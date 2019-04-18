@@ -1,0 +1,27 @@
+{
+  "name": "async-iterator-buffer-stream",
+  "version": "0.0.1",
+  "description": "An async iterator that emits buffers containing bytes up to a certain length",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
+    "lint": "standard",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/async-iterator-buffer-stream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/async-iterator-buffer-stream/issues"
+  },
+  "homepage": "https://github.com/achingbrain/async-iterator-buffer-stream#readme",
+  "devDependencies": {
+    "ava": "^1.4.1",
+    "coveralls": "^3.0.2",
+    "nyc": "^14.0.0",
+    "standard": "^12.0.1"
+  }
+}
