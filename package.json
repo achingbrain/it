@@ -1,7 +1,7 @@
 {
-  "name": "async-iterator-first",
+  "name": "async-iterator-last",
   "version": "0.0.1",
-  "description": "Returns the first result from an async iterator",
+  "description": "Returns the last result from an async iterator",
   "main": "index.js",
   "scripts": {
     "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
