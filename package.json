@@ -1,5 +1,5 @@
 {
-  "name": "async-iterator-to-array",
+  "name": "async-iterator-all",
   "version": "0.0.1",
   "description": "Collects all values from an async iterator and returns them as an array",
   "main": "index.js",
@@ -12,12 +12,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achingbrain/async-iterator-to-array.git"
+    "url": "git+https://github.com/achingbrain/async-iterator-all.git"
   },
   "bugs": {
-    "url": "https://github.com/achingbrain/async-iterator-to-array/issues"
+    "url": "https://github.com/achingbrain/async-iterator-all/issues"
   },
-  "homepage": "https://github.com/achingbrain/async-iterator-to-array#readme",
+  "homepage": "https://github.com/achingbrain/async-iterator-all#readme",
   "devDependencies": {
     "ava": "^1.4.1",
     "coveralls": "^3.0.2",

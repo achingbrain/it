@@ -1,6 +1,6 @@
-# async-iterator-to-array
+# async-iterator-all
 
-[![Build status](https://travis-ci.org/achingbrain/async-iterator-to-array.svg?branch=master)](https://travis-ci.org/achingbrain/async-iterator-to-array?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/async-iterator-to-array/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/async-iterator-to-array?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/async-iterator-to-array/status.svg)](https://david-dm.org/achingbrain/async-iterator-to-array)
+[![Build status](https://travis-ci.org/achingbrain/async-iterator-all.svg?branch=master)](https://travis-ci.org/achingbrain/async-iterator-all?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/async-iterator-all/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/async-iterator-all?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/async-iterator-all/status.svg)](https://david-dm.org/achingbrain/async-iterator-all)
 
 > Collects all values from an async iterator and returns them as an array
 
@@ -9,13 +9,13 @@ Mostly useful for tests.
 ## Install
 
 ```sh
-$ npm install --save async-iterator-to-array
+$ npm install --save async-iterator-all
 ```
 
 ## Usage
 
 ```javascript
-const toArray = require('async-iterator-to-array')
+const all = require('async-iterator-all')
 
 async function * iterator (values) {
   for (let i = 0; i < values.length; i++) {
@@ -23,7 +23,7 @@ async function * iterator (values) {
   }
 }
 
-const arr = await toArray(iterator([0, 1, 2, 3, 4]))
+const arr = await all(iterator([0, 1, 2, 3, 4]))
 
 console.info(arr) // 0, 1, 2, 3, 4
 ```
