@@ -23,7 +23,7 @@ async function * iterator (values) {
   }
 }
 
-const arr = await first(iterator([0, 1, 2, 3, 4]))
+const res = await first(iterator([0, 1, 2, 3, 4]))
 
-console.info(arr) // 0
+console.info(res) // 0
 ```
