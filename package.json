@@ -12,12 +12,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achingbrain/async-iterator-to-array.git"
+    "url": "git+https://github.com/achingbrain/async-iterator-last.git"
   },
   "bugs": {
-    "url": "https://github.com/achingbrain/async-iterator-to-array/issues"
+    "url": "https://github.com/achingbrain/async-iterator-last/issues"
   },
-  "homepage": "https://github.com/achingbrain/async-iterator-to-array#readme",
+  "homepage": "https://github.com/achingbrain/async-iterator-last#readme",
   "devDependencies": {
     "ava": "^1.4.1",
     "coveralls": "^3.0.2",
