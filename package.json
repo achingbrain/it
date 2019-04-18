@@ -1,6 +1,6 @@
 {
   "name": "async-iterator-all",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Collects all values from an async iterator and returns them as an array",
   "main": "index.js",
   "scripts": {
