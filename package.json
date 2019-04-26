@@ -1,0 +1,28 @@
+{
+  "name": "async-iterator-batch",
+  "version": "0.0.1",
+  "description": "Takes an async iterator that emits variable length arrays and emits them as fixed size batches",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
+    "lint": "standard",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/async-iterator-batch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/async-iterator-batch/issues"
+  },
+  "homepage": "https://github.com/achingbrain/async-iterator-batch#readme",
+  "devDependencies": {
+    "async-iterator-all": "0.0.2",
+    "ava": "^1.4.1",
+    "coveralls": "^3.0.2",
+    "nyc": "^14.0.0",
+    "standard": "^12.0.1"
+  }
+}
