@@ -1,6 +1,6 @@
 {
   "name": "async-iterator-buffer-stream",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An async iterator that emits buffers containing bytes up to a certain length",
   "main": "index.js",
   "scripts": {
