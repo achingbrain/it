@@ -9,10 +9,9 @@ let server
 
 test.before.cb((t) => {
   async function echo (req) {
-    const boundary = req.headers['content-type'].split('boundary=')[1].trim()
     const files = {}
 
-    for await (const part of handler(boundary, req)) {
+    for await (const part of handler(req)) {
       const name = part.headers['content-disposition'].match(/name="(.*)"/)[1]
 
       files[name] = ''

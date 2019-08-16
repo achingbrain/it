@@ -5,8 +5,12 @@ const parseHeaders = require('parse-headers')
 
 module.exports = multipart
 
-async function * multipart (marker, stream) {
-  const boundary = `--${marker}`
+async function * multipart (stream, boundary) {
+  if (!boundary) {
+    boundary = stream.headers['content-type'].split('boundary=')[1].trim()
+  }
+
+  boundary = `--${boundary}`
   const headerEnd = Buffer.from('\r\n\r\n')
 
   // allow pushing data back into stream
