@@ -89,6 +89,7 @@ async function consumeUntilAfter (haystack, needle) {
 // a stream that lets us push content back into it for consumption elsewhere
 function prefixStream (stream) {
   const buffer = []
+  const streamIterator = stream[Symbol.asyncIterator]()
 
   const iterator = {
     [Symbol.asyncIterator]: () => {
@@ -102,7 +103,7 @@ function prefixStream (stream) {
         }
       }
 
-      return stream[Symbol.asyncIterator]().next()
+      return streamIterator.next()
     },
     push: function (buf) {
       buffer.push(buf)
@@ -120,6 +121,7 @@ function waitForStreamToBeConsumed (stream) {
       reject
     }
   })
+  const streamIterator = stream[Symbol.asyncIterator]()
 
   const iterator = {
     [Symbol.asyncIterator]: () => {
@@ -127,7 +129,7 @@ function waitForStreamToBeConsumed (stream) {
     },
     next: async () => {
       try {
-        const next = await stream[Symbol.asyncIterator]().next()
+        const next = await streamIterator.next()
 
         if (next.done) {
           pending.resolve()
