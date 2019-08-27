@@ -3,14 +3,14 @@
   "version": "0.0.2",
   "description": "Async iterable http multipart message parser",
   "main": "index.js",
-  "repository": "github:ipfs/js-ipfs-multipart",
+  "repository": "github:achingbrain/it-multipart",
   "homepage": "https://github.com/achingbrain/it-multipart#readme",
   "bugs": "https://github.com/achingbrain/it-multipart/issues",
   "scripts": {
     "test": "ava",
     "lint": "standard"
   },
-  "author": "Alex Potsides <ale@achingbrain.net>",
+  "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "dependencies": {
     "buffer-indexof": "^1.1.1",
