@@ -4,7 +4,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const minimatch = require('minimatch')
 
-module.exports = async function * glob (dir, pattern, options) {
+module.exports = async function * glob (dir, pattern, options = {}) {
   const stats = await fs.stat(dir)
 
   if (stats.isDirectory()) {
@@ -26,11 +26,17 @@ async function * _glob (dir, pattern, options) {
     const stats = await fs.stat(entryPath)
 
     if (stats.isDirectory()) {
-      for await (const subEntry of _glob(entryPath, pattern, options)) {
-        yield subEntry
-      }
+      yield *  _glob(entryPath, pattern, options)
     } else {
-      if (minimatch(entryPath, pattern)) {
+      let match = minimatch(entryPath, pattern, options)
+
+      if (options.ignore && match && options.ignore.reduce((acc, curr) => {
+        return acc || minimatch(entryPath, curr, options)
+      }, false)) {
+        match = false
+      }
+
+      if (match) {
         yield entryPath
       }
     }

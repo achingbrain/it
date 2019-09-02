@@ -25,3 +25,11 @@ test('it should match files', async t => {
 
   t.deepEqual(files, ['README.md'])
 })
+
+test('it should ignore files', async t => {
+  const files = await all(glob('.', '**/*', {
+    ignore: ['*/index.js']
+  }))
+
+  t.falsy(files.includes('test/index.js'))
+})

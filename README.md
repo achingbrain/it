@@ -16,7 +16,10 @@ $ npm install --save it-glob
 const glob = require('it-glob')
 
 const options = {
-
+  ignore: [
+    'glob' // glob patterns to ignore
+  ]
+  // all other options are passed to minimatch
 }
 
 for await (const path of glob('/path/to/file', '**/*', options)) {
