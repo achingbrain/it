@@ -18,7 +18,10 @@ const glob = require('it-glob')
 const options = {
   ignore: [
     'glob' // glob patterns to ignore
-  ]
+  ],
+  cwd // defaults to process.cwd
+  absolute // return absolute paths, defaults to false
+
   // all other options are passed to minimatch
 }
 
