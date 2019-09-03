@@ -19,5 +19,8 @@
     "async-iterator-all": "^1.0.0",
     "ava": "^2.3.0",
     "standard": "^14.0.0"
+  },
+  "browser": {
+    "fs-extra": false
   }
 }
