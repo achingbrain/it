@@ -1,6 +1,6 @@
 {
   "name": "it-multipart",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Async iterable http multipart message parser",
   "main": "index.js",
   "repository": "github:achingbrain/it-multipart",
