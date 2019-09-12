@@ -105,3 +105,11 @@ test('it parses loads of files from multipart requests', async (t) => {
     })
   )
 })
+
+test('it throws if not handed a multipart request', async (t) => {
+  await t.throwsAsync(async () => {
+    for await (const _ of handler()) { // eslint-disable-line no-unused-vars
+
+    }
+  }, 'Not a multipart request')
+})

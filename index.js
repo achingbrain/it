@@ -7,7 +7,11 @@ module.exports = multipart
 
 async function * multipart (stream, boundary) {
   if (!boundary) {
-    boundary = stream.headers['content-type'].split('boundary=')[1].trim()
+    if (stream && stream.headers && stream.headers['content-type'] && stream.headers['content-type'].includes('boundary')) {
+      boundary = stream.headers['content-type'].split('boundary=')[1].trim()
+    } else {
+      throw new Error('Not a multipart request')
+    }
   }
 
   boundary = `--${boundary}`
