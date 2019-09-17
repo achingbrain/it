@@ -28,21 +28,20 @@ async function * _glob (base, dir, pattern, options) {
     const relativeEntryPath = path.join(dir, entry)
     const absoluteEntryPath = path.join(base, dir, entry)
     const stats = await fs.stat(absoluteEntryPath)
+    let match = minimatch(relativeEntryPath, pattern, options)
+
+    if (options.ignore && match && options.ignore.reduce((acc, curr) => {
+      return acc || minimatch(relativeEntryPath, curr, options)
+    }, false)) {
+      match = false
+    }
+
+    if (match) {
+      yield options.absolute ? absoluteEntryPath : relativeEntryPath
+    }
 
     if (stats.isDirectory()) {
-      yield *  _glob(base, relativeEntryPath, pattern, options)
-    } else {
-      let match = minimatch(relativeEntryPath, pattern, options)
-
-      if (options.ignore && match && options.ignore.reduce((acc, curr) => {
-        return acc || minimatch(relativeEntryPath, curr, options)
-      }, false)) {
-        match = false
-      }
-
-      if (match) {
-        yield options.absolute ? absoluteEntryPath : relativeEntryPath
-      }
+      yield * _glob(base, relativeEntryPath, pattern, options)
     }
   }
 }

@@ -63,7 +63,6 @@ test('it returns absolute paths', async t => {
   })
 })
 
-
 test('it returns relative paths', async t => {
   const dir = path.resolve(__dirname, '..')
 
@@ -74,4 +73,12 @@ test('it returns relative paths', async t => {
   files.forEach(file => {
     t.falsy(file.startsWith('/'))
   })
+})
+
+test('it matches directories', async t => {
+  const dir = path.resolve(__dirname, '..')
+
+  const files = await all(glob(dir, 'node_modules/*'))
+
+  t.truthy(files.includes('node_modules/@ava'))
 })
