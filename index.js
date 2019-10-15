@@ -36,7 +36,7 @@ async function * _glob (base, dir, pattern, options) {
       match = false
     }
 
-    if (match) {
+    if (match && !(stats.isDirectory() && options.nodir)) {
       yield options.absolute ? absoluteEntryPath : relativeEntryPath
     }
 

@@ -80,5 +80,16 @@ test('it matches directories', async t => {
 
   const files = await all(glob(dir, 'node_modules/*'))
 
-  t.truthy(files.includes('node_modules/@ava'))
+  t.truthy(files.includes('node_modules/ava'))
+})
+
+test('it skips directories', async t => {
+  const dir = path.resolve(__dirname, '..')
+
+  const files = await all(glob(dir, 'node_modules/**/*', {
+    nodir: true
+  }))
+
+  t.falsy(files.includes('node_modules/ava'))
+  t.truthy(files.includes('node_modules/ava/package.json'))
 })

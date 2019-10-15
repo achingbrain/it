@@ -21,6 +21,7 @@ const options = {
   ],
   cwd // defaults to process.cwd
   absolute // return absolute paths, defaults to false
+  nodir // only yield file paths, skip directories
 
   // all other options are passed to minimatch
 }
