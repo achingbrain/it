@@ -3,9 +3,7 @@ import test from 'ava'
 
 test('Should collect all entries of an async iterator as an array', async (t) => {
   async function * iterator (values) {
-    for (let i = 0; i < values.length; i++) {
-      yield values[i]
-    }
+    yield * values
   }
 
   const vals = [0, 1, 2, 3, 4]

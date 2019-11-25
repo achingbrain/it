@@ -1,26 +1,24 @@
-# async-iterator-all
+# it-all
 
-[![Build status](https://travis-ci.org/achingbrain/async-iterator-all.svg?branch=master)](https://travis-ci.org/achingbrain/async-iterator-all?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/async-iterator-all/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/async-iterator-all?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/async-iterator-all/status.svg)](https://david-dm.org/achingbrain/async-iterator-all)
+[![Build status](https://travis-ci.org/achingbrain/f.svg?branch=master)](https://travis-ci.org/achingbrain/it-all?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-all/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-all?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-all/status.svg)](https://david-dm.org/achingbrain/it-all)
 
 > Collects all values from an async iterator and returns them as an array
 
-Mostly useful for tests.
+For when you need a one-liner to collect iterable values.
 
 ## Install
 
 ```sh
-$ npm install --save async-iterator-all
+$ npm install --save it-all
 ```
 
 ## Usage
 
 ```javascript
-const all = require('async-iterator-all')
+const all = require('it-all')
 
 async function * iterator (values) {
-  for (let i = 0; i < values.length; i++) {
-    yield values[i]
-  }
+  yield * values
 }
 
 const arr = await all(iterator([0, 1, 2, 3, 4]))
