@@ -1,5 +1,5 @@
 {
-  "name": "async-iterator-last",
+  "name": "it-last",
   "version": "1.0.0",
   "description": "Returns the last result from an async iterator",
   "main": "index.js",
@@ -12,12 +12,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achingbrain/async-iterator-last.git"
+    "url": "git+https://github.com/achingbrain/it-last.git"
   },
   "bugs": {
-    "url": "https://github.com/achingbrain/async-iterator-last/issues"
+    "url": "https://github.com/achingbrain/it-last/issues"
   },
-  "homepage": "https://github.com/achingbrain/async-iterator-last#readme",
+  "homepage": "https://github.com/achingbrain/it-last#readme",
   "devDependencies": {
     "ava": "^1.4.1",
     "coveralls": "^3.0.2",
