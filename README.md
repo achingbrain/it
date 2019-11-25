@@ -1,13 +1,13 @@
-# async-iterator-buffer-stream
+# it-buffer-stream
 
-[![Build status](https://travis-ci.org/achingbrain/async-iterator-buffer-stream.svg?branch=master)](https://travis-ci.org/achingbrain/async-iterator-buffer-stream?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/async-iterator-buffer-stream/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/async-iterator-buffer-stream?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/async-iterator-buffer-stream/status.svg)](https://david-dm.org/achingbrain/async-iterator-buffer-stream)
+[![Build status](https://travis-ci.org/achingbrain/it-buffer-stream.svg?branch=master)](https://travis-ci.org/achingbrain/it-buffer-stream?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-buffer-stream/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-buffer-stream?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-buffer-stream/status.svg)](https://david-dm.org/achingbrain/it-buffer-stream)
 
 > An async iterator that emits buffers containing bytes up to a certain length
 
 ## Install
 
 ```sh
-$ npm install --save async-iterator-buffer-stream
+$ npm install --save it-buffer-stream
 ```
 
 ## Usage

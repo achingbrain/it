@@ -67,7 +67,7 @@ test('Should allow generation of buffers', async (t) => {
   t.deepEqual(emitted, buffers[0])
 })
 
-test('Should proagate byte generation errors', async (t) => {
+test('Should propagate byte generation errors', async (t) => {
   const generationError = new Error('Urk!')
 
   try {

@@ -1,5 +1,5 @@
 {
-  "name": "async-iterator-buffer-stream",
+  "name": "it-buffer-stream",
   "version": "1.0.0",
   "description": "An async iterator that emits buffers containing bytes up to a certain length",
   "main": "index.js",
@@ -12,16 +12,16 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achingbrain/async-iterator-buffer-stream.git"
+    "url": "git+https://github.com/achingbrain/it-buffer-stream.git"
   },
   "bugs": {
-    "url": "https://github.com/achingbrain/async-iterator-buffer-stream/issues"
+    "url": "https://github.com/achingbrain/it-buffer-stream/issues"
   },
-  "homepage": "https://github.com/achingbrain/async-iterator-buffer-stream#readme",
+  "homepage": "https://github.com/achingbrain/it-buffer-stream#readme",
   "devDependencies": {
-    "ava": "^1.4.1",
+    "ava": "^2.4.0",
     "coveralls": "^3.0.2",
     "nyc": "^14.0.0",
-    "standard": "^12.0.1"
+    "standard": "^14.3.1"
   }
 }
