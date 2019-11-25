@@ -1,5 +1,5 @@
 {
-  "name": "async-iterator-first",
+  "name": "it-first",
   "version": "1.0.0",
   "description": "Returns the first result from an async iterator",
   "main": "index.js",
@@ -12,16 +12,16 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/achingbrain/async-iterator-first.git"
+    "url": "git+https://github.com/achingbrain/it-first.git"
   },
   "bugs": {
-    "url": "https://github.com/achingbrain/async-iterator-first/issues"
+    "url": "https://github.com/achingbrain/it-first/issues"
   },
-  "homepage": "https://github.com/achingbrain/async-iterator-first#readme",
+  "homepage": "https://github.com/achingbrain/it-first#readme",
   "devDependencies": {
-    "ava": "^1.4.1",
+    "ava": "^2.4.0",
     "coveralls": "^3.0.2",
     "nyc": "^14.0.0",
-    "standard": "^12.0.1"
+    "standard": "^14.3.1"
   }
 }
