@@ -1,7 +1,7 @@
 {
-  "name": "ipfs",
+  "name": "it",
   "version": "1.0.0",
-  "description": "Mono repo containing the javascript implementation of IPFS",
+  "description": "A collection of utilities for making working with iterables more bearable",
   "scripts": {
     "postinstall": "lerna bootstrap",
     "reset": "lerna run --parallel clean && rm -rf packages/*/node_modules packages/*/package-lock.json node_modules",
