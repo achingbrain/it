@@ -4,3 +4,5 @@ node_modules
 Thumbs.db
 package-lock.json
 .vscode
+.nyc_output
+coverage
