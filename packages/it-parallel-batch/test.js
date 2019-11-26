@@ -132,3 +132,79 @@ test('Should work without size parameter', async (t) => {
 
   t.deepEqual(res, [1, 2])
 })
+
+test('Should batch up entries with negative batch size', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return 1
+    },
+    async () => {
+      await delay(100)
+
+      return 2
+    }
+  ]
+  const batchSize = -1
+  const res = await all(parallelBatch(input, batchSize))
+
+  t.deepEqual(res, [1, 2])
+})
+
+test('Should batch up entries with zero batch size', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return 1
+    },
+    async () => {
+      await delay(100)
+
+      return 2
+    }
+  ]
+  const batchSize = 0
+  const res = await all(parallelBatch(input, batchSize))
+
+  t.deepEqual(res, [1, 2])
+})
+
+test('Should batch up entries with string batch size', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return 1
+    },
+    async () => {
+      await delay(100)
+
+      return 2
+    }
+  ]
+  const batchSize = '2'
+  const res = await all(parallelBatch(input, batchSize))
+
+  t.deepEqual(res, [1, 2])
+})
+
+test('Should batch up entries with non-integer batch size', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return 1
+    },
+    async () => {
+      await delay(100)
+
+      return 2
+    }
+  ]
+  const batchSize = 2.5
+  const res = await all(parallelBatch(input, batchSize))
+
+  t.deepEqual(res, [1, 2])
+})

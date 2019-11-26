@@ -1,6 +1,6 @@
 'use strict'
 
-const toArray = async (iterator) => {
+const all = async (iterator) => {
   const arr = []
 
   for await (const entry of iterator) {
@@ -10,4 +10,4 @@ const toArray = async (iterator) => {
   return arr
 }
 
-module.exports = toArray
+module.exports = all

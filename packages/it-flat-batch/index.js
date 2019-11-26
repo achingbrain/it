@@ -1,7 +1,9 @@
 'use strict'
 
 async function * batch (source, size) {
-  if (isNaN(size)) {
+  size = parseInt(size)
+
+  if (isNaN(size) || size < 1) {
     size = 1
   }
 
