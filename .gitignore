@@ -5,3 +5,4 @@ Thumbs.db
 .vscode
 .nyc_output
 coverage
+bin
