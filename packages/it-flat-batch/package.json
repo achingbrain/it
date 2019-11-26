@@ -3,24 +3,19 @@
   "version": "1.0.1",
   "description": "Takes an async iterator that emits variable length arrays and emits them as fixed size batches",
   "main": "index.js",
+  "repository": "github:achingbrain/it",
+  "homepage": "https://github.com/achingbrain/it#readme",
+  "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
-    "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
+    "test": "ava",
     "lint": "standard",
-    "coverage": "npm test && cat ./coverage/lcov.info | coveralls"
+    "coverage": "nyc --reporter html --reporter lcov ava",
+    "clean": "rm -rf .nyc_output coverage"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/achingbrain/it-flat-batch.git"
-  },
-  "bugs": {
-    "url": "https://github.com/achingbrain/it-flat-batch/issues"
-  },
-  "homepage": "https://github.com/achingbrain/it-flat-batch#readme",
   "devDependencies": {
     "ava": "^2.4.0",
-    "coveralls": "^3.0.2",
     "it-all": "1.0.0",
     "nyc": "^14.0.0",
     "standard": "^14.3.1"

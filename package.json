@@ -15,6 +15,7 @@
     "publish": "lerna publish"
   },
   "devDependencies": {
+    "@sourceallies/coveralls-merge": "^1.0.0",
     "lerna": "^3.1.4"
   }
 }

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Async iterable http multipart message parser",
   "main": "index.js",
-  "repository": "github:achingbrain/it-multipart",
-  "homepage": "https://github.com/achingbrain/it-multipart#readme",
-  "bugs": "https://github.com/achingbrain/it-multipart/issues",
+  "repository": "github:achingbrain/it",
+  "homepage": "https://github.com/achingbrain/it#readme",
+  "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
-    "test": "nyc --check-coverage --lines 98 --reporter html --reporter lcov ava",
+    "test": "ava",
     "lint": "standard",
-    "coverage": "npm test && cat ./coverage/lcov.info | coveralls"
+    "coverage": "nyc --reporter html --reporter lcov ava",
+    "clean": "rm -rf .nyc_output coverage"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -19,7 +20,6 @@
   },
   "devDependencies": {
     "ava": "^2.4.0",
-    "coveralls": "^3.0.2",
     "form-data": "^2.5.0",
     "node-fetch": "^2.6.0",
     "nyc": "^14.0.0",
