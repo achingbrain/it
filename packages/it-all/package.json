@@ -1,0 +1,27 @@
+{
+  "name": "it-all",
+  "version": "1.0.0",
+  "description": "Collects all values from an async iterator and returns them as an array",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
+    "lint": "standard",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it-all.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it-all/issues"
+  },
+  "homepage": "https://github.com/achingbrain/it-all#readme",
+  "devDependencies": {
+    "ava": "^2.4.0",
+    "coveralls": "^3.0.2",
+    "nyc": "^14.0.0",
+    "standard": "^14.3.1"
+  }
+}
