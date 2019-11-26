@@ -1,0 +1,21 @@
+{
+  "name": "ipfs",
+  "version": "1.0.0",
+  "description": "Mono repo containing the javascript implementation of IPFS",
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "reset": "lerna run --parallel clean && rm -rf packages/*/node_modules packages/*/package-lock.json node_modules",
+    "test": "lerna run --parallel test",
+    "coverage": "lerna run --parallel coverage",
+    "build": "lerna run --parallel build",
+    "deploy": "lerna run --parallel deploy",
+    "start": "NODE_ENV=development lerna run --parallel start",
+    "clean": "lerna run --parallel clean",
+    "lint": "lerna run --parallel lint",
+    "publish": "lerna publish"
+  },
+  "devDependencies": {
+    "lerna": "^3.1.4"
+  }
+}
+
