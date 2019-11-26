@@ -1,6 +1,6 @@
 import test from 'ava'
 import http from 'http'
-import handler from '../'
+import handler from '.'
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 
