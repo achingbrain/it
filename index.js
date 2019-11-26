@@ -3,6 +3,10 @@
 const batch = require('it-batch')
 
 async function * parallelBatch (source, size) {
+  if (isNaN(size)) {
+    size = 1
+  }
+
   for await (const things of batch(source, size)) {
     const results = []
     let nextResultIndex = 0
