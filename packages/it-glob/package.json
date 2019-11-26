@@ -1,0 +1,26 @@
+{
+  "name": "it-glob",
+  "version": "0.0.6",
+  "description": "Async iterable filename pattern matcher",
+  "main": "index.js",
+  "homepage": "https://github.com/achingbrain/it-glob",
+  "repository": "achingbrain/it-glob",
+  "scripts": {
+    "test": "ava",
+    "lint": "standard"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "minimatch": "^3.0.4"
+  },
+  "devDependencies": {
+    "async-iterator-all": "^1.0.0",
+    "ava": "^2.3.0",
+    "standard": "^14.0.0"
+  },
+  "browser": {
+    "fs-extra": false
+  }
+}
