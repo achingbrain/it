@@ -1,6 +1,6 @@
 # it-parallel-batch
 
-[![Build status](https://travis-ci.org/achingbrain/it-parallel-batch.svg?branch=master)](https://travis-ci.org/achingbrain/it-parallel-batch?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-parallel-batch/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-parallel-batch?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-parallel-batch/status.svg)](https://david-dm.org/achingbrain/it-parallel-batch)
+[![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg)](https://david-dm.org/achingbrain/it)
 
 > Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results as they become available but in the same order as the input
 

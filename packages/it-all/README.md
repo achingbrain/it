@@ -1,6 +1,6 @@
 # it-all
 
-[![Build status](https://travis-ci.org/achingbrain/f.svg?branch=master)](https://travis-ci.org/achingbrain/it-all?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-all/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-all?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-all/status.svg)](https://david-dm.org/achingbrain/it-all)
+[![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg)](https://david-dm.org/achingbrain/it)
 
 > Collects all values from an async iterator and returns them as an array
 

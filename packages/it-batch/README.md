@@ -1,6 +1,6 @@
 # it-batch
 
-[![Build status](https://travis-ci.org/achingbrain/it-batch.svg?branch=master)](https://travis-ci.org/achingbrain/it-batch?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-batch/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-batch?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-batch/status.svg)](https://david-dm.org/achingbrain/it-batch)
+[![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg)](https://david-dm.org/achingbrain/it)
 
 > Takes an async iterator that emits things and emits them as fixed-size batches
 

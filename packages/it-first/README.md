@@ -1,6 +1,6 @@
 # it-first
 
-[![Build status](https://travis-ci.org/achingbrain/it-first.svg?branch=master)](https://travis-ci.org/achingbrain/it-first?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it-first/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it-first?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it-first/status.svg)](https://david-dm.org/achingbrain/it-first)
+[![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg)](https://david-dm.org/achingbrain/it)
 
 > Returns the first result from an async iterator
 
