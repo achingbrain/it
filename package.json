@@ -1,6 +1,6 @@
 {
   "name": "it-batch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Takes an async iterator that emits things and emits them as fixed size batches",
   "main": "index.js",
   "scripts": {
