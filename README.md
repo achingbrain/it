@@ -17,11 +17,10 @@ $ npm install --save it-first
 ```javascript
 const first = require('it-first')
 
-async function * iterator (values) {
-  yield * values
-}
+// This can also be an iterator, async iterator, generator, etc
+const values = [0, 1, 2, 3, 4]
 
-const res = await first(iterator([0, 1, 2, 3, 4]))
+const res = await first(values)
 
 console.info(res) // 0
 ```
