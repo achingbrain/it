@@ -1,6 +1,10 @@
 'use strict'
 
 async function * batch (source, size) {
+  if (isNaN(size)) {
+    size = 1
+  }
+
   let things = []
 
   for await (const set of source) {

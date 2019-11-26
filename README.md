@@ -18,11 +18,11 @@ $ npm install --save it-flat-batch
 const batch = require('it-flat-batch')
 const all = require('it-all')
 
-async function * iterator (values) {
-  yield * values
-}
+// This can also be an iterator, async iterator, generator, etc
+const values = [[0, 1, 2], [3], [4]]
+const batchSize = 2
 
-const result = await all(batch(iterator([[0, 1, 2], [3], [4]]), 2))
+const result = await all(batch(values, batchSize))
 
 console.info(result) // [0, 1], [2, 3], [4]
 ```
