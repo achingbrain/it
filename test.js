@@ -113,3 +113,22 @@ test('Execute batch in parallel', async (t) => {
 
   t.deepEqual(started, [true, true, false])
 })
+
+test('Should work without size parameter', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return 1
+    },
+    async () => {
+      await delay(100)
+
+      return 2
+    }
+  ]
+
+  const res = await all(parallelBatch(input))
+
+  t.deepEqual(res, [1, 2])
+})
