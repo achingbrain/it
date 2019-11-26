@@ -1,7 +1,7 @@
-sudo: required
 language: node_js
 
 node_js:
   - '12'
 
-script: npm run lint && npm run coverage && node ./send-coverage.js
+script: npm run lint && npm run coverage
+after_success: node ./send-coverage.js
