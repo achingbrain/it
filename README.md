@@ -17,11 +17,10 @@ $ npm install --save it-all
 ```javascript
 const all = require('it-all')
 
-async function * iterator (values) {
-  yield * values
-}
+// This can also be an iterator, async iterator, generator, etc
+const values = [0, 1, 2, 3, 4]
 
-const arr = await all(iterator([0, 1, 2, 3, 4]))
+const arr = await all(values)
 
 console.info(arr) // 0, 1, 2, 3, 4
 ```

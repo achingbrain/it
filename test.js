@@ -1,14 +1,10 @@
-import toArray from './'
+import all from './'
 import test from 'ava'
 
 test('Should collect all entries of an async iterator as an array', async (t) => {
-  async function * iterator (values) {
-    yield * values
-  }
+  const values = [0, 1, 2, 3, 4]
 
-  const vals = [0, 1, 2, 3, 4]
+  const res = await all(values)
 
-  const arr = await toArray(iterator(vals))
-
-  t.deepEqual(arr, vals)
+  t.deepEqual(res, values)
 })
