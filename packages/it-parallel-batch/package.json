@@ -1,0 +1,32 @@
+{
+  "name": "it-parallel-batch",
+  "version": "1.0.1",
+  "description": "Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results in the same order as the input",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
+    "lint": "standard",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it-parallel-batch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it-parallel-batch/issues"
+  },
+  "homepage": "https://github.com/achingbrain/it-parallel-batch#readme",
+  "devDependencies": {
+    "ava": "^2.4.0",
+    "coveralls": "^3.0.2",
+    "delay": "^4.3.0",
+    "it-all": "1.0.0",
+    "nyc": "^14.0.0",
+    "standard": "^14.3.1"
+  },
+  "dependencies": {
+    "it-batch": "0.0.1"
+  }
+}
