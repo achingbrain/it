@@ -17,11 +17,10 @@ $ npm install --save it-last
 ```javascript
 const last = require('it-last')
 
-async function * iterator (values) {
-  yield * values
-}
+// This can also be an iterator, async iterator, generator, etc
+const values = [0, 1, 2, 3, 4]
 
-const res = await last(iterator([0, 1, 2, 3, 4]))
+const res = await last(values)
 
 console.info(res) // 4
 ```
