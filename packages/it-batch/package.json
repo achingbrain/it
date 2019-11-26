@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc --check-coverage --lines 100 --reporter html --reporter lcov ava",
     "lint": "standard",
-    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls"
+    "coverage": "npm test && cat ./coverage/lcov.info | coveralls"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/achingbrain/it-batch#readme",
   "devDependencies": {
-    "ava": "^1.4.1",
+    "ava": "^2.4.0",
     "coveralls": "^3.0.2",
     "it-all": "^1.0.0",
     "nyc": "^14.0.0",
-    "standard": "^12.0.1"
+    "standard": "^14.3.1"
   }
 }

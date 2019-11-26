@@ -1,6 +1,6 @@
 import test from 'ava'
-import all from 'async-iterator-all'
-import glob from '../'
+import all from 'it-all'
+import glob from '.'
 import path from 'path'
 
 test('it should match file', async t => {
@@ -12,7 +12,7 @@ test('it should match file', async t => {
 test('it should match file in subdirectory', async t => {
   const files = await all(glob('.', '**/*'))
 
-  t.truthy(files.includes('test/index.js'))
+  t.truthy(files.includes('node_modules/it-all'))
 })
 
 test('it should match one', async t => {
@@ -39,9 +39,7 @@ test('it should ignore files', async t => {
 })
 
 test('it should ignore files from absolute directory', async t => {
-  const dir = path.resolve(__dirname, '..')
-
-  const files = await all(glob(dir, '**/*', {
+  const files = await all(glob(__dirname, '**/*', {
     ignore: [
       'test/index.js',
       '**/node_modules/**'
@@ -52,9 +50,7 @@ test('it should ignore files from absolute directory', async t => {
 })
 
 test('it returns absolute paths', async t => {
-  const dir = path.resolve(__dirname, '..')
-
-  const files = await all(glob(dir, '**/*', {
+  const files = await all(glob(__dirname, '**/*', {
     absolute: true
   }))
 
@@ -64,9 +60,7 @@ test('it returns absolute paths', async t => {
 })
 
 test('it returns relative paths', async t => {
-  const dir = path.resolve(__dirname, '..')
-
-  const files = await all(glob(dir, '**/*', {
+  const files = await all(glob(__dirname, '**/*', {
     absolute: false
   }))
 
@@ -76,20 +70,16 @@ test('it returns relative paths', async t => {
 })
 
 test('it matches directories', async t => {
-  const dir = path.resolve(__dirname, '..')
+  const files = await all(glob(__dirname, 'node_modules/*'))
 
-  const files = await all(glob(dir, 'node_modules/*'))
-
-  t.truthy(files.includes('node_modules/ava'))
+  t.truthy(files.includes('node_modules/it-all'))
 })
 
 test('it skips directories', async t => {
-  const dir = path.resolve(__dirname, '..')
-
-  const files = await all(glob(dir, 'node_modules/**/*', {
+  const files = await all(glob(__dirname, 'node_modules/**/*', {
     nodir: true
   }))
 
-  t.falsy(files.includes('node_modules/ava'))
-  t.truthy(files.includes('node_modules/ava/package.json'))
+  t.falsy(files.includes('node_modules/it-all'))
+  t.truthy(files.includes('node_modules/it-all/package.json'))
 })
