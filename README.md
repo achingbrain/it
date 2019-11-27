@@ -3,7 +3,7 @@
 Utility modules to make dealing with async iterators easier, some trivial, some not.
 
 * [it-all](./packages/it-all) Collect the contents of an iterable into an array
-* [it-batch](./packages/it-batch) Batch up the contents of an interable into arrays
+* [it-batch](./packages/it-batch) Batch up the contents of an iterable into arrays
 * [it-buffer-stream](./packages/it-buffer-stream) Creates an iterable of buffers
 * [it-first]('./packages/it-first) Return the first item in an iterable
 * [it-flat-batch](./packages/it-flat-batch) Take an iterable of variable length arrays and make them all the same length
