@@ -1,0 +1,22 @@
+{
+  "name": "it-drain",
+  "version": "0.0.0",
+  "description": "Empties an async iterator",
+  "main": "index.js",
+  "repository": "github:achingbrain/it",
+  "homepage": "https://github.com/achingbrain/it#readme",
+  "bugs": "https://github.com/achingbrain/it/issues",
+  "scripts": {
+    "test": "ava",
+    "lint": "standard",
+    "coverage": "nyc --reporter html --reporter lcov ava",
+    "clean": "rm -rf .nyc_output coverage"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^2.4.0",
+    "nyc": "^14.0.0",
+    "standard": "^14.3.1"
+  }
+}
