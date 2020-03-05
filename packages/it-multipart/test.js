@@ -12,7 +12,7 @@ test.before.cb((t) => {
     const files = {}
 
     for await (const part of handler(req)) {
-      const name = part.headers['content-disposition'].match(/name="(.*)"/)[1]
+      const name = part.headers['content-disposition'].match(/name="([^"]+)"/)[1]
 
       files[name] = ''
 
@@ -32,7 +32,6 @@ test.before.cb((t) => {
       echo(req)
         .then((files) => {
           res.writeHead(200, {
-            'content-length': files.length,
             'content-type': 'application/json'
           })
           res.end(files)
@@ -61,8 +60,9 @@ test.after.cb((t) => {
 
 test('it parses files from a multipart request', async (t) => {
   const formData = new FormData()
-  formData.append('file-1.txt', Buffer.from('file 1 contents'))
-  formData.append('file-2.txt', Buffer.from('file 2 contents'))
+  formData.append('file-1', Buffer.from('file 1 contents'), 'file-1.txt')
+  formData.append('file-2', Buffer.from('file 2 contents'), 'file-2.txt')
+  formData.append('file-3', Buffer.from('file 3 contènts'), 'filé-3.txt')
 
   const result = await fetch(`http://localhost:${port}`, {
     method: 'POST',
@@ -75,8 +75,9 @@ test('it parses files from a multipart request', async (t) => {
   const response = await result.json()
 
   t.deepEqual(response, {
-    'file-1.txt': 'file 1 contents',
-    'file-2.txt': 'file 2 contents'
+    'file-1': 'file 1 contents',
+    'file-2': 'file 2 contents',
+    'file-3': 'file 3 contènts'
   })
 })
 
