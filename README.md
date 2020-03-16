@@ -14,3 +14,5 @@ Utility modules to make dealing with async iterators easier, some trivial, some 
 * [it-multipart](./packages/it-multipart) Parse multipart message bodies as an iterable
 * [it-parallel-batch](./packages/it-parallel-batch) Take an iterable of functions that return promises and run them in parallel in batches
 * [it-reduce](./packages/it-reduce) Reduce the output of an iterable
+* [it-to-browser-readablestream](./packages/it-reduce) Turns an iterable into a WhatWG [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+* [it-to-buffer](./packages/it-to-buffer) Takes an iterable of Buffers and concatenates them
