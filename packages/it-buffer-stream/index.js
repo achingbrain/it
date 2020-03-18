@@ -1,11 +1,11 @@
 'use strict'
 
-const crypto = require('crypto')
+const randomBytes = require('iso-random-stream/src/random')
 
 const defaultOptions = {
   chunkSize: 4096,
   collector: () => {},
-  generator: (size) => Promise.resolve(crypto.randomBytes(size))
+  generator: (size) => Promise.resolve(randomBytes(size))
 }
 
 async function * bufferStream (limit, options = {}) {
