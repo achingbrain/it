@@ -1,5 +1,7 @@
 'use strict'
+
 const { Buffer } = require('buffer')
+
 async function toBuffer (stream) {
   let buffer = Buffer.alloc(0)
 

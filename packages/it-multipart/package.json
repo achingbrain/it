@@ -15,6 +15,7 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "dependencies": {
+    "buffer": "^5.5.0",
     "buffer-indexof": "^1.1.1",
     "parse-headers": "^2.0.2"
   },
