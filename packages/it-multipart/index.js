@@ -1,5 +1,6 @@
 'use strict'
 
+const { Buffer } = require('buffer')
 const bIndexOf = require('buffer-indexof')
 const parseHeaders = require('parse-headers')
 

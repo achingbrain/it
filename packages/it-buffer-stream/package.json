@@ -15,8 +15,12 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "devDependencies": {
+    "buffer": "^5.5.0",
     "ava": "^2.4.0",
     "nyc": "^14.0.0",
     "standard": "^14.3.1"
+  },
+  "dependencies": {
+    "iso-random-stream": "^1.1.1"
   }
 }

@@ -1,5 +1,6 @@
 import bufferStream from './'
 import test from 'ava'
+import { Buffer } from 'buffer'
 
 test('Should emit bytes', async (t) => {
   const expected = 100
