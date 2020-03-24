@@ -1,6 +1,6 @@
 {
   "name": "it-to-buffer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Takes an async iterator that yields buffers and concatenates them all together",
   "main": "index.js",
   "repository": "github:achingbrain/it",
