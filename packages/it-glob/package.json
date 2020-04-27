@@ -1,6 +1,6 @@
 {
   "name": "it-glob",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Async iterable filename pattern matcher",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "ava": "^2.4.0",
-    "it-all": "^1.0.1",
+    "it-all": "^1.0.2",
     "nyc": "^14.0.0",
     "standard": "^14.3.1"
   },

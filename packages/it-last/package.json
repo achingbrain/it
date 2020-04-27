@@ -1,6 +1,6 @@
 {
   "name": "it-last",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Returns the last result from an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",

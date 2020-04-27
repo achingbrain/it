@@ -1,6 +1,6 @@
 {
   "name": "it-parallel-batch",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results in the same order as the input",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -17,11 +17,11 @@
   "devDependencies": {
     "ava": "^2.4.0",
     "delay": "^4.3.0",
-    "it-all": "^1.0.1",
+    "it-all": "^1.0.2",
     "nyc": "^14.0.0",
     "standard": "^14.3.1"
   },
   "dependencies": {
-    "it-batch": "^1.0.3"
+    "it-batch": "^1.0.4"
   }
 }

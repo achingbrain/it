@@ -1,6 +1,6 @@
 {
   "name": "it-flat-batch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Takes an async iterator that emits variable length arrays and emits them as fixed size batches",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^2.4.0",
-    "it-all": "^1.0.1",
+    "it-all": "^1.0.2",
     "nyc": "^14.0.0",
     "standard": "^14.3.1"
   }
