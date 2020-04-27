@@ -208,3 +208,22 @@ test('Should batch up entries with non-integer batch size', async (t) => {
 
   t.deepEqual(res, [1, 2])
 })
+
+test('Should allow returning errors', async (t) => {
+  const input = [
+    async () => {
+      await delay(200)
+
+      return new Error('herp')
+    },
+    async () => {
+      await delay(100)
+
+      return new Error('derp')
+    }
+  ]
+  const batchSize = 2
+  const res = await all(parallelBatch(input, batchSize))
+
+  t.deepEqual(res, [new Error('herp'), new Error('derp')])
+})
