@@ -1,6 +1,6 @@
 {
   "name": "it-filter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Filters the passed iterable by using the filter function",
   "main": "index.js",
   "repository": "github:achingbrain/it",
