@@ -2,6 +2,8 @@
 
 Utility modules to make dealing with async iterators easier, some trivial, some not.
 
+* [blob-to-it](./packages/blob-to-it) Turn a Blob into an iterable
+* [browser-readablestream-to-it](./packages/browser-readablestream-to-it) Turn a browser ReadableStream into an iterable
 * [it-all](./packages/it-all) Collect the contents of an iterable into an array
 * [it-batch](./packages/it-batch) Batch up the contents of an iterable into arrays
 * [it-buffer-stream](./packages/it-buffer-stream) Creates an iterable of buffers
