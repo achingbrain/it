@@ -1,4 +1,4 @@
-# browser-stream-to-it
+# browser-readablestream-to-it
 
 [![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-all)](https://david-dm.org/achingbrain/it?path=packages/it-all)
 
@@ -7,13 +7,13 @@
 ## Install
 
 ```sh
-$ npm install --save browser-stream-to-it
+$ npm install --save browser-readablestream-to-it
 ```
 
 ## Usage
 
 ```javascript
-const toIt = require('browser-stream-to-it')
+const toIt = require('browser-readablestream-to-it')
 const all = require('it-all')
 
 const content = [0, 1, 2, 3, 4]
