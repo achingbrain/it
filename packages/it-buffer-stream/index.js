@@ -1,13 +1,29 @@
 'use strict'
 
+// @ts-ignore - untyped dependency
 const randomBytes = require('iso-random-stream/src/random')
 
+/**
+ * @typedef {Object} Options
+ * @property {number} [chunkSize]
+ * @property {function(Buffer):void} [collector]
+ * @property {function(number):Promise<Buffer>|Buffer} [generator]
+ */
+
+/** @type {Options} */
 const defaultOptions = {
   chunkSize: 4096,
   collector: () => {},
   generator: (size) => Promise.resolve(randomBytes(size))
 }
 
+/**
+ * An async iterable that emits buffers containing bytes up to a certain length.
+ *
+ * @param {number} limit
+ * @param {Options} [options]
+ * @returns {AsyncIterable<Buffer>}
+ */
 async function * bufferStream (limit, options = {}) {
   options = Object.assign({}, defaultOptions, options)
   let emitted = 0

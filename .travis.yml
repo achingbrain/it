@@ -4,5 +4,5 @@ node_js:
   - 'lts/*'
   - 'node'
 
-script: npm run lint && npm run coverage
+script: npm run lint && npm run check && npm run coverage
 after_success: coveralls-lerna

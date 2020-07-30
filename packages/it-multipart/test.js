@@ -1,17 +1,25 @@
 import test from 'ava'
 import http from 'http'
 import handler from '.'
+// @ts-ignore
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 
+/** @type {string} */
 let port
+/** @type {import('http').Server} */
 let server
 
 test.before.cb((t) => {
+  /**
+   * @param {import('http').IncomingMessage} req
+   */
   async function echo (req) {
+    /** @type {Record<string, string>} */
     const files = {}
 
     for await (const part of handler(req)) {
+      // @ts-ignore - header may not be present
       const name = part.headers['content-disposition'].match(/name="(.*)"/)[1]
 
       files[name] = ''
@@ -26,7 +34,9 @@ test.before.cb((t) => {
 
   server = http.createServer((req, res) => {
     if (req.method === 'POST' &&
+      // @ts-ignore - header may not be present
       req.headers['content-type'].includes('multipart/form-data') &&
+      // @ts-ignore - header may not be present
       req.headers['content-type'].includes('boundary=')
     ) {
       echo(req)
@@ -50,6 +60,7 @@ test.before.cb((t) => {
     res.writeHead(404)
     res.end()
   }).listen(() => {
+    // @ts-ignore - could be null
     port = server.address().port
     t.end()
   })
@@ -108,6 +119,7 @@ test('it parses loads of files from multipart requests', async (t) => {
 
 test('it throws if not handed a multipart request', async (t) => {
   await t.throwsAsync(async () => {
+    // @ts-ignore
     for await (const _ of handler()) { // eslint-disable-line no-unused-vars
 
     }

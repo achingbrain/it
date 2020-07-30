@@ -1,9 +1,19 @@
 'use strict'
 
+/** @type {typeof window} */
+// @ts-ignore
 const globalThis = require('@ungap/global-this')
 
+/**
+ * @template T
+ * @param {AsyncIterator<T>|Iterator<T>} source
+ * @param {QueuingStrategy<T>} [queuingStrategy]
+ * @returns {ReadableStream<T>}
+ */
 function itToBrowserReadableStream (source, queuingStrategy = {}) {
-  return new globalThis.ReadableStream({
+  /** @type {UnderlyingSource<T> & { _cancelled:boolean} } */
+  const pump = {
+    _cancelled: false,
     async start () {
       this._cancelled = false
     },
@@ -28,7 +38,9 @@ function itToBrowserReadableStream (source, queuingStrategy = {}) {
     cancel () {
       this._cancelled = true
     }
-  }, queuingStrategy)
+  }
+
+  return new globalThis.ReadableStream(pump, queuingStrategy)
 }
 
 module.exports = itToBrowserReadableStream

@@ -2,6 +2,12 @@
 
 const { Buffer } = require('buffer')
 
+/**
+ * Takes an (async) iterable that yields buffer-like-objects and concats them
+ * into one buffer
+ * @param {AsyncIterable<Buffer>|Iterable<Buffer>} stream
+ * @returns {Promise<Buffer>}
+ */
 async function toBuffer (stream) {
   let buffer = Buffer.alloc(0)
 

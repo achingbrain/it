@@ -1,15 +1,34 @@
 'use strict'
 
 const { Buffer } = require('buffer')
+/** @type {(source:Buffer, search:Buffer, index?:number) => number} */
+// @ts-ignore
 const bIndexOf = require('buffer-indexof')
+/** @typedef {function(string):IncomingHttpHeaders} */
+// @ts-ignore
 const parseHeaders = require('parse-headers')
 
 module.exports = multipart
 
-async function * multipart (stream, boundary) {
+/**
+ * @typedef {import('http').IncomingHttpHeaders} IncomingHttpHeaders
+ */
+
+/**
+ * @template T
+ * @typedef {AsyncIterable<T> & AsyncIterator<T>} It
+ */
+
+/**
+ * Streaming multipart HTTP message parser
+ * @param {import('http').IncomingMessage} source
+ * @param {string} [boundary]
+ * @returns {AsyncIterable<{headers:IncomingHttpHeaders, body:It<Buffer>}>}
+ */
+async function * multipart (source, boundary) {
   if (!boundary) {
-    if (stream && stream.headers && stream.headers['content-type'] && stream.headers['content-type'].includes('boundary')) {
-      boundary = stream.headers['content-type'].split('boundary=')[1].trim()
+    if (source && source.headers && source.headers['content-type'] && source.headers['content-type'].includes('boundary')) {
+      boundary = source.headers['content-type'].split('boundary=')[1].trim()
     } else {
       throw new Error('Not a multipart request')
     }
@@ -19,7 +38,7 @@ async function * multipart (stream, boundary) {
   const headerEnd = Buffer.from('\r\n\r\n')
 
   // allow pushing data back into stream
-  stream = prefixStream(stream)
+  const stream = prefixStream(source)
 
   // consume initial boundary
   await consumeUntilAfter(stream, Buffer.from(boundary))
@@ -49,7 +68,13 @@ async function * multipart (stream, boundary) {
   }
 }
 
-// yield chunks of buffer until a the needle is reached. consume the needle without yielding it
+/**
+ * yield chunks of buffer until a the needle is reached. consume the needle
+ * without yielding it
+ * @param {PrefixStream<Buffer>} haystack
+ * @param {Buffer} needle
+ * @returns {AsyncIterable<Buffer>}
+ */
 async function * yieldUntilAfter (haystack, needle) {
   let buffer = Buffer.alloc(0)
 
@@ -85,14 +110,35 @@ async function * yieldUntilAfter (haystack, needle) {
   }
 }
 
+/**
+ * @param {PrefixStream<Buffer>} haystack
+ * @param {Buffer} needle
+ * @returns {Promise<void>}
+ */
 async function consumeUntilAfter (haystack, needle) {
-  for await (const chunk of yieldUntilAfter(haystack, needle)) { // eslint-disable-line no-unused-vars
+  for await (const _chunk of yieldUntilAfter(haystack, needle)) { // eslint-disable-line no-unused-vars
 
   }
 }
 
-// a stream that lets us push content back into it for consumption elsewhere
+/**
+ * @template T
+ * @typedef {Object} PrefixPush
+ * @property {function(T):void} push
+ */
+
+/**
+ * @template T
+ * @typedef {It<T> & PrefixPush<T>} PrefixStream
+ */
+
+/**
+ * a stream that lets us push content back into it for consumption elsewhere
+ * @param {AsyncIterable<Buffer>} stream
+ * @returns {PrefixStream<Buffer>}
+ */
 function prefixStream (stream) {
+  /** @type {Buffer[]} */
   const buffer = []
   const streamIterator = stream[Symbol.asyncIterator]()
 
@@ -100,16 +146,20 @@ function prefixStream (stream) {
     [Symbol.asyncIterator]: () => {
       return iterator
     },
-    next: () => {
+    next: async () => {
       if (buffer.length) {
         return {
           done: false,
-          value: buffer.shift()
+          /** @type {Buffer} */
+          value: (buffer.shift())
         }
       }
 
       return streamIterator.next()
     },
+    /**
+     * @param {Buffer} buf
+     */
     push: function (buf) {
       buffer.push(buf)
     }
@@ -118,7 +168,12 @@ function prefixStream (stream) {
   return iterator
 }
 
+/**
+ * @param {AsyncIterable<Buffer>} stream
+ * @returns {{complete:Promise<void>, iterator:It<Buffer>}}
+ */
 function waitForStreamToBeConsumed (stream) {
+  /** @type {{resolve():void, reject(error:Error):void}} */
   let pending
   const complete = new Promise((resolve, reject) => {
     pending = {
@@ -143,6 +198,7 @@ function waitForStreamToBeConsumed (stream) {
         return next
       } catch (err) {
         pending.reject(err)
+        throw err
       }
     }
   }
@@ -153,6 +209,10 @@ function waitForStreamToBeConsumed (stream) {
   }
 }
 
+/**
+ * @param {AsyncIterable<Buffer>} stream
+ * @returns {Promise<Buffer>}
+ */
 const collect = async (stream) => {
   const buffers = []
   let size = 0
