@@ -5,15 +5,22 @@
 const globalThis = require('@ungap/global-this')
 
 /**
+ * @typedef {Object} SourceExt
+ * @property {boolean} [_cancelled]
+ */
+/**
+ * @template T
+ * @typedef {SourceExt & UnderlyingSource<T>} Source
+ */
+
+/**
  * @template T
  * @param {AsyncIterator<T>|Iterator<T>} source
  * @param {QueuingStrategy<T>} [queuingStrategy]
  * @returns {ReadableStream<T>}
  */
 function itToBrowserReadableStream (source, queuingStrategy = {}) {
-  /** @type {UnderlyingSource<T> & { _cancelled:boolean} } */
-  const pump = {
-    _cancelled: false,
+  return new globalThis.ReadableStream(/** @type {Source<T>} */({
     async start () {
       this._cancelled = false
     },
@@ -38,9 +45,7 @@ function itToBrowserReadableStream (source, queuingStrategy = {}) {
     cancel () {
       this._cancelled = true
     }
-  }
-
-  return new globalThis.ReadableStream(pump, queuingStrategy)
+  }), queuingStrategy)
 }
 
 module.exports = itToBrowserReadableStream
