@@ -1,5 +1,10 @@
 'use strict'
 
+/**
+ * @template T
+ * @param {ReadableStream<T>} stream
+ * @returns {AsyncIterable<T>}
+ */
 async function * browserReadableStreamToIt (stream) {
   const reader = stream.getReader()
 
