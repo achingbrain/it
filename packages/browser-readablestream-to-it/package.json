@@ -11,6 +11,7 @@
     "lint": "standard",
     "coverage": "playwright-test",
     "check": "tsc --noEmit",
+    "clean": "rm -rf dist",
     "build": "npm run build:types",
     "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
   },

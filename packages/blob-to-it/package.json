@@ -10,6 +10,7 @@
     "test": "playwright-test",
     "lint": "standard",
     "coverage": "playwright-test",
+    "clean": "rm -rf dist",
     "check": "npm run build:dep:types && tsc --noEmit",
     "build": "npm run build:types",
     "build:dep:types": "cd node_modules/browser-readablestream-to-it && npm run build:types",
