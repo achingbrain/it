@@ -10,9 +10,10 @@
     "test": "playwright-test",
     "lint": "standard",
     "coverage": "playwright-test",
-    "check": "tsc --noEmit",
+    "check": "npm run build:dep:types && tsc --noEmit",
     "build": "npm run build:types",
-    "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
+    "build:dep:types": "cd node_modules/browser-readablestream-to-it && npm run build:types",
+    "build:types": "npm run build:dep:types && tsc --emitDeclarationOnly --declarationDir dist"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
