@@ -197,6 +197,13 @@ function waitForStreamToBeConsumed (stream) {
 
         return next
       } catch (err) {
+        // By rejecting `completion` propagate error to the
+        // A. `for await (cons part of multipart(...))`
+        // By throwing we propagate error to the
+        // B. `for await (const chunk of part.body)`
+        // We need to do both because if we just do A. error will not appear to
+        // the consumer of `part.body`, furthermore A might break a loop before
+        // completion and error may get swallowed.
         pending.reject(err)
         throw err
       }
