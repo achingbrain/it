@@ -33,11 +33,10 @@ test.before.cb((t) => {
   }
 
   server = http.createServer((req, res) => {
+    const contentType = req.headers['content-type'] || ''
     if (req.method === 'POST' &&
-      // @ts-ignore - header may not be present
-      req.headers['content-type'].includes('multipart/form-data') &&
-      // @ts-ignore - header may not be present
-      req.headers['content-type'].includes('boundary=')
+      contentType.includes('multipart/form-data') &&
+      contentType.includes('boundary=')
     ) {
       echo(req)
         .then((files) => {
@@ -60,7 +59,8 @@ test.before.cb((t) => {
     res.writeHead(404)
     res.end()
   }).listen(() => {
-    // @ts-ignore - could be null
+    // @ts-ignore - address() returns `null|string|object` and TS can't infer
+    // it's last one even though it's inside listen callback.
     port = server.address().port
     t.end()
   })
@@ -119,7 +119,6 @@ test('it parses loads of files from multipart requests', async (t) => {
 
 test('it throws if not handed a multipart request', async (t) => {
   await t.throwsAsync(async () => {
-    // @ts-ignore
     for await (const _ of handler()) { // eslint-disable-line no-unused-vars
 
     }
