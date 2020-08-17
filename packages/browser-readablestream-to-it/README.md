@@ -28,7 +28,15 @@ const stream = new ReadableStream({
   }
 })
 
-const arr = await all(toIt(stream))
+// An optional object which may have the following keys:
+const options = {
+  // Unless `true` stream will be cancelled when consumed partially (e.g. break
+  // in for await loop). Default to `false`.
+  preventCancel: false
+}
+
+const arr = await all(toIt(stream, options))
 
 console.info(arr) // 0, 1, 2, 3, 4
 ```
+
