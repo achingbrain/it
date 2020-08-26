@@ -2,7 +2,7 @@
 
 /**
  * Returns the first result from an (async) iterable, unless empty, in which
- * case returns `void`.
+ * case returns `undefined`.
  *
  * @template T
  * @param {AsyncIterable<T>|Iterable<T>} source
