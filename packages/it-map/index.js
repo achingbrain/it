@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Takes an (async) iterable and return one with each item mapped with given
+ * Takes an (async) iterable and returns one with each item mapped by the passed
  * function.
  *
  * @template I,O
