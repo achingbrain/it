@@ -5,7 +5,7 @@
  * returns an async iterable that emits those things in fixed-size batches.
  *
  * @template T
- * @param {AsyncIterable<T[]>|Iterable<T[]>|AsyncIterable<T>|Iterable<T>} source
+ * @param {AsyncIterable<T[]>|Iterable<T[]>} source
  * @param {number|string} [batchSize=1]
  * @returns {AsyncIterable<T[]>}
  */
