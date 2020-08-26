@@ -2,7 +2,7 @@
 
 /**
  * Takes an (async) iterable that emits variable length arrays of things and
- * returns an async iterable that emits those thnigs in fixed-size batches.
+ * returns an async iterable that emits those things in fixed-size batches.
  *
  * @template T
  * @param {AsyncIterable<T[]>|Iterable<T[]>|AsyncIterable<T>|Iterable<T>} source
