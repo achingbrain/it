@@ -69,7 +69,7 @@ async function * multipart (source, boundary) {
 }
 
 /**
- * yield chunks of buffer until a the needle is reached. consume the needle
+ * Yield chunks of haystack until the needle is reached. Consume the needle
  * without yielding it
  * @param {PrefixStream<Buffer>} haystack
  * @param {Buffer} needle
