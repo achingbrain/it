@@ -1,17 +1,25 @@
 import test from 'ava'
 import http from 'http'
 import handler from '.'
+// @ts-ignore
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 
+/** @type {string} */
 let port
+/** @type {import('http').Server} */
 let server
 
 test.before.cb((t) => {
+  /**
+   * @param {import('http').IncomingMessage} req
+   */
   async function echo (req) {
+    /** @type {Record<string, string>} */
     const files = {}
 
     for await (const part of handler(req)) {
+      // @ts-ignore - header may not be present
       const name = part.headers['content-disposition'].match(/name="(.*)"/)[1]
 
       files[name] = ''
@@ -25,9 +33,10 @@ test.before.cb((t) => {
   }
 
   server = http.createServer((req, res) => {
+    const contentType = req.headers['content-type'] || ''
     if (req.method === 'POST' &&
-      req.headers['content-type'].includes('multipart/form-data') &&
-      req.headers['content-type'].includes('boundary=')
+      contentType.includes('multipart/form-data') &&
+      contentType.includes('boundary=')
     ) {
       echo(req)
         .then((files) => {
@@ -50,6 +59,8 @@ test.before.cb((t) => {
     res.writeHead(404)
     res.end()
   }).listen(() => {
+    // @ts-ignore - address() returns `null|string|object` and TS can't infer
+    // it's last one even though it's inside listen callback.
     port = server.address().port
     t.end()
   })

@@ -2,7 +2,7 @@
 
 [![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-parallel-batch)](https://david-dm.org/achingbrain/it?path=packages/it-parallel-batch)
 
-> Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results as they become available but in the same order as the input
+> Takes an (async) iterable that emits promise-returning functions, invokes them in parallel and emits the results as they become available but in the same order as the input
 
 The final batch may be smaller than the batch size.
 

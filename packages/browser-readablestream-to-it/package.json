@@ -9,7 +9,11 @@
   "scripts": {
     "test": "playwright-test",
     "lint": "standard",
-    "coverage": "playwright-test"
+    "coverage": "playwright-test",
+    "check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "build": "npm run build:types",
+    "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -19,5 +23,13 @@
     "mocha": "8.0.1",
     "playwright-test": "^0.7.1",
     "standard": "^14.3.1"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        ".",
+        "dist/*"
+      ]
+    }
   }
 }

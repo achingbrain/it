@@ -12,6 +12,7 @@
     "start": "NODE_ENV=development lerna run --parallel start",
     "clean": "lerna run --parallel clean",
     "lint": "lerna run --parallel lint",
+    "check": "lerna run --parallel check",
     "publish": "lerna publish"
   },
   "devDependencies": {

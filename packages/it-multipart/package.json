@@ -10,7 +10,10 @@
     "test": "ava",
     "lint": "standard",
     "coverage": "nyc --reporter html --reporter lcov ava",
-    "clean": "rm -rf .nyc_output coverage"
+    "clean": "rm -rf .nyc_output coverage dist",
+    "check": "tsc --noEmit",
+    "build": "npm run build:types",
+    "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -24,6 +27,15 @@
     "form-data": "^2.5.0",
     "node-fetch": "^2.6.0",
     "nyc": "^14.0.0",
-    "standard": "^14.3.1"
+    "standard": "^14.3.1",
+    "typescript": "^3.9.7"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        ".",
+        "dist/*"
+      ]
+    }
   }
 }

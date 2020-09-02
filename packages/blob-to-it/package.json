@@ -9,7 +9,12 @@
   "scripts": {
     "test": "playwright-test",
     "lint": "standard",
-    "coverage": "playwright-test"
+    "coverage": "playwright-test",
+    "clean": "rm -rf dist",
+    "check": "npm run build:dep:types && tsc --noEmit",
+    "build": "npm run build:types",
+    "build:dep:types": "cd node_modules/browser-readablestream-to-it && npm run build:types",
+    "build:types": "npm run build:dep:types && tsc --emitDeclarationOnly --declarationDir dist"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -22,5 +27,13 @@
     "mocha": "8.0.1",
     "playwright-test": "^0.7.1",
     "standard": "^14.3.1"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        ".",
+        "dist/*"
+      ]
+    }
   }
 }

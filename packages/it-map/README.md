@@ -3,7 +3,7 @@
 
 [![Build status](https://travis-ci.org/achingbrain/it.svg?branch=master)](https://travis-ci.org/achingbrain/it?branch=master) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-map)](https://david-dm.org/achingbrain/it?path=packages/it-map)
 
-> Maps the values yielded by an async iterator
+> Maps the values yielded by an (async) iterator
 
 ## Install
 
