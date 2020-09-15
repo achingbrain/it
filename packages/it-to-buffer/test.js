@@ -1,5 +1,5 @@
-import toBuffer from './'
-import test from 'ava'
+const toBuffer = require('./')
+const test = require('ava')
 
 test('Should turn a generator that yields buffers into a buffer', async (t) => {
   const iter = function * () {

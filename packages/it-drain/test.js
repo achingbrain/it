@@ -1,5 +1,5 @@
-import drain from './'
-import test from 'ava'
+const drain = require('./')
+const test = require('ava')
 
 test('Should empty an async iterator', async (t) => {
   let done = false

@@ -1,6 +1,6 @@
-import bufferStream from './'
-import test from 'ava'
-import { Buffer } from 'buffer'
+const bufferStream = require('./')
+const test = require('ava')
+const { Buffer } = require('buffer')
 
 test('Should emit bytes', async (t) => {
   const expected = 100

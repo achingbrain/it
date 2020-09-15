@@ -1,5 +1,5 @@
-import last from './'
-import test from 'ava'
+const last = require('./')
+const test = require('ava')
 
 test('Should return only the last result from an async iterator', async (t) => {
   const values = [0, 1, 2, 3, 4]

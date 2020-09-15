@@ -1,7 +1,7 @@
-import test from 'ava'
-import all from 'it-all'
-import glob from '.'
-import path from 'path'
+const test = require('ava')
+const all = require('it-all')
+const glob = require('.')
+const path = require('path')
 
 test('it should match file', async t => {
   const files = await all(glob('.', '**/*'))

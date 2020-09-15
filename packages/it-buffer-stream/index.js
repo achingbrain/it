@@ -10,7 +10,14 @@ const randomBytes = require('iso-random-stream/src/random')
  * @property {function(number):Promise<Buffer>|Buffer} [generator]
  */
 
-/** @type {Options} */
+ /**
+ * @typedef {Object} ActualOptions
+ * @property {number} chunkSize
+ * @property {function(Buffer):void} collector
+ * @property {function(number):Promise<Buffer>|Buffer} generator
+ */
+
+/** @type {ActualOptions} */
 const defaultOptions = {
   chunkSize: 4096,
   collector: () => {},
@@ -25,25 +32,26 @@ const defaultOptions = {
  * @returns {AsyncIterable<Buffer>}
  */
 async function * bufferStream (limit, options = {}) {
-  options = Object.assign({}, defaultOptions, options)
+  /** @type {ActualOptions} */
+  const opts = Object.assign({}, defaultOptions, options)
   let emitted = 0
 
   const arr = []
-  arr.length = Math.ceil(limit / options.chunkSize)
+  arr.length = Math.ceil(limit / opts.chunkSize)
 
   while (emitted < limit) {
-    const nextLength = emitted + options.chunkSize
-    let nextChunkSize = options.chunkSize
+    const nextLength = emitted + opts.chunkSize
+    let nextChunkSize = opts.chunkSize
 
     if (nextLength > limit) {
       // emit the final chunk
       nextChunkSize = limit - emitted
     }
 
-    let bytes = await options.generator(nextChunkSize)
+    let bytes = await opts.generator(nextChunkSize)
     bytes = bytes.slice(0, nextChunkSize)
 
-    options.collector(bytes)
+    opts.collector(bytes)
     emitted += nextChunkSize
 
     yield bytes

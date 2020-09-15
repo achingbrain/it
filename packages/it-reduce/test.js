@@ -1,5 +1,5 @@
-import reduce from './'
-import test from 'ava'
+const reduce = require('./')
+const test = require('ava')
 
 test('Should reduce the values yielded from an async iterator', async (t) => {
   const iter = function * () {

@@ -1,9 +1,9 @@
-import test from 'ava'
-import http from 'http'
-import handler from '.'
+const test = require('ava')
+const http = require('http')
+const handler = require('.')
 // @ts-ignore
-import fetch from 'node-fetch'
-import FormData from 'form-data'
+const fetch = require('node-fetch')
+const FormData = require('form-data')
 
 /** @type {string} */
 let port
@@ -122,5 +122,5 @@ test('it throws if not handed a multipart request', async (t) => {
     for await (const _ of handler()) { // eslint-disable-line no-unused-vars
 
     }
-  }, 'Not a multipart request')
+  }, { message: 'Not a multipart request' })
 })

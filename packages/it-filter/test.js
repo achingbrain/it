@@ -1,6 +1,6 @@
-import all from 'it-all'
-import filter from './'
-import test from 'ava'
+const all = require('it-all')
+const filter = require('./')
+const test = require('ava')
 
 test('Should filter all values greater than 2', async (t) => {
   const values = [0, 1, 2, 3, 4]

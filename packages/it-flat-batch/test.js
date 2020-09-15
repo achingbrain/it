@@ -1,6 +1,6 @@
-import batch from './'
-import test from 'ava'
-import all from 'it-all'
+const batch = require('./')
+const test = require('ava')
+const all = require('it-all')
 
 test('Should batch up emitted arrays', async (t) => {
   const values = [[0, 1, 2], [3], [4]]

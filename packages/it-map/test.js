@@ -1,5 +1,5 @@
-import map from './'
-import test from 'ava'
+const map = require('./')
+const test = require('ava')
 
 test('Should map an async iterator', async (t) => {
   const iter = function * () {

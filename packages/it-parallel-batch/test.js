@@ -1,9 +1,9 @@
 'use strict'
 
-import parallelBatch from './'
-import test from 'ava'
-import all from 'it-all'
-import delay from 'delay'
+const parallelBatch = require('./')
+const test = require('ava')
+const all = require('it-all')
+const delay = require('delay')
 
 test('Should batch up emitted arrays', async (t) => {
   const input = [
