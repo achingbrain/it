@@ -24,6 +24,7 @@
   "include": [],
   "baseUrl": ".",
   "exclude": [
+    "packages/*/coverage",
     "packages/*/dist",
     "packages/*/test*.js",
     "packages/*/node_modules",

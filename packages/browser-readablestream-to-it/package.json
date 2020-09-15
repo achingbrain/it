@@ -22,7 +22,8 @@
     "it-all": "^1.0.2",
     "mocha": "8.0.1",
     "playwright-test": "^0.7.1",
-    "standard": "^14.3.1"
+    "standard": "^14.3.1",
+    "typescript": "^3.9.7"
   },
   "typesVersions": {
     "*": {

@@ -1,5 +1,11 @@
 'use strict'
 
+/**
+ * Consumes the passed iterator and returns the number of items it contained.
+ *
+ * @param {AsyncIterable<object>} iterator
+ * @returns {Promise<number>}
+ */
 const length = async (iterator) => {
   let count = 0
 
