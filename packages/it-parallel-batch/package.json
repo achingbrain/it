@@ -14,7 +14,8 @@
     "check": "npm run build:dep:types && tsc --noEmit",
     "build": "npm run build:types",
     "build:dep:types": "cd node_modules/it-batch && npm run build:types",
-    "build:types": "npm run build:dep:types && tsc --emitDeclarationOnly --declarationDir dist"
+    "build:types": "npm run build:dep:types && tsc --emitDeclarationOnly --declarationDir dist",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",

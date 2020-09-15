@@ -13,7 +13,8 @@
     "clean": "rm -rf .nyc_output coverage dist",
     "check": "tsc --noEmit",
     "build": "npm run build:types",
-    "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
+    "build:types": "tsc --emitDeclarationOnly --declarationDir dist",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -30,6 +31,5 @@
         "dist/*"
       ]
     }
-  },
-  "gitHead": "42faa5aeb9de0e07c956d73020bd74fd08e3029d"
+  }
 }

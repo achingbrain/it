@@ -13,7 +13,8 @@
     "check": "tsc --noEmit",
     "clean": "rm -rf dist",
     "build": "npm run build:types",
-    "build:types": "tsc --emitDeclarationOnly --declarationDir dist"
+    "build:types": "tsc --emitDeclarationOnly --declarationDir dist",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
