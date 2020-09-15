@@ -1,6 +1,6 @@
 {
   "name": "it-map",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Maps the values yielded by an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",
