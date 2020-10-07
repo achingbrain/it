@@ -10,7 +10,7 @@ const randomBytes = require('iso-random-stream/src/random')
  * @property {function(number):Promise<Buffer>|Buffer} [generator]
  */
 
- /**
+/**
  * @typedef {Object} ActualOptions
  * @property {number} chunkSize
  * @property {function(Buffer):void} collector
