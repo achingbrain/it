@@ -40,7 +40,7 @@ const input = [
 
 const batchSize = 2
 
-const result = await all(parallelBatch(input, batchSize))
+const result = await all(batch(input, batchSize))
 
 console.info(result) // [1, 2, 3]
 ```
