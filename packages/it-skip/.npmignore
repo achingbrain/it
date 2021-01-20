@@ -6,6 +6,3 @@ Thumbs.db
 .nyc_output
 coverage
 bin
-packages/*/dist
-package-lock.json
-

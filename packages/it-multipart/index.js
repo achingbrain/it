@@ -173,7 +173,7 @@ function prefixStream (stream) {
  * @returns {{complete:Promise<void>, iterator:It<Buffer>}}
  */
 function waitForStreamToBeConsumed (stream) {
-  /** @type {{resolve():void, reject(error:Error):void}} */
+  /** @type {{resolve(value?:any):void, reject(error:Error):void}} */
   let pending
   const complete = new Promise((resolve, reject) => {
     pending = {

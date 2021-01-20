@@ -15,7 +15,7 @@ $ npm install --save it-parallel-batch
 ## Usage
 
 ```javascript
-const batch = require('it-parallel-batch')
+const parallelBatch = require('it-parallel-batch')
 const all = require('it-all')
 const delay = require('delay')
 
@@ -40,7 +40,7 @@ const input = [
 
 const batchSize = 2
 
-const result = await all(batch(input, batchSize))
+const result = await all(parallelBatch(input, batchSize))
 
 console.info(result) // [1, 2, 3]
 ```
