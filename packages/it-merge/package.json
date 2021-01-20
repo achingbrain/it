@@ -1,6 +1,6 @@
 {
   "name": "it-merge",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Treat one or more iterables as a single iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",
