@@ -1,6 +1,6 @@
 {
   "name": "it-take",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Stop iteration after n items have been received",
   "main": "index.js",
   "repository": "github:achingbrain/it",
