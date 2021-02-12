@@ -1,6 +1,6 @@
 {
   "name": "it-length",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Counts the number of items in an async iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",

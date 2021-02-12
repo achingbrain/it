@@ -1,6 +1,6 @@
 {
   "name": "browser-readablestream-to-it",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Turns a browser readble stream into an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -20,7 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
-    "it-all": "^1.0.4",
+    "it-all": "^1.0.5",
     "mocha": "8.0.1",
     "playwright-test": "^0.7.1",
     "standard": "^16.0.3",
