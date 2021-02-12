@@ -6,10 +6,9 @@
  *
  * @template T
  * @param {AsyncIterable<T>|Iterable<T>} source
- * @returns {Promise<T|void>}
  */
 const first = async (source) => {
-  for await (const entry of source) {
+  for await (const entry of source) { // eslint-disable-line no-unreachable-loop
     return entry
   }
 }

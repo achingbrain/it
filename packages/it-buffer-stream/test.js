@@ -76,7 +76,7 @@ test('Should propagate byte generation errors', async (t) => {
       generator: async () => {
         throw generationError
       }
-    })) {
+    })) { // eslint-disable-line no-empty
 
     }
 

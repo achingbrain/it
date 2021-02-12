@@ -13,7 +13,6 @@ const pushable = require('it-pushable')
  * @returns {AsyncIterable<T>}
  */
 const merge = async function * (...sources) {
-  // @ts-ignore
   const output = pushable()
 
   setTimeout(async () => {

@@ -6,17 +6,10 @@
  *
  * @template T
  * @param {AsyncIterable<T>|Iterable<T>} source
- * @param {number|string} [size=1]
+ * @param {number} [size=1]
  * @returns {AsyncIterable<T[]>}
  */
-async function * batch (source, size) {
-  // @ts-ignore - parseInt expects string
-  size = parseInt(size)
-
-  if (isNaN(size) || size < 1) {
-    size = 1
-  }
-
+async function * batch (source, size = 1) {
   /** @type {T[]} */
   let things = []
 

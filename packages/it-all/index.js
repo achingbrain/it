@@ -5,7 +5,6 @@
  *
  * @template T
  * @param {AsyncIterable<T>|Iterable<T>} source
- * @returns {Promise<T[]>}
  */
 const all = async (source) => {
   const arr = []

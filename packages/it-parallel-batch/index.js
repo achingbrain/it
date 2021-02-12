@@ -4,7 +4,11 @@ const batch = require('it-batch')
 
 /**
  * @template T
- * @typedef {function():Promise<T>} Task
+ * @typedef {{ok:true, value:T}} Success
+ */
+
+ /**
+ * @typedef {{ok:false, err:Error}} Failure
  */
 
 /**
@@ -13,21 +17,18 @@ const batch = require('it-batch')
  * in the same order as the input
  *
  * @template T
- * @param {AsyncIterable<Task<T>>} source
- * @param {number|string} [size=1]
+ * @param {AsyncIterable<() => Promise<T>>} source
+ * @param {number} [size=1]
  * @returns {AsyncIterable<T>}
  */
-async function * parallelBatch (source, size) {
-  // @ts-ignore - expects string not a number
-  size = parseInt(size)
-
-  if (isNaN(size) || size < 1) {
-    size = 1
-  }
-
+async function * parallelBatch (source, size = 1) {
   for await (const tasks of batch(source, size)) {
-    /** @type {Promise<{ok:true, value:T}|{ok:false, err:Error}>[]} */
-    const things = tasks.map(p => {
+    /** @type {Promise<Success<T>|Failure>[]} */
+    const things = tasks.map(
+      /**
+       * @param {() => Promise<T>} p
+       */
+      p => {
       return p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
     })
 

@@ -1,9 +1,5 @@
 'use strict'
 
-/** @type {typeof window} */
-// @ts-ignore
-const globalThis = require('@ungap/global-this')
-
 /**
  * @typedef {Object} SourceExt
  * @property {boolean} [_cancelled]
