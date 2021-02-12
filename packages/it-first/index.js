@@ -11,6 +11,8 @@ const first = async (source) => {
   for await (const entry of source) { // eslint-disable-line no-unreachable-loop
     return entry
   }
+
+  return undefined
 }
 
 module.exports = first
