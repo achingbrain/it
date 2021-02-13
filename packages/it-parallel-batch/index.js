@@ -7,7 +7,7 @@ const batch = require('it-batch')
  * @typedef {{ok:true, value:T}} Success
  */
 
- /**
+/**
  * @typedef {{ok:false, err:Error}} Failure
  */
 
@@ -29,8 +29,8 @@ async function * parallelBatch (source, size = 1) {
        * @param {() => Promise<T>} p
        */
       p => {
-      return p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
-    })
+        return p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
+      })
 
     for (let i = 0; i < things.length; i++) {
       const result = await things[i]
