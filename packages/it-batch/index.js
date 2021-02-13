@@ -13,6 +13,10 @@ async function * batch (source, size = 1) {
   /** @type {T[]} */
   let things = []
 
+  if (size < 1) {
+    size = 1
+  }
+
   for await (const thing of source) {
     things.push(thing)
 
