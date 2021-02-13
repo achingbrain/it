@@ -6,15 +6,15 @@ const randomBytes = require('iso-random-stream/src/random')
 /**
  * @typedef {Object} Options
  * @property {number} [chunkSize]
- * @property {function(Buffer):void} [collector]
- * @property {function(number):Promise<Buffer>|Buffer} [generator]
+ * @property {function(Uint8Array):void} [collector]
+ * @property {function(number):Promise<Uint8Array>|Uint8Array} [generator]
  */
 
 /**
  * @typedef {Object} ActualOptions
  * @property {number} chunkSize
- * @property {function(Buffer):void} collector
- * @property {function(number):Promise<Buffer>|Buffer} generator
+ * @property {function(Uint8Array):void} collector
+ * @property {function(number):Promise<Uint8Array>|Uint8Array} generator
  */
 
 /** @type {ActualOptions} */
@@ -29,7 +29,6 @@ const defaultOptions = {
  *
  * @param {number} limit
  * @param {Options} [options]
- * @returns {AsyncIterable<Buffer>}
  */
 async function * bufferStream (limit, options = {}) {
   /** @type {ActualOptions} */

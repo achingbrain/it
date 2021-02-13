@@ -1,6 +1,6 @@
 const bufferStream = require('./')
 const test = require('ava')
-const { Buffer } = require('buffer')
+const uint8ArrayConcat = require('uint8arrays/concat')
 
 test('Should emit bytes', async (t) => {
   const expected = 100
@@ -35,29 +35,29 @@ test('Should emit a number of buffers', async (t) => {
 
 test('Should allow collection of buffers', async (t) => {
   const expected = 100
-  let emitted = Buffer.alloc(0)
+  let emitted = new Uint8Array(0)
   const buffers = []
 
   for await (const buf of bufferStream(expected, {
     collector: (buffer) => {
-      emitted = Buffer.concat([emitted, buffer])
+      emitted = uint8ArrayConcat([emitted, buffer])
     }
   })) {
     buffers.push(buf)
   }
 
-  t.deepEqual(emitted, buffers[0])
+  t.deepEqual(Uint8Array.from(emitted), Uint8Array.from(buffers[0]))
 })
 
 test('Should allow generation of buffers', async (t) => {
   const expected = 100
-  let emitted = Buffer.alloc(0)
+  let emitted = new Uint8Array(0)
   const buffers = []
 
   for await (const buf of bufferStream(expected, {
     generator: (size) => {
-      const output = Buffer.alloc(size, 1)
-      emitted = Buffer.concat([emitted, output])
+      const output = new Uint8Array(size)
+      emitted = uint8ArrayConcat([emitted, output])
 
       return output
     }
