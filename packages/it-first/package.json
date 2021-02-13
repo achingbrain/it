@@ -1,6 +1,6 @@
 {
   "name": "it-first",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Returns the first result from an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",
