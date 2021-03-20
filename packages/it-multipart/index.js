@@ -11,23 +11,24 @@ const parseHeaders = require('parse-headers')
 module.exports = multipart
 
 /**
+ * @typedef {import('http').IncomingMessage} IncomingMessage
  * @typedef {import('http').IncomingHttpHeaders} IncomingHttpHeaders
- */
-
-/**
- * @template T
- * @typedef {AsyncIterable<T> & AsyncIterator<T>} It
+ * @typedef {Object} Part
+ * @property {IncomingHttpHeaders} headers
+ * @property {AsyncIterable<Buffer>} body
  */
 
 /**
  * Streaming multipart HTTP message parser
- * @param {import('http').IncomingMessage} source
+ * @param {IncomingMessage | AsyncIterable<Buffer>} source
  * @param {string} [boundary]
- * @returns {AsyncIterable<{headers:IncomingHttpHeaders, body:It<Buffer>}>}
+ * @returns {AsyncIterable<Part>}
  */
 async function * multipart (source, boundary) {
   if (!boundary) {
+    // @ts-ignore
     if (source && source.headers && source.headers['content-type'] && source.headers['content-type'].includes('boundary')) {
+      // @ts-ignore
       boundary = source.headers['content-type'].split('boundary=')[1].trim()
     } else {
       throw new Error('Not a multipart request')
@@ -129,7 +130,7 @@ async function consumeUntilAfter (haystack, needle) {
 
 /**
  * @template T
- * @typedef {It<T> & PrefixPush<T>} PrefixStream
+ * @typedef {AsyncIterable<T> & PrefixPush<T>} PrefixStream
  */
 
 /**
@@ -170,7 +171,7 @@ function prefixStream (stream) {
 
 /**
  * @param {AsyncIterable<Buffer>} stream
- * @returns {{complete:Promise<void>, iterator:It<Buffer>}}
+ * @returns {{complete:Promise<void>, iterator:AsyncIterable<Buffer>}}
  */
 function waitForStreamToBeConsumed (stream) {
   /** @type {{resolve(value?:any):void, reject(error:Error):void}} */
