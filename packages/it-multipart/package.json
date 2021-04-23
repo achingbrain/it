@@ -19,11 +19,11 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "dependencies": {
-    "buffer": "^6.0.3",
-    "buffer-indexof": "^1.1.1",
-    "parse-headers": "^2.0.2"
+    "formidable": "^1.2.2",
+    "it-pushable": "^1.4.2"
   },
   "devDependencies": {
+    "@types/formidable": "^1.2.1",
     "ava": "^3.12.1",
     "form-data": "^3.0.0",
     "node-fetch": "^2.6.0",

@@ -33,31 +33,23 @@ test.before.cb((t) => {
   }
 
   server = http.createServer((req, res) => {
-    const contentType = req.headers['content-type'] || ''
-    if (req.method === 'POST' &&
-      contentType.includes('multipart/form-data') &&
-      contentType.includes('boundary=')
-    ) {
-      echo(req)
-        .then((files) => {
-          res.writeHead(200, {
-            'content-length': files.length,
-            'content-type': 'application/json'
-          })
-          res.end(files)
+    echo(req)
+      .then((files) => {
+        res.writeHead(200, {
+          'content-length': files.length,
+          'content-type': 'application/json'
         })
-        .catch(err => {
-          console.error(err)
-
+        res.end(files)
+      })
+      .catch(err => {
+        if (err.message.includes('bad content-type header')) {
+          res.writeHead(400)
+        } else {
           res.writeHead(500)
-          res.end(err.stack)
-        })
+        }
 
-      return
-    }
-
-    res.writeHead(404)
-    res.end()
+        res.end(err.stack)
+      })
   }).listen(() => {
     // @ts-ignore - address() returns `null|string|object` and TS can't infer
     // it's last one even though it's inside listen callback.
@@ -117,10 +109,19 @@ test('it parses loads of files from multipart requests', async (t) => {
   )
 })
 
-test('it throws if not handed a multipart request', async (t) => {
+test('it throws when request is not passed', async (t) => {
   await t.throwsAsync(async () => {
     for await (const _ of handler()) { // eslint-disable-line no-unused-vars
 
     }
-  }, { message: 'Not a multipart request' })
+  }, { message: 'request missing' })
+})
+
+test('it throws when request is not multipart', async (t) => {
+  const result = await fetch(`http://localhost:${port}`, {
+    method: 'POST',
+    body: 'not multipart'
+  })
+
+  t.is(result.status, 400)
 })
