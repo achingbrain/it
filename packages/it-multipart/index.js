@@ -1,6 +1,6 @@
 'use strict'
 
-const Formidable = require('formidable')
+const formidable = require('formidable')
 const pushable = require('it-pushable')
 
 /**
@@ -28,7 +28,7 @@ async function * multipart (request) {
     return
   }
 
-  const form = new Formidable({ keepExtensions: true })
+  const form = formidable({ keepExtensions: true })
 
   form.parse(request, err => {
     output.end(err)

@@ -1,7 +1,6 @@
 'use strict'
 
-// @ts-ignore
-const fs = require('fs-extra')
+const fs = require('fs').promises
 const path = require('path')
 const minimatch = require('minimatch')
 
@@ -24,7 +23,7 @@ const minimatch = require('minimatch')
  * @param {Options} [options]
  * @returns {AsyncIterable<string>}
  */
-module.exports = async function * glob (dir, pattern, options = {}) {
+async function * glob (dir, pattern, options = {}) {
   const absoluteDir = path.resolve(dir)
   const relativeDir = path.relative(options.cwd || process.cwd(), dir)
 
@@ -72,3 +71,5 @@ async function * _glob (base, dir, pattern, options) {
     }
   }
 }
+
+module.exports = glob
