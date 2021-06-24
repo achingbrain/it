@@ -37,7 +37,7 @@ async function * glob (dir, pattern, options = {}) {
     return
   }
 
-  if (minimatch(relativeDir, pattern)) {
+  if (minimatch(relativeDir, pattern, options)) {
     yield options.absolute ? absoluteDir : relativeDir
   }
 }
