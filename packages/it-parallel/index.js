@@ -28,9 +28,6 @@ async function * parallel (source, concurrency = 1) {
   let resultAvailable = defer()
 
   emitter.on('task-complete', () => {
-    slotAvailable.resolve()
-    slotAvailable = defer()
-
     resultAvailable.resolve()
     resultAvailable = defer()
   })
@@ -81,6 +78,9 @@ async function * parallel (source, concurrency = 1) {
       } else {
         throw op.err
       }
+
+      slotAvailable.resolve()
+      slotAvailable = defer()
     }
 
     if (sourceFinished && ops.length === 0) {

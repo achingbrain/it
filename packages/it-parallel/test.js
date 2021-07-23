@@ -5,28 +5,20 @@ const test = require('ava')
 const all = require('it-all')
 const delay = require('delay')
 
+const createFn = (ms, result) => {
+  return async () => {
+    await delay(ms)
+
+    return result
+  }
+}
+
 test('Should execute', async (t) => {
   const input = [
-    async () => {
-      await delay(1000)
-
-      return 1
-    },
-    async () => {
-      await delay(2000)
-
-      return 2
-    },
-    async () => {
-      await delay(100)
-
-      return 3
-    },
-    async () => {
-      await delay(100)
-
-      return 4
-    }
+    createFn(1000, 1),
+    createFn(2000, 2),
+    createFn(100, 3),
+    createFn(100, 4)
   ]
 
   const res = await all(parallel(input, 3))
@@ -34,25 +26,53 @@ test('Should execute', async (t) => {
   t.deepEqual(res, [1, 2, 3, 4])
 })
 
+test('Should not exceed concurrency limit', async (t) => {
+  let running = 0
+  let runningMax = 0
+  const concurrency = 3
+
+  const createFn = (ms, result) => {
+    return async () => {
+      running++
+
+      if (running > runningMax) {
+        runningMax = running
+      }
+
+      await delay(ms)
+
+      running--
+
+      return result
+    }
+  }
+
+  const input = [
+    createFn(1000, 1),
+    createFn(100, 2),
+    createFn(100, 3),
+    createFn(10, 4),
+    createFn(10, 5)
+  ]
+
+  const res = await all(parallel(input, concurrency))
+
+  t.deepEqual(res, [1, 2, 3, 4, 5])
+
+  t.is(runningMax, concurrency)
+})
+
 test('Should propagate errors', async (t) => {
   const error = new Error('wat')
 
   const input = [
-    async () => {
-      await delay(100)
-
-      return 1
-    },
+    createFn(100, 1),
     async () => {
       await delay(200)
 
       throw error
     },
-    async () => {
-      await delay(50)
-
-      return 3
-    }
+    createFn(50, 3)
   ]
 
   try {
@@ -64,16 +84,8 @@ test('Should propagate errors', async (t) => {
 
 test('Should work without size parameter', async (t) => {
   const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
+    createFn(200, 1),
+    createFn(100, 2)
   ]
 
   const res = await all(parallel(input))
@@ -83,16 +95,8 @@ test('Should work without size parameter', async (t) => {
 
 test('Should batch up entries with negative batch size', async (t) => {
   const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
+    createFn(200, 1),
+    createFn(100, 2)
   ]
   const batchSize = -1
   const res = await all(parallel(input, batchSize))
@@ -102,16 +106,8 @@ test('Should batch up entries with negative batch size', async (t) => {
 
 test('Should batch up entries with zero batch size', async (t) => {
   const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
+    createFn(200, 1),
+    createFn(100, 2)
   ]
   const batchSize = 0
   const res = await all(parallel(input, batchSize))
@@ -121,16 +117,8 @@ test('Should batch up entries with zero batch size', async (t) => {
 
 test('Should batch up entries with string batch size', async (t) => {
   const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
+    createFn(200, 1),
+    createFn(100, 2)
   ]
   const batchSize = '2'
   const res = await all(parallel(input, batchSize))
@@ -140,16 +128,8 @@ test('Should batch up entries with string batch size', async (t) => {
 
 test('Should batch up entries with non-integer batch size', async (t) => {
   const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
+    createFn(200, 1),
+    createFn(100, 2)
   ]
   const batchSize = 2.5
   const res = await all(parallel(input, batchSize))
