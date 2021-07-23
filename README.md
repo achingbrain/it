@@ -17,6 +17,7 @@ Utility modules to make dealing with async iterators easier, some trivial, some 
 * [it-map](./packages/it-map) Map the output of an iterable
 * [it-merge](./packages/it-merge) Treat multiple iterables as one
 * [it-multipart](./packages/it-multipart) Parse multipart message bodies as an iterable
+* [it-parallel](./packages/it-parallel) Take an iterable of functions that return promises and run them in parallel up to a concurrency limit
 * [it-parallel-batch](./packages/it-parallel-batch) Take an iterable of functions that return promises and run them in parallel in batches
 * [it-peekable](./packages/it-peekable) Peek/push an iterable
 * [it-reduce](./packages/it-reduce) Reduce the output of an iterable

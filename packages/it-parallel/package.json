@@ -1,0 +1,40 @@
+{
+  "name": "it-parallel",
+  "version": "0.0.0",
+  "description": "Takes an (async) iterable that emits promise-returning functions, invokes them in parallel up to the concurrency limit and emits the results as they become available but in the same order as the input",
+  "main": "index.js",
+  "repository": "github:achingbrain/it",
+  "homepage": "https://github.com/achingbrain/it#readme",
+  "bugs": "https://github.com/achingbrain/it/issues",
+  "scripts": {
+    "test": "ava",
+    "lint": "standard",
+    "coverage": "nyc --reporter html --reporter lcov ava",
+    "clean": "rm -rf .nyc_output coverage dist",
+    "check": "tsc --noEmit",
+    "build": "npm run build:types",
+    "build:types": "tsc --emitDeclarationOnly --declarationDir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^3.12.1",
+    "delay": "^4.3.0",
+    "it-all": "^1.0.5",
+    "nyc": "^15.1.0",
+    "standard": "^16.0.3",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "p-defer": "^3.0.0"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        ".",
+        "dist/*"
+      ]
+    }
+  }
+}
