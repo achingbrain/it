@@ -24,5 +24,5 @@ Utility modules to make dealing with async iterators easier, some trivial, some 
 * [it-skip](./packages/it-skip) Skip items at the start of an iterable
 * [it-split](./packages/it-split) Split an iterable of buffers by linebreaks
 * [it-take](./packages/it-take) Limit the number of items you want from an iterable
-* [it-to-browser-readablestream](./packages/it-reduce) Turns an iterable into a WhatWG [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+* [it-to-browser-readablestream](./packages/it-to-browser-readablestream) Turns an iterable into a WhatWG [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
 * [it-to-buffer](./packages/it-to-buffer) Takes an iterable of Buffers and concatenates them
