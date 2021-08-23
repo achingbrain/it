@@ -3,7 +3,7 @@
 /**
  * Consumes the passed iterator and returns the number of items it contained.
  *
- * @param {AsyncIterable<object>} iterator
+ * @param {AsyncIterable<any> | Iterable<any>} iterator
  * @returns {Promise<number>}
  */
 const length = async (iterator) => {
