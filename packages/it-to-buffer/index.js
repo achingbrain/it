@@ -1,6 +1,6 @@
 'use strict'
 
-const uint8ArrayConcat = require('uint8arrays/concat')
+const { concat: uint8ArrayConcat } = require('uint8arrays/concat')
 
 /**
  * Takes an (async) iterable that yields buffer-like-objects and concats them

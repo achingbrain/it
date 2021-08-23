@@ -1,6 +1,6 @@
 const bufferStream = require('./')
 const test = require('ava')
-const uint8ArrayConcat = require('uint8arrays/concat')
+const { concat: uint8ArrayConcat } = require('uint8arrays/concat')
 
 test('Should emit bytes', async (t) => {
   const expected = 100
