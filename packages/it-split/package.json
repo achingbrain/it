@@ -1,6 +1,6 @@
 {
   "name": "it-split",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Splits Uint8Arrays emitted by an (async) iterable by a delimiter",
   "main": "index.js",
   "repository": "github:achingbrain/it",
