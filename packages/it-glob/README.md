@@ -18,9 +18,6 @@ $ npm install --save it-glob
 const glob = require('it-glob')
 
 const options = {
-  ignore: [
-    'glob' // glob patterns to ignore
-  ],
   cwd // defaults to process.cwd
   absolute // return absolute paths, defaults to false
   nodir // only yield file paths, skip directories
@@ -32,3 +29,5 @@ for await (const path of glob('/path/to/file', '**/*', options)) {
   console.info(path)
 }
 ```
+
+See the [minimatch docs](https://www.npmjs.com/package/minimatch#options) for the full list of options.

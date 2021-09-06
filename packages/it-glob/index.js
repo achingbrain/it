@@ -56,17 +56,17 @@ async function * _glob (base, dir, pattern, options) {
 
     let match = minimatch(relativeEntryPath, pattern, options)
 
-    if (options.ignore && match && options.ignore.reduce((acc, curr) => {
-      return acc || minimatch(relativeEntryPath, curr, options)
-    }, false)) {
+    const isDirectory = entry.isDirectory()
+
+    if (isDirectory && options.nodir) {
       match = false
     }
 
-    if (match && !(entry.isDirectory() && options.nodir)) {
+    if (match) {
       yield options.absolute ? absoluteEntryPath : relativeEntryPath
     }
 
-    if (entry.isDirectory()) {
+    if (isDirectory) {
       yield * _glob(base, relativeEntryPath, pattern, options)
     }
   }
