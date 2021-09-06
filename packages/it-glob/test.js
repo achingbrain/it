@@ -28,23 +28,13 @@ test('it should match files', async t => {
 })
 
 test('it should ignore files', async t => {
-  const files = await all(glob('.', '**/*', {
-    ignore: [
-      '*/index.js',
-      '**/node_modules/**'
-    ]
-  }))
+  const files = await all(glob('.', '**/*!(*/index.js|**/node_modules/**)'))
 
   t.falsy(files.includes('test/index.js'))
 })
 
 test('it should ignore files from absolute directory', async t => {
-  const files = await all(glob(__dirname, '**/*', {
-    ignore: [
-      'test/index.js',
-      '**/node_modules/**'
-    ]
-  }))
+  const files = await all(glob(__dirname, '**/*!(test/index.js|)**/node_modules/**'))
 
   t.falsy(files.includes(path.resolve(__dirname, 'index.js')))
 })
@@ -77,9 +67,10 @@ test('it matches directories', async t => {
 
 test('it skips directories', async t => {
   const files = await all(glob(__dirname, 'node_modules/**/*', {
-    nodir: true
+    nodir: true,
+    dot: true
   }))
 
-  t.falsy(files.includes('node_modules/it-all'))
-  t.truthy(files.includes('node_modules/it-all/package.json'))
+  t.falsy(files.includes('node_modules/.bin'))
+  t.truthy(files.includes('node_modules/.bin/ava'))
 })
