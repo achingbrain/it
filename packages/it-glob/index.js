@@ -50,10 +50,10 @@ async function * glob (dir, pattern, options = {}) {
  * @returns {AsyncIterable<string>}
  */
 async function * _glob (base, dir, pattern, options) {
-  for await (const entry of await fs.readdir(path.join(base, dir))) {
-    const relativeEntryPath = path.join(dir, entry)
-    const absoluteEntryPath = path.join(base, dir, entry)
-    const stats = await fs.stat(absoluteEntryPath)
+  for await (const entry of await fs.opendir(path.join(base, dir))) {
+    const relativeEntryPath = path.join(dir, entry.name)
+    const absoluteEntryPath = path.join(base, dir, entry.name)
+
     let match = minimatch(relativeEntryPath, pattern, options)
 
     if (options.ignore && match && options.ignore.reduce((acc, curr) => {
@@ -62,11 +62,11 @@ async function * _glob (base, dir, pattern, options) {
       match = false
     }
 
-    if (match && !(stats.isDirectory() && options.nodir)) {
+    if (match && !(entry.isDirectory() && options.nodir)) {
       yield options.absolute ? absoluteEntryPath : relativeEntryPath
     }
 
-    if (stats.isDirectory()) {
+    if (entry.isDirectory()) {
       yield * _glob(base, relativeEntryPath, pattern, options)
     }
   }
