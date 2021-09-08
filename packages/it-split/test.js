@@ -1,7 +1,7 @@
 const split = require('./')
 const all = require('it-all')
 const test = require('ava')
-const { toString: toString } = require('uint8arrays/to-string')
+const { toString } = require('uint8arrays/to-string')
 
 test('Should split Uint8Arrays by newlines', async (t) => {
   const encoder = new TextEncoder()
