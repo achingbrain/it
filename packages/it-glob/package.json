@@ -30,7 +30,8 @@
     "typescript": "^4.0.2"
   },
   "browser": {
-    "fs": false
+    "fs": false,
+    "path": false
   },
   "types": "dist/index.d.ts"
 }
