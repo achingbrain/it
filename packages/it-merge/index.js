@@ -26,7 +26,7 @@ const merge = async function * (...sources) {
       )
 
       output.end()
-    } catch (err) {
+    } catch (/** @type {any} */ err) {
       output.end(err)
     }
   }, 0)
