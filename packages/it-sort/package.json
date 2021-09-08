@@ -1,6 +1,6 @@
 {
   "name": "it-sort",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Collects all values from an async iterator, sorts them using the passed function and yields them",
   "main": "index.js",
   "repository": "github:achingbrain/it",
