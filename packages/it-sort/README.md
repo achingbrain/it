@@ -27,3 +27,5 @@ const arr = await all(sort(values, sorter))
 
 console.info(arr) // 'bar', 'foo'
 ```
+
+pre-v1
