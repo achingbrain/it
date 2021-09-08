@@ -1,6 +1,6 @@
 {
   "name": "blob-to-it",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Turns a blob into an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",
