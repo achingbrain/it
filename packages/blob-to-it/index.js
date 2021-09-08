@@ -10,6 +10,7 @@ const browserReadableStreamToIt = require('browser-readablestream-to-it')
  */
 function blobToIt (blob) {
   if (typeof blob.stream === 'function') {
+    // @ts-ignore missing some properties
     return browserReadableStreamToIt(blob.stream())
   }
 
