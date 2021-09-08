@@ -22,6 +22,7 @@ Utility modules to make dealing with async iterators easier, some trivial, some 
 * [it-peekable](./packages/it-peekable) Peek/push an iterable
 * [it-reduce](./packages/it-reduce) Reduce the output of an iterable
 * [it-skip](./packages/it-skip) Skip items at the start of an iterable
+* [it-sort](./packages/it-sort) Sort an iterable using a passed sort function
 * [it-split](./packages/it-split) Split an iterable of buffers by linebreaks
 * [it-take](./packages/it-take) Limit the number of items you want from an iterable
 * [it-to-browser-readablestream](./packages/it-to-browser-readablestream) Turns an iterable into a WhatWG [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
