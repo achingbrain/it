@@ -6,8 +6,7 @@ const minimatch = require('minimatch')
 
 /**
  * @typedef {string} Glob
- * @typedef {Object} OptionsExt
- * @property {Glob[]} [ignore] - Glob patterns to ignore
+ * @typedef {object} OptionsExt
  * @property {string} [cwd=process.cwd()]
  * @property {boolean} [absolute=false] - If true produces absolute paths
  * @property {boolean} [nodir] - If true yields file paths and skip directories

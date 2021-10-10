@@ -4,7 +4,7 @@
   "description": "Splits Uint8Arrays emitted by an (async) iterable by a delimiter",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-split#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",

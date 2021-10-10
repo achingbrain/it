@@ -4,7 +4,7 @@
   "description": "Allows peeking/pushing an iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-peekable#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",

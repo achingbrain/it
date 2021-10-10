@@ -12,7 +12,7 @@ test('it should match file', async t => {
 test('it should match file in subdirectory', async t => {
   const files = await all(glob('.', '**/*'))
 
-  t.truthy(files.includes('node_modules/it-all'))
+  t.truthy(files.includes(path.join('node_modules', 'it-all')))
 })
 
 test('it should match one', async t => {
@@ -45,7 +45,7 @@ test('it returns absolute paths', async t => {
   }))
 
   files.forEach(file => {
-    t.truthy(file.startsWith('/'))
+    t.truthy(path.isAbsolute(file))
   })
 })
 
@@ -55,14 +55,14 @@ test('it returns relative paths', async t => {
   }))
 
   files.forEach(file => {
-    t.falsy(file.startsWith('/'))
+    t.falsy(path.isAbsolute(file))
   })
 })
 
 test('it matches directories', async t => {
   const files = await all(glob(__dirname, 'node_modules/*'))
 
-  t.truthy(files.includes('node_modules/it-all'))
+  t.truthy(files.includes(path.join('node_modules', 'it-all')))
 })
 
 test('it skips directories', async t => {
@@ -71,6 +71,6 @@ test('it skips directories', async t => {
     dot: true
   }))
 
-  t.falsy(files.includes('node_modules/.bin'))
-  t.truthy(files.includes('node_modules/.bin/ava'))
+  t.falsy(files.includes(path.join('node_modules', '.bin')))
+  t.truthy(files.includes(path.join('node_modules', '.bin', 'ava')))
 })

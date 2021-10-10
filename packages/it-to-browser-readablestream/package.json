@@ -4,7 +4,7 @@
   "description": "Takes an async iterator and turns it into a browser readable stream",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-to-browser-readablestream#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",

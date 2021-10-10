@@ -4,7 +4,7 @@
   "description": "Takes an async iterator that yields buffers and concatenates them all together",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-to-buffer#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",

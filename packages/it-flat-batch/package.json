@@ -4,7 +4,7 @@
   "description": "Takes an async iterator that emits variable length arrays and emits them as fixed size batches",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-flat-batch#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",
