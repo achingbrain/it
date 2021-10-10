@@ -4,7 +4,7 @@
   "description": "Treat one or more iterables as a single iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-merge",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-merge#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "ava",

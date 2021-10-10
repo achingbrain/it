@@ -4,7 +4,7 @@
   "description": "Turns a blob into an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/blob-to-it#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
     "test": "playwright-test",
