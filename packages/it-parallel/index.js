@@ -50,6 +50,7 @@ async function * parallel (source, options = {}) {
     try {
       for await (const task of source) {
         if (ops.length === concurrency) {
+          slotAvailable = defer()
           await slotAvailable.promise
         }
 
@@ -110,7 +111,6 @@ async function * parallel (source, options = {}) {
       }
 
       slotAvailable.resolve()
-      slotAvailable = defer()
     }
   }
 
@@ -134,7 +134,6 @@ async function * parallel (source, options = {}) {
           }
 
           slotAvailable.resolve()
-          slotAvailable = defer()
         }
       }
     }
