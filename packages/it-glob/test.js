@@ -12,7 +12,7 @@ test('it should match file', async t => {
 test('it should match file in subdirectory', async t => {
   const files = await all(glob('.', '**/*'))
 
-  t.truthy(files.includes('node_modules/it-all'))
+  t.truthy(files.includes('node_modules/.bin'))
 })
 
 test('it should match one', async t => {
@@ -62,7 +62,7 @@ test('it returns relative paths', async t => {
 test('it matches directories', async t => {
   const files = await all(glob(__dirname, 'node_modules/*'))
 
-  t.truthy(files.includes('node_modules/it-all'))
+  t.truthy(files.includes('node_modules/.bin'))
 })
 
 test('it skips directories', async t => {
