@@ -29,8 +29,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
            npm install
-           npm run build
-           npm run link
+           npm run build --if-present
+           npm run link --if-present
 
   check:
     name: Check
@@ -56,12 +56,12 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           npm install
-          npm run build
-          npm run link
+          npm run build --if-present
+          npm run link --if-present
       - run: |
-          npm run lint
-          npm run dep-check -- -- -- -p
-          npm run dep-check -- -- -- -- --unused
+          npm run lint --if-present
+          npm run dep-check --if-present -- -- -- -p
+          npm run dep-check --if-present -- -- -- -- --unused
 
   test-node:
     name: Unit tests ${{ matrix.project }} node ${{ matrix.node }} ${{ matrix.os }}
@@ -93,6 +93,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           npm install
-          npm run build
-          npm run link
+          npm run build --if-present
+          npm run link --if-present
       - run: npm run test -- --since ${{ github.event.pull_request.base.sha }} --concurrency 1
