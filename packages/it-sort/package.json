@@ -1,6 +1,6 @@
 {
   "name": "it-sort",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collects all values from an async iterator, sorts them using the passed function and yields them",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -19,7 +19,7 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "dependencies": {
-    "it-all": "^1.0.5"
+    "it-all": "^1.0.6"
   },
   "devDependencies": {
     "ava": "^3.12.1",

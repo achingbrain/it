@@ -1,6 +1,6 @@
 {
   "name": "it-drain",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Empties an async iterator",
   "main": "index.js",
   "repository": "github:achingbrain/it",

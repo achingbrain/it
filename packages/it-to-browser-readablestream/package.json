@@ -1,6 +1,6 @@
 {
   "name": "it-to-browser-readablestream",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Takes an async iterator and turns it into a browser readable stream",
   "main": "index.js",
   "repository": "github:achingbrain/it",

@@ -1,6 +1,6 @@
 {
   "name": "it-skip",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Skip items from an iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",
@@ -20,7 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "ava": "^3.12.1",
-    "it-all": "^1.0.5",
+    "it-all": "^1.0.6",
     "nyc": "^15.1.0",
     "standard": "^16.0.3",
     "typescript": "^4.0.2"

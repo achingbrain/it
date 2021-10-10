@@ -1,6 +1,6 @@
 {
   "name": "it-all",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Collects all values from an async iterator and returns them as an array",
   "main": "index.js",
   "repository": "github:achingbrain/it",

@@ -1,6 +1,6 @@
 {
   "name": "it-buffer-stream",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "An async iterator that emits buffers containing bytes up to a certain length",
   "main": "index.js",
   "repository": "github:achingbrain/it",
