@@ -44,7 +44,6 @@ async function * parallel (source, options = {}) {
 
   emitter.on('task-complete', () => {
     resultAvailable.resolve()
-    resultAvailable = defer()
   })
 
   Promise.resolve().then(async () => {
@@ -87,6 +86,14 @@ async function * parallel (source, options = {}) {
     }
   })
 
+  function valuesAvailable () {
+    if (ordered) {
+      return Boolean(ops[0] && ops[0].done)
+    }
+
+    return Boolean(ops.find(op => op.done))
+  }
+
   function * yieldOrderedValues () {
     while (ops.length && ops[0].done) {
       const op = ops[0]
@@ -108,10 +115,6 @@ async function * parallel (source, options = {}) {
   }
 
   function * yieldUnOrderedValues () {
-    function valuesAvailable () {
-      return Boolean(ops.find(op => op.done))
-    }
-
     // more values can become available while we wait for `yield`
     // to return control to this function
     while (valuesAvailable()) {
@@ -138,7 +141,10 @@ async function * parallel (source, options = {}) {
   }
 
   while (true) {
-    await resultAvailable.promise
+    if (!valuesAvailable()) {
+      resultAvailable = defer()
+      await resultAvailable.promise
+    }
 
     if (sourceErr) {
       // the source threw an error, propagate it
