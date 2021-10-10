@@ -4,28 +4,43 @@ const defer = require('p-defer')
 const EventEmitter = require('events').EventEmitter
 
 /**
+ * @template T
+ * @typedef {object} Operation
+ * @property {boolean} done
+ * @property {boolean} ok
+ * @property {Error} err
+ * @property {T} value
+ */
+
+/**
  * Takes an (async) iterator that emits promise-returning functions,
  * invokes them in parallel and emits the results as they become available but
  * in the same order as the input
  *
  * @template T
  * @param {Iterable<() => Promise<T>> | AsyncIterable<() => Promise<T>>} source
- * @param {number} [concurrency=1]
+ * @param {object} [options]
+ * @param {number} [options.concurrency=Infinity]
+ * @param {boolean} [options.ordered=false]
  * @returns {AsyncIterable<T>}
  */
-async function * parallel (source, concurrency = 1) {
+async function * parallel (source, options = {}) {
+  let concurrency = options.concurrency || Infinity
+
   if (concurrency < 1) {
-    concurrency = 1
+    concurrency = Infinity
   }
 
+  const ordered = options.ordered == null ? false : options.ordered
   const emitter = new EventEmitter()
 
-  /** @type {any[]} */
+  /** @type {Operation<T>[]}} */
   const ops = []
   let slotAvailable = defer()
-  let sourceFinished = false
-
   let resultAvailable = defer()
+  let sourceFinished = false
+  let sourceErr
+  let opErred = false
 
   emitter.on('task-complete', () => {
     resultAvailable.resolve()
@@ -37,6 +52,10 @@ async function * parallel (source, concurrency = 1) {
       for await (const task of source) {
         if (ops.length === concurrency) {
           await slotAvailable.promise
+        }
+
+        if (opErred) {
+          break
         }
 
         /**
@@ -61,14 +80,14 @@ async function * parallel (source, concurrency = 1) {
       }
 
       sourceFinished = true
+      emitter.emit('task-complete')
     } catch (err) {
+      sourceErr = err
       emitter.emit('task-complete')
     }
   })
 
-  while (true) {
-    await resultAvailable.promise
-
+  function * yieldOrderedValues () {
     while (ops.length && ops[0].done) {
       const op = ops[0]
       ops.shift()
@@ -76,11 +95,60 @@ async function * parallel (source, concurrency = 1) {
       if (op.ok) {
         yield op.value
       } else {
+        // allow the source to exit
+        opErred = true
+        slotAvailable.resolve()
+
         throw op.err
       }
 
       slotAvailable.resolve()
       slotAvailable = defer()
+    }
+  }
+
+  function * yieldUnOrderedValues () {
+    function valuesAvailable () {
+      return Boolean(ops.find(op => op.done))
+    }
+
+    // more values can become available while we wait for `yield`
+    // to return control to this function
+    while (valuesAvailable()) {
+      for (let i = 0; i < ops.length; i++) {
+        if (ops[i].done) {
+          const op = ops[i]
+          ops.splice(i, 1)
+          i--
+
+          if (op.ok) {
+            yield op.value
+          } else {
+            opErred = true
+            slotAvailable.resolve()
+
+            throw op.err
+          }
+
+          slotAvailable.resolve()
+          slotAvailable = defer()
+        }
+      }
+    }
+  }
+
+  while (true) {
+    await resultAvailable.promise
+
+    if (sourceErr) {
+      // the source threw an error, propagate it
+      throw sourceErr
+    }
+
+    if (ordered) {
+      yield * yieldOrderedValues()
+    } else {
+      yield * yieldUnOrderedValues()
     }
 
     if (sourceFinished && ops.length === 0) {
