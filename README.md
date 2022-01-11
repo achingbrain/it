@@ -11,6 +11,7 @@ Utility modules to make dealing with async iterators easier, some trivial, some 
 * [it-filter](./packages/it-filter) Skip some items in an iterable based on a filter function
 * [it-first](./packages/it-first) Return the first item in an iterable
 * [it-flat-batch](./packages/it-flat-batch) Take an iterable of variable length arrays and make them all the same length
+* [it-foreach](./packages/it-foreach) Invoke a function for every member of an iterable
 * [it-glob](./packages/it-glob) Glob matcher for file systems
 * [it-last](./packages/it-last) Return the last item in an iterable
 * [it-length](./packages/it-length) Consume an iterable and return its length
