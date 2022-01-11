@@ -1,6 +1,6 @@
 {
   "name": "it-ndjson",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Parse iterators as ndjson and transform iterators to ndjson",
   "main": "index.js",
   "repository": "github:achingbrain/it",
