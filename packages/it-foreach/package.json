@@ -1,6 +1,6 @@
 {
   "name": "it-foreach",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Invokes the passed function for each item in an iterable",
   "main": "index.js",
   "repository": "github:achingbrain/it",
