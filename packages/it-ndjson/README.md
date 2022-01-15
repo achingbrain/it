@@ -22,4 +22,8 @@ const values = [0, 1, 2, 3, 4]
 const arr = await all(ndjson.stringify(values))
 
 console.info(arr) // '0\n', '1\n', '2\n', '3\n', '4\n'
+
+const res = await all(ndjson.parse(arr))
+
+console.info(res) // [0, 1, 2, 3, 4]
 ```

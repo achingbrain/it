@@ -1,5 +1,5 @@
 /**
- * @param {AsyncIterable<Uint8Array> | Iterable<Uint8Array>} source
+ * @param {AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>} source
  */
 async function * parse (source) {
   const matcher = /\r?\n/
