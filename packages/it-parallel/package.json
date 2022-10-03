@@ -27,6 +27,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "events": "^3.3.0",
     "p-defer": "^3.0.0"
   },
   "typesVersions": {
