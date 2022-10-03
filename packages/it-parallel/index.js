@@ -1,7 +1,7 @@
+/* global EventTarget Event */
 'use strict'
 
 const defer = require('p-defer')
-const EventEmitter = require('events').EventEmitter
 
 /**
  * @template T
@@ -11,6 +11,8 @@ const EventEmitter = require('events').EventEmitter
  * @property {Error} err
  * @property {T} value
  */
+
+const CustomEvent = globalThis.CustomEvent || Event
 
 /**
  * Takes an (async) iterator that emits promise-returning functions,
@@ -32,7 +34,7 @@ async function * parallel (source, options = {}) {
   }
 
   const ordered = options.ordered == null ? false : options.ordered
-  const emitter = new EventEmitter()
+  const emitter = new EventTarget()
 
   /** @type {Operation<T>[]}} */
   const ops = []
@@ -42,7 +44,7 @@ async function * parallel (source, options = {}) {
   let sourceErr
   let opErred = false
 
-  emitter.on('task-complete', () => {
+  emitter.addEventListener('task-complete', () => {
     resultAvailable.resolve()
   })
 
@@ -71,19 +73,19 @@ async function * parallel (source, options = {}) {
             op.done = true
             op.ok = true
             op.value = result
-            emitter.emit('task-complete')
+            emitter.dispatchEvent(new CustomEvent('task-complete'))
           }, err => {
             op.done = true
             op.err = err
-            emitter.emit('task-complete')
+            emitter.dispatchEvent(new CustomEvent('task-complete'))
           })
       }
 
       sourceFinished = true
-      emitter.emit('task-complete')
+      emitter.dispatchEvent(new CustomEvent('task-complete'))
     } catch (err) {
       sourceErr = err
-      emitter.emit('task-complete')
+      emitter.dispatchEvent(new CustomEvent('task-complete'))
     }
   })
 
