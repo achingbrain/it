@@ -17,7 +17,7 @@ const batch = require('it-batch')
  * in the same order as the input
  *
  * @template T
- * @param {AsyncIterable<() => Promise<T>>} source
+ * @param {AsyncIterable<() => Promise<T>>|Iterable<() => Promise<T>>} source
  * @param {number} [size=1]
  * @returns {AsyncIterable<T>}
  */
