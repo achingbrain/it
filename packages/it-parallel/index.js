@@ -1,3 +1,4 @@
+/* global EventTarget Event */
 'use strict'
 
 const defer = require('p-defer')
