@@ -11,6 +11,8 @@ const defer = require('p-defer')
  * @property {T} value
  */
 
+const CustomEvent = globalThis.CustomEvent || Event
+
 /**
  * Takes an (async) iterator that emits promise-returning functions,
  * invokes them in parallel and emits the results as they become available but
