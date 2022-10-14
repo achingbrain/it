@@ -23,7 +23,7 @@ For when you only want a few values out of an iterable.
 ## Usage
 
 ```javascript
-const take = require('it-take')
+import take from 'it-take'
 import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc

@@ -22,7 +22,7 @@ $ npm i browser-readablestream-to-it
 ## Usage
 
 ```javascript
-const toIt = require('browser-readablestream-to-it')
+import toIt from 'browser-readablestream-to-it'
 import all from 'it-all'
 
 const content = [0, 1, 2, 3, 4]

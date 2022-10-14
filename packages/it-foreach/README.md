@@ -23,8 +23,8 @@ For when you need a one-liner to collect iterable values.
 ## Usage
 
 ```javascript
-const each = require('it-foreach')
-const drain = require('it-drain')
+import each from 'it-foreach'
+import drain from 'it-drain'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

@@ -21,7 +21,8 @@ $ npm i it-split
 ## Usage
 
 ```javascript
-const split = require('it-split')
+import split from 'it-split'
+
 const encoder = new TextEncoder()
 
 // This can also be an iterator, async iterator, generator, etc

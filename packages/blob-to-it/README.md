@@ -21,7 +21,7 @@ $ npm i blob-to-it
 ## Usage
 
 ```javascript
-const toIt = require('blob-to-it')
+import toIt from 'blob-to-it'
 import all from 'it-all'
 
 const content = [ Uint8Array.from([0, 1, 2, 3, 4]) ]

@@ -21,7 +21,7 @@ $ npm i it-map
 ## Usage
 
 ```javascript
-const map = require('it-map')
+import map from 'it-map'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

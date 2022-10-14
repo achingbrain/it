@@ -21,7 +21,7 @@ $ npm i it-to-buffer
 ## Usage
 
 ```javascript
-const toBuffer = require('it-to-buffer')
+import toBuffer from 'it-to-buffer'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [Buffer.from([0, 1]), Buffer.from([2, 3])]

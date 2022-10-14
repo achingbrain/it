@@ -23,7 +23,7 @@ Mostly useful for tests or when you want to be explicit about consuming an itera
 ## Usage
 
 ```javascript
-const drain = require('it-drain')
+import drain from 'it-drain'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

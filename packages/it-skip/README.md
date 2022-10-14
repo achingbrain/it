@@ -23,7 +23,7 @@ For when you are only interested in later values from an iterable.
 ## Usage
 
 ```javascript
-const take = require('it-skip')
+import take from 'it-skip'
 import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc

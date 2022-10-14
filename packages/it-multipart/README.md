@@ -21,8 +21,8 @@ $ npm i it-multipart
 ## Example
 
 ```javascript
-const http = require('http')
-const multipart = require('it-multipart')
+import http from 'http'
+import multipart from 'it-multipart'
 
 http.createServer(async (req, res) => {
   if (req.method === 'POST' && req.headers['content-type']) {

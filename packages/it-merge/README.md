@@ -23,7 +23,8 @@ Nb. sources are iterated over in parallel so the order of emitted items is not g
 ## Usage
 
 ```javascript
-const all = require('it-merge')
+import merge from 'it-merge'
+import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc
 const values1 = [0, 1, 2, 3, 4]

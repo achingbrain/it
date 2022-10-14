@@ -23,7 +23,7 @@ The final batch may be smaller than the batch size.
 ## Usage
 
 ```javascript
-const parallelBatch = require('it-parallel-batch')
+import parallelBatch from 'it-parallel-batch'
 import all from 'it-all'
 import delay from 'delay'
 

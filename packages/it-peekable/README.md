@@ -23,7 +23,7 @@ Lets you look at the contents of an async iterator and decide what to do
 ## Usage
 
 ```javascript
-const peekable = require('it-peekable')
+import peekable from 'it-peekable'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

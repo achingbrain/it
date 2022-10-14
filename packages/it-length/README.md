@@ -23,7 +23,7 @@ N.b. will consume the iterable
 ## Usage
 
 ```javascript
-const length = require('it-length')
+import length from 'it-length'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

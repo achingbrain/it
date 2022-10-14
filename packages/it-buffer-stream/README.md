@@ -21,6 +21,8 @@ $ npm i it-buffer-stream
 ## Usage
 
 ```javascript
+import bufferStream from 'it-buffer-stream'
+
 const totalLength = //... a big number
 
 // all options are optional, defaults are shown

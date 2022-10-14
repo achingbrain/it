@@ -21,7 +21,7 @@ $ npm i it-ndjson
 ## Usage
 
 ```javascript
-const ndjson = require('it-ndjson')
+import ndjson from 'it-ndjson'
 import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc

@@ -22,7 +22,7 @@ $ npm i it-filter
 
 ```javascript
 import all from 'it-all'
-const filter = require('it-filter')
+import filter from 'it-filter'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

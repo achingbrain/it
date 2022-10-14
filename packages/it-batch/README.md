@@ -23,7 +23,7 @@ The final batch may be smaller than the max.
 ## Usage
 
 ```javascript
-const batch = require('it-batch')
+import batch from 'it-batch'
 import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc

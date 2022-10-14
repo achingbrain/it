@@ -21,7 +21,7 @@ $ npm i it-sort
 ## Usage
 
 ```javascript
-const sort = require('it-sort')
+import sort from 'it-sort'
 import all from 'it-all'
 
 const sorter = (a, b) => {

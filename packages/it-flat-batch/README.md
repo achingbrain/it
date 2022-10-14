@@ -23,7 +23,7 @@ The final batch may be smaller than requested batch size.
 ## Usage
 
 ```javascript
-const batch = require('it-flat-batch')
+import batch from 'it-flat-batch'
 import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc

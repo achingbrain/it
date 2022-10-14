@@ -23,7 +23,7 @@ Like [`glob`](https://npmjs.com/package/glob) but async iterable.
 ## Usage
 
 ```javascript
-const glob = require('it-glob')
+import glob from 'it-glob'
 
 const options = {
   cwd // defaults to process.cwd

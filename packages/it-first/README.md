@@ -23,7 +23,7 @@ Mostly useful for tests.
 ## Usage
 
 ```javascript
-const first = require('it-first')
+import first from 'it-first'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

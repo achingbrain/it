@@ -21,7 +21,7 @@ $ npm i it-to-browser-readablestream
 ## Usage
 
 ```javascript
-const toBrowserReadableStream = require('it-to-browser-readablestream')
+import toBrowserReadableStream from 'it-to-browser-readablestream'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [Buffer.from([0, 1]), Buffer.from([2, 3])]

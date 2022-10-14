@@ -21,7 +21,7 @@ $ npm i it-parallel
 ## Usage
 
 ```javascript
-const parallel = require('it-parallel')
+import parallel from 'it-parallel'
 import all from 'it-all'
 import delay from 'delay'
 
