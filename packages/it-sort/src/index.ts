@@ -1,6 +1,6 @@
 'use strict'
 
-const all = require('it-all')
+import all from 'it-all'
 
 /**
  * Collects all values from an async iterator, sorts them

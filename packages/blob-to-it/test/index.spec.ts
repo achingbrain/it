@@ -1,10 +1,8 @@
 /* eslint-env mocha, browser */
 
-'use strict'
-
-const all = require('it-all/src')
-const { expect } = require('chai')
-const toIt = require('./index')
+import all from 'it-all'
+import { expect } from 'aegir/chai'
+import toIt from '../src/index.js'
 
 describe('blob-to-it', () => {
   it('should convert a blob to an async iterator', async () => {

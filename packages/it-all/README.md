@@ -15,7 +15,7 @@ $ npm install --save it-all
 ## Usage
 
 ```javascript
-const all = require('it-all')
+import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]

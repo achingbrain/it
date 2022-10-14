@@ -1,7 +1,7 @@
 const test = require('ava')
 const ndjson = require('.')
 const { Buffer } = require('buffer')
-const all = require('it-all')
+import all from 'it-all'
 
 /**
  * @template T

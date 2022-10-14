@@ -1,12 +1,8 @@
-'use strict'
 
 /**
- * Collects all values from an (async) iterable into an array and returns it.
- *
- * @template T
- * @param {AsyncIterable<T>|Iterable<T>} source
+ * Collects all values from an (async) iterable and returns them as an array
  */
-const all = async (source) => {
+export default async function all <T> (source: AsyncIterable<T>|Iterable<T>): Promise<T[]> {
   const arr = []
 
   for await (const entry of source) {
@@ -15,5 +11,3 @@ const all = async (source) => {
 
   return arr
 }
-
-module.exports = all

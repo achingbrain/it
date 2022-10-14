@@ -14,7 +14,7 @@ $ npm install --save it-parallel
 
 ```javascript
 const parallel = require('it-parallel')
-const all = require('it-all')
+import all from 'it-all'
 const delay = require('delay')
 
 // This can also be an iterator, async iterator, generator, etc

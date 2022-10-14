@@ -1,5 +1,5 @@
 const merge = require('./')
-const all = require('it-all')
+import all from 'it-all'
 const test = require('ava')
 
 test('Should merge multiple arrays', async (t) => {

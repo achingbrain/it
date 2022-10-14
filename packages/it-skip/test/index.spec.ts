@@ -1,5 +1,5 @@
 const skip = require('./')
-const all = require('it-all')
+import all from 'it-all'
 const test = require('ava')
 
 test('Should skip values from an iterable', async (t) => {

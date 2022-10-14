@@ -14,7 +14,7 @@ $ npm install --save blob-to-it
 
 ```javascript
 const toIt = require('blob-to-it')
-const all = require('it-all')
+import all from 'it-all'
 
 const content = [ Uint8Array.from([0, 1, 2, 3, 4]) ]
 const blob = new Blob(content)

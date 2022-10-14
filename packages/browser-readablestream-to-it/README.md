@@ -14,7 +14,7 @@ $ npm install --save browser-readablestream-to-it
 
 ```javascript
 const toIt = require('browser-readablestream-to-it')
-const all = require('it-all')
+import all from 'it-all'
 
 const content = [0, 1, 2, 3, 4]
 

@@ -16,7 +16,7 @@ $ npm install --save it-parallel-batch
 
 ```javascript
 const parallelBatch = require('it-parallel-batch')
-const all = require('it-all')
+import all from 'it-all'
 const delay = require('delay')
 
 // This can also be an iterator, async iterator, generator, etc

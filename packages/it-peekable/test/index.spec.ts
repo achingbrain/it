@@ -1,6 +1,6 @@
 const peekableIt = require('./')
 const test = require('ava')
-const all = require('it-all')
+import all from 'it-all'
 
 test('Should peek at an iterable', async (t) => {
   const iterable = [0, 1, 2, 3]

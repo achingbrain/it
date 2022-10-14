@@ -1,4 +1,4 @@
-const all = require('it-all')
+import all from 'it-all'
 const filter = require('./')
 const test = require('ava')
 

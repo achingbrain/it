@@ -2,7 +2,7 @@
 
 const parallelBatch = require('../dist')
 const test = require('ava')
-const all = require('it-all')
+import all from 'it-all'
 const delay = require('delay')
 
 test('Should batch up emitted arrays', async (t) => {

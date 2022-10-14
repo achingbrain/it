@@ -14,7 +14,7 @@ $ npm install --save it-sort
 
 ```javascript
 const sort = require('it-sort')
-const all = require('it-all')
+import all from 'it-all'
 
 const sorter = (a, b) => {
   return a.localeCompare(b)

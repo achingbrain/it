@@ -13,7 +13,7 @@ $ npm install --save it-filter
 ## Usage
 
 ```javascript
-const all = require('it-all')
+import all from 'it-all'
 const filter = require('it-filter')
 
 // This can also be an iterator, async iterator, generator, etc

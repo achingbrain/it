@@ -1,14 +1,8 @@
 /* eslint-env browser */
 
-'use strict'
+import browserReadableStreamToIt from 'browser-readablestream-to-it'
 
-const browserReadableStreamToIt = require('browser-readablestream-to-it/src')
-
-/**
- * @param {Blob} blob
- * @returns {AsyncIterable<Uint8Array>}
- */
-function blobToIt (blob) {
+export default function blobToIt (blob: Blob): AsyncIterable<Uint8Array> {
   if (typeof blob.stream === 'function') {
     // @ts-ignore missing some properties
     return browserReadableStreamToIt(blob.stream())
@@ -18,5 +12,3 @@ function blobToIt (blob) {
   // @ts-ignore - response.body is optional, but in practice it's a stream.
   return browserReadableStreamToIt(new Response(blob).body)
 }
-
-module.exports = blobToIt

@@ -1,4 +1,4 @@
-const toBuffer = require('./')
+const toBuffer = require('../dist')
 const test = require('ava')
 
 test('Should turn a generator that yields buffers into a buffer', async (t) => {

@@ -1,5 +1,5 @@
 const split = require('./')
-const all = require('it-all')
+import all from 'it-all'
 const test = require('ava')
 const { toString } = require('uint8arrays/to-string')
 

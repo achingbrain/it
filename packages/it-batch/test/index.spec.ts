@@ -1,6 +1,6 @@
 const batch = require('../dist')
 const test = require('ava')
-const all = require('it-all')
+import all from 'it-all'
 
 test('Should batch up entries', async (t) => {
   const values = [0, 1, 2, 3, 4]

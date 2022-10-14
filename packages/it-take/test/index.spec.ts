@@ -1,5 +1,5 @@
 const take = require('./')
-const all = require('it-all')
+import all from 'it-all'
 const test = require('ava')
 
 test('Should limit the number of values returned from an iterable', async (t) => {

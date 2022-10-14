@@ -1,5 +1,5 @@
 const each = require('./')
-const all = require('it-all')
+import all from 'it-all'
 const test = require('ava')
 
 test('Should iterate over every value', async (t) => {
