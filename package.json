@@ -26,6 +26,7 @@
     "start": "NODE_ENV=development lerna run start",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
+    "dep-check": "lerna run dep-check",
     "check": "lerna run check",
     "publish": "lerna publish"
   },
