@@ -9,6 +9,16 @@ describe('it-merge', () => {
 
     const res = await all(merge(values1, values2))
 
-    expect(res.sort()).to.deep.equal([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    expect(res.sort((a, b) => {
+      if (a < b) {
+        return -1
+      }
+
+      if (a > b) {
+        return 1
+      }
+
+      return 0
+    })).to.deep.equal([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   })
 })

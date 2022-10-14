@@ -23,7 +23,7 @@ export default function itToBrowserReadableStream <T> (source: AsyncIterator<T>|
           return
         }
 
-        if (done) {
+        if (done === true) {
           controller.close()
           return
         }

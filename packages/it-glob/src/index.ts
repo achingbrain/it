@@ -25,7 +25,7 @@ export interface GlobOptions extends IOptions {
  */
 export default async function * glob (dir: string, pattern: string, options: GlobOptions = {}): AsyncGenerator<string, void, undefined> {
   const absoluteDir = path.resolve(dir)
-  const relativeDir = path.relative(options.cwd || process.cwd(), dir)
+  const relativeDir = path.relative(options.cwd ?? process.cwd(), dir)
 
   const stats = await fs.stat(absoluteDir)
 
@@ -38,7 +38,7 @@ export default async function * glob (dir: string, pattern: string, options: Glo
   }
 
   if (minimatch(relativeDir, pattern, options)) {
-    yield options.absolute ? absoluteDir : relativeDir
+    yield options.absolute === true ? absoluteDir : relativeDir
   }
 }
 
@@ -51,12 +51,12 @@ async function * _glob (base: string, dir: string, pattern: string, options: Glo
 
     const isDirectory = entry.isDirectory()
 
-    if (isDirectory && options.nodir) {
+    if (isDirectory && options.nodir === true) {
       match = false
     }
 
     if (match) {
-      yield options.absolute ? absoluteEntryPath : relativeEntryPath
+      yield options.absolute === true ? absoluteEntryPath : relativeEntryPath
     }
 
     if (isDirectory) {

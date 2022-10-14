@@ -10,7 +10,7 @@ export interface BufferStreamOptions {
 const defaultOptions: Required<BufferStreamOptions> = {
   chunkSize: 4096,
   collector: () => {},
-  generator: (size) => Promise.resolve(randomBytes(size))
+  generator: async (size) => await Promise.resolve(randomBytes(size))
 }
 
 /**

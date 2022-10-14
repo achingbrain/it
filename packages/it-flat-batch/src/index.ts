@@ -23,7 +23,7 @@ export default async function * batch <T> (source: AsyncIterable<T[]>|Iterable<T
     }
   }
 
-  while (things.length) {
+  while (things.length > 0) {
     yield things.slice(0, size)
 
     things = things.slice(size)

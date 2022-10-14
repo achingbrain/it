@@ -17,9 +17,9 @@ interface Failure {
  */
 export default async function * parallelBatch <T> (source: AsyncIterable<() => Promise<T>>|Iterable<() => Promise<T>>, size: number = 1): AsyncGenerator<T, void, undefined> {
   for await (const tasks of batch(source, size)) {
-    const things: Promise<Success<T>|Failure>[] = tasks.map(
-      (p: () => Promise<T>) => {
-        return p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
+    const things: Array<Promise<Success<T>|Failure>> = tasks.map(
+      async (p: () => Promise<T>) => {
+        return await p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
       })
 
     for (let i = 0; i < things.length; i++) {

@@ -73,7 +73,7 @@ describe('it-buffer-stream', () => {
     const generationError = new Error('Urk!')
 
     try {
-      for await (const _ of bufferStream(5, { // eslint-disable-line no-unused-vars
+      for await (const _ of bufferStream(5, { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
         generator: async () => {
           throw generationError
         }

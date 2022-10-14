@@ -156,7 +156,7 @@ describe('it-parallel', () => {
         const value = values[index]
         index++
 
-        return Promise.resolve({
+        return await Promise.resolve({
           done: index === values.length,
           value
         })

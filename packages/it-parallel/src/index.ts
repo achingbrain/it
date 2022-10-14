@@ -9,7 +9,7 @@ interface Operation<T> {
   value: T
 }
 
-const CustomEvent = globalThis.CustomEvent || Event
+const CustomEvent = globalThis.CustomEvent ?? Event
 
 export interface ParallelOptions {
   /**
@@ -25,7 +25,7 @@ export interface ParallelOptions {
  * in the same order as the input
  */
 export default async function * parallel <T> (source: Iterable<() => Promise<T>> | AsyncIterable<() => Promise<T>>, options: ParallelOptions = {}): AsyncGenerator<T, void, undefined> {
-  let concurrency = options.concurrency || Infinity
+  let concurrency = options.concurrency ?? Infinity
 
   if (concurrency < 1) {
     concurrency = Infinity
@@ -34,18 +34,18 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
   const ordered = options.ordered == null ? false : options.ordered
   const emitter = new EventTarget()
 
-  const ops: Operation<T>[] = []
+  const ops: Array<Operation<T>> = []
   let slotAvailable = defer()
   let resultAvailable = defer()
   let sourceFinished = false
-  let sourceErr
+  let sourceErr: Error | undefined
   let opErred = false
 
   emitter.addEventListener('task-complete', () => {
     resultAvailable.resolve()
   })
 
-  Promise.resolve().then(async () => {
+  void Promise.resolve().then(async () => {
     try {
       for await (const task of source) {
         if (ops.length === concurrency) {
@@ -77,7 +77,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
 
       sourceFinished = true
       emitter.dispatchEvent(new CustomEvent('task-complete'))
-    } catch (err) {
+    } catch (err: any) {
       sourceErr = err
       emitter.dispatchEvent(new CustomEvent('task-complete'))
     }
@@ -85,14 +85,14 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
 
   function valuesAvailable () {
     if (ordered) {
-      return Boolean(ops[0] && ops[0].done)
+      return ops[0]?.done
     }
 
     return Boolean(ops.find(op => op.done))
   }
 
   function * yieldOrderedValues () {
-    while (ops.length && ops[0].done) {
+    while ((ops.length > 0) && ops[0].done) {
       const op = ops[0]
       ops.shift()
 
@@ -141,7 +141,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
       await resultAvailable.promise
     }
 
-    if (sourceErr) {
+    if (sourceErr != null) {
       // the source threw an error, propagate it
       throw sourceErr
     }

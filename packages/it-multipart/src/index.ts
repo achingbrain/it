@@ -13,7 +13,7 @@ export interface Part {
 export default async function * multipart (request: IncomingMessage): AsyncGenerator<Part, void, undefined> {
   const output = pushable<Part>()
 
-  if (!request) {
+  if (request == null) {
     output.end(new Error('request missing'))
 
     yield * output

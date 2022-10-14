@@ -9,10 +9,10 @@ export interface SplitOptions {
  */
 export default async function * split (source: AsyncIterable<Uint8Array>|Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> {
   const bl = new BufferList()
-  const delimiter = options.delimiter || new TextEncoder().encode('\n')
+  const delimiter = options.delimiter ?? new TextEncoder().encode('\n')
 
   for await (const buf of source) {
-    // @ts-ignore Uint8Array type is missing from add signature
+    // @ts-expect-error Uint8Array type is missing from add signature
     bl.append(buf)
 
     yield * yieldUntilEnd(bl, delimiter)
@@ -20,7 +20,7 @@ export default async function * split (source: AsyncIterable<Uint8Array>|Iterabl
 
   yield * yieldUntilEnd(bl, delimiter)
 
-  if (bl.length) {
+  if (bl.length > 0) {
     yield bl.slice()
   }
 }

@@ -9,7 +9,7 @@ import pushable from 'it-pushable'
 export default async function * merge <T> (...sources: Array<AsyncIterable<T>|Iterable<T>>): AsyncGenerator<T, void, undefined> {
   const output = pushable<T>()
 
-  setTimeout(async () => {
+  void Promise.resolve().then(async () => {
     try {
       await Promise.all(
         sources.map(async (source) => {
@@ -23,7 +23,7 @@ export default async function * merge <T> (...sources: Array<AsyncIterable<T>|It
     } catch (err: any) {
       output.end(err)
     }
-  }, 0)
+  })
 
   yield * output
 }

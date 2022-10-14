@@ -11,7 +11,7 @@ export default async function * parse <T> (source: AsyncIterable<Uint8Array | st
 
     buffer += decoder.decode(chunk, { stream: true })
     const parts = buffer.split(matcher)
-    buffer = parts.pop() || ''
+    buffer = parts.pop() ?? ''
 
     for (let i = 0; i < parts.length; i++) {
       yield JSON.parse(parts[i])
@@ -20,7 +20,7 @@ export default async function * parse <T> (source: AsyncIterable<Uint8Array | st
 
   buffer += decoder.decode()
 
-  if (buffer) {
+  if (buffer !== '') {
     yield JSON.parse(buffer)
   }
 }

@@ -1,11 +1,10 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
 import glob from '../src/index.js'
-import path from 'path'
-import { dirname } from 'path'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const dir = dirname(fileURLToPath(import.meta.url))
 
 describe('it-glob', () => {
   it('should match file', async () => {
@@ -39,13 +38,13 @@ describe('it-glob', () => {
   })
 
   it('should ignore files from absolute directory', async () => {
-    const files = await all(glob(__dirname, '**/*!(test/index.js|)**/dist/**'))
+    const files = await all(glob(dir, '**/*!(test/index.js|)**/dist/**'))
 
-    expect(files.includes(path.resolve(__dirname, 'index.js'))).to.be.false()
+    expect(files.includes(path.resolve(dir, 'index.js'))).to.be.false()
   })
 
   it('should return absolute paths', async () => {
-    const files = await all(glob(__dirname, '**/*', {
+    const files = await all(glob(dir, '**/*', {
       absolute: true
     }))
 
@@ -55,7 +54,7 @@ describe('it-glob', () => {
   })
 
   it('should return relative paths', async () => {
-    const files = await all(glob(__dirname, '**/*', {
+    const files = await all(glob(dir, '**/*', {
       absolute: false
     }))
 
@@ -65,13 +64,13 @@ describe('it-glob', () => {
   })
 
   it('should match directories', async () => {
-    const files = await all(glob(path.resolve(__dirname, '..', '..'), 'dist/*'))
+    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*'))
 
     expect(files.includes(path.join('dist', 'src'))).to.be.true()
   })
 
   it('should skip directories', async () => {
-    const files = await all(glob(path.resolve(__dirname, '..', '..'), 'dist/**/*', {
+    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/**/*', {
       nodir: true,
       dot: true
     }))

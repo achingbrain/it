@@ -4,6 +4,7 @@ import handler from '../src/index.js'
 import fetch from 'node-fetch'
 import FormData from 'form-data'
 import drain from 'it-drain'
+import { toString as uint8ArrayToString } from 'uint8arrays/to-string'
 import type { Server, IncomingMessage } from 'http'
 
 describe('it-multipart', () => {
@@ -15,13 +16,13 @@ describe('it-multipart', () => {
       const files: Record<string, string> = {}
 
       for await (const part of handler(req)) {
-        // @ts-ignore - header may not be present
+        // @ts-expect-error - header may not be present
         const name = part.headers['content-disposition'].match(/name="(.*)"/)[1]
 
         files[name] = ''
 
         for await (const str of part.body) {
-          files[name] += str
+          files[name] += uint8ArrayToString(str)
         }
       }
 
@@ -39,7 +40,7 @@ describe('it-multipart', () => {
             res.end(files)
           })
           .catch(err => {
-            if (err.message.includes('bad content-type header')) {
+            if (err.message.includes('bad content-type header') === true) {
               res.writeHead(400)
             } else {
               res.writeHead(500)
@@ -49,7 +50,6 @@ describe('it-multipart', () => {
           })
       })
       server.on('error', (err) => {
-        console.info('start failed', err)
         reject(err)
       })
       server.listen(() => {

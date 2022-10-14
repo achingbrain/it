@@ -25,7 +25,7 @@ export default async function * browserReadableStreamToIt <T> (stream: ReadableS
     }
   } finally {
     if (options.preventCancel !== true) {
-      reader.cancel()
+      await reader.cancel()
     }
 
     reader.releaseLock()
