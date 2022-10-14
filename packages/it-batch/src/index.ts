@@ -1,17 +1,9 @@
-'use strict'
-
 /**
  * Takes an (async) iterable that emits things and returns an async iterable that
- * emits those things in fixed-sized batches.
- *
- * @template T
- * @param {AsyncIterable<T>|Iterable<T>} source
- * @param {number} [size=1]
- * @returns {AsyncIterable<T[]>}
+ * emits those things in fixed-sized batches
  */
-async function * batch (source, size = 1) {
-  /** @type {T[]} */
-  let things = []
+export default async function * batch <T> (source: AsyncIterable<T> | Iterable<T>, size: number = 1): AsyncGenerator<T[], void, undefined> {
+  let things: T[] = []
 
   if (size < 1) {
     size = 1
@@ -33,5 +25,3 @@ async function * batch (source, size = 1) {
     things = things.slice(size)
   }
 }
-
-module.exports = batch

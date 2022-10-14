@@ -2,10 +2,125 @@
   "name": "it-flat-batch",
   "version": "1.0.7",
   "description": "Takes an async iterator that emits variable length arrays and emits them as fixed size batches",
-  "type": "module",
-  "repository": "github:achingbrain/it",
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-flat-batch#readme",
-  "bugs": "https://github.com/achingbrain/it/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "src",
+    "dist/src",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "releaseRules": [
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "deps",
+              "release": "patch"
+            },
+            {
+              "scope": "no-release",
+              "release": false
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "deps",
+                "section": "Dependencies"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
   "scripts": {
     "build": "aegir build",
     "lint": "aegir lint",
@@ -19,16 +134,8 @@
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
     "release": "aegir release"
   },
-  "author": "Alex Potsides <alex@achingbrain.net>",
-  "license": "ISC",
   "devDependencies": {
     "aegir": "^37.5.0",
-    "it-all": "^1.0.6"
-  },
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/src/index.js"
-    }
+    "it-all": "^1.0.0"
   }
 }

@@ -1,11 +1,13 @@
-const skip = require('./')
+import { expect } from 'aegir/chai'
 import all from 'it-all'
-const test = require('ava')
+import skip from '../src/index.js'
 
-test('Should skip values from an iterable', async (t) => {
-  const values = [0, 1, 2, 3, 4]
+describe('it-skip', () => {
+  it('should skip values from an iterable', async () => {
+    const values = [0, 1, 2, 3, 4]
 
-  const res = await all(skip(values, 2))
+    const res = await all(skip(values, 2))
 
-  t.deepEqual(res, [2, 3, 4])
+    expect(res).to.deep.equal([2, 3, 4])
+  })
 })

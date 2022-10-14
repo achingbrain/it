@@ -1,15 +1,13 @@
-'use strict'
+import BufferList from 'bl/BufferList.js'
 
-const BufferList = require('bl/BufferList')
+export interface SplitOptions {
+  delimiter?: Uint8Array
+}
 
 /**
  * Splits Uint8Arrays emitted by an (async) iterable by a delimiter
- *
- * @param {AsyncIterable<Uint8Array>|Iterable<Uint8Array>} source
- * @param {object} [options]
- * @param {Uint8Array} [options.delimiter]
  */
-const split = async function * (source, options = {}) {
+export default async function * split (source: AsyncIterable<Uint8Array>|Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> {
   const bl = new BufferList()
   const delimiter = options.delimiter || new TextEncoder().encode('\n')
 
@@ -27,12 +25,7 @@ const split = async function * (source, options = {}) {
   }
 }
 
-/**
- *
- * @param {BufferList} bl
- * @param {Uint8Array} delimiter
- */
-async function * yieldUntilEnd (bl, delimiter) {
+async function * yieldUntilEnd (bl: BufferList, delimiter: Uint8Array): AsyncGenerator<Uint8Array, void, undefined> {
   let index = bl.indexOf(delimiter)
 
   while (index !== -1) {
@@ -43,5 +36,3 @@ async function * yieldUntilEnd (bl, delimiter) {
     index = bl.indexOf(delimiter)
   }
 }
-
-module.exports = split

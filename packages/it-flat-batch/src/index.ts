@@ -1,24 +1,17 @@
-'use strict'
 
 /**
  * Takes an (async) iterable that emits variable length arrays of things and
- * returns an async iterable that emits those things in fixed-size batches.
- *
- * @template T
- * @param {AsyncIterable<T[]>|Iterable<T[]>} source
- * @param {number|string} [batchSize=1]
- * @returns {AsyncIterable<T[]>}
+ * returns an async iterable that emits those things in fixed-size batches
  */
-async function * batch (source, batchSize) {
-  // @ts-ignore - expects string not a number
+export default async function * batch <T> (source: AsyncIterable<T[]>|Iterable<T[]>, batchSize: number = 1): AsyncGenerator<T[], void, undefined> {
+  // @ts-expect-error - expects string not a number
   let size = parseInt(batchSize)
 
   if (isNaN(size) || size < 1) {
     size = 1
   }
 
-  /** @type {T[]} */
-  let things = []
+  let things: T[] = []
 
   for await (const set of source) {
     things = things.concat(set)
@@ -36,5 +29,3 @@ async function * batch (source, batchSize) {
     things = things.slice(size)
   }
 }
-
-module.exports = batch

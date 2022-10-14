@@ -10,7 +10,7 @@ export interface BrowserReadableStreamToItOptions {
  * prevent stream cancelling optional `{ preventCancel: true }` could be passed
  * as a second argument.
  */
-export default async function * browserReadableStreamToIt <T> (stream: ReadableStream<T>, options: BrowserReadableStreamToItOptions = {}): AsyncGenerator<T, void> {
+export default async function * browserReadableStreamToIt <T> (stream: ReadableStream<T>, options: BrowserReadableStreamToItOptions = {}): AsyncGenerator<T, void, undefined> {
   const reader = stream.getReader()
 
   try {

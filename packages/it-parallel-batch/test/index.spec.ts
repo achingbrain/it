@@ -1,229 +1,233 @@
-'use strict'
-
-const parallelBatch = require('../dist')
-const test = require('ava')
+import { expect } from 'aegir/chai'
 import all from 'it-all'
-const delay = require('delay')
+import delay from 'delay'
+import parallelBatch from '../src/index.js'
 
-test('Should batch up emitted arrays', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
+describe('it-parallel-batch', () => {
+  it('should batch up emitted arrays', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-      return 1
-    },
-    async () => {
-      await delay(100)
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-      return 2
+        return 2
+      }
+    ]
+
+    const res = await all(parallelBatch(input, 2))
+
+    expect(res).to.deep.equal([1, 2])
+  })
+
+  it('should batch up emitted arrays in the right order', async () => {
+    const input = [
+      async () => {
+        await delay(100)
+
+        return 1
+      },
+      async () => {
+        await delay(200)
+
+        return 2
+      },
+      async () => {
+        await delay(50)
+
+        return 3
+      }
+    ]
+
+    const res = await all(parallelBatch(input, 2))
+
+    expect(res).to.deep.equal([1, 2, 3])
+  })
+
+  it('should propagate errors', async () => {
+    const error = new Error('wat')
+
+    const input = [
+      async () => {
+        await delay(100)
+
+        return 1
+      },
+      async () => {
+        await delay(200)
+
+        throw error
+      },
+      async () => {
+        await delay(50)
+
+        return 3
+      }
+    ]
+
+    try {
+      await all(parallelBatch(input, 2))
+    } catch (err) {
+      expect(err).to.equal(error)
     }
-  ]
+  })
 
-  const res = await all(parallelBatch(input, 2))
+  it('should execute batch in parallel', async () => {
+    const error = new Error('wat')
+    const started = [false, false, false]
 
-  t.deepEqual(res, [1, 2])
-})
+    const input = [
+      async () => {
+        started[0] = true
 
-test('Should batch up emitted arrays in the right order', async (t) => {
-  const input = [
-    async () => {
-      await delay(100)
+        await delay(200)
 
-      return 1
-    },
-    async () => {
-      await delay(200)
+        return 1
+      },
+      async () => {
+        started[1] = true
 
-      return 2
-    },
-    async () => {
-      await delay(50)
+        await delay(100)
 
-      return 3
+        throw error
+      },
+      async () => {
+        // in second batch, should not execute
+        started[2] = true
+
+        await delay(100)
+
+        return 3
+      }
+    ]
+
+    try {
+      await all(parallelBatch(input, 2))
+    } catch (err) {
+      expect(err).to.equal(error)
     }
-  ]
 
-  const res = await all(parallelBatch(input, 2))
+    expect(started).to.deep.equal([true, true, false])
+  })
 
-  t.deepEqual(res, [1, 2, 3])
-})
+  it('should work without size parameter', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-test('Should propagate errors', async (t) => {
-  const error = new Error('wat')
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-  const input = [
-    async () => {
-      await delay(100)
+        return 2
+      }
+    ]
 
-      return 1
-    },
-    async () => {
-      await delay(200)
+    const res = await all(parallelBatch(input))
 
-      throw error
-    },
-    async () => {
-      await delay(50)
+    expect(res).to.deep.equal([1, 2])
+  })
 
-      return 3
-    }
-  ]
+  it('should batch up entries with negative batch size', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-  try {
-    await all(parallelBatch(input, 2))
-  } catch (err) {
-    t.is(err, error)
-  }
-})
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-test('Execute batch in parallel', async (t) => {
-  const error = new Error('wat')
-  const started = [false, false, false]
+        return 2
+      }
+    ]
+    const batchSize = -1
+    const res = await all(parallelBatch(input, batchSize))
 
-  const input = [
-    async () => {
-      started[0] = true
+    expect(res).to.deep.equal([1, 2])
+  })
 
-      await delay(200)
+  it('should batch up entries with zero batch size', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-      return 1
-    },
-    async () => {
-      started[1] = true
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-      await delay(100)
+        return 2
+      }
+    ]
+    const batchSize = 0
+    const res = await all(parallelBatch(input, batchSize))
 
-      throw error
-    },
-    async () => {
-      // in second batch, should not execute
-      started[2] = true
+    expect(res).to.deep.equal([1, 2])
+  })
 
-      await delay(100)
+  it('should batch up entries with string batch size', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-      return 3
-    }
-  ]
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-  try {
-    await all(parallelBatch(input, 2))
-  } catch (err) {
-    t.is(err, error)
-  }
+        return 2
+      }
+    ]
+    const batchSize = '2'
+    // @ts-expect-error batchSize type is wrong
+    const res = await all(parallelBatch(input, batchSize))
 
-  t.deepEqual(started, [true, true, false])
-})
+    expect(res).to.deep.equal([1, 2])
+  })
 
-test('Should work without size parameter', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
+  it('should batch up entries with non-integer batch size', async () => {
+    const input = [
+      async () => {
+        await delay(200)
 
-      return 1
-    },
-    async () => {
-      await delay(100)
+        return 1
+      },
+      async () => {
+        await delay(100)
 
-      return 2
-    }
-  ]
+        return 2
+      }
+    ]
+    const batchSize = 2.5
+    const res = await all(parallelBatch(input, batchSize))
 
-  const res = await all(parallelBatch(input))
+    expect(res).to.deep.equal([1, 2])
+  })
 
-  t.deepEqual(res, [1, 2])
-})
+  it('should allow returning errors', async () => {
+    const herp = new Error('herp')
+    const derp = new Error('derp')
 
-test('Should batch up entries with negative batch size', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
+    const input = [
+      async () => {
+        await delay(200)
 
-      return 1
-    },
-    async () => {
-      await delay(100)
+        return herp
+      },
+      async () => {
+        await delay(100)
 
-      return 2
-    }
-  ]
-  const batchSize = -1
-  const res = await all(parallelBatch(input, batchSize))
+        return derp
+      }
+    ]
+    const batchSize = 2
+    const res = await all(parallelBatch(input, batchSize))
 
-  t.deepEqual(res, [1, 2])
-})
-
-test('Should batch up entries with zero batch size', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
-  ]
-  const batchSize = 0
-  const res = await all(parallelBatch(input, batchSize))
-
-  t.deepEqual(res, [1, 2])
-})
-
-test('Should batch up entries with string batch size', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
-  ]
-  const batchSize = '2'
-  const res = await all(parallelBatch(input, batchSize))
-
-  t.deepEqual(res, [1, 2])
-})
-
-test('Should batch up entries with non-integer batch size', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
-
-      return 1
-    },
-    async () => {
-      await delay(100)
-
-      return 2
-    }
-  ]
-  const batchSize = 2.5
-  const res = await all(parallelBatch(input, batchSize))
-
-  t.deepEqual(res, [1, 2])
-})
-
-test('Should allow returning errors', async (t) => {
-  const input = [
-    async () => {
-      await delay(200)
-
-      return new Error('herp')
-    },
-    async () => {
-      await delay(100)
-
-      return new Error('derp')
-    }
-  ]
-  const batchSize = 2
-  const res = await all(parallelBatch(input, batchSize))
-
-  t.deepEqual(res, [new Error('herp'), new Error('derp')])
+    expect(res).to.deep.equal([herp, derp])
+  })
 })

@@ -1,13 +1,21 @@
-# it-to-browser-readablestream
+# it-to-browser-readablestream <!-- omit in toc -->
 
-[![Build status](https://github.com/achingbrain/it/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/achingbrain/it/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-to-browser-readablestream)](https://david-dm.org/achingbrain/it?path=packages/it-to-browser-readablestream)
+[![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
+[![CI](https://img.shields.io/github/workflow/status/achingbrain/it/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml)
 
-> Takes an iterable and turns it into a WhatWG browser readablestream
+> Takes an async iterator and turns it into a browser readable stream
+
+## Table of contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
 
 ## Install
 
-```sh
-$ npm install --save it-to-browser-readablestream
+```console
+$ npm i it-to-browser-readablestream
 ```
 
 ## Usage
@@ -24,3 +32,14 @@ for await (const buf of stream) {
   console.info(buf) // Buffer[0, 1]
 }
 ```
+
+## License
+
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

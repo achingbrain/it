@@ -1,44 +1,26 @@
-'use strict'
 
-/**
- * @template T
- * @typedef {Object} Peek
- * @property {() => IteratorResult<T, void>} peek
- */
 
-/**
- * @template T
- * @typedef {Object} AsyncPeek
- * @property {() => Promise<IteratorResult<T, void>>} peek
- */
+interface Peek <T> {
+  peek: () => IteratorResult<T, undefined>
+}
 
-/**
- * @template T
- * @typedef {Object} Push
- * @property {(value:T) => void} push
- */
+interface AsyncPeek <T> {
+  peek: () => Promise<IteratorResult<T, undefined>>
+}
 
-/**
- * @template T
- * @typedef {Iterable<T> & Peek<T> & Push<T> & Iterator<T>} Peekable<T>
- */
+interface Push <T> {
+  push: (value:T) => void
+}
 
-/**
- * @template T
- * @typedef {AsyncIterable<T> & AsyncPeek<T> & Push<T> & AsyncIterator<T>} AsyncPeekable<T>
- */
+type Peekable <T> = Iterable<T> & Peek<T> & Push<T> & Iterator<T>
 
-/**
- * @template {Iterable<any> | AsyncIterable<any>} I
- * @param {I} iterable
- * @returns {I extends Iterable<infer T>
- *  ? Peekable<T>
- *  : I extends AsyncIterable<infer T>
- *  ? AsyncPeekable<T>
- *  : never
- * }
- */
-function peekableIterator (iterable) {
+type AsyncPeekable <T> = AsyncIterable<T> & AsyncPeek<T> & Push<T> & AsyncIterator<T>
+
+export default function peekableIterator <I = Iterable<any> | AsyncIterable<any>> (iterable: I): I extends Iterable<infer T>
+ ? Peekable<T>
+ : I extends AsyncIterable<infer T>
+ ? AsyncPeekable<T>
+ : never {
   // @ts-ignore
   const [iterator, symbol] = iterable[Symbol.asyncIterator]
     // @ts-ignore
@@ -46,15 +28,14 @@ function peekableIterator (iterable) {
     // @ts-ignore
     : [iterable[Symbol.iterator](), Symbol.iterator]
 
-  /** @type {any[]} */
-  const queue = []
+  const queue: any[] = []
 
   // @ts-ignore
   return {
     peek: () => {
       return iterator.next()
     },
-    push: (value) => {
+    push: (value: any) => {
       queue.push(value)
     },
     next: () => {
@@ -72,5 +53,3 @@ function peekableIterator (iterable) {
     }
   }
 }
-
-module.exports = peekableIterator

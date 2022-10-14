@@ -55,7 +55,7 @@ describe('browser-readablestream-to-it', () => {
 
   it('should cancel stream', async () => {
     const source = [1, 2, 3, 4, 5]
-    const cancel = []
+    const cancel: any = []
     const stream = new ReadableStream({
       pull (controller) {
         controller.enqueue(source.shift())
@@ -83,7 +83,7 @@ describe('browser-readablestream-to-it', () => {
 
   it('should not cancel stream if preventCancel is set', async () => {
     const source = [1, 2, 3, 4, 5]
-    const cancel = []
+    const cancel: any = []
     const stream = new ReadableStream({
       pull (controller) {
         controller.enqueue(source.shift())
@@ -111,7 +111,7 @@ describe('browser-readablestream-to-it', () => {
 
   it('error cancels the stream', async () => {
     const source = [1, 2, 3, 4, 5]
-    const cancel = []
+    const cancel: any = []
     const stream = new ReadableStream({
       pull (controller) {
         controller.enqueue(source.shift())
@@ -141,7 +141,7 @@ describe('browser-readablestream-to-it', () => {
 
   it('error does not cancels the stream if preventCancel is set', async () => {
     const source = [1, 2, 3, 4, 5]
-    const cancel = []
+    const cancel: any = []
     const stream = new ReadableStream({
       pull (controller) {
         controller.enqueue(source.shift())

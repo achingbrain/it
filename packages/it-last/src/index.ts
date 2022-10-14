@@ -1,13 +1,8 @@
-'use strict'
-
 /**
  * Returns the last item of an (async) iterable, unless empty, in which case
- * return `undefined`.
- *
- * @template T
- * @param {AsyncIterable<T>|Iterable<T>} source
+ * return `undefined`
  */
-const last = async (source) => {
+export default async function last <T> (source: AsyncIterable<T>|Iterable<T>): Promise<T | undefined> {
   let res
 
   for await (const entry of source) {
@@ -16,5 +11,3 @@ const last = async (source) => {
 
   return res
 }
-
-module.exports = last

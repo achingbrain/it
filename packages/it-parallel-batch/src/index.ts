@@ -1,34 +1,24 @@
-'use strict'
+import batch from 'it-batch'
 
-const batch = require('it-batch')
+interface Success<T> {
+  ok: true
+  value: T
+}
 
-/**
- * @template T
- * @typedef {{ok:true, value:T}} Success
- */
-
-/**
- * @typedef {{ok:false, err:Error}} Failure
- */
+interface Failure {
+  ok: false
+  err: Error
+}
 
 /**
  * Takes an (async) iterator that emits promise-returning functions,
  * invokes them in parallel and emits the results as they become available but
  * in the same order as the input
- *
- * @template T
- * @param {AsyncIterable<() => Promise<T>>|Iterable<() => Promise<T>>} source
- * @param {number} [size=1]
- * @returns {AsyncIterable<T>}
  */
-async function * parallelBatch (source, size = 1) {
+export default async function * parallelBatch <T> (source: AsyncIterable<() => Promise<T>>|Iterable<() => Promise<T>>, size: number = 1): AsyncGenerator<T, void, undefined> {
   for await (const tasks of batch(source, size)) {
-    /** @type {Promise<Success<T>|Failure>[]} */
-    const things = tasks.map(
-      /**
-       * @param {() => Promise<T>} p
-       */
-      p => {
+    const things: Promise<Success<T>|Failure>[] = tasks.map(
+      (p: () => Promise<T>) => {
         return p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
       })
 
@@ -43,5 +33,3 @@ async function * parallelBatch (source, size = 1) {
     }
   }
 }
-
-module.exports = parallelBatch

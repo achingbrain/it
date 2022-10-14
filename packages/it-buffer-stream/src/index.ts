@@ -1,38 +1,23 @@
-'use strict'
+// @ts-expect-error - untyped dependency
+import randomBytes from 'iso-random-stream/src/random.js'
 
-// @ts-ignore - untyped dependency
-const randomBytes = require('iso-random-stream/src/random')
+export interface BufferStreamOptions {
+  chunkSize?: number
+  collector?: (arr: Uint8Array) => void
+  generator?: (lenght: number) => Uint8Array | Promise<Uint8Array>
+}
 
-/**
- * @typedef {Object} Options
- * @property {number} [chunkSize]
- * @property {function(Uint8Array):void} [collector]
- * @property {function(number):Promise<Uint8Array>|Uint8Array} [generator]
- */
-
-/**
- * @typedef {Object} ActualOptions
- * @property {number} chunkSize
- * @property {function(Uint8Array):void} collector
- * @property {function(number):Promise<Uint8Array>|Uint8Array} generator
- */
-
-/** @type {ActualOptions} */
-const defaultOptions = {
+const defaultOptions: Required<BufferStreamOptions> = {
   chunkSize: 4096,
   collector: () => {},
   generator: (size) => Promise.resolve(randomBytes(size))
 }
 
 /**
- * An async iterable that emits buffers containing bytes up to a certain length.
- *
- * @param {number} limit
- * @param {Options} [options]
+ * An async iterable that emits buffers containing bytes up to a certain length
  */
-async function * bufferStream (limit, options = {}) {
-  /** @type {ActualOptions} */
-  const opts = Object.assign({}, defaultOptions, options)
+export default async function * bufferStream (limit: number, options: BufferStreamOptions = {}) {
+  const opts: Required<BufferStreamOptions> = Object.assign({}, defaultOptions, options)
   let emitted = 0
 
   const arr = []
@@ -56,5 +41,3 @@ async function * bufferStream (limit, options = {}) {
     yield bytes
   }
 }
-
-module.exports = bufferStream

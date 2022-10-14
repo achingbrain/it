@@ -1,7 +1,3 @@
-const parse = require('./parse')
-const stringify = require('./stringify')
 
-module.exports = {
-  parse,
-  stringify
-}
+export { default as parse } from './parse.js'
+export { default as stringify } from './stringify.js'

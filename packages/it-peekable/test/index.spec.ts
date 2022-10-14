@@ -1,53 +1,59 @@
-const peekableIt = require('./')
-const test = require('ava')
+import { expect } from 'aegir/chai'
 import all from 'it-all'
+import peekableIt from '../src/index.js'
 
-test('Should peek at an iterable', async (t) => {
-  const iterable = [0, 1, 2, 3]
-  const peekable = peekableIt(iterable)
-  const { value, done } = peekable.peek()
+describe('it-peekable', () => {
+  it('should peek at an iterable', async () => {
+    const iterable = [0, 1, 2, 3]
+    const peekable = peekableIt(iterable)
+    const { value, done } = peekable.peek()
 
-  t.is(value, 0)
-  t.is(done, false)
-})
+    expect(value).to.equal(0)
+    expect(done).to.be.false()
+  })
 
-test('Should peek at an async iterable', async (t) => {
-  const content = [0, 1, 2, 3]
-  const iterable = async function * () {
-    for (let i = 0; i < content.length; i++) {
-      yield content[i]
+  it('should peek at an async iterable', async () => {
+    const content = [0, 1, 2, 3]
+    const iterable = async function * () {
+      for (let i = 0; i < content.length; i++) {
+        yield content[i]
+      }
     }
-  }
 
-  const peekable = peekableIt(iterable())
-  const { value, done } = await peekable.peek()
+    const peekable = peekableIt(iterable())
+    const { value, done } = await peekable.peek()
 
-  t.is(value, 0)
-  t.is(done, false)
-})
+    expect(value).to.equal(0)
+    expect(done).to.be.false()
+  })
 
-test('Should push an iterable', async (t) => {
-  const iterable = [0, 1, 2, 3]
-  const peekable = peekableIt(iterable)
-  const { value } = peekable.peek()
+  it('should push an iterable', async () => {
+    const iterable = [0, 1, 2, 3]
+    const peekable = peekableIt(iterable)
+    const { value } = peekable.peek()
 
-  peekable.push(value)
-
-  t.deepEqual([...peekable], iterable)
-})
-
-test('Should push an async iterable', async (t) => {
-  const content = [0, 1, 2, 3]
-  const iterable = async function * () {
-    for (let i = 0; i < content.length; i++) {
-      yield content[i]
+    if (value != null) {
+      peekable.push(value)
     }
-  }
 
-  const peekable = peekableIt(iterable())
-  const { value } = await peekable.peek()
+    expect([...peekable]).to.deep.equal(iterable)
+  })
 
-  peekable.push(value)
+  it('should push an async iterable', async () => {
+    const content = [0, 1, 2, 3]
+    const iterable = async function * () {
+      for (let i = 0; i < content.length; i++) {
+        yield content[i]
+      }
+    }
 
-  t.deepEqual(await all(peekable), content)
+    const peekable = peekableIt(iterable())
+    const { value } = await peekable.peek()
+
+    if (value != null) {
+      peekable.push(value)
+    }
+
+    expect(await all(peekable)).to.deep.equal(content)
+  })
 })

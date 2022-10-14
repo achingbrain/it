@@ -1,7 +1,5 @@
-/**
- * @param {AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>} source
- */
-async function * parse (source) {
+
+export default async function * parse <T> (source: AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>): AsyncGenerator<T, void, undefined> {
   const matcher = /\r?\n/
   const decoder = new TextDecoder('utf8')
   let buffer = ''
@@ -26,5 +24,3 @@ async function * parse (source) {
     yield JSON.parse(buffer)
   }
 }
-
-module.exports = parse

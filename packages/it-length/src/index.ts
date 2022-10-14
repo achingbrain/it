@@ -1,12 +1,7 @@
-'use strict'
-
 /**
- * Consumes the passed iterator and returns the number of items it contained.
- *
- * @param {AsyncIterable<any> | Iterable<any>} iterator
- * @returns {Promise<number>}
+ * Consumes the passed iterator and returns the number of items it contained
  */
-const length = async (iterator) => {
+export default async function length (iterator: AsyncIterable<unknown> | Iterable<unknown>): Promise<number> {
   let count = 0
 
   for await (const _ of iterator) { // eslint-disable-line no-unused-vars
@@ -15,5 +10,3 @@ const length = async (iterator) => {
 
   return count
 }
-
-module.exports = length

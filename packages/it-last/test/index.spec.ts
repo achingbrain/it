@@ -1,10 +1,20 @@
-const last = require('./')
-const test = require('ava')
+import { expect } from 'aegir/chai'
+import last from '../src/index.js'
 
-test('Should return only the last result from an async iterator', async (t) => {
-  const values = [0, 1, 2, 3, 4]
+describe('it-last', () => {
+  it('should return only the last result from an async iterator', async () => {
+    const values = [0, 1, 2, 3, 4]
 
-  const res = await last(values)
+    const res = await last(values)
 
-  t.is(res, 4)
+    expect(res).to.equal(4)
+  })
+
+  it('should return undefined if the async iterator was empty', async () => {
+    const values: any[] = []
+
+    const res = await last(values)
+
+    expect(res).to.be.undefined()
+  })
 })

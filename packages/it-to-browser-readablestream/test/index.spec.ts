@@ -1,6 +1,8 @@
-const toBrowserReadbleStream = require('./')
-const test = require('ava')
+import { expect } from 'aegir/chai'
+import toBrowserReadbleStream from '../src/index.js'
 
-test('Should export something', async (t) => {
-  t.true(typeof toBrowserReadbleStream === 'function')
+describe('it-to-browser-readable-stream', () => {
+  it('should export something', async () => {
+    expect(typeof toBrowserReadbleStream).to.equal('function')
+  })
 })

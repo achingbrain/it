@@ -1,32 +1,30 @@
 /* global EventTarget Event */
-'use strict'
 
-const defer = require('p-defer')
+import defer from 'p-defer'
 
-/**
- * @template T
- * @typedef {object} Operation
- * @property {boolean} done
- * @property {boolean} ok
- * @property {Error} err
- * @property {T} value
- */
+interface Operation<T> {
+  done: boolean
+  ok: boolean
+  err: Error
+  value: T
+}
 
 const CustomEvent = globalThis.CustomEvent || Event
+
+export interface ParallelOptions {
+  /**
+   * How many jobs to execute in parallel (default: )
+   */
+  concurrency?: number
+  ordered?: boolean
+}
 
 /**
  * Takes an (async) iterator that emits promise-returning functions,
  * invokes them in parallel and emits the results as they become available but
  * in the same order as the input
- *
- * @template T
- * @param {Iterable<() => Promise<T>> | AsyncIterable<() => Promise<T>>} source
- * @param {object} [options]
- * @param {number} [options.concurrency=Infinity]
- * @param {boolean} [options.ordered=false]
- * @returns {AsyncIterable<T>}
  */
-async function * parallel (source, options = {}) {
+export default async function * parallel <T> (source: Iterable<() => Promise<T>> | AsyncIterable<() => Promise<T>>, options: ParallelOptions = {}): AsyncGenerator<T, void, undefined> {
   let concurrency = options.concurrency || Infinity
 
   if (concurrency < 1) {
@@ -36,8 +34,7 @@ async function * parallel (source, options = {}) {
   const ordered = options.ordered == null ? false : options.ordered
   const emitter = new EventTarget()
 
-  /** @type {Operation<T>[]}} */
-  const ops = []
+  const ops: Operation<T>[] = []
   let slotAvailable = defer()
   let resultAvailable = defer()
   let sourceFinished = false
@@ -60,10 +57,7 @@ async function * parallel (source, options = {}) {
           break
         }
 
-        /**
-         * @type {any}
-         */
-        const op = {
+        const op: any = {
           done: false
         }
         ops.push(op)
@@ -164,5 +158,3 @@ async function * parallel (source, options = {}) {
     }
   }
 }
-
-module.exports = parallel

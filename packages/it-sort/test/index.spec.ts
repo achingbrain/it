@@ -1,14 +1,16 @@
-const sort = require('./')
+import { expect } from 'aegir/chai'
 import all from 'it-all'
-const test = require('ava')
+import sort, { CompareFunction } from '../src/index.js'
 
-test('Should sort all entries of an array', async (t) => {
-  const values = ['foo', 'bar']
-  const sorter = (a, b) => {
-    return a.localeCompare(b)
-  }
+describe('it-sort', () => {
+  it('should sort all entries of an array', async () => {
+    const values = ['foo', 'bar']
+    const sorter: CompareFunction<string> = (a, b) => {
+      return a.localeCompare(b)
+    }
 
-  const res = await all(sort(values, sorter))
+    const res = await all(sort(values, sorter))
 
-  t.deepEqual(res, ['bar', 'foo'])
+    expect(res).to.deep.equal(['bar', 'foo'])
+  })
 })

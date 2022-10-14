@@ -1,14 +1,8 @@
-'use strict'
 
 /**
- * Skip items from an iterable.
- *
- * @template T
- * @param {AsyncIterable<T>|Iterable<T>} source
- * @param {number} offset
- * @returns {AsyncIterable<T>}
+ * Skip items from an iterable
  */
-const skip = async function * (source, offset) {
+export default async function * skip <T> (source: AsyncIterable<T>|Iterable<T>, offset: number): AsyncGenerator<T, void, undefined> {
   for await (const entry of source) {
     if (offset === 0) {
       yield entry
@@ -19,5 +13,3 @@ const skip = async function * (source, offset) {
     offset--
   }
 }
-
-module.exports = skip

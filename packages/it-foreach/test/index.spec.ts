@@ -1,36 +1,38 @@
-const each = require('./')
 import all from 'it-all'
-const test = require('ava')
+import { expect } from 'aegir/chai'
+import forEach from '../src/index.js'
 
-test('Should iterate over every value', async (t) => {
-  const values = [0, 1, 2, 3, 4]
-  let sum = 0
+describe('it-for-each', () => {
+  it('should iterate over every value', async () => {
+    const values = [0, 1, 2, 3, 4]
+    let sum = 0
 
-  const res = await all(each(values, (val) => {
-    sum += val
-  }))
-
-  t.deepEqual(res, values)
-  t.is(10, sum)
-})
-
-test('Should abort source', async (t) => {
-  const values = [0, 1, 2, 3, 4]
-  let sum = 0
-  const err = new Error('wat')
-
-  try {
-    await all(each(values, (val) => {
+    const res = await all(forEach(values, (val) => {
       sum += val
-
-      if (val === 3) {
-        throw err
-      }
     }))
 
-    throw new Error('Did not abort')
-  } catch (e) {
-    t.is(e, err)
-    t.is(6, sum)
-  }
+    expect(res).to.deep.equal(values)
+    expect(10).to.equal(sum)
+  })
+
+  it('should abort source', async () => {
+    const values = [0, 1, 2, 3, 4]
+    let sum = 0
+    const err = new Error('wat')
+
+    try {
+      await all(forEach(values, (val) => {
+        sum += val
+
+        if (val === 3) {
+          throw err
+        }
+      }))
+
+      throw new Error('Did not abort')
+    } catch (e) {
+      expect(e).to.equal(err)
+      expect(6).to.equal(sum)
+    }
+  })
 })

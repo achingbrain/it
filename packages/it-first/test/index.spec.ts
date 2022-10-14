@@ -1,10 +1,12 @@
-const first = require('./')
-const test = require('ava')
+import { expect } from 'aegir/chai'
+import first from '../src/index.js'
 
-test('Should return only the first result from an async iterator', async (t) => {
-  const values = [0, 1, 2, 3, 4]
+describe('it-first', () => {
+  it('should return only the first result from an async iterator', async () => {
+    const values = [0, 1, 2, 3, 4]
 
-  const res = await first(values)
+    const res = await first(values)
 
-  t.is(res, 0)
+    expect(res).to.equal(0)
+  })
 })

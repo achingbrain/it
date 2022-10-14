@@ -1,24 +1,17 @@
-'use strict'
+import formidable from 'formidable'
+import pushable from 'it-pushable'
+import type { IncomingMessage, IncomingHttpHeaders } from 'http'
 
-const formidable = require('formidable')
-const pushable = require('it-pushable')
-
-/**
- * @typedef {import('http').IncomingMessage} IncomingMessage
- * @typedef {import('http').IncomingHttpHeaders} IncomingHttpHeaders
- * @typedef {Object} Part
- * @property {IncomingHttpHeaders} headers
- * @property {AsyncIterable<Buffer>} body
- */
+export interface Part {
+  headers: IncomingHttpHeaders
+  body: AsyncIterable<Uint8Array>
+}
 
 /**
  * Streaming multipart HTTP message parser
- *
- * @param {IncomingMessage} request
- * @returns {AsyncIterable<Part>}
  */
-async function * multipart (request) {
-  const output = pushable()
+export default async function * multipart (request: IncomingMessage): AsyncGenerator<Part, void, undefined> {
+  const output = pushable<Part>()
 
   if (!request) {
     output.end(new Error('request missing'))
@@ -35,7 +28,7 @@ async function * multipart (request) {
   })
 
   form.onPart = (part) => {
-    const body = pushable()
+    const body = pushable<Uint8Array>()
 
     part.on('data', buf => {
       body.push(buf)
@@ -55,5 +48,3 @@ async function * multipart (request) {
 
   yield * output
 }
-
-module.exports = multipart

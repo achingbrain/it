@@ -1,22 +1,17 @@
-'use strict'
+
+interface SourceExt {
+  _cancelled: boolean
+}
+
+type Source<T> = SourceExt & UnderlyingSource<T>
 
 /**
- * @typedef {Object} SourceExt
- * @property {boolean} [_cancelled]
+ * Converts an (async) iterator into a WHATWG ReadableStream
  */
-/**
- * @template T
- * @typedef {SourceExt & UnderlyingSource<T>} Source
- */
+export default function itToBrowserReadableStream <T> (source: AsyncIterator<T>|Iterator<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
+  const s: Source<T> = {
+    _cancelled: false,
 
-/**
- * @template T
- * @param {AsyncIterator<T>|Iterator<T>} source
- * @param {QueuingStrategy<T>} [queuingStrategy]
- * @returns {ReadableStream<T>}
- */
-function itToBrowserReadableStream (source, queuingStrategy = {}) {
-  return new globalThis.ReadableStream(/** @type {Source<T>} */({
     async start () {
       this._cancelled = false
     },
@@ -41,7 +36,7 @@ function itToBrowserReadableStream (source, queuingStrategy = {}) {
     cancel () {
       this._cancelled = true
     }
-  }), queuingStrategy)
-}
+  }
 
-module.exports = itToBrowserReadableStream
+  return new globalThis.ReadableStream(s, queuingStrategy)
+}

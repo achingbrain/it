@@ -1,14 +1,8 @@
-'use strict'
 
 /**
- * Stop iteration after n items have been received.
- *
- * @template T
- * @param {AsyncIterable<T>|Iterable<T>} source
- * @param {number} limit
- * @returns {AsyncIterable<T>}
+ * Stop iteration after n items have been received
  */
-const take = async function * (source, limit) {
+export default async function * take <T> (source: AsyncIterable<T>|Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> {
   let items = 0
 
   if (limit < 1) {
@@ -25,5 +19,3 @@ const take = async function * (source, limit) {
     }
   }
 }
-
-module.exports = take

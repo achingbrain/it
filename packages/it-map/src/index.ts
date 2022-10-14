@@ -1,18 +1,9 @@
-'use strict'
-
 /**
  * Takes an (async) iterable and returns one with each item mapped by the passed
- * function.
- *
- * @template I,O
- * @param {AsyncIterable<I>|Iterable<I>} source
- * @param {function(I):O|Promise<O>} func
- * @returns {AsyncIterable<O>}
+ * function
  */
-const map = async function * (source, func) {
+export default async function * map <I, O> (source: AsyncIterable<I>|Iterable<I>, func: (val: I) => O | Promise<O>): AsyncGenerator<O, void, undefined> {
   for await (const val of source) {
     yield func(val)
   }
 }
-
-module.exports = map

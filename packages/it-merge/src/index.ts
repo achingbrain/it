@@ -1,19 +1,13 @@
-'use strict'
-
-const pushable = require('it-pushable')
+import pushable from 'it-pushable'
 
 /**
  * Treat one or more iterables as a single iterable.
  *
  * Nb. sources are iterated over in parallel so the
  * order of emitted items is not guaranteed.
- *
- * @template T
- * @param {...AsyncIterable<T>|Iterable<T>} sources
- * @returns {AsyncIterable<T>}
  */
-const merge = async function * (...sources) {
-  const output = pushable()
+export default async function * merge <T> (...sources: Array<AsyncIterable<T>|Iterable<T>>): AsyncGenerator<T, void, undefined> {
+  const output = pushable<T>()
 
   setTimeout(async () => {
     try {
@@ -26,12 +20,10 @@ const merge = async function * (...sources) {
       )
 
       output.end()
-    } catch (/** @type {any} */ err) {
+    } catch (err: any) {
       output.end(err)
     }
   }, 0)
 
   yield * output
 }
-
-module.exports = merge

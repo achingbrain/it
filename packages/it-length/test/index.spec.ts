@@ -1,10 +1,12 @@
-const length = require('../dist')
-const test = require('ava')
+import { expect } from 'aegir/chai'
+import length from '../src/index.js'
 
-test('Should count the items in an async iterator', async (t) => {
-  const values = [0, 1, 2, 3, 4]
+describe('it-length', () => {
+  it('should count the items in an async iterator', async () => {
+    const values = [0, 1, 2, 3, 4]
 
-  const res = await length(values)
+    const res = await length(values)
 
-  t.is(res, 5)
+    expect(res).to.equal(5)
+  })
 })

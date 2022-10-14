@@ -1,28 +1,29 @@
-'use strict'
+import fs from 'fs/promises'
+import path from 'path'
+import minimatch from 'minimatch'
+import type { IOptions } from 'minimatch'
 
-const fs = require('fs').promises
-const path = require('path')
-const minimatch = require('minimatch')
+export interface GlobOptions extends IOptions {
+  /**
+   * The current working directory
+   */
+  cwd?: string
 
-/**
- * @typedef {string} Glob
- * @typedef {object} OptionsExt
- * @property {string} [cwd=process.cwd()]
- * @property {boolean} [absolute=false] - If true produces absolute paths
- * @property {boolean} [nodir] - If true yields file paths and skip directories
- *
- * @typedef {OptionsExt & minimatch.IOptions} Options
- */
+  /**
+   * If true produces absolute paths (default: false)
+   */
+  absolute?: boolean
+
+  /**
+   * If true yields file paths and skip directories (default: false)
+   */
+  nodir?: boolean
+}
 
 /**
  * Async iterable filename pattern matcher
- *
- * @param {string} dir
- * @param {string} pattern
- * @param {Options} [options]
- * @returns {AsyncIterable<string>}
  */
-async function * glob (dir, pattern, options = {}) {
+export default async function * glob (dir: string, pattern: string, options: GlobOptions = {}): AsyncGenerator<string, void, undefined> {
   const absoluteDir = path.resolve(dir)
   const relativeDir = path.relative(options.cwd || process.cwd(), dir)
 
@@ -41,14 +42,7 @@ async function * glob (dir, pattern, options = {}) {
   }
 }
 
-/**
- * @param {string} base
- * @param {string} dir
- * @param {Glob} pattern
- * @param {Options} options
- * @returns {AsyncIterable<string>}
- */
-async function * _glob (base, dir, pattern, options) {
+async function * _glob (base: string, dir: string, pattern: string, options: GlobOptions): AsyncGenerator<string, void, undefined> {
   for await (const entry of await fs.opendir(path.join(base, dir))) {
     const relativeEntryPath = path.join(dir, entry.name)
     const absoluteEntryPath = path.join(base, dir, entry.name)
@@ -70,5 +64,3 @@ async function * _glob (base, dir, pattern, options) {
     }
   }
 }
-
-module.exports = glob

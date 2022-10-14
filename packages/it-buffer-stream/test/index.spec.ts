@@ -1,87 +1,89 @@
-const bufferStream = require('./')
-const test = require('ava')
-const { concat: uint8ArrayConcat } = require('uint8arrays/concat')
+import { expect } from 'aegir/chai'
+import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
+import bufferStream from '../src/index.js'
 
-test('Should emit bytes', async (t) => {
-  const expected = 100
-  const buffers = []
+describe('it-buffer-stream', () => {
+  it('should emit bytes', async () => {
+    const expected = 100
+    const buffers = []
 
-  for await (const buf of bufferStream(expected)) {
-    buffers.push(buf)
-  }
-
-  t.is(buffers.length, 1)
-  t.is(buffers[0].length, expected)
-})
-
-test('Should emit a number of buffers', async (t) => {
-  const expected = 100
-  const chunkSize = 10
-  const buffers = []
-
-  for await (const buf of bufferStream(expected, {
-    chunkSize
-  })) {
-    buffers.push(buf)
-  }
-
-  t.is(buffers.length, 10)
-  t.is(buffers[0].length, expected / chunkSize)
-
-  const total = buffers.reduce((acc, cur) => acc + cur.length, 0)
-
-  t.is(expected, total)
-})
-
-test('Should allow collection of buffers', async (t) => {
-  const expected = 100
-  let emitted = new Uint8Array(0)
-  const buffers = []
-
-  for await (const buf of bufferStream(expected, {
-    collector: (buffer) => {
-      emitted = uint8ArrayConcat([emitted, buffer])
+    for await (const buf of bufferStream(expected)) {
+      buffers.push(buf)
     }
-  })) {
-    buffers.push(buf)
-  }
 
-  t.deepEqual(Uint8Array.from(emitted), Uint8Array.from(buffers[0]))
-})
+    expect(buffers).to.have.lengthOf(1)
+    expect(buffers[0]).to.have.lengthOf(expected)
+  })
 
-test('Should allow generation of buffers', async (t) => {
-  const expected = 100
-  let emitted = new Uint8Array(0)
-  const buffers = []
+  it('should emit a number of buffers', async () => {
+    const expected = 100
+    const chunkSize = 10
+    const buffers = []
 
-  for await (const buf of bufferStream(expected, {
-    generator: (size) => {
-      const output = new Uint8Array(size)
-      emitted = uint8ArrayConcat([emitted, output])
-
-      return output
+    for await (const buf of bufferStream(expected, {
+      chunkSize
+    })) {
+      buffers.push(buf)
     }
-  })) {
-    buffers.push(buf)
-  }
 
-  t.deepEqual(emitted, buffers[0])
-})
+    expect(buffers).to.have.lengthOf(10)
+    expect(buffers[0]).to.have.lengthOf(expected / chunkSize)
 
-test('Should propagate byte generation errors', async (t) => {
-  const generationError = new Error('Urk!')
+    const total = buffers.reduce((acc, cur) => acc + cur.length, 0)
 
-  try {
-    for await (const _ of bufferStream(5, { // eslint-disable-line no-unused-vars
-      generator: async () => {
-        throw generationError
+    expect(expected).to.equal(total)
+  })
+
+  it('should allow collection of buffers', async () => {
+    const expected = 100
+    let emitted = new Uint8Array(0)
+    const buffers = []
+
+    for await (const buf of bufferStream(expected, {
+      collector: (buffer) => {
+        emitted = uint8ArrayConcat([emitted, buffer])
       }
-    })) { // eslint-disable-line no-empty
-
+    })) {
+      buffers.push(buf)
     }
 
-    throw new Error('No error was thrown')
-  } catch (err) {
-    t.is(err, generationError)
-  }
+    expect(Uint8Array.from(emitted)).to.equalBytes(Uint8Array.from(buffers[0]))
+  })
+
+  it('should allow generation of buffers', async () => {
+    const expected = 100
+    let emitted = new Uint8Array(0)
+    const buffers = []
+
+    for await (const buf of bufferStream(expected, {
+      generator: (size) => {
+        const output = new Uint8Array(size)
+        emitted = uint8ArrayConcat([emitted, output])
+
+        return output
+      }
+    })) {
+      buffers.push(buf)
+    }
+
+    expect(emitted).to.equalBytes(buffers[0])
+  })
+
+  it('should propagate byte generation errors', async () => {
+    const generationError = new Error('Urk!')
+
+    try {
+      for await (const _ of bufferStream(5, { // eslint-disable-line no-unused-vars
+        generator: async () => {
+          throw generationError
+        }
+      })) { // eslint-disable-line no-empty
+
+      }
+
+      throw new Error('No error was thrown')
+    } catch (err) {
+      expect(err).to.equal(generationError)
+    }
+  })
 })
