@@ -2,20 +2,22 @@
   "name": "blob-to-it",
   "version": "1.0.4",
   "description": "Turns a blob into an async iterator",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/blob-to-it#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
   "scripts": {
-    "test": "playwright-test",
-    "lint": "standard",
-    "coverage": "playwright-test",
-    "clean": "rm -rf dist",
-    "check": "npm run build:dep:types && tsc --noEmit",
-    "build": "npm run build:types",
-    "build:dep:types": "cd node_modules/browser-readablestream-to-it && npm run build:types",
-    "build:types": "npm run build:dep:types && tsc --emitDeclarationOnly --declarationDir dist",
-    "prepublishOnly": "npm run build"
+    "build": "aegir build",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "clean": "aegir clean",
+    "test": "aegir test",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "release": "aegir release"
   },
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
@@ -23,12 +25,13 @@
     "browser-readablestream-to-it": "^1.0.3"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "it-all": "^1.0.6",
-    "mocha": "8.0.1",
-    "playwright-test": "^0.7.1",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+    "aegir": "^37.5.0",
+    "it-all": "^1.0.6"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }

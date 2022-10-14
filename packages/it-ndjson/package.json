@@ -2,7 +2,7 @@
   "name": "it-ndjson",
   "version": "0.1.1",
   "description": "Parse iterators as ndjson and transform iterators to ndjson",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-ndjson#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
@@ -19,12 +19,14 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^3.12.1",
+    "aegir": "^37.5.0",
     "buffer": "^6.0.3",
-    "it-all": "^1.0.6",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+    "it-all": "^1.0.6"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }

@@ -2,7 +2,7 @@
   "name": "it-glob",
   "version": "1.0.2",
   "description": "Async iterable filename pattern matcher",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-glob#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
@@ -23,15 +23,17 @@
     "minimatch": "^3.0.4"
   },
   "devDependencies": {
-    "ava": "^3.12.1",
-    "it-all": "^1.0.6",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+    "aegir": "^37.5.0",
+    "it-all": "^1.0.6"
   },
   "browser": {
     "fs": false,
     "path": false
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }

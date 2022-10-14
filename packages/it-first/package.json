@@ -2,7 +2,7 @@
   "name": "it-first",
   "version": "1.0.7",
   "description": "Returns the first result from an async iterator",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-first#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
@@ -19,10 +19,12 @@
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "ISC",
   "devDependencies": {
-    "ava": "^3.12.1",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+    "aegir": "^37.5.0"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }

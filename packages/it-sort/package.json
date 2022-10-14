@@ -2,7 +2,7 @@
   "name": "it-sort",
   "version": "1.0.1",
   "description": "Collects all values from an async iterator, sorts them using the passed function and yields them",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-sort#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
@@ -22,10 +22,12 @@
     "it-all": "^1.0.6"
   },
   "devDependencies": {
-    "ava": "^3.12.1",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+    "aegir": "^37.5.0"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }

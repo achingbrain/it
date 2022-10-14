@@ -17,7 +17,7 @@
     "publish": "lerna publish"
   },
   "devDependencies": {
-    "coveralls-lerna": "0.0.5",
-    "lerna": "^4.0.0"
+    "coveralls-lerna": "^0.0.5",
+    "lerna": "^6.0.0"
   }
 }

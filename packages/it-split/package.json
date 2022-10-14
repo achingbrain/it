@@ -2,7 +2,7 @@
   "name": "it-split",
   "version": "1.0.2",
   "description": "Splits Uint8Arrays emitted by an (async) iterable by a delimiter",
-  "main": "index.js",
+  "type": "module",
   "repository": "github:achingbrain/it",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-split#readme",
   "bugs": "https://github.com/achingbrain/it/issues",
@@ -23,12 +23,14 @@
   },
   "devDependencies": {
     "@types/bl": "^5.0.1",
-    "ava": "^3.12.1",
+    "aegir": "^37.5.0",
     "it-all": "^1.0.6",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2",
-    "uint8arrays": "^3.0.0"
+    "uint8arrays": "^4.0.2"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js"
+    }
+  }
 }
