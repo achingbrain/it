@@ -135,7 +135,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-all": "^1.0.0"
+    "it-all": "^2.0.0"
   },
   "devDependencies": {
     "aegir": "^37.5.0"
