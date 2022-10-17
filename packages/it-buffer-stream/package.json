@@ -135,7 +135,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "iso-random-stream": "^1.1.1"
+    "iso-random-stream": "^2.0.2"
   },
   "devDependencies": {
     "aegir": "^37.5.0",

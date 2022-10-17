@@ -40,7 +40,7 @@ describe('it-multipart', () => {
             res.end(files)
           })
           .catch(err => {
-            if (err.message.includes('bad content-type header') === true) {
+            if (err.message.includes('bad content-type header') || err.message.includes('no parser found')) {
               res.writeHead(400)
             } else {
               res.writeHead(500)

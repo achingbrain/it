@@ -1,4 +1,4 @@
-import pushable from 'it-pushable'
+import { pushable } from 'it-pushable'
 
 /**
  * Treat one or more iterables as a single iterable.
@@ -7,7 +7,9 @@ import pushable from 'it-pushable'
  * order of emitted items is not guaranteed.
  */
 export default async function * merge <T> (...sources: Array<AsyncIterable<T>|Iterable<T>>): AsyncGenerator<T, void, undefined> {
-  const output = pushable<T>()
+  const output = pushable<T>({
+    objectMode: true
+  })
 
   void Promise.resolve().then(async () => {
     try {

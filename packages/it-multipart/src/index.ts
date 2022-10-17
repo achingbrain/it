@@ -1,5 +1,5 @@
 import formidable from 'formidable'
-import pushable from 'it-pushable'
+import { pushable } from 'it-pushable'
 import type { IncomingMessage, IncomingHttpHeaders } from 'http'
 
 export interface Part {
@@ -11,7 +11,9 @@ export interface Part {
  * Streaming multipart HTTP message parser
  */
 export default async function * multipart (request: IncomingMessage): AsyncGenerator<Part, void, undefined> {
-  const output = pushable<Part>()
+  const output = pushable<Part>({
+    objectMode: true
+  })
 
   if (request == null) {
     output.end(new Error('request missing'))
@@ -28,7 +30,7 @@ export default async function * multipart (request: IncomingMessage): AsyncGener
   })
 
   form.onPart = (part) => {
-    const body = pushable<Uint8Array>()
+    const body = pushable()
 
     part.on('data', buf => {
       body.push(buf)
@@ -41,6 +43,7 @@ export default async function * multipart (request: IncomingMessage): AsyncGener
     })
 
     output.push({
+      // @ts-expect-error headers is not part of formidable api but is present
       headers: part.headers,
       body
     })

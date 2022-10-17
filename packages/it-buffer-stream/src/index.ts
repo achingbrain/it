@@ -1,4 +1,3 @@
-// @ts-expect-error - untyped dependency
 import randomBytes from 'iso-random-stream/src/random.js'
 
 export interface BufferStreamOptions {
