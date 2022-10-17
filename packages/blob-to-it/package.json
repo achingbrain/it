@@ -134,7 +134,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "browser-readablestream-to-it": "^1.0.0"
+    "browser-readablestream-to-it": "^2.0.0"
   },
   "devDependencies": {
     "aegir": "^37.5.0",
