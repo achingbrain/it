@@ -1,15 +1,13 @@
 {
-  "lerna": "2.9.0",
-  "packages": [
-    "packages/*"
-  ],
+  "lerna": "5.4.0",
+  "useWorkspaces": true,
   "version": "independent",
   "command": {
-    "bootstrap": {
-      "hoist": true
-    },
     "run": {
       "stream": true
     }
-  }
+  },
+  "packages": [
+    "packages/*"
+  ]
 }

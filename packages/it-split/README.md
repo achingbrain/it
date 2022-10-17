@@ -1,19 +1,28 @@
-# it-split
+# it-split <!-- omit in toc -->
 
-[![Build status](https://github.com/achingbrain/it/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/achingbrain/it/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-split)](https://david-dm.org/achingbrain/it?path=packages/it-split)
+[![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
+[![CI](https://img.shields.io/github/workflow/status/achingbrain/it/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml)
 
 > Splits Uint8Arrays emitted by an (async) iterable by a delimiter
 
+## Table of contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
+
 ## Install
 
-```sh
-$ npm install --save it-split
+```console
+$ npm i it-split
 ```
 
 ## Usage
 
 ```javascript
-const split = require('it-split')
+import split from 'it-split'
+
 const encoder = new TextEncoder()
 
 // This can also be an iterator, async iterator, generator, etc
@@ -43,3 +52,14 @@ const arr = await all(split(values, {
 
 console.info(arr) // [ Buffer.from([0]), Buffer.from([3, 0]), Buffer.from([3, 1]) ]
 ```
+
+## License
+
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

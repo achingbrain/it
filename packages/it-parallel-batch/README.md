@@ -1,23 +1,31 @@
-# it-parallel-batch
+# it-parallel-batch <!-- omit in toc -->
 
-[![Build status](https://github.com/achingbrain/it/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/achingbrain/it/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-parallel-batch)](https://david-dm.org/achingbrain/it?path=packages/it-parallel-batch)
+[![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
+[![CI](https://img.shields.io/github/workflow/status/achingbrain/it/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml)
 
-> Takes an (async) iterable that emits promise-returning functions, invokes them in parallel and emits the results as they become available but in the same order as the input
+> Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results in the same order as the input
 
-The final batch may be smaller than the batch size.
+## Table of contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
 
 ## Install
 
-```sh
-$ npm install --save it-parallel-batch
+```console
+$ npm i it-parallel-batch
 ```
+
+The final batch may be smaller than the batch size.
 
 ## Usage
 
 ```javascript
-const parallelBatch = require('it-parallel-batch')
-const all = require('it-all')
-const delay = require('delay')
+import parallelBatch from 'it-parallel-batch'
+import all from 'it-all'
+import delay from 'delay'
 
 // This can also be an iterator, async iterator, generator, etc
 const input = [
@@ -44,3 +52,14 @@ const result = await all(parallelBatch(input, batchSize))
 
 console.info(result) // [1, 2, 3]
 ```
+
+## License
+
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

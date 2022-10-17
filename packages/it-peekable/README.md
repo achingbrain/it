@@ -1,21 +1,29 @@
-# it-peekable
+# it-peekable <!-- omit in toc -->
 
-[![Build status](https://github.com/achingbrain/it/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/achingbrain/it/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-reduce)](https://david-dm.org/achingbrain/it?path=packages/it-reduce)
+[![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
+[![CI](https://img.shields.io/github/workflow/status/achingbrain/it/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml)
 
-> A peekable async iterator
+> Allows peeking/pushing an iterable
 
-Lets you look at the contents of an async iterator and decide what to do
+## Table of contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
 
 ## Install
 
-```sh
-$ npm install --save it-peekable
+```console
+$ npm i it-peekable
 ```
+
+Lets you look at the contents of an async iterator and decide what to do
 
 ## Usage
 
 ```javascript
-const peekable = require('it-peekable')
+import peekable from 'it-peekable'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
@@ -31,3 +39,14 @@ it.push(first)
 console.info([...it])
 // [ 0, 1, 2, 3, 4 ]
 ```
+
+## License
+
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

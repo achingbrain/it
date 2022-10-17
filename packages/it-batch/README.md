@@ -1,22 +1,30 @@
-# it-batch
+# it-batch <!-- omit in toc -->
 
-[![Build status](https://github.com/achingbrain/it/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/achingbrain/it/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/achingbrain/it/badge.svg?branch=master)](https://coveralls.io/github/achingbrain/it?branch=master) [![Dependencies Status](https://david-dm.org/achingbrain/it/status.svg?path=packages/it-batch)](https://david-dm.org/achingbrain/it?path=packages/it-batch)
+[![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
+[![CI](https://img.shields.io/github/workflow/status/achingbrain/it/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml)
 
-> Takes an (async) iterable that emits things and returns an async iterable that emits those things in fixed-sized batches.
+> Takes an async iterator that emits things and emits them as fixed size batches
 
-The final batch may be smaller than the max.
+## Table of contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [License](#license)
+- [Contribute](#contribute)
 
 ## Install
 
-```sh
-$ npm install --save it-batch
+```console
+$ npm i it-batch
 ```
+
+The final batch may be smaller than the max.
 
 ## Usage
 
 ```javascript
-const batch = require('it-batch')
-const all = require('it-all')
+import batch from 'it-batch'
+import all from 'it-all'
 
 // This can also be an iterator, async iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
@@ -26,3 +34,14 @@ const result = await all(batch(values, batchSize))
 
 console.info(result) // [0, 1], [2, 3], [4]
 ```
+
+## License
+
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

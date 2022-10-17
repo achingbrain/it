@@ -2,22 +2,38 @@
   "name": "it",
   "version": "1.0.0",
   "description": "A collection of utilities for making working with iterables more bearable",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/achingbrain/it#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "reset": "lerna run clean && rm -rf packages/*/node_modules packages/*/package-lock.json node_modules",
+    "reset": "rm -rf packages/*/dist packages/*/node_modules packages/*/package-lock.json node_modules package-lock.json",
     "test": "lerna run test",
     "coverage": "lerna run coverage",
-    "build": "lerna run build",
+    "build": "lerna exec -- tsc && lerna run build",
     "deploy": "lerna run deploy",
     "start": "NODE_ENV=development lerna run start",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
+    "dep-check": "lerna run dep-check",
     "check": "lerna run check",
     "publish": "lerna publish"
   },
-  "devDependencies": {
-    "coveralls-lerna": "0.0.5",
-    "lerna": "^4.0.0"
-  }
+  "dependencies": {
+    "lerna": "^6.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

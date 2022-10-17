@@ -2,27 +2,139 @@
   "name": "it-length",
   "version": "1.0.4",
   "description": "Counts the number of items in an async iterable",
-  "main": "index.js",
-  "repository": "github:achingbrain/it",
-  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-length#readme",
-  "bugs": "https://github.com/achingbrain/it/issues",
-  "scripts": {
-    "test": "ava",
-    "lint": "standard",
-    "coverage": "nyc --reporter html --reporter lcov ava",
-    "clean": "rm -rf .nyc_output coverage",
-    "check": "tsc --noEmit",
-    "build": "npm run build:types",
-    "build:types": "tsc --emitDeclarationOnly --declarationDir dist",
-    "prepublishOnly": "npm run build"
-  },
   "author": "Alex Potsides <alex@achingbrain.net>",
-  "license": "ISC",
-  "devDependencies": {
-    "ava": "^3.12.1",
-    "nyc": "^15.1.0",
-    "standard": "^16.0.3",
-    "typescript": "^4.0.2"
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-length#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
   },
-  "types": "dist/index.d.ts"
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "src",
+    "dist/src",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "releaseRules": [
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "deps",
+              "release": "patch"
+            },
+            {
+              "scope": "no-release",
+              "release": false
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "deps",
+                "section": "Dependencies"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "scripts": {
+    "build": "aegir build",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "clean": "aegir clean",
+    "test": "aegir test",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "release": "aegir release"
+  },
+  "devDependencies": {
+    "aegir": "^37.5.0"
+  }
 }
