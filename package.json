@@ -21,14 +21,13 @@
     "reset": "rm -rf packages/*/dist packages/*/node_modules packages/*/package-lock.json node_modules package-lock.json",
     "test": "lerna run test",
     "coverage": "lerna run coverage",
+    "generate": "lerna run generate",
     "build": "lerna exec -- tsc && lerna run build",
-    "deploy": "lerna run deploy",
     "start": "NODE_ENV=development lerna run start",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "dep-check": "lerna run dep-check",
-    "check": "lerna run check",
-    "publish": "lerna publish"
+    "release": "lerna run --concurrency 1 release -- --"
   },
   "dependencies": {
     "lerna": "^6.0.0"
