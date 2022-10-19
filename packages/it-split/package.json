@@ -135,7 +135,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "bl": "^5.0.0"
+    "bl": "^6.0.0"
   },
   "devDependencies": {
     "@types/bl": "^5.0.1",
