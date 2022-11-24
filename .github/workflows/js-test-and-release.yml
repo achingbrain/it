@@ -4,8 +4,6 @@ on:
     branches:
       - master # with #262 - ${{{ github.default_branch }}}
   pull_request:
-    branches:
-      - master # with #262 - ${{{ github.default_branch }}}
 
 jobs:
 
