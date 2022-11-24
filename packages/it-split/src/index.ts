@@ -1,4 +1,4 @@
-import BufferList from 'bl/BufferList.js'
+import { Uint8ArrayList } from 'uint8arraylist'
 
 export interface SplitOptions {
   delimiter?: Uint8Array
@@ -8,11 +8,10 @@ export interface SplitOptions {
  * Splits Uint8Arrays emitted by an (async) iterable by a delimiter
  */
 export default async function * split (source: AsyncIterable<Uint8Array>|Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> {
-  const bl = new BufferList()
+  const bl = new Uint8ArrayList()
   const delimiter = options.delimiter ?? new TextEncoder().encode('\n')
 
   for await (const buf of source) {
-    // @ts-expect-error Uint8Array type is missing from add signature
     bl.append(buf)
 
     yield * yieldUntilEnd(bl, delimiter)
@@ -25,7 +24,7 @@ export default async function * split (source: AsyncIterable<Uint8Array>|Iterabl
   }
 }
 
-async function * yieldUntilEnd (bl: BufferList, delimiter: Uint8Array): AsyncGenerator<Uint8Array, void, undefined> {
+async function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): AsyncGenerator<Uint8Array, void, undefined> {
   let index = bl.indexOf(delimiter)
 
   while (index !== -1) {

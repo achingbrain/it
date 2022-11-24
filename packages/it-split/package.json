@@ -135,10 +135,9 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "bl": "^5.0.0"
+    "uint8arraylist": "^2.4.1"
   },
   "devDependencies": {
-    "@types/bl": "^5.0.1",
     "aegir": "^37.5.0",
     "buffer": "^6.0.3",
     "it-all": "^2.0.0",
