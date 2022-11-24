@@ -17,6 +17,7 @@
 - [`/packages/browser-readablestream-to-it`](./packages/browser-readablestream-to-it) Turns a browser readble stream into an async iterator
 - [`/packages/it-all`](./packages/it-all) Collects all values from an (async) iterable and returns them as an array
 - [`/packages/it-batch`](./packages/it-batch) Takes an async iterator that emits things and emits them as fixed size batches
+- [`/packages/it-batched-bytes`](./packages/it-batched-bytes) Takes an async iterator that emits byte arrays and emits them as fixed size batches
 - [`/packages/it-buffer-stream`](./packages/it-buffer-stream) An async iterator that emits buffers containing bytes up to a certain length
 - [`/packages/it-drain`](./packages/it-drain) Empties an async iterator
 - [`/packages/it-filter`](./packages/it-filter) Filters the passed iterable by using the filter function
