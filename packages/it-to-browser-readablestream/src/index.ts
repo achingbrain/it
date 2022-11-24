@@ -8,7 +8,7 @@ type Source<T> = SourceExt & UnderlyingSource<T>
 /**
  * Converts an (async) iterator into a WHATWG ReadableStream
  */
-export default function itToBrowserReadableStream <T> (source: AsyncIterator<T>|Iterator<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
+export default function itToBrowserReadableStream <T extends ArrayBufferView > (source: AsyncIterator<T>|Iterator<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
   const s: Source<T> = {
     _cancelled: false,
 
