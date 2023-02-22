@@ -131,7 +131,7 @@
   },
   "dependencies": {
     "@types/minimatch": "^5.1.2",
-    "minimatch": "^5.1.0"
+    "minimatch": "^7.0.1"
   },
   "devDependencies": {
     "aegir": "^37.5.0",
