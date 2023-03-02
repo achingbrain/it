@@ -12,7 +12,7 @@ describe('it-multipart', () => {
   let server: Server
 
   before(async () => {
-    async function echo (req: IncomingMessage) {
+    async function echo (req: IncomingMessage): Promise<string> {
       const files: Record<string, string> = {}
 
       for await (const part of handler(req)) {

@@ -3,7 +3,7 @@ import defer from 'p-defer'
 import type { Source } from 'it-stream-types'
 
 const DEFAULT_BATCH_SIZE = 1024 * 1024
-const DEFAULT_SERIALIZE = (buf: Uint8Array | Uint8ArrayList, list: Uint8ArrayList) => list.append(buf)
+const DEFAULT_SERIALIZE = (buf: Uint8Array | Uint8ArrayList, list: Uint8ArrayList): void => { list.append(buf) }
 
 export interface BatchedBytesOptions {
   /**

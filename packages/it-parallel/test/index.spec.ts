@@ -103,7 +103,7 @@ describe('it-parallel', () => {
   it('should propagate source errors', async () => {
     const error = new Error('Urk!')
 
-    async function * source () {
+    async function * source (): AsyncGenerator<() => Promise<string>, void, unknown> {
       yield async () => 'foo'
 
       throw error

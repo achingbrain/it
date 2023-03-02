@@ -6,7 +6,7 @@ import { pushable } from 'it-pushable'
  * Nb. sources are iterated over in parallel so the
  * order of emitted items is not guaranteed.
  */
-export default async function * merge <T> (...sources: Array<AsyncIterable<T>|Iterable<T>>): AsyncGenerator<T, void, undefined> {
+export default async function * merge <T> (...sources: Array<AsyncIterable<T> | Iterable<T>>): AsyncGenerator<T, void, undefined> {
   const output = pushable<T>({
     objectMode: true
   })

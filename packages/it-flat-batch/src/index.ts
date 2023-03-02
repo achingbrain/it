@@ -3,7 +3,7 @@
  * Takes an (async) iterable that emits variable length arrays of things and
  * returns an async iterable that emits those things in fixed-size batches
  */
-export default async function * batch <T> (source: AsyncIterable<T[]>|Iterable<T[]>, batchSize: number = 1): AsyncGenerator<T[], void, undefined> {
+export default async function * batch <T> (source: AsyncIterable<T[]> | Iterable<T[]>, batchSize: number = 1): AsyncGenerator<T[], void, undefined> {
   // @ts-expect-error - expects string not a number
   let size = parseInt(batchSize)
 

@@ -94,7 +94,7 @@ describe('it-batched-bytes', () => {
     const batchSize = 2.5
     const res = await all(batch(values, {
       size: batchSize,
-      serialize: (obj, list) => list.append(Uint8Array.of(obj))
+      serialize: (obj, list) => { list.append(Uint8Array.of(obj)) }
     }))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1, 2), Uint8Array.of(3, 4)])

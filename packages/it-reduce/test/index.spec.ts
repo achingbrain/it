@@ -3,7 +3,7 @@ import reduce from '../src/index.js'
 
 describe('it-reduce', () => {
   it('should reduce the values yielded from an async iterator', async () => {
-    const iter = function * () {
+    const iter = function * (): Generator<number, void, unknown> {
       yield 1
       yield 2
       yield 3

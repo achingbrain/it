@@ -2,7 +2,7 @@
 /**
  * Stop iteration after n items have been received
  */
-export default async function * take <T> (source: AsyncIterable<T>|Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> {
+export default async function * take <T> (source: AsyncIterable<T> | Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> {
   let items = 0
 
   if (limit < 1) {

@@ -4,7 +4,7 @@ import drain from '../src/index.js'
 describe('it-drain', () => {
   it('should empty an async iterator', async () => {
     let done = false
-    const iter = function * () {
+    const iter = function * (): Generator<number, void, unknown> {
       yield 1
       yield 2
       yield 3
