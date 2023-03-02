@@ -83,7 +83,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
     }
   })
 
-  function valuesAvailable () {
+  function valuesAvailable (): boolean {
     if (ordered) {
       return ops[0]?.done
     }
@@ -91,7 +91,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
     return Boolean(ops.find(op => op.done))
   }
 
-  function * yieldOrderedValues () {
+  function * yieldOrderedValues (): Generator<T, void, unknown> {
     while ((ops.length > 0) && ops[0].done) {
       const op = ops[0]
       ops.shift()
@@ -110,7 +110,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
     }
   }
 
-  function * yieldUnOrderedValues () {
+  function * yieldUnOrderedValues (): Generator<T, void, unknown> {
     // more values can become available while we wait for `yield`
     // to return control to this function
     while (valuesAvailable()) {

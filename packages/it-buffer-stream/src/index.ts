@@ -15,7 +15,7 @@ const defaultOptions: Required<BufferStreamOptions> = {
 /**
  * An async iterable that emits buffers containing bytes up to a certain length
  */
-export default async function * bufferStream (limit: number, options: BufferStreamOptions = {}) {
+export default async function * bufferStream (limit: number, options: BufferStreamOptions = {}): AsyncGenerator<Uint8Array, void, unknown> {
   const opts: Required<BufferStreamOptions> = Object.assign({}, defaultOptions, options)
   let emitted = 0
 

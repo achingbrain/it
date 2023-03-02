@@ -3,7 +3,7 @@ import toBuffer from '../src/index.js'
 
 describe('it-to-buffer', () => {
   it('should turn a generator that yields buffers into a buffer', async () => {
-    const iter = function * () {
+    const iter = function * (): Generator<Uint8Array, void, unknown> {
       yield Uint8Array.from([0])
       yield Uint8Array.from([1])
       yield Uint8Array.from([2])

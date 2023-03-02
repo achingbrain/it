@@ -124,7 +124,7 @@
   "scripts": {
     "build": "aegir build",
     "lint": "aegir lint",
-    "dep-check": "aegir dep-check",
+    "dep-check": "aegir dep-check -i buffer",
     "clean": "aegir clean",
     "test": "aegir test",
     "test:node": "aegir test -t node --cov",

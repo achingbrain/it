@@ -14,7 +14,7 @@ describe('it-peekable', () => {
 
   it('should peek at an async iterable', async () => {
     const content = [0, 1, 2, 3]
-    const iterable = async function * () {
+    const iterable = async function * (): AsyncGenerator<number, void, unknown> {
       for (let i = 0; i < content.length; i++) {
         yield content[i]
       }
@@ -41,7 +41,7 @@ describe('it-peekable', () => {
 
   it('should push an async iterable', async () => {
     const content = [0, 1, 2, 3]
-    const iterable = async function * () {
+    const iterable = async function * (): AsyncGenerator<number, void, unknown> {
       for (let i = 0; i < content.length; i++) {
         yield content[i]
       }

@@ -15,9 +15,9 @@ interface Failure {
  * invokes them in parallel and emits the results as they become available but
  * in the same order as the input
  */
-export default async function * parallelBatch <T> (source: AsyncIterable<() => Promise<T>>|Iterable<() => Promise<T>>, size: number = 1): AsyncGenerator<T, void, undefined> {
+export default async function * parallelBatch <T> (source: AsyncIterable<() => Promise<T>> | Iterable<() => Promise<T>>, size: number = 1): AsyncGenerator<T, void, undefined> {
   for await (const tasks of batch(source, size)) {
-    const things: Array<Promise<Success<T>|Failure>> = tasks.map(
+    const things: Array<Promise<Success<T> | Failure>> = tasks.map(
       async (p: () => Promise<T>) => {
         return await p().then(value => ({ ok: true, value }), err => ({ ok: false, err }))
       })

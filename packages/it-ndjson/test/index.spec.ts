@@ -5,7 +5,7 @@ import all from 'it-all'
 
 async function * toAsyncIterator <T> (array: T[]): AsyncIterable<T> {
   for (let i = 0; i < array.length; i++) {
-    await new Promise<void>(resolve => setTimeout(() => resolve()))
+    await new Promise<void>(resolve => setTimeout(() => { resolve() }))
     yield array[i]
   }
 }

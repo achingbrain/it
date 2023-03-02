@@ -17,20 +17,17 @@
   },
   "private": true,
   "scripts": {
-    "postinstall": "lerna bootstrap",
-    "reset": "rm -rf packages/*/dist packages/*/node_modules packages/*/package-lock.json node_modules package-lock.json",
-    "test": "lerna run test",
-    "coverage": "lerna run coverage",
-    "generate": "lerna run generate",
-    "build": "lerna exec -- tsc && lerna run build",
-    "start": "NODE_ENV=development lerna run start",
-    "clean": "lerna run clean",
-    "lint": "lerna run lint",
-    "dep-check": "lerna run dep-check",
-    "release": "lerna run --concurrency 1 release -- --"
+    "reset": "aegir run clean && aegir clean ./node_modules ./package-lock.json packages/*/node_modules packages/*/package-lock.json packages/*/dist",
+    "test": "aegir run test",
+    "generate": "aegir run generate",
+    "build": "aegir run build",
+    "clean": "aegir run clean",
+    "lint": "aegir run lint",
+    "dep-check": "aegir run dep-check",
+    "release": "aegir run release"
   },
-  "dependencies": {
-    "lerna": "^6.0.0"
+  "devDependencies": {
+    "aegir": "^38.1.6"
   },
   "workspaces": [
     "packages/*"
