@@ -1,6 +1,6 @@
 {
   "name": "it-buffer-stream",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "An async iterator that emits buffers containing bytes up to a certain length",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
