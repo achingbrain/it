@@ -138,6 +138,6 @@
     "it-all": "^2.0.0"
   },
   "devDependencies": {
-    "aegir": "^38.1.6"
+    "aegir": "^38.1.7"
   }
 }
