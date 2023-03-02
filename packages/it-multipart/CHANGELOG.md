@@ -1,3 +1,15 @@
+## [it-multipart-v3.0.1](https://github.com/achingbrain/it/compare/it-multipart-v3.0.0...it-multipart-v3.0.1) (2023-03-02)
+
+
+### Trivial Changes
+
+* update project config ([#32](https://github.com/achingbrain/it/issues/32)) ([d24611c](https://github.com/achingbrain/it/commit/d24611c683d64ff5f344c3cb268bd32cc8e9f6d1))
+
+
+### Dependencies
+
+* **dev:** bump aegir from 37.12.1 to 38.1.6 ([#45](https://github.com/achingbrain/it/issues/45)) ([2c8139e](https://github.com/achingbrain/it/commit/2c8139ef060efa72c386aa3863e6c575f6f199e5))
+
 ## [it-multipart-v3.0.0](https://github.com/achingbrain/it/compare/it-multipart-v2.0.2...it-multipart-v3.0.0) (2022-10-17)
 
 
