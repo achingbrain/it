@@ -35,10 +35,25 @@ For when you are only interested in later values from an iterable.
 import take from 'it-skip'
 import all from 'it-all'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const arr = await all(skip(values, 2))
+const arr = all(skip(values, 2))
+
+console.info(arr) // 2, 3, 4
+```
+
+Async sources must be awaited:
+
+```javascript
+import take from 'it-skip'
+import all from 'it-all'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const arr = await all(skip(values(), 2))
 
 console.info(arr) // 2, 3, 4
 ```

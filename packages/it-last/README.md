@@ -34,10 +34,24 @@ Mostly useful for tests.
 ```javascript
 import last from 'it-last'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const res = await last(values)
+const res = last(values)
+
+console.info(res) // 4
+```
+
+Async sources must be awaited:
+
+```javascript
+import last from 'it-last'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const res = await last(values())
 
 console.info(res) // 4
 ```

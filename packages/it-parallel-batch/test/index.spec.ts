@@ -190,23 +190,22 @@ describe('it-parallel-batch', () => {
     expect(res).to.deep.equal([1, 2])
   })
 
-  it('should batch up entries with non-integer batch size', async () => {
-    const input = [
-      async () => {
+  it('should throw when batching up entries with non-integer batch size', async () => {
+    const input = async function * (): AsyncGenerator<() => Promise<number>, void, undefined> {
+      yield async () => {
         await delay(200)
 
         return 1
-      },
-      async () => {
+      }
+      yield async () => {
         await delay(100)
 
         return 2
       }
-    ]
+    }
     const batchSize = 2.5
-    const res = await all(parallelBatch(input, batchSize))
 
-    expect(res).to.deep.equal([1, 2])
+    await expect(all(parallelBatch(input(), batchSize))).to.eventually.be.rejectedWith('Batch size must be an integer')
   })
 
   it('should allow returning errors', async () => {

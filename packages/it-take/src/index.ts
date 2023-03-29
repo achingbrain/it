@@ -1,21 +1,50 @@
+function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
+  return thing[Symbol.asyncIterator] != null
+}
 
 /**
  * Stop iteration after n items have been received
  */
-export default async function * take <T> (source: AsyncIterable<T> | Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> {
-  let items = 0
+function take <T> (source: Iterable<T>, limit: number): Generator<T, void, undefined>
+function take <T> (source: AsyncIterable<T>, limit: number): AsyncGenerator<T, void, undefined>
+function take <T> (source: AsyncIterable<T> | Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+  if (isAsyncIterable(source)) {
+    return (async function * () {
+      let items = 0
 
-  if (limit < 1) {
-    return
+      if (limit < 1) {
+        return
+      }
+
+      for await (const entry of source) {
+        yield entry
+
+        items++
+
+        if (items === limit) {
+          return
+        }
+      }
+    })()
   }
 
-  for await (const entry of source) {
-    yield entry
+  return (function * () {
+    let items = 0
 
-    items++
-
-    if (items === limit) {
+    if (limit < 1) {
       return
     }
-  }
+
+    for (const entry of source) {
+      yield entry
+
+      items++
+
+      if (items === limit) {
+        return
+      }
+    }
+  })()
 }
+
+export default take

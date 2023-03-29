@@ -35,7 +35,7 @@ The final batch may be smaller than the max.
 import batch from 'it-batched-bytes'
 import all from 'it-all'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [
   Uint8Array.from([0]),
   Uint8Array.from([1]),
@@ -43,6 +43,26 @@ const values = [
   Uint8Array.from([3]),
   Uint8Array.from([4])
 ]
+const batchSize = 2
+
+const result = all(batch(values, { size: batchSize }))
+
+console.info(result) // [0, 1], [2, 3], [4]
+```
+
+Async sources must be awaited:
+
+```javascript
+import batch from 'it-batched-bytes'
+import all from 'it-all'
+
+const values = async function * () {
+  yield Uint8Array.from([0])
+  yield Uint8Array.from([1])
+  yield Uint8Array.from([2])
+  yield Uint8Array.from([3])
+  yield Uint8Array.from([4])
+}
 const batchSize = 2
 
 const result = await all(batch(values, { size: batchSize }))

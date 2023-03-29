@@ -135,7 +135,6 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-stream-types": "^1.0.4",
     "p-defer": "^4.0.0",
     "uint8arraylist": "^2.4.1"
   },

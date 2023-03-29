@@ -34,10 +34,22 @@ Mostly useful for tests or when you want to be explicit about consuming an itera
 ```javascript
 import drain from 'it-drain'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-await drain(values)
+drain(values)
+```
+
+Async sources must be awaited:
+
+```javascript
+import drain from 'it-drain'
+
+const values = async function * {
+  yield * [0, 1, 2, 3, 4]
+}
+
+await drain(values())
 ```
 
 ## License
