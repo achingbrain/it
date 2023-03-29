@@ -1,3 +1,15 @@
+## [it-to-browser-readablestream-v2.0.3](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-v2.0.2...it-to-browser-readablestream-v2.0.3) (2023-03-29)
+
+
+### Bug Fixes
+
+* fix it-to-browser-readablestream-types ([#56](https://github.com/achingbrain/it/issues/56)) ([cb34b22](https://github.com/achingbrain/it/commit/cb34b22aa578cb34c8eb5bcd33a19cae63b11597))
+
+
+### Trivial Changes
+
+* update project config, fix broken badges ([#53](https://github.com/achingbrain/it/issues/53)) ([e56c6ae](https://github.com/achingbrain/it/commit/e56c6ae9a0a766b5eab77040e92b2e034ce52d2e))
+
 ## [it-to-browser-readablestream-v2.0.2](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-v2.0.1...it-to-browser-readablestream-v2.0.2) (2023-03-02)
 
 
