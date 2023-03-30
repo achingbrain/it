@@ -1,3 +1,15 @@
+## [it-multipart-v3.0.2](https://github.com/achingbrain/it/compare/it-multipart-v3.0.1...it-multipart-v3.0.2) (2023-03-30)
+
+
+### Trivial Changes
+
+* update project config, fix broken badges ([#53](https://github.com/achingbrain/it/issues/53)) ([e56c6ae](https://github.com/achingbrain/it/commit/e56c6ae9a0a766b5eab77040e92b2e034ce52d2e))
+
+
+### Dependencies
+
+* update sibling dependencies ([a76da40](https://github.com/achingbrain/it/commit/a76da40c6a230adeda777760ad4266c68a721a77))
+
 ## [it-multipart-v3.0.1](https://github.com/achingbrain/it/compare/it-multipart-v3.0.0...it-multipart-v3.0.1) (2023-03-02)
 
 
