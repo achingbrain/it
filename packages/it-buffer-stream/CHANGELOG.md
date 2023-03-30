@@ -1,3 +1,15 @@
+## [it-buffer-stream-v3.0.2](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.1...it-buffer-stream-v3.0.2) (2023-03-30)
+
+
+### Bug Fixes
+
+* fix argument typo ([#57](https://github.com/achingbrain/it/issues/57)) ([a031dea](https://github.com/achingbrain/it/commit/a031dea54cbfb466b64602f41fcd4e934679e750))
+
+
+### Trivial Changes
+
+* update project config, fix broken badges ([#53](https://github.com/achingbrain/it/issues/53)) ([e56c6ae](https://github.com/achingbrain/it/commit/e56c6ae9a0a766b5eab77040e92b2e034ce52d2e))
+
 ## [it-buffer-stream-v3.0.1](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.0...it-buffer-stream-v3.0.1) (2023-03-02)
 
 
