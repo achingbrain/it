@@ -140,7 +140,7 @@
   "devDependencies": {
     "aegir": "^38.1.7",
     "buffer": "^6.0.3",
-    "it-all": "^2.0.0",
+    "it-all": "^3.0.0",
     "uint8arrays": "^4.0.2"
   }
 }
