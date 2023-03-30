@@ -1,6 +1,6 @@
 {
   "name": "browser-readablestream-to-it",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Turns a browser readble stream into an async iterator",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
