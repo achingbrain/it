@@ -1,6 +1,6 @@
 {
   "name": "it-length",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Counts the number of items in an async iterable",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
