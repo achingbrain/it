@@ -34,13 +34,13 @@ import split from 'it-split'
 
 const encoder = new TextEncoder()
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [
   encoder.encode('hello\nwor'),
   encoder.encode('ld')
 ]
 
-const arr = await all(split(values))
+const arr = all(split(values))
 
 console.info(arr) // [encoder.encode('hello'), encoder.encode('world')]
 ```
@@ -55,11 +55,30 @@ const values = [
 ]
 const delimiter = Uint8Array.from([1, 2])
 
-const arr = await all(split(values, {
+const arr = all(split(values, {
   delimiter
 }))
 
 console.info(arr) // [ Buffer.from([0]), Buffer.from([3, 0]), Buffer.from([3, 1]) ]
+```
+
+Async sources must be awaited:
+
+```javascript
+import split from 'it-split'
+
+const encoder = new TextEncoder()
+
+const values = async function * () {
+  yield * [
+    encoder.encode('hello\nwor'),
+    encoder.encode('ld')
+  ]
+}
+
+const arr = await all(split(values()))
+
+console.info(arr) // [encoder.encode('hello'), encoder.encode('world')]
 ```
 
 ## License
