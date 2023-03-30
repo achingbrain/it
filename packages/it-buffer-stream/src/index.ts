@@ -3,7 +3,7 @@ import randomBytes from 'iso-random-stream/src/random.js'
 export interface BufferStreamOptions {
   chunkSize?: number
   collector?: (arr: Uint8Array) => void
-  generator?: (lenght: number) => Uint8Array | Promise<Uint8Array>
+  generator?: (length: number) => Uint8Array | Promise<Uint8Array>
 }
 
 const defaultOptions: Required<BufferStreamOptions> = {
