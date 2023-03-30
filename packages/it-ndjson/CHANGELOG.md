@@ -1,3 +1,15 @@
+## [it-ndjson-v1.0.2](https://github.com/achingbrain/it/compare/it-ndjson-v1.0.1...it-ndjson-v1.0.2) (2023-03-30)
+
+
+### Trivial Changes
+
+* update project config, fix broken badges ([#53](https://github.com/achingbrain/it/issues/53)) ([e56c6ae](https://github.com/achingbrain/it/commit/e56c6ae9a0a766b5eab77040e92b2e034ce52d2e))
+
+
+### Dependencies
+
+* update sibling dependencies ([8b60209](https://github.com/achingbrain/it/commit/8b60209d429e282f8d5e5218ee2019ae7153585b))
+
 ## [it-ndjson-v1.0.1](https://github.com/achingbrain/it/compare/it-ndjson-v1.0.0...it-ndjson-v1.0.1) (2023-03-02)
 
 
