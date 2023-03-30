@@ -4,27 +4,51 @@ export interface SplitOptions {
   delimiter?: Uint8Array
 }
 
+function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
+  return thing[Symbol.asyncIterator] != null
+}
+
 /**
  * Splits Uint8Arrays emitted by an (async) iterable by a delimiter
  */
-export default async function * split (source: AsyncIterable<Uint8Array> | Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> {
+function split (source: Iterable<Uint8Array>, options?: SplitOptions): Generator<Uint8Array, void, undefined>
+function split (source: AsyncIterable<Uint8Array>, options?: SplitOptions): AsyncGenerator<Uint8Array, void, undefined>
+function split (source: AsyncIterable<Uint8Array> | Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> | Generator<Uint8Array, void, undefined> {
   const bl = new Uint8ArrayList()
   const delimiter = options.delimiter ?? new TextEncoder().encode('\n')
 
-  for await (const buf of source) {
-    bl.append(buf)
+  if (isAsyncIterable(source)) {
+    return (async function * () {
+      for await (const buf of source) {
+        bl.append(buf)
+
+        yield * yieldUntilEnd(bl, delimiter)
+      }
+
+      yield * yieldUntilEnd(bl, delimiter)
+
+      if (bl.length > 0) {
+        yield bl.slice()
+      }
+    })()
+  }
+
+  return (function * () {
+    for (const buf of source) {
+      bl.append(buf)
+
+      yield * yieldUntilEnd(bl, delimiter)
+    }
 
     yield * yieldUntilEnd(bl, delimiter)
-  }
 
-  yield * yieldUntilEnd(bl, delimiter)
-
-  if (bl.length > 0) {
-    yield bl.slice()
-  }
+    if (bl.length > 0) {
+      yield bl.slice()
+    }
+  })()
 }
 
-async function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): AsyncGenerator<Uint8Array, void, undefined> {
+function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): Generator<Uint8Array, void, undefined> {
   let index = bl.indexOf(delimiter)
 
   while (index !== -1) {
@@ -35,3 +59,5 @@ async function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): Asyn
     index = bl.indexOf(delimiter)
   }
 }
+
+export default split

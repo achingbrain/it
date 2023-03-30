@@ -32,12 +32,26 @@ Loading this module through a script tag will make it's exports available as `It
 ```javascript
 import map from 'it-map'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const result = await map(values, (val) => val++)
+const result = map(values, (val) => val++)
 
-console.info(result) // 15
+console.info(result) // [1, 2, 3, 4, 5]
+```
+
+Async sources and transforms must be awaited:
+
+```javascript
+import map from 'it-map'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const result = await map(values(), async (val) => val++)
+
+console.info(result) // [1, 2, 3, 4, 5]
 ```
 
 ## License

@@ -34,10 +34,24 @@ N.b. will consume the iterable
 ```javascript
 import length from 'it-length'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const res = await length(values)
+const res = length(values)
+
+console.info(res) // 5
+```
+
+Async sources must be awaited:
+
+```javascript
+import length from 'it-length'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const res = await length(values())
 
 console.info(res) // 5
 ```

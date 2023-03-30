@@ -34,10 +34,31 @@ Lets you look at the contents of an async iterator and decide what to do
 ```javascript
 import peekable from 'it-peekable'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
 const it = peekable(value)
+
+const first = it.peek()
+
+console.info(first) // 0
+
+it.push(first)
+
+console.info([...it])
+// [ 0, 1, 2, 3, 4 ]
+```
+
+Async sources must be awaited:
+
+```javascript
+import peekable from 'it-peekable'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const it = peekable(values())
 
 const first = await it.peek()
 
@@ -45,7 +66,7 @@ console.info(first) // 0
 
 it.push(first)
 
-console.info([...it])
+console.info(await all(it))
 // [ 0, 1, 2, 3, 4 ]
 ```
 

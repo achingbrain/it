@@ -39,7 +39,23 @@ import all from 'it-all'
 const values = [[0, 1, 2], [3], [4]]
 const batchSize = 2
 
-const result = await all(batch(values, batchSize))
+const result = all(batch(values, batchSize))
+
+console.info(result) // [0, 1], [2, 3], [4]
+```
+
+Async sources must be awaited:
+
+```javascript
+import batch from 'it-flat-batch'
+import all from 'it-all'
+
+const values = async function * () {
+  yield * [[0, 1, 2], [3], [4]]
+}
+const batchSize = 2
+
+const result = await all(batch(values(), batchSize))
 
 console.info(result) // [0, 1], [2, 3], [4]
 ```

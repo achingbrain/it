@@ -35,12 +35,28 @@ For when you need a one-liner to collect iterable values.
 import each from 'it-foreach'
 import drain from 'it-drain'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
 // prints 0, 1, 2, 3, 4
-const arr = await drain(
+const arr = drain(
   each(values, console.info)
+)
+```
+
+Async sources and callbacks must be awaited:
+
+```javascript
+import each from 'it-foreach'
+import drain from 'it-drain'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+// prints 0, 1, 2, 3, 4
+const arr = await drain(
+  each(values(), console.info)
 )
 ```
 

@@ -1,12 +1,32 @@
+function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
+  return thing[Symbol.asyncIterator] != null
+}
+
 /**
  * Consumes the passed iterator and returns the number of items it contained
  */
-export default async function length (iterator: AsyncIterable<unknown> | Iterable<unknown>): Promise<number> {
-  let count = 0
+function length (source: Iterable<unknown>): number
+function length (source: AsyncIterable<unknown>): Promise<number>
+function length (source: AsyncIterable<unknown> | Iterable<unknown>): Promise<number> | number {
+  if (isAsyncIterable(source)) {
+    return (async () => {
+      let count = 0
 
-  for await (const _ of iterator) { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
-    count++
+      for await (const _ of source) { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
+        count++
+      }
+
+      return count
+    })()
+  } else {
+    let count = 0
+
+    for (const _ of source) { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
+      count++
+    }
+
+    return count
   }
-
-  return count
 }
+
+export default length

@@ -35,10 +35,25 @@ For when you only want a few values out of an iterable.
 import take from 'it-take'
 import all from 'it-all'
 
-// This can also be an iterator, async iterator, generator, etc
+// This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const arr = await all(take(values, 2))
+const arr = all(take(values, 2))
+
+console.info(arr) // 0, 1
+```
+
+Async sources must be awaited:
+
+```javascript
+import take from 'it-take'
+import all from 'it-all'
+
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const arr = await all(take(values(), 2))
 
 console.info(arr) // 0, 1
 ```

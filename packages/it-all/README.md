@@ -34,10 +34,24 @@ For when you need a one-liner to collect iterable values.
 ```javascript
 import all from 'it-all'
 
-// This can also be an iterator, async iterator, generator, etc
-const values = [0, 1, 2, 3, 4]
+// This can also be an iterator, etc
+const values = function * () {
+  yield * [0, 1, 2, 3, 4]
+}
 
-const arr = await all(values)
+const arr = all(values)
+
+console.info(arr) // 0, 1, 2, 3, 4
+```
+
+Async sources must be awaited:
+
+```javascript
+const values = async function * () {
+  yield * [0, 1, 2, 3, 4]
+}
+
+const arr = await all(values())
 
 console.info(arr) // 0, 1, 2, 3, 4
 ```

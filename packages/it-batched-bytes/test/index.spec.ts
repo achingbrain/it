@@ -5,7 +5,7 @@ import { expect } from 'aegir/chai'
 import all from 'it-all'
 
 describe('it-batched-bytes', () => {
-  it('should batch up entries', async () => {
+  it('should batch up entries', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -14,12 +14,30 @@ describe('it-batched-bytes', () => {
       Uint8Array.of(4)
     ]
     const batchSize = 2
-    const res = await all(batch(values, { size: batchSize }))
+    const gen = batch(values, { size: batchSize })
+    expect(gen[Symbol.iterator]).to.be.ok()
 
+    const res = all(gen)
     expect(res).to.deep.equal([Uint8Array.of(0, 1), Uint8Array.of(2, 3), Uint8Array.of(4)])
   })
 
-  it('should batch up entries without batch size', async () => {
+  it('should batch up an async iterator of entries', async () => {
+    const values = async function * (): AsyncGenerator<Uint8Array> {
+      yield Uint8Array.of(0)
+      yield Uint8Array.of(1)
+      yield Uint8Array.of(2)
+      yield Uint8Array.of(3)
+      yield Uint8Array.of(4)
+    }
+    const batchSize = 2
+    const gen = batch(values(), { size: batchSize })
+    expect(gen[Symbol.asyncIterator]).to.be.ok()
+
+    const res = await all(gen)
+    expect(res).to.deep.equal([Uint8Array.of(0, 1), Uint8Array.of(2, 3), Uint8Array.of(4)])
+  })
+
+  it('should batch up entries without batch size', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -27,12 +45,12 @@ describe('it-batched-bytes', () => {
       Uint8Array.of(3),
       Uint8Array.of(4)
     ]
-    const res = await all(batch(values))
+    const res = all(batch(values))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1, 2, 3, 4)])
   })
 
-  it('should batch up entries with negative batch size', async () => {
+  it('should batch up entries with negative batch size', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -41,12 +59,12 @@ describe('it-batched-bytes', () => {
       Uint8Array.of(4)
     ]
     const batchSize = -1
-    const res = await all(batch(values, { size: batchSize }))
+    const res = all(batch(values, { size: batchSize }))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1, 2, 3, 4)])
   })
 
-  it('should batch up entries with zero batch size', async () => {
+  it('should batch up entries with zero batch size', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -55,12 +73,12 @@ describe('it-batched-bytes', () => {
       Uint8Array.of(4)
     ]
     const batchSize = 0
-    const res = await all(batch(values, { size: batchSize }))
+    const res = all(batch(values, { size: batchSize }))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1, 2, 3, 4)])
   })
 
-  it('should batch up entries with string batch size', async () => {
+  it('should batch up entries with string batch size', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -70,12 +88,12 @@ describe('it-batched-bytes', () => {
     ]
     const batchSize = '2'
     // @ts-expect-error batchSize type is incorrect
-    const res = await all(batch(values, { size: batchSize }))
+    const res = all(batch(values, { size: batchSize }))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1), Uint8Array.of(2, 3), Uint8Array.of(4)])
   })
 
-  it('should batch up entries with non-integer batch size', async () => {
+  it('should throw when batching up entries with non-integer batch size', () => {
     const values = [
       Uint8Array.of(0),
       Uint8Array.of(1),
@@ -84,17 +102,22 @@ describe('it-batched-bytes', () => {
       Uint8Array.of(4)
     ]
     const batchSize = 2.5
-    const res = await all(batch(values, { size: batchSize }))
 
-    expect(res).to.deep.equal([Uint8Array.of(0, 1, 2), Uint8Array.of(3, 4)])
+    expect(() => all(batch(values, { size: batchSize }))).to.throw('Batch size must be an integer')
   })
 
   it('should batch up values that need serializing', async () => {
-    const values = [0, 1, 2, 3, 4]
-    const batchSize = 2.5
-    const res = await all(batch(values, {
+    const values = [
+      Uint8Array.of(0),
+      Uint8Array.of(1),
+      Uint8Array.of(2),
+      Uint8Array.of(3),
+      Uint8Array.of(4)
+    ]
+    const batchSize = 3
+    const res = all(batch(values, {
       size: batchSize,
-      serialize: (obj, list) => { list.append(Uint8Array.of(obj)) }
+      serialize: (obj, list) => { list.append(obj) }
     }))
 
     expect(res).to.deep.equal([Uint8Array.of(0, 1, 2), Uint8Array.of(3, 4)])
