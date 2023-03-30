@@ -135,7 +135,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-batch": "^2.0.0"
+    "it-batch": "^3.0.0"
   },
   "devDependencies": {
     "aegir": "^38.1.7",
