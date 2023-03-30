@@ -138,6 +138,6 @@
     "aegir": "^38.1.7"
   },
   "dependencies": {
-    "it-peekable": "^2.0.0"
+    "it-peekable": "^3.0.0"
   }
 }

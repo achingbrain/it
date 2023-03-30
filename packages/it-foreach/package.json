@@ -139,6 +139,6 @@
     "it-all": "^3.0.0"
   },
   "dependencies": {
-    "it-peekable": "^2.0.0"
+    "it-peekable": "^3.0.0"
   }
 }
