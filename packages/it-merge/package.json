@@ -1,6 +1,6 @@
 {
   "name": "it-merge",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Treat one or more iterables as a single iterable",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
