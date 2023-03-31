@@ -44,6 +44,8 @@ function map <I, O> (source: AsyncIterable<I> | Iterable<I>, func: (val: I) => O
   const fn = func as (val: I) => O
 
   return (function * () {
+    yield res as O
+
     for (const val of source) {
       yield fn(val)
     }

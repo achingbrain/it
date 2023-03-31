@@ -49,6 +49,10 @@ function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boo
   const func = fn as (val: T) => boolean
 
   return (function * () {
+    if (res === true) {
+      yield value
+    }
+
     for (const entry of source) {
       if (func(entry)) {
         yield entry

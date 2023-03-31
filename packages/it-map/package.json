@@ -135,7 +135,8 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^38.1.7"
+    "aegir": "^38.1.7",
+    "it-all": "^3.0.0"
   },
   "dependencies": {
     "it-peekable": "^3.0.0"

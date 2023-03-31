@@ -18,6 +18,13 @@ describe('it-filter', () => {
     expect(res).to.deep.equal([3, 4])
   })
 
+  it('should filter all values less than 2', async () => {
+    const res = all(filter(values(), val => val < 2))
+
+    expect(res[Symbol.iterator]).to.be.ok()
+    expect(res).to.deep.equal([0, 1])
+  })
+
   it('should filter all values greater than 2 with a promise', () => {
     const res = all(filter(values(), val => val > 2))
 
