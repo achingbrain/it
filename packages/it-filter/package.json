@@ -134,6 +134,9 @@
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
     "release": "aegir release"
   },
+  "dependencies": {
+    "it-peekable": "^3.0.0"
+  },
   "devDependencies": {
     "aegir": "^38.1.7",
     "it-all": "^3.0.0"
