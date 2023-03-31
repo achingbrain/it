@@ -1,3 +1,10 @@
+## [it-sort-v3.0.1](https://github.com/achingbrain/it/compare/it-sort-v3.0.0...it-sort-v3.0.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* allow Iterable | AsyncIterable union input ([#59](https://github.com/achingbrain/it/issues/59)) ([80ec2ac](https://github.com/achingbrain/it/commit/80ec2ace4f64b6291b39cb51bc5ebe2cedba7152))
+
 ## [it-sort-v3.0.0](https://github.com/achingbrain/it/compare/it-sort-v2.0.1...it-sort-v3.0.0) (2023-03-30)
 
 
