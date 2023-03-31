@@ -7,8 +7,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * return `undefined`
  */
 function last <T> (source: Iterable<T>): T | undefined
-function last <T> (source: AsyncIterable<T>): Promise<T | undefined>
-function last <T> (source: AsyncIterable<T> | Iterable<T>): Promise<T | undefined> | T | undefined {
+function last <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T | undefined>
+function last <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T | undefined> | T | undefined {
   if (isAsyncIterable(source)) {
     return (async () => {
       let res

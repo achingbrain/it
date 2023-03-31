@@ -7,8 +7,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * case returns `undefined`
  */
 function first <T> (source: Iterable<T>): T | undefined
-function first <T> (source: AsyncIterable<T>): Promise<T | undefined>
-function first <T> (source: AsyncIterable<T> | Iterable<T>): Promise<T | undefined> | T | undefined {
+function first <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T | undefined>
+function first <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T | undefined> | T | undefined {
   if (isAsyncIterable(source)) {
     return (async () => {
       for await (const entry of source) { // eslint-disable-line no-unreachable-loop

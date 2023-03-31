@@ -12,8 +12,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Splits Uint8Arrays emitted by an (async) iterable by a delimiter
  */
 function split (source: Iterable<Uint8Array>, options?: SplitOptions): Generator<Uint8Array, void, undefined>
-function split (source: AsyncIterable<Uint8Array>, options?: SplitOptions): AsyncGenerator<Uint8Array, void, undefined>
-function split (source: AsyncIterable<Uint8Array> | Iterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> | Generator<Uint8Array, void, undefined> {
+function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options?: SplitOptions): AsyncGenerator<Uint8Array, void, undefined>
+function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> | Generator<Uint8Array, void, undefined> {
   const bl = new Uint8ArrayList()
   const delimiter = options.delimiter ?? new TextEncoder().encode('\n')
 

@@ -7,8 +7,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * returns an async iterable that emits those things in fixed-size batches
  */
 function batch <T> (source: Iterable<T[]>, batchSize?: number): Generator<T[], void, undefined>
-function batch <T> (source: AsyncIterable<T[]>, batchSize?: number): AsyncGenerator<T[], void, undefined>
-function batch <T> (source: AsyncIterable<T[]> | Iterable<T[]>, batchSize: number = 1): AsyncGenerator<T[], void, undefined> | Generator<T[], void, undefined> {
+function batch <T> (source: Iterable<T[]> | AsyncIterable<T[]>, batchSize?: number): AsyncGenerator<T[], void, undefined>
+function batch <T> (source: Iterable<T[]> | AsyncIterable<T[]>, batchSize: number = 1): AsyncGenerator<T[], void, undefined> | Generator<T[], void, undefined> {
   let size = parseInt(`${batchSize}`)
 
   if (isNaN(size) || size < 1) {

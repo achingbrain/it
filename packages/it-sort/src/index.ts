@@ -13,8 +13,8 @@ export interface CompareFunction<T> {
  * using the passed function and yields them
  */
 function sort <T> (source: Iterable<T>, sorter: CompareFunction<T>): Generator<T, void, undefined>
-function sort <T> (source: AsyncIterable<T>, sorter: CompareFunction<T>): AsyncGenerator<T, void, undefined>
-function sort <T> (source: AsyncIterable<T> | Iterable<T>, sorter: CompareFunction<T>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+function sort <T> (source: Iterable<T> | AsyncIterable<T>, sorter: CompareFunction<T>): AsyncGenerator<T, void, undefined>
+function sort <T> (source: Iterable<T> | AsyncIterable<T>, sorter: CompareFunction<T>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {
       const arr = await all(source)

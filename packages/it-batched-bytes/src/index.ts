@@ -35,7 +35,7 @@ export interface AsyncBatchedBytesOptions extends BatchedBytesOptions {
  * or the next event loop tick occurs, yield any bytes from the buffer.
  */
 function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList>, options?: BatchedBytesOptions): Iterable<Uint8Array>
-function batchedBytes (source: AsyncIterable<Uint8Array | Uint8ArrayList>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array>
+function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array>
 function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options: AsyncBatchedBytesOptions = {}): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
   if (isAsyncIterable(source)) {
     return (async function * () {

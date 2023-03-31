@@ -9,8 +9,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  */
 function forEach <T> (source: Iterable<T>, fn: (thing: T) => Promise<void>): AsyncGenerator<T, void, undefined>
 function forEach <T> (source: Iterable<T>, fn: (thing: T) => void): Generator<T, void, undefined>
-function forEach <T> (source: AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined>
-function forEach <T> (source: AsyncIterable<T> | Iterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined>
+function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {
       for await (const thing of source) {
