@@ -10,7 +10,7 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  */
 function map <I, O> (source: Iterable<I>, func: (val: I) => Promise<O>): AsyncGenerator<O, void, undefined>
 function map <I, O> (source: Iterable<I>, func: (val: I) => O): Generator<O, void, undefined>
-function map <I, O> (source: AsyncIterable<I>, func: (val: I) => O | Promise<O>): AsyncGenerator<O, void, undefined>
+function map <I, O> (source: AsyncIterable<I> | Iterable<I>, func: (val: I) => O | Promise<O>): AsyncGenerator<O, void, undefined>
 function map <I, O> (source: AsyncIterable<I> | Iterable<I>, func: (val: I) => O | Promise<O>): AsyncGenerator<O, void, undefined> | Generator<O, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {

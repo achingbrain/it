@@ -6,8 +6,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Stop iteration after n items have been received
  */
 function take <T> (source: Iterable<T>, limit: number): Generator<T, void, undefined>
-function take <T> (source: AsyncIterable<T>, limit: number): AsyncGenerator<T, void, undefined>
-function take <T> (source: AsyncIterable<T> | Iterable<T>, limit: number): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+function take <T> (source: Iterable<T> | AsyncIterable<T>, limit: number): AsyncGenerator<T, void, undefined>
+function take <T> (source: Iterable<T> | AsyncIterable<T>, limit: number): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {
       let items = 0

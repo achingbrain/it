@@ -6,8 +6,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Collects all values from an (async) iterable and returns them as an array
  */
 function all <T> (source: Iterable<T>): T[]
-function all <T> (source: AsyncIterable<T>): Promise<T[]>
-function all <T> (source: AsyncIterable<T> | Iterable<T>): Promise<T[]> | T[] {
+function all <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T[]>
+function all <T> (source: Iterable<T> | AsyncIterable<T>): Promise<T[]> | T[] {
   if (isAsyncIterable(source)) {
     return (async () => {
       const arr = []

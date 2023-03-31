@@ -6,8 +6,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Reduces the values yielded by an (async) iterable
  */
 function reduce <T, V> (source: Iterable<T>, func: (acc: V, curr: T) => V, init: V): V
-function reduce <T, V> (source: AsyncIterable<T>, func: (acc: V, curr: T) => V, init: V): Promise<V>
-function reduce <T, V> (source: AsyncIterable<T> | Iterable<T>, func: (acc: V, curr: T) => V, init: V): Promise<V> | V {
+function reduce <T, V> (source: Iterable<T> | AsyncIterable<T>, func: (acc: V, curr: T) => V, init: V): Promise<V>
+function reduce <T, V> (source: Iterable<T> | AsyncIterable<T>, func: (acc: V, curr: T) => V, init: V): Promise<V> | V {
   if (isAsyncIterable(source)) {
     return (async function () {
       for await (const val of source) {

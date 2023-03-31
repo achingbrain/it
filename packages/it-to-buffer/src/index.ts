@@ -9,8 +9,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * into one buffer
  */
 function toBuffer (source: Iterable<Uint8Array>): Uint8Array
-function toBuffer (source: AsyncIterable<Uint8Array>): Promise<Uint8Array>
-function toBuffer (source: AsyncIterable<Uint8Array> | Iterable<Uint8Array>): Promise<Uint8Array> | Uint8Array {
+function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array>
+function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array> | Uint8Array {
   if (isAsyncIterable(source)) {
     return (async () => {
       let buffer = new Uint8Array(0)

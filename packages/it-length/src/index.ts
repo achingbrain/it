@@ -6,8 +6,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Consumes the passed iterator and returns the number of items it contained
  */
 function length (source: Iterable<unknown>): number
-function length (source: AsyncIterable<unknown>): Promise<number>
-function length (source: AsyncIterable<unknown> | Iterable<unknown>): Promise<number> | number {
+function length (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<number>
+function length (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<number> | number {
   if (isAsyncIterable(source)) {
     return (async () => {
       let count = 0

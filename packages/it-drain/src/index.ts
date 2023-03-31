@@ -7,8 +7,8 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * anything
  */
 function drain (source: Iterable<unknown>): void
-function drain (source: AsyncIterable<unknown>): Promise<void>
-function drain (source: AsyncIterable<unknown> | Iterable<unknown>): Promise<void> | void {
+function drain (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<void>
+function drain (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<void> | void {
   if (isAsyncIterable(source)) {
     return (async () => {
       for await (const _ of source) { } // eslint-disable-line no-unused-vars,no-empty,@typescript-eslint/no-unused-vars
