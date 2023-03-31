@@ -1,3 +1,14 @@
+## [it-filter-v3.0.0](https://github.com/achingbrain/it/compare/it-filter-v2.0.2...it-filter-v3.0.0) (2023-03-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* if you pass a synchronous iterator and a synchronous filter function it will return a synchronous generator in response
+
+### Bug Fixes
+
+* return iterators from synchronous sources ([#58](https://github.com/achingbrain/it/issues/58)) ([cdd84b4](https://github.com/achingbrain/it/commit/cdd84b4fd6ad746a2c11ecfbe176b628a541b619)), closes [#55](https://github.com/achingbrain/it/issues/55)
+
 ## [it-filter-v2.0.2](https://github.com/achingbrain/it/compare/it-filter-v2.0.1...it-filter-v2.0.2) (2023-03-30)
 
 
