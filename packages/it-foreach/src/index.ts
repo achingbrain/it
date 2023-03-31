@@ -44,7 +44,9 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
   const func = fn as (val: T) => void
 
   return (function * () {
-    for (const val of source) {
+    yield value
+
+    for (const val of peekable) {
       func(val)
       yield val
     }
