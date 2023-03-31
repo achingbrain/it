@@ -1,3 +1,10 @@
+## [it-to-buffer-v4.0.1](https://github.com/achingbrain/it/compare/it-to-buffer-v4.0.0...it-to-buffer-v4.0.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* allow Iterable | AsyncIterable union input ([#59](https://github.com/achingbrain/it/issues/59)) ([80ec2ac](https://github.com/achingbrain/it/commit/80ec2ace4f64b6291b39cb51bc5ebe2cedba7152))
+
 ## [it-to-buffer-v4.0.0](https://github.com/achingbrain/it/compare/it-to-buffer-v3.0.1...it-to-buffer-v4.0.0) (2023-03-30)
 
 
