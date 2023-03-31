@@ -53,7 +53,7 @@ function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boo
       yield value
     }
 
-    for (const entry of source) {
+    for (const entry of peekable) {
       if (func(entry)) {
         yield entry
       }
