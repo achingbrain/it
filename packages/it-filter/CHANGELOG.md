@@ -1,3 +1,10 @@
+## [it-filter-v3.0.1](https://github.com/achingbrain/it/compare/it-filter-v3.0.0...it-filter-v3.0.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* yield first mapped/filtered values ([#60](https://github.com/achingbrain/it/issues/60)) ([778a991](https://github.com/achingbrain/it/commit/778a9918b13dd5b8743f34f5cb0a9e256aa2a0b7))
+
 ## [it-filter-v3.0.0](https://github.com/achingbrain/it/compare/it-filter-v2.0.2...it-filter-v3.0.0) (2023-03-31)
 
 
