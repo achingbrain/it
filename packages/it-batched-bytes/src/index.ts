@@ -44,7 +44,7 @@ function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList>, options?: 
 function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array>
 function batchedBytes <T> (source: Iterable<T>, options?: BatchedObjectsOptions<T>): Iterable<Uint8Array>
 function batchedBytes <T> (source: Iterable<T> | AsyncIterable<T>, options?: AsyncBatchedObjectsOptions<T>): AsyncIterable<Uint8Array>
-function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | AsyncIterable<T>, options?: AsyncBatchedObjectsOptions<T>): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
+function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | AsyncIterable<T>, options?: Partial<AsyncBatchedObjectsOptions<T>>): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
   if (isAsyncIterable(source)) {
     return (async function * () {
       let buffer = new Uint8ArrayList()

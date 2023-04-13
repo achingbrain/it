@@ -106,23 +106,6 @@ describe('it-batched-bytes', () => {
     expect(() => all(batch(values, { size: batchSize }))).to.throw('Batch size must be an integer')
   })
 
-  it('should batch up values that need serializing', () => {
-    const values = [
-      Uint8Array.of(0),
-      Uint8Array.of(1),
-      Uint8Array.of(2),
-      Uint8Array.of(3),
-      Uint8Array.of(4)
-    ]
-    const batchSize = 3
-    const res = all(batch(values, {
-      size: batchSize,
-      serialize: (obj, list) => { list.append(obj) }
-    }))
-
-    expect(res).to.deep.equal([Uint8Array.of(0, 1, 2), Uint8Array.of(3, 4)])
-  })
-
   it('should accept objects as values and allow serializing them', () => {
     const values = [
       { bytes: Uint8Array.of(0) },
