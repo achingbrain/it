@@ -8,7 +8,7 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
 const DEFAULT_BATCH_SIZE = 1024 * 1024
 const DEFAULT_SERIALIZE = (buf: Uint8Array | Uint8ArrayList, list: Uint8ArrayList): void => { list.append(buf) }
 
-export interface BatchedBytesOptions {
+export interface BatchedBytesOptions<T> {
   /**
    * The minimum number of bytes that should be in a batch (default: 1MB)
    */
@@ -18,10 +18,10 @@ export interface BatchedBytesOptions {
    * If passed, this function should serialize the object and append the
    * result to the passed list
    */
-  serialize?: (object: Uint8Array | Uint8ArrayList, list: Uint8ArrayList) => void
+  serialize?: (object: T, list: Uint8ArrayList) => void
 }
 
-export interface AsyncBatchedBytesOptions extends BatchedBytesOptions {
+export interface AsyncBatchedBytesOptions<T> extends BatchedBytesOptions<T> {
   /**
    * If this amount of time passes, yield all the bytes in the batch even
    * if they are below `size` (default: 0 - e.g. on every tick)
@@ -34,9 +34,9 @@ export interface AsyncBatchedBytesOptions extends BatchedBytesOptions {
  * an internal buffer. Either once the buffer reaches the requested size
  * or the next event loop tick occurs, yield any bytes from the buffer.
  */
-function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList>, options?: BatchedBytesOptions): Iterable<Uint8Array>
-function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array>
-function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options: AsyncBatchedBytesOptions = {}): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
+function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T>, options?: BatchedBytesOptions<T>): Iterable<Uint8Array>
+function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | AsyncIterable<T>, options?: AsyncBatchedBytesOptions<T>): AsyncIterable<Uint8Array>
+function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | AsyncIterable<T>, options: AsyncBatchedBytesOptions<T> = {}): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
   if (isAsyncIterable(source)) {
     return (async function * () {
       let buffer = new Uint8ArrayList()
@@ -61,6 +61,7 @@ function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIter
           let timeout
 
           for await (const buf of source) {
+            // @ts-expect-error - if buf is not `Uint8Array | Uint8ArrayList` we cannot use the default serializer
             serialize(buf, buffer)
 
             if (buffer.byteLength >= size) {
@@ -110,6 +111,7 @@ function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIter
     const serialize = options.serialize ?? DEFAULT_SERIALIZE
 
     for (const buf of source) {
+      // @ts-expect-error - if buf is not `Uint8Array | Uint8ArrayList` we cannot use the default serializer
       serialize(buf, buffer)
 
       if (buffer.byteLength >= size) {
