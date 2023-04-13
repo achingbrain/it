@@ -1,3 +1,10 @@
+## [it-batched-bytes-v2.0.2](https://github.com/achingbrain/it/compare/it-batched-bytes-v2.0.1...it-batched-bytes-v2.0.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* allow object streams in it-batched-bytes ([#64](https://github.com/achingbrain/it/issues/64)) ([f2104b9](https://github.com/achingbrain/it/commit/f2104b97e9e10f56fca6675b7379ab9e542cf594))
+
 ## [it-batched-bytes-v2.0.1](https://github.com/achingbrain/it/compare/it-batched-bytes-v2.0.0...it-batched-bytes-v2.0.1) (2023-03-31)
 
 
