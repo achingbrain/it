@@ -1,5 +1,5 @@
-import { Uint8ArrayList } from 'uint8arraylist'
 import defer from 'p-defer'
+import { Uint8ArrayList } from 'uint8arraylist'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null

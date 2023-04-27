@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
-import map from '../src/index.js'
 import all from 'it-all'
+import map from '../src/index.js'
 
 async function * asyncGenerator (): AsyncGenerator<number> {
   yield 1

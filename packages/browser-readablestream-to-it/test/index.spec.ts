@@ -1,7 +1,7 @@
 /* eslint-env mocha, browser */
 
-import all from 'it-all'
 import { expect } from 'aegir/chai'
+import all from 'it-all'
 import toIt from '../src/index.js'
 
 describe('browser-readablestream-to-it', () => {

@@ -130,7 +130,6 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "@types/minimatch": "^5.1.2",
     "minimatch": "^9.0.0"
   },
   "devDependencies": {

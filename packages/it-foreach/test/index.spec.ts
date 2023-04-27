@@ -1,5 +1,5 @@
-import all from 'it-all'
 import { expect } from 'aegir/chai'
+import all from 'it-all'
 import forEach from '../src/index.js'
 
 describe('it-for-each', () => {

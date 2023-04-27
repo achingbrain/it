@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 
-import batch from '../src/index.js'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
+import batch from '../src/index.js'
 
 describe('it-batched-bytes', () => {
   it('should batch up entries', () => {
