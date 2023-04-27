@@ -1,3 +1,10 @@
+## [it-glob-v2.0.3](https://github.com/achingbrain/it/compare/it-glob-v2.0.2...it-glob-v2.0.3) (2023-04-27)
+
+
+### Dependencies
+
+* bump minimatch from 5.1.6 to 9.0.0 ([#63](https://github.com/achingbrain/it/issues/63)) ([dc0c089](https://github.com/achingbrain/it/commit/dc0c089de3d238d72ce44fcbaff328238a27beaa))
+
 ## [it-glob-v2.0.2](https://github.com/achingbrain/it/compare/it-glob-v2.0.1...it-glob-v2.0.2) (2023-03-30)
 
 
