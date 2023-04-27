@@ -134,7 +134,7 @@
     "minimatch": "^5.1.0"
   },
   "devDependencies": {
-    "aegir": "^38.1.7",
+    "aegir": "^39.0.1",
     "it-all": "^3.0.0"
   },
   "browser": {
