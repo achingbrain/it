@@ -1,9 +1,9 @@
 import fs from 'fs/promises'
 import path from 'path'
-import minimatch from 'minimatch'
-import type { IOptions } from 'minimatch'
+import { minimatch } from 'minimatch'
+import type { MinimatchOptions } from 'minimatch'
 
-export interface GlobOptions extends IOptions {
+export interface GlobOptions extends MinimatchOptions {
   /**
    * The current working directory
    */
