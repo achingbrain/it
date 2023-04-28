@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
-import all from 'it-all'
 import delay from 'delay'
+import all from 'it-all'
 import parallelBatch from '../src/index.js'
 
 describe('it-parallel-batch', () => {

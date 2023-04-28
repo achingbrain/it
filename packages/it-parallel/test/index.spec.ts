@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
-import all from 'it-all'
 import delay from 'delay'
+import all from 'it-all'
 import parallel from '../src/index.js'
 
 const createFn = (ms: number, result: number) => {
@@ -156,7 +156,7 @@ describe('it-parallel', () => {
         const value = values[index]
         index++
 
-        return await Promise.resolve({
+        return Promise.resolve({
           done: index === values.length,
           value
         })

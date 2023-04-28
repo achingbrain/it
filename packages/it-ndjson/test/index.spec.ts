@@ -1,7 +1,7 @@
-import { expect } from 'aegir/chai'
-import * as ndjson from '../src/index.js'
 import { Buffer } from 'buffer'
+import { expect } from 'aegir/chai'
 import all from 'it-all'
+import * as ndjson from '../src/index.js'
 
 async function * toAsyncIterator <T> (array: T[]): AsyncIterable<T> {
   for (let i = 0; i < array.length; i++) {

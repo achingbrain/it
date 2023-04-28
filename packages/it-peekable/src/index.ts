@@ -18,16 +18,16 @@ type AsyncPeekable <T> = AsyncIterable<T> & AsyncPeek<T> & Push<T> & AsyncIterat
 function peekable <T> (iterable: Iterable<T>): Peekable<T>
 function peekable <T> (iterable: AsyncIterable<T>): AsyncPeekable<T>
 function peekable <T> (iterable: Iterable<T> | AsyncIterable<T>): Peekable<T> | AsyncPeekable<T> {
-  // @ts-expect-error
+  // @ts-expect-error can't use Symbol.asyncIterator to index iterable since it might be Iterable
   const [iterator, symbol] = iterable[Symbol.asyncIterator] != null
-    // @ts-expect-error
+    // @ts-expect-error can't use Symbol.asyncIterator to index iterable since it might be Iterable
     ? [iterable[Symbol.asyncIterator](), Symbol.asyncIterator]
-    // @ts-expect-error
+    // @ts-expect-error can't use Symbol.iterator to index iterable since it might be AsyncIterable
     : [iterable[Symbol.iterator](), Symbol.iterator]
 
   const queue: any[] = []
 
-  // @ts-expect-error
+  // @ts-expect-error can't use symbol to index peekable
   return {
     peek: () => {
       return iterator.next()

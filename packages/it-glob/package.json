@@ -130,11 +130,10 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "@types/minimatch": "^5.1.2",
     "minimatch": "^9.0.0"
   },
   "devDependencies": {
-    "aegir": "^38.1.7",
+    "aegir": "^39.0.2",
     "it-all": "^3.0.0"
   },
   "browser": {
