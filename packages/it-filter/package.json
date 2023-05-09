@@ -1,6 +1,6 @@
 {
   "name": "it-filter",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Filters the passed iterable by using the filter function",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
