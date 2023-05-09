@@ -1,3 +1,10 @@
+## [it-ndjson-v1.0.3](https://github.com/achingbrain/it/compare/it-ndjson-v1.0.2...it-ndjson-v1.0.3) (2023-05-09)
+
+
+### Dependencies
+
+* **dev:** bump aegir from 38.1.8 to 39.0.2 ([#66](https://github.com/achingbrain/it/issues/66)) ([a92bb16](https://github.com/achingbrain/it/commit/a92bb1690e8d584292e37c878d40f437036721a7))
+
 ## [it-ndjson-v1.0.2](https://github.com/achingbrain/it/compare/it-ndjson-v1.0.1...it-ndjson-v1.0.2) (2023-03-30)
 
 
