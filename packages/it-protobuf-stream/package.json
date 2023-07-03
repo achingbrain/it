@@ -134,7 +134,7 @@
     "generate": "protons test/fixtures/*.proto"
   },
   "dependencies": {
-    "it-length-prefixed-stream": "~0.0.0",
+    "it-length-prefixed-stream": "^1.0.0",
     "it-stream-types": "^2.0.1",
     "protons-runtime": "^5.0.0",
     "uint8-varint": "^1.0.6",
