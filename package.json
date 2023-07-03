@@ -11,10 +11,6 @@
   "bugs": {
     "url": "https://github.com/achingbrain/it/issues"
   },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
-  },
   "private": true,
   "scripts": {
     "reset": "aegir run clean && aegir clean ./node_modules ./package-lock.json packages/*/node_modules packages/*/package-lock.json packages/*/dist",
@@ -28,6 +24,10 @@
   },
   "devDependencies": {
     "aegir": "^39.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
   },
   "workspaces": [
     "packages/*"
