@@ -151,7 +151,7 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
         write.push(data.subarray())
       }
 
-      await write.onEmpty(options?.signal)
+      await write.onEmpty(options)
     },
     unwrap: () => {
       const originalStream = duplex.source
