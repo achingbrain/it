@@ -131,7 +131,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-byte-stream": "~0.0.0",
+    "it-byte-stream": "^1.0.0",
     "it-length-prefixed": "^9.0.1",
     "it-stream-types": "^2.0.1",
     "uint8-varint": "^1.0.6",
