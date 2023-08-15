@@ -66,7 +66,7 @@ describe('it-protobuf-stream', () => {
     const w = pbStream({
       source: (async function * () {
         yield uint8ArrayConcat([
-          unsigned.encode(messageBuf.byteLength),
+          unsigned.encode(messageBuf.byteLength, new Uint8Array(unsigned.encodingLength(messageBuf.byteLength))),
           messageBuf,
           extraData
         ])
