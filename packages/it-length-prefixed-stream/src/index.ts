@@ -21,7 +21,7 @@
 
 import { byteStream } from 'it-byte-stream'
 import * as lp from 'it-length-prefixed'
-import { unsigned } from 'uint8-varint'
+import * as unsigned from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
 
