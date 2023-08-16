@@ -1,4 +1,3 @@
-
 interface SourceExt {
   _cancelled: boolean
 }

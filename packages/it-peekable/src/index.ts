@@ -1,4 +1,3 @@
-
 interface Peek <T> {
   peek: () => IteratorResult<T, undefined>
 }
