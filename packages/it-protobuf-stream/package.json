@@ -137,7 +137,6 @@
     "it-length-prefixed-stream": "^1.0.0",
     "it-stream-types": "^2.0.1",
     "protons-runtime": "^5.0.0",
-    "uint8-varint": "^1.0.6",
     "uint8arraylist": "^2.4.1"
   },
   "devDependencies": {
@@ -146,6 +145,7 @@
     "it-pair": "^2.0.2",
     "it-to-buffer": "^4.0.0",
     "protons": "^7.0.2",
+    "uint8-varint": "^2.0.1",
     "uint8arrays": "^4.0.2"
   },
   "engines": {

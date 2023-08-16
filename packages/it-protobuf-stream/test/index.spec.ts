@@ -2,7 +2,7 @@ import { expect } from 'aegir/chai'
 import map from 'it-map'
 import { pair } from 'it-pair'
 import toBuffer from 'it-to-buffer'
-import { unsigned } from 'uint8-varint'
+import * as varint from 'uint8-varint'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { pbStream } from '../src/index.js'
 import { TestMessage } from './fixtures/test-message.js'
@@ -66,7 +66,7 @@ describe('it-protobuf-stream', () => {
     const w = pbStream({
       source: (async function * () {
         yield uint8ArrayConcat([
-          unsigned.encode(messageBuf.byteLength),
+          varint.encode(messageBuf.byteLength),
           messageBuf,
           extraData
         ])
@@ -90,7 +90,7 @@ describe('it-protobuf-stream', () => {
 
     const w = pbStream({
       source: (async function * () {
-        yield unsigned.encode(messageBuf.byteLength)
+        yield varint.encode(messageBuf.byteLength)
         yield messageBuf
         yield extraData
       }()),
