@@ -1,6 +1,6 @@
 {
   "name": "it-split",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Splits Uint8Arrays emitted by an (async) iterable by a delimiter",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
