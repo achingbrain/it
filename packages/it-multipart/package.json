@@ -127,7 +127,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "formidable": "^2.0.1",
+    "formidable": "^3.5.0",
     "it-pushable": "^3.2.0"
   },
   "devDependencies": {
