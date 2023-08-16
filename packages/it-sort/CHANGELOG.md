@@ -1,3 +1,10 @@
+## [it-sort-v3.0.3](https://github.com/achingbrain/it/compare/it-sort-v3.0.2...it-sort-v3.0.3) (2023-08-16)
+
+
+### Dependencies
+
+* **dev:** bump aegir from 39.0.13 to 40.0.11 ([#80](https://github.com/achingbrain/it/issues/80)) ([98e17ff](https://github.com/achingbrain/it/commit/98e17ff5f108fce177d98a56c201533a415623e4))
+
 ## [it-sort-v3.0.2](https://github.com/achingbrain/it/compare/it-sort-v3.0.1...it-sort-v3.0.2) (2023-05-09)
 
 
