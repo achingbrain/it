@@ -25,10 +25,6 @@
   "devDependencies": {
     "aegir": "^40.0.11"
   },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
-  },
   "workspaces": [
     "packages/*"
   ]

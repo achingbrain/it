@@ -147,9 +147,5 @@
     "protons": "^7.0.2",
     "uint8-varint": "^2.0.1",
     "uint8arrays": "^4.0.2"
-  },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
   }
 }
