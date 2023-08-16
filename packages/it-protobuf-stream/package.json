@@ -140,16 +140,12 @@
     "uint8arraylist": "^2.4.1"
   },
   "devDependencies": {
-    "aegir": "^39.0.2",
+    "aegir": "^40.0.11",
     "it-map": "^3.0.0",
     "it-pair": "^2.0.2",
     "it-to-buffer": "^4.0.0",
     "protons": "^7.0.2",
     "uint8-varint": "^2.0.1",
     "uint8arrays": "^4.0.2"
-  },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
   }
 }

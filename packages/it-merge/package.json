@@ -12,10 +12,6 @@
   "bugs": {
     "url": "https://github.com/achingbrain/it/issues"
   },
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
-  },
   "type": "module",
   "types": "./dist/src/index.d.ts",
   "files": [
@@ -135,10 +131,10 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-pushable": "^3.1.0"
+    "it-pushable": "^3.2.0"
   },
   "devDependencies": {
-    "aegir": "^39.0.2",
+    "aegir": "^40.0.11",
     "it-all": "^3.0.0"
   }
 }
