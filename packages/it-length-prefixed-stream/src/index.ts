@@ -21,7 +21,7 @@
 
 import { byteStream } from 'it-byte-stream'
 import * as lp from 'it-length-prefixed'
-import * as unsigned from 'uint8-varint'
+import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
 
@@ -66,7 +66,7 @@ export interface LengthPrefixedStreamOpts {
 }
 
 const defaultLengthDecoder: lp.LengthDecoderFunction = (buf) => {
-  return unsigned.decode(buf)
+  return varint.decode(buf)
 }
 defaultLengthDecoder.bytes = 0
 
