@@ -23,7 +23,7 @@
     "release": "aegir run release"
   },
   "devDependencies": {
-    "aegir": "^40.0.11"
+    "aegir": "^41.0.6"
   },
   "workspaces": [
     "packages/*"
