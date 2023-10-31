@@ -130,7 +130,7 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^40.0.11",
+    "aegir": "^41.1.4",
     "it-all": "^3.0.0"
   }
 }
