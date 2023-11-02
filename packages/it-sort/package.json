@@ -134,6 +134,6 @@
     "it-all": "^3.0.0"
   },
   "devDependencies": {
-    "aegir": "^40.0.11"
+    "aegir": "^41.1.6"
   }
 }
