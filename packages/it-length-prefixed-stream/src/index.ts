@@ -50,6 +50,11 @@ export interface LengthPrefixedStream <Stream = unknown> {
   write: (input: Uint8Array | Uint8ArrayList, options?: AbortOptions) => Promise<void>
 
   /**
+   * Write passed list of bytes, prefix by their individual lengths to the stream as a single write
+   */
+  writeV: (input: Array<Uint8Array | Uint8ArrayList>, options?: AbortOptions) => Promise<void>
+
+  /**
    * Returns the underlying stream
    */
   unwrap: () => Stream
@@ -111,6 +116,14 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
     write: async (data, options?: AbortOptions) => {
       // encode, write
       await bytes.write(lp.encode.single(data, opts), options)
+    },
+    writeV: async (data, options?: AbortOptions) => {
+      const list = new Uint8ArrayList(
+        ...data.map(buf => lp.encode.single(buf, opts))
+      )
+
+      // encode, write
+      await bytes.write(list, options)
     },
     unwrap: () => {
       return bytes.unwrap()

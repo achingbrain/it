@@ -58,9 +58,14 @@ export interface ProtobufStream <Stream = unknown> {
   read: <T>(proto: { decode: Decoder<T> }, options?: AbortOptions) => Promise<T>
 
   /**
-   * Encode the passed object as a protobuf message and write it's length-prefixed bytes tot he stream
+   * Encode the passed object as a protobuf message and write it's length-prefixed bytes to the stream
    */
   write: <T>(data: T, proto: { encode: Encoder<T> }, options?: AbortOptions) => Promise<void>
+
+  /**
+   * Encode the passed objects as protobuf messages and write their length-prefixed bytes to the stream as a single write
+   */
+  writeV: <T>(input: T[], proto: { encode: Encoder<T> }, options?: AbortOptions) => Promise<void>
 
   /**
    * Returns an object with read/write methods for operating on one specific type of protobuf message
@@ -88,6 +93,11 @@ export interface MessageStream <T, S = unknown> {
   write: (d: T, options?: AbortOptions) => Promise<void>
 
   /**
+   * Write several messages to the stream
+   */
+  writeV: (d: T[], options?: AbortOptions) => Promise<void>
+
+  /**
    * Unwrap the underlying protobuf stream
    */
   unwrap: () => ProtobufStream<S>
@@ -107,14 +117,19 @@ export function pbStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
 
       return proto.decode(value)
     },
-    write: async (data, proto, options?: AbortOptions) => {
+    write: async (message, proto, options?: AbortOptions) => {
       // encode, writeLP
-      await lp.write(proto.encode(data), options)
+      await lp.write(proto.encode(message), options)
+    },
+    writeV: async (messages, proto, options?: AbortOptions) => {
+      // encode, writeLP
+      await lp.writeV(messages.map(message => proto.encode(message)), options)
     },
     pb: (proto) => {
       return {
         read: async (options) => W.read(proto, options),
         write: async (d, options) => W.write(d, proto, options),
+        writeV: async (d, options) => W.writeV(d, proto, options),
         unwrap: () => W
       }
     },
