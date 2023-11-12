@@ -1,3 +1,10 @@
+## [it-parallel-batch-v3.0.3](https://github.com/achingbrain/it/compare/it-parallel-batch-v3.0.2...it-parallel-batch-v3.0.3) (2023-11-12)
+
+
+### Dependencies
+
+* **dev:** bump delay from 5.0.0 to 6.0.0 ([#68](https://github.com/achingbrain/it/issues/68)) ([cf8dc98](https://github.com/achingbrain/it/commit/cf8dc98bc22c9baf22a3620d08c04db6b3f99f6a))
+
 ## [it-parallel-batch-v3.0.2](https://github.com/achingbrain/it/compare/it-parallel-batch-v3.0.1...it-parallel-batch-v3.0.2) (2023-08-16)
 
 
