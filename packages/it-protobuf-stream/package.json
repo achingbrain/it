@@ -1,6 +1,6 @@
 {
   "name": "it-protobuf-stream",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Read and write protobuf messages over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
