@@ -1,3 +1,10 @@
+## [it-foreach-v2.0.5](https://github.com/achingbrain/it/compare/it-foreach-v2.0.4...it-foreach-v2.0.5) (2023-11-12)
+
+
+### Bug Fixes
+
+* it-foreach should only await thenables ([#100](https://github.com/achingbrain/it/issues/100)) ([265af59](https://github.com/achingbrain/it/commit/265af59dc1c4e873dfb39c5de2af347efa73c5da))
+
 ## [it-foreach-v2.0.4](https://github.com/achingbrain/it/compare/it-foreach-v2.0.3...it-foreach-v2.0.4) (2023-08-16)
 
 
