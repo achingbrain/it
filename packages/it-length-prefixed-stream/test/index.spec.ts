@@ -166,5 +166,20 @@ Object.keys(tests).forEach(key => {
       const res = await lp.read()
       expect(res.subarray()).to.equalBytes(data.subarray())
     })
+
+    it('lp writeV', async () => {
+      const data = test.from('hellllllllloooo')
+      const input = new Uint8ArrayList(data, data, data)
+
+      const p = lp.writeV([data, data, data])
+      const res = new Uint8ArrayList(
+        await lp.read(),
+        await lp.read(),
+        await lp.read()
+      )
+      expect(res.subarray()).to.equalBytes(input.subarray())
+
+      await expect(p).to.eventually.be.undefined()
+    })
   })
 })
