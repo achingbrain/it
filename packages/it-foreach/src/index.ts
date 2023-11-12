@@ -4,6 +4,10 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }
 
+function isPromise <T = unknown> (thing: any): thing is Promise<T> {
+  return thing?.then != null
+}
+
 /**
  * Invokes the passed function for each item in an iterable
  */
@@ -13,9 +17,14 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
 function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {
-      for await (const thing of source) {
-        await fn(thing)
-        yield thing
+      for await (const val of source) {
+        const res = fn(val)
+
+        if (isPromise(res)) {
+          await res
+        }
+
+        yield val
       }
     })()
   }
@@ -35,7 +44,12 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
       yield value
 
       for await (const val of peekable) {
-        await fn(val)
+        const res = fn(val)
+
+        if (isPromise(res)) {
+          await res
+        }
+
         yield val
       }
     })()
