@@ -1,3 +1,29 @@
+/**
+ * @packageDocumentation
+ *
+ * Like [`glob`](https://npmjs.com/package/glob) but async iterable.
+ *
+ * @example
+ *
+ * ```javascript
+ * import glob from 'it-glob'
+ *
+ * const options = {
+ *   cwd // defaults to process.cwd
+ *   absolute // return absolute paths, defaults to false
+ *   nodir // only yield file paths, skip directories
+ *
+ *   // all other options are passed to minimatch
+ * }
+ *
+ * for await (const path of glob('/path/to/file', '**\/*', options)) {
+ *  console.info(path)
+ * }
+ * ```
+ *
+ * See the [minimatch docs](https://www.npmjs.com/package/minimatch#options) for the full list of options.
+ */
+
 import fs from 'fs/promises'
 import path from 'path'
 import { minimatch } from 'minimatch'

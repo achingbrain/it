@@ -1,3 +1,36 @@
+/**
+ * @packageDocumentation
+ *
+ * Convert one value from an (async)iterator into another.
+ *
+ * @example
+ *
+ * ```javascript
+ * import map from 'it-map'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * const result = map(values, (val) => val++)
+ *
+ * console.info(result) // [1, 2, 3, 4, 5]
+ * ```
+ *
+ * Async sources and transforms must be awaited:
+ *
+ * ```javascript
+ * import map from 'it-map'
+ *
+ * const values = async function * () {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * const result = await map(values(), async (val) => val++)
+ *
+ * console.info(result) // [1, 2, 3, 4, 5]
+ * ```
+ */
+
 import peek from 'it-peekable'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {

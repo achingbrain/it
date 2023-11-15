@@ -1,26 +1,13 @@
-# it-glob <!-- omit in toc -->
-
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
 [![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
 
 > Async iterable filename pattern matcher
 
-## Table of contents <!-- omit in toc -->
-
-- [Install](#install)
-- [Usage](#usage)
-- [License](#license)
-- [Contribution](#contribution)
-
-## Install
-
-```console
-$ npm i it-glob
-```
+# About
 
 Like [`glob`](https://npmjs.com/package/glob) but async iterable.
 
-## Usage
+## Example
 
 ```javascript
 import glob from 'it-glob'
@@ -34,19 +21,25 @@ const options = {
 }
 
 for await (const path of glob('/path/to/file', '**/*', options)) {
-  console.info(path)
+ console.info(path)
 }
 ```
 
 See the [minimatch docs](https://www.npmjs.com/package/minimatch#options) for the full list of options.
 
-## License
+# Install
+
+```console
+$ npm i it-glob
+```
+
+# License
 
 Licensed under either of
 
 - Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
 - MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
-## Contribution
+# Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

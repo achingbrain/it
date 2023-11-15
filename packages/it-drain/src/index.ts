@@ -1,3 +1,32 @@
+/**
+ * @packageDocumentation
+ *
+ * Mostly useful for tests or when you want to be explicit about consuming an iterable without doing anything with any yielded values.
+ *
+ * @example
+ *
+ * ```javascript
+ * import drain from 'it-drain'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * drain(values)
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import drain from 'it-drain'
+ *
+ * const values = async function * {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * await drain(values())
+ * ```
+ */
+
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }

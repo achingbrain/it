@@ -1,7 +1,7 @@
 {
   "name": "it-parallel-batch",
   "version": "3.0.3",
-  "description": "Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results in the same order as the input",
+  "description": "Process (async)iterable values as functions with concurrency control",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-parallel-batch#readme",
@@ -29,6 +29,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },
@@ -134,7 +135,7 @@
     "it-batch": "^3.0.0"
   },
   "devDependencies": {
-    "aegir": "^40.0.11",
+    "aegir": "^41.1.9",
     "delay": "^6.0.0",
     "it-all": "^3.0.0"
   }

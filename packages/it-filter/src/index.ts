@@ -1,3 +1,42 @@
+/**
+ * @packageDocumentation
+ *
+ * Filter values out of an (async)iterable
+ *
+ * @example
+ *
+ * ```javascript
+ * import all from 'it-all'
+ * import filter from 'it-filter'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * const fn = val => val > 2 // Return boolean to keep item
+ *
+ * const arr = all(filter(values, fn))
+ *
+ * console.info(arr) // 3, 4
+ * ```
+ *
+ * Async sources and filter functions must be awaited:
+ *
+ * ```javascript
+ * import all from 'it-all'
+ * import filter from 'it-filter'
+ *
+ * const values = async function * () {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * const fn = async val => val > 2 // Return boolean or promise of boolean to keep item
+ *
+ * const arr = await all(filter(values, fn))
+ *
+ * console.info(arr) // 3, 4
+ * ```
+ */
+
 import peek from 'it-peekable'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {

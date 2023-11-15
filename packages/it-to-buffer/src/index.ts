@@ -1,3 +1,37 @@
+/**
+ * @packageDocumentation
+ *
+ * Collects all `Uint8Array` values from an (async)iterable and returns them as a single `Uint8Array`.
+ *
+ * @example
+ *
+ * ```javascript
+ * import toBuffer from 'it-to-buffer'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [Buffer.from([0, 1]), Buffer.from([2, 3])]
+ *
+ * const result = toBuffer(values)
+ *
+ * console.info(result) // Buffer[0, 1, 2, 3]
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import toBuffer from 'it-to-buffer'
+ *
+ * const values = async function * () {
+ *   yield Buffer.from([0, 1])
+ *   yield Buffer.from([2, 3])
+ * }
+ *
+ * const result = await toBuffer(values())
+ *
+ * console.info(result) // Buffer[0, 1, 2, 3]
+ * ```
+ */
+
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {

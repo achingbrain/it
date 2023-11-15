@@ -29,6 +29,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },
@@ -134,7 +135,7 @@
     "it-peekable": "^3.0.0"
   },
   "devDependencies": {
-    "aegir": "^40.0.11",
+    "aegir": "^41.1.9",
     "it-all": "^3.0.0"
   }
 }
