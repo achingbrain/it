@@ -1,3 +1,40 @@
+/**
+ * @packageDocumentation
+ *
+ * The final batch may be smaller than requested batch size.
+ *
+ * @example
+ *
+ * ```javascript
+ * import batch from 'it-flat-batch'
+ * import all from 'it-all'
+ *
+ * // This can also be an iterator, async iterator, generator, etc
+ * const values = [[0, 1, 2], [3], [4]]
+ * const batchSize = 2
+ *
+ * const result = all(batch(values, batchSize))
+ *
+ * console.info(result) // [0, 1], [2, 3], [4]
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import batch from 'it-flat-batch'
+ * import all from 'it-all'
+ *
+ * const values = async function * () {
+ *   yield * [[0, 1, 2], [3], [4]]
+ * }
+ * const batchSize = 2
+ *
+ * const result = await all(batch(values(), batchSize))
+ *
+ * console.info(result) // [0, 1], [2, 3], [4]
+ * ```
+ */
+
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }

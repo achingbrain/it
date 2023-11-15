@@ -1,4 +1,21 @@
-/* eslint-env browser */
+/**
+ * @packageDocumentation
+ *
+ * Allows reading Blob contents as an async iterator.
+ *
+ * @example
+ *
+ * ```javascript
+ * import toIt from 'blob-to-it'
+ * import all from 'it-all'
+ *
+ * const content = [ Uint8Array.from([0, 1, 2, 3, 4]) ]
+ * const blob = new Blob(content)
+ * const arr = await all(toIt(blob))
+ *
+ * console.info(arr) // [ [ 0, 1, 2, 3, 4 ] ]
+ * ```
+ */
 
 import browserReadableStreamToIt from 'browser-readablestream-to-it'
 

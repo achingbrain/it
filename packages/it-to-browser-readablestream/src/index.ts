@@ -1,3 +1,24 @@
+/**
+ * @packageDocumentation
+ *
+ * Turns an (async)iterable into a W3C ReadbleStream.
+ *
+ * @example
+ *
+ * ```javascript
+ * import toBrowserReadableStream from 'it-to-browser-readablestream'
+ *
+ * // This can also be an iterator, async iterator, generator, etc
+ * const values = [Buffer.from([0, 1]), Buffer.from([2, 3])]
+ *
+ * const stream = await toBrowserReadableStream(values)
+ *
+ * for await (const buf of stream) {
+ *   console.info(buf) // Buffer[0, 1]
+ * }
+ * ```
+ */
+
 interface SourceExt {
   _cancelled: boolean
 }

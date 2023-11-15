@@ -51,17 +51,17 @@ export interface ByteStream <Stream = unknown> {
   /**
    * Read a set number of bytes from the stream
    */
-  read: (bytes?: number, options?: AbortOptions) => Promise<Uint8ArrayList>
+  read(bytes?: number, options?: AbortOptions): Promise<Uint8ArrayList>
 
   /**
    * Write the passed bytes to the stream
    */
-  write: (input: Uint8Array | Uint8ArrayList, options?: AbortOptions) => Promise<void>
+  write(input: Uint8Array | Uint8ArrayList, options?: AbortOptions): Promise<void>
 
   /**
    * Returns the underlying stream
    */
-  unwrap: () => Stream
+  unwrap(): Stream
 }
 
 export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream): ByteStream<Stream> {

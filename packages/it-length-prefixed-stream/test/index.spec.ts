@@ -14,11 +14,11 @@ import type { LengthPrefixedStream } from '../src/index.js'
 /* eslint-disable max-nested-callbacks */
 
 interface Test<T> {
-  from: (str: string) => T
-  alloc: (length: number, fill?: number) => T
-  allocUnsafe: (length: number) => T
-  concat: (arrs: T[], length?: number) => T
-  writeInt32BE: (buf: T, value: number, offset: number) => void
+  from(str: string): T
+  alloc(length: number, fill?: number): T
+  allocUnsafe(length: number): T
+  concat(arrs: T[], length?: number): T
+  writeInt32BE(buf: T, value: number, offset: number): void
 }
 
 const tests: Record<string, Test<any>> = {

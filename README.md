@@ -5,13 +5,7 @@
 
 > A collection of utilities for making working with iterables more bearable
 
-## Table of contents <!-- omit in toc -->
-
-- [Structure](#structure)
-- [License](#license)
-- [Contribution](#contribution)
-
-## Structure
+# Packages
 
 - [`/packages/blob-to-it`](./packages/blob-to-it) Turns a blob into an async iterator
 - [`/packages/browser-readablestream-to-it`](./packages/browser-readablestream-to-it) Turns a browser readble stream into an async iterator
@@ -33,8 +27,8 @@
 - [`/packages/it-merge`](./packages/it-merge) Treat one or more iterables as a single iterable
 - [`/packages/it-multipart`](./packages/it-multipart) Async iterable http multipart message parser
 - [`/packages/it-ndjson`](./packages/it-ndjson) Parse iterators as ndjson and transform iterators to ndjson
-- [`/packages/it-parallel`](./packages/it-parallel) Takes an (async) iterable that emits promise-returning functions, invokes them in parallel up to the concurrency limit and emits the results as they become available, optionally in the same order as the input
-- [`/packages/it-parallel-batch`](./packages/it-parallel-batch) Takes an async iterator that emits promise-returning functions, invokes them in parallel and emits the results in the same order as the input
+- [`/packages/it-parallel`](./packages/it-parallel) Process incoming async(iterable) functions in parallel
+- [`/packages/it-parallel-batch`](./packages/it-parallel-batch) Process (async)iterable values as functions with concurrency control
 - [`/packages/it-peekable`](./packages/it-peekable) Allows peeking/pushing an iterable
 - [`/packages/it-protobuf-stream`](./packages/it-protobuf-stream) Read and write protobuf messages over a duplex stream
 - [`/packages/it-reduce`](./packages/it-reduce) Reduces the values yielded from an async iterator
@@ -45,13 +39,13 @@
 - [`/packages/it-to-browser-readablestream`](./packages/it-to-browser-readablestream) Takes an async iterator and turns it into a browser readable stream
 - [`/packages/it-to-buffer`](./packages/it-to-buffer) Takes an async iterator that yields buffers and concatenates them all together
 
-## License
+# License
 
 Licensed under either of
 
 - Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
 - MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
-## Contribution
+# Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

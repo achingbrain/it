@@ -20,7 +20,8 @@
     "clean": "aegir run clean",
     "lint": "aegir run lint",
     "dep-check": "aegir run dep-check",
-    "release": "aegir run release"
+    "release": "aegir run release",
+    "docs": "aegir docs"
   },
   "devDependencies": {
     "aegir": "^41.1.9"

@@ -10,11 +10,11 @@ import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { byteStream, type ByteStream } from '../src/index.js'
 
 interface Test<T> {
-  from: (str: string) => T
-  alloc: (length: number, fill?: number) => T
-  allocUnsafe: (length: number) => T
-  concat: (arrs: T[], length?: number) => T
-  writeInt32BE: (buf: T, value: number, offset: number) => void
+  from(str: string): T
+  alloc(length: number, fill?: number): T
+  allocUnsafe(length: number): T
+  concat(arrs: T[], length?: number): T
+  writeInt32BE(buf: T, value: number, offset: number): void
 }
 
 const tests: Record<string, Test<any>> = {

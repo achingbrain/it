@@ -1,3 +1,45 @@
+/**
+ * @packageDocumentation
+ *
+ * Allows treating a browser readable stream as an async iterator.
+ *
+ * @example
+ *
+ * ```javascript
+ * import toIt from 'browser-readablestream-to-it'
+ * import all from 'it-all'
+ *
+ * const content = [0, 1, 2, 3, 4]
+ *
+ * const stream = new ReadableStream({
+ *   start(controller) {
+ *     for (let i = 0; i < content.length; i++) {
+ *       controller.enqueue(content[i])
+ *     }
+ *
+ *     controller.close()
+ *   }
+ * })
+ *
+ * const arr = await all(toIt(stream))
+ *
+ * console.info(arr) // 0, 1, 2, 3, 4
+ * ```
+ *
+ * ## preventCancel
+ *
+ * By default a readable stream will have [.cancel](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/cancel) called on it once it has ended or
+ * reading has stopped prematurely.
+ *
+ * To prevent this behaviour, pass `preventCancel: true` as an option:
+ *
+ * ```javascript
+ * const arr = await all(toIt(stream, { preventCancel: true }))
+ *
+ * console.info(arr) // 0, 1, 2, 3, 4
+ * ```
+ */
+
 export interface BrowserReadableStreamToItOptions {
   preventCancel?: boolean
 }

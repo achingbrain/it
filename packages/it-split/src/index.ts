@@ -1,3 +1,63 @@
+/**
+ * @packageDocumentation
+ *
+ * Searches `Uint8Array`s emitted by an (async)iterable for a delimiter and yields chunks split by that delimiter.
+ *
+ * @example
+ *
+ * ```javascript
+ * import split from 'it-split'
+ *
+ * const encoder = new TextEncoder()
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [
+ *   encoder.encode('hello\nwor'),
+ *   encoder.encode('ld')
+ * ]
+ *
+ * const arr = all(split(values))
+ *
+ * console.info(arr) // [encoder.encode('hello'), encoder.encode('world')]
+ * ```
+ *
+ * You can also split by arbitrary delimiters:
+ *
+ * ```javascript
+ * const values = [
+ *   Uint8Array.from([0, 1, 2, 3]),
+ *   Uint8Array.from([0, 1, 2, 3]),
+ *   Uint8Array.from([1, 1, 2])
+ * ]
+ * const delimiter = Uint8Array.from([1, 2])
+ *
+ * const arr = all(split(values, {
+ *   delimiter
+ * }))
+ *
+ * console.info(arr) // [ Buffer.from([0]), Buffer.from([3, 0]), Buffer.from([3, 1]) ]
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import split from 'it-split'
+ *
+ * const encoder = new TextEncoder()
+ *
+ * const values = async function * () {
+ *   yield * [
+ *     encoder.encode('hello\nwor'),
+ *     encoder.encode('ld')
+ *   ]
+ * }
+ *
+ * const arr = await all(split(values()))
+ *
+ * console.info(arr) // [encoder.encode('hello'), encoder.encode('world')]
+ * ```
+ */
+
 import { Uint8ArrayList } from 'uint8arraylist'
 
 export interface SplitOptions {

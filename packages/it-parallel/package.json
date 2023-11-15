@@ -1,7 +1,7 @@
 {
   "name": "it-parallel",
   "version": "3.0.5",
-  "description": "Takes an (async) iterable that emits promise-returning functions, invokes them in parallel up to the concurrency limit and emits the results as they become available, optionally in the same order as the input",
+  "description": "Process incoming async(iterable) functions in parallel",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-parallel#readme",
@@ -29,6 +29,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },

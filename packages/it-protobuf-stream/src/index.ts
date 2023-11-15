@@ -55,12 +55,12 @@ export interface ProtobufStream <Stream = unknown> {
   /**
    * Read the next length-prefixed byte array from the stream and decode it as the passed protobuf format
    */
-  read: <T>(proto: { decode: Decoder<T> }, options?: AbortOptions) => Promise<T>
+  read<T>(proto: { decode: Decoder<T> }, options?: AbortOptions): Promise<T>
 
   /**
    * Encode the passed object as a protobuf message and write it's length-prefixed bytes to the stream
    */
-  write: <T>(data: T, proto: { encode: Encoder<T> }, options?: AbortOptions) => Promise<void>
+  write<T>(data: T, proto: { encode: Encoder<T> }, options?: AbortOptions): Promise<void>
 
   /**
    * Encode the passed objects as protobuf messages and write their length-prefixed bytes to the stream as a single write
@@ -70,12 +70,12 @@ export interface ProtobufStream <Stream = unknown> {
   /**
    * Returns an object with read/write methods for operating on one specific type of protobuf message
    */
-  pb: <T> (proto: { encode: Encoder<T>, decode: Decoder<T> }) => MessageStream<T, Stream>
+  pb<T>(proto: { encode: Encoder<T>, decode: Decoder<T> }): MessageStream<T, Stream>
 
   /**
    * Returns the underlying stream
    */
-  unwrap: () => Stream
+  unwrap(): Stream
 }
 
 /**
@@ -85,12 +85,12 @@ export interface MessageStream <T, S = unknown> {
   /**
    * Read a message from the stream
    */
-  read: (options?: AbortOptions) => Promise<T>
+  read(options?: AbortOptions): Promise<T>
 
   /**
    * Write a message to the stream
    */
-  write: (d: T, options?: AbortOptions) => Promise<void>
+  write(d: T, options?: AbortOptions): Promise<void>
 
   /**
    * Write several messages to the stream
@@ -100,7 +100,7 @@ export interface MessageStream <T, S = unknown> {
   /**
    * Unwrap the underlying protobuf stream
    */
-  unwrap: () => ProtobufStream<S>
+  unwrap(): ProtobufStream<S>
 }
 
 export interface ProtobufStreamOpts extends LengthPrefixedStreamOpts {

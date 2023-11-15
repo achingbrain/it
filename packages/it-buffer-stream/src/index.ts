@@ -1,9 +1,45 @@
+/**
+ * @packageDocumentation
+ *
+ * Generate a stream of buffers, useful for testing purposes.
+ *
+ * @example
+ *
+ * ```javascript
+ * import bufferStream from 'it-buffer-stream'
+ *
+ * const totalLength = //... a big number
+ *
+ * // all options are optional, defaults are shown
+ * const options = {
+ *   chunkSize: 4096, // how many bytes will be in each buffer
+ *   collector: (buffer) => {
+ *     // will be called as each buffer is generated. the final buffer
+ *     // may be smaller than `chunkSize`
+ *   },
+ *   generator: async (size) => {
+ *     // return a promise that resolves to a buffer of length `size`
+ *     //
+ *     // if omitted, `Promise.resolve(crypto.randomBytes(size))` will be used
+ *   }
+ * }
+ *
+ * let buffers = []
+ *
+ * for await (buf of bufferStream(totalLength, options)) {
+ *   buffers.push(buf)
+ * }
+ *
+ * // `buffers` is an array of Buffers the combined length of which === totalLength
+ * ```
+ */
+
 import randomBytes from 'iso-random-stream/src/random.js'
 
 export interface BufferStreamOptions {
   chunkSize?: number
-  collector?: (arr: Uint8Array) => void
-  generator?: (length: number) => Uint8Array | Promise<Uint8Array>
+  collector?(arr: Uint8Array): void
+  generator?(length: number): Uint8Array | Promise<Uint8Array>
 }
 
 const defaultOptions: Required<BufferStreamOptions> = {

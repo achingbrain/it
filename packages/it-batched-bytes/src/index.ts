@@ -1,3 +1,50 @@
+/**
+ * @packageDocumentation
+ *
+ * The final batch may be smaller than the max.
+ *
+ * @example
+ *
+ * ```javascript
+ * import batch from 'it-batched-bytes'
+ * import all from 'it-all'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [
+ *   Uint8Array.from([0]),
+ *   Uint8Array.from([1]),
+ *   Uint8Array.from([2]),
+ *   Uint8Array.from([3]),
+ *   Uint8Array.from([4])
+ * ]
+ * const batchSize = 2
+ *
+ * const result = all(batch(values, { size: batchSize }))
+ *
+ * console.info(result) // [0, 1], [2, 3], [4]
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import batch from 'it-batched-bytes'
+ * import all from 'it-all'
+ *
+ * const values = async function * () {
+ *   yield Uint8Array.from([0])
+ *   yield Uint8Array.from([1])
+ *   yield Uint8Array.from([2])
+ *   yield Uint8Array.from([3])
+ *   yield Uint8Array.from([4])
+ * }
+ * const batchSize = 2
+ *
+ * const result = await all(batch(values, { size: batchSize }))
+ *
+ * console.info(result) // [0, 1], [2, 3], [4]
+ * ```
+ */
+
 import defer from 'p-defer'
 import { Uint8ArrayList } from 'uint8arraylist'
 
@@ -28,7 +75,7 @@ export interface BatchedObjectsOptions<T> extends BatchedBytesOptions {
    * This function should serialize the object and append the
    * result to the passed list
    */
-  serialize: (object: T, list: Uint8ArrayList) => void
+  serialize(object: T, list: Uint8ArrayList): void
 }
 
 export interface AsyncBatchedObjectsOptions<T> extends AsyncBatchedBytesOptions, BatchedObjectsOptions<T> {
