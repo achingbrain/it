@@ -1,3 +1,10 @@
+## [it-length-prefixed-stream-v1.1.1](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.0...it-length-prefixed-stream-v1.1.1) (2023-11-15)
+
+
+### Dependencies
+
+* **dev:** bump aegir from 40.0.13 to 41.1.9 ([#98](https://github.com/achingbrain/it/issues/98)) ([b5d17af](https://github.com/achingbrain/it/commit/b5d17af750dfa2191423dcf06f37b06e5a866ec8))
+
 ## [it-length-prefixed-stream-v1.1.0](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.0.2...it-length-prefixed-stream-v1.1.0) (2023-11-12)
 
 
