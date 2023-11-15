@@ -56,7 +56,7 @@ export interface LengthPrefixedStream <Stream = unknown> {
   /**
    * Write passed list of bytes, prefix by their individual lengths to the stream as a single write
    */
-  writeV: (input: Array<Uint8Array | Uint8ArrayList>, options?: AbortOptions) => Promise<void>
+  writeV(input: Array<Uint8Array | Uint8ArrayList>, options?: AbortOptions): Promise<void>
 
   /**
    * Returns the underlying stream

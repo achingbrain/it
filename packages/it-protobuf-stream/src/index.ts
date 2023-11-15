@@ -65,7 +65,7 @@ export interface ProtobufStream <Stream = unknown> {
   /**
    * Encode the passed objects as protobuf messages and write their length-prefixed bytes to the stream as a single write
    */
-  writeV: <T>(input: T[], proto: { encode: Encoder<T> }, options?: AbortOptions) => Promise<void>
+  writeV<T>(input: T[], proto: { encode: Encoder<T> }, options?: AbortOptions): Promise<void>
 
   /**
    * Returns an object with read/write methods for operating on one specific type of protobuf message
@@ -95,7 +95,7 @@ export interface MessageStream <T, S = unknown> {
   /**
    * Write several messages to the stream
    */
-  writeV: (d: T[], options?: AbortOptions) => Promise<void>
+  writeV(d: T[], options?: AbortOptions): Promise<void>
 
   /**
    * Unwrap the underlying protobuf stream

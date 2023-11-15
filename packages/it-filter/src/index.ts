@@ -1,5 +1,5 @@
 /**
- * @packageDocumenation
+ * @packageDocumentation
  *
  * Filter values out of an (async)iterable
  *
