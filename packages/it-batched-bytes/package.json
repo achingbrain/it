@@ -1,6 +1,6 @@
 {
   "name": "it-batched-bytes",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Takes an async iterator that emits byte arrays and emits them as fixed size batches",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
