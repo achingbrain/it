@@ -1,6 +1,6 @@
 {
   "name": "it-batch",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Takes an async iterator that emits things and emits them as fixed size batches",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
