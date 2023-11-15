@@ -128,11 +128,11 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "formidable": "^2.0.1",
+    "formidable": "^3.5.1",
     "it-pushable": "^3.2.0"
   },
   "devDependencies": {
-    "@types/formidable": "^2.0.5",
+    "@types/formidable": "^3.4.5",
     "aegir": "^41.1.9",
     "form-data": "^4.0.0",
     "it-drain": "^3.0.0",
