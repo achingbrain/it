@@ -1,5 +1,4 @@
 import { duplexPair } from 'it-pair/duplex'
-import { Uint8ArrayList } from 'uint8arraylist'
 import { byteStream } from '../dist/src/index.js'
 
 const DATA_LENGTH = 1024 * 1024 * 1024
@@ -17,9 +16,8 @@ for (let i = 0; i < ITERATIONS; i++) {
   const start = Date.now()
 
   while (read < DATA_LENGTH) {
-    await inputStream.writeV(
-      new Array(5).fill(0).map(() => new Uint8Array(CHUNK_SIZE))
-    )
+    inputStream.write(new Uint8Array(CHUNK_SIZE))
+
     const buf = await outputStream.read()
 
     read += buf.byteLength
