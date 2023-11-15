@@ -96,7 +96,7 @@ class QueuelessPushable <T> implements Pushable<T> {
   }
 
   private async _push (value?: T, options?: AbortOptions & RaceSignalOptions): Promise<void> {
-    if (this.ended) {
+    if (value != null && this.ended) {
       throw new Error('Cannot push value onto an ended pushable')
     }
 
