@@ -1,3 +1,10 @@
+## [it-multipart-v3.0.6](https://github.com/achingbrain/it/compare/it-multipart-v3.0.5...it-multipart-v3.0.6) (2023-11-15)
+
+
+### Dependencies
+
+* bump formidable from 2.1.2 to 3.5.1 ([#84](https://github.com/achingbrain/it/issues/84)) ([7464c22](https://github.com/achingbrain/it/commit/7464c222ea532db9974a10c10f44b551a2233596))
+
 ## [it-multipart-v3.0.5](https://github.com/achingbrain/it/compare/it-multipart-v3.0.4...it-multipart-v3.0.5) (2023-11-15)
 
 
