@@ -1,3 +1,15 @@
+## [it-byte-stream-v1.0.2](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.1...it-byte-stream-v1.0.2) (2023-11-15)
+
+
+### Trivial Changes
+
+* add byte stream benchmark ([#102](https://github.com/achingbrain/it/issues/102)) ([656e54d](https://github.com/achingbrain/it/commit/656e54d0dbf50c3586d4cafab58472b527c9c064))
+
+
+### Dependencies
+
+* **dev:** bump aegir from 40.0.13 to 41.1.9 ([#98](https://github.com/achingbrain/it/issues/98)) ([b5d17af](https://github.com/achingbrain/it/commit/b5d17af750dfa2191423dcf06f37b06e5a866ec8))
+
 ## [it-byte-stream-v1.0.1](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.0...it-byte-stream-v1.0.1) (2023-08-16)
 
 
