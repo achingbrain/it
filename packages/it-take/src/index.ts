@@ -1,3 +1,38 @@
+/**
+ * @packageDocumentation
+ *
+ * For when you only want a few values out of an (async)iterable.
+ *
+ * @example
+ *
+ * ```javascript
+ * import take from 'it-take'
+ * import all from 'it-all'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * const arr = all(take(values, 2))
+ *
+ * console.info(arr) // 0, 1
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import take from 'it-take'
+ * import all from 'it-all'
+ *
+ * const values = async function * () {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * const arr = await all(take(values(), 2))
+ *
+ * console.info(arr) // 0, 1
+ * ```
+ */
+
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }

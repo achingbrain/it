@@ -1,33 +1,13 @@
-# it-split <!-- omit in toc -->
-
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
 [![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
 
 > Splits Uint8Arrays emitted by an (async) iterable by a delimiter
 
-## Table of contents <!-- omit in toc -->
+# About
 
-- [Install](#install)
-  - [Browser `<script>` tag](#browser-script-tag)
-- [Usage](#usage)
-- [License](#license)
-- [Contribution](#contribution)
+Searches `Uint8Array`s emitted by an (async)iterable for a delimiter and yields chunks split by that delimiter.
 
-## Install
-
-```console
-$ npm i it-split
-```
-
-### Browser `<script>` tag
-
-Loading this module through a script tag will make it's exports available as `ItSplit` in the global namespace.
-
-```html
-<script src="https://unpkg.com/it-split/dist/index.min.js"></script>
-```
-
-## Usage
+## Example
 
 ```javascript
 import split from 'it-split'
@@ -81,13 +61,27 @@ const arr = await all(split(values()))
 console.info(arr) // [encoder.encode('hello'), encoder.encode('world')]
 ```
 
-## License
+# Install
+
+```console
+$ npm i it-split
+```
+
+## Browser `<script>` tag
+
+Loading this module through a script tag will make it's exports available as `ItSplit` in the global namespace.
+
+```html
+<script src="https://unpkg.com/it-split/dist/index.min.js"></script>
+```
+
+# License
 
 Licensed under either of
 
 - Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
 - MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
-## Contribution
+# Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

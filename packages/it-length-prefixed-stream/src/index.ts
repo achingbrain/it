@@ -1,8 +1,7 @@
 /**
  * @packageDocumentation
  *
- * This module makes it easy to send and receive length-prefixed byte arrays over
- * streams.
+ * This module makes it easy to send and receive length-prefixed byte arrays over streams.
  *
  * @example
  *
@@ -16,9 +15,14 @@
  *
  * // write a length-prefixed chunk
  * await stream.write(Uint8Array.from([0, 1, 2, 3, 4]))
+ *
+ * // write several chunks, all individually length-prefixed
+ * await stream.writeV([
+ *   Uint8Array.from([0, 1, 2, 3, 4]),
+ *   Uint8Array.from([5, 6, 7, 8, 9])
+ * ])
  * ```
  */
-
 import { byteStream } from 'it-byte-stream'
 import * as lp from 'it-length-prefixed'
 import * as varint from 'uint8-varint'
@@ -42,17 +46,22 @@ export interface LengthPrefixedStream <Stream = unknown> {
   /**
    * Read the next length-prefixed number of bytes from the stream
    */
-  read: (options?: AbortOptions) => Promise<Uint8ArrayList>
+  read(options?: AbortOptions): Promise<Uint8ArrayList>
 
   /**
    * Write the passed bytes to the stream prefixed by their length
    */
-  write: (input: Uint8Array | Uint8ArrayList, options?: AbortOptions) => Promise<void>
+  write(input: Uint8Array | Uint8ArrayList, options?: AbortOptions): Promise<void>
+
+  /**
+   * Write passed list of bytes, prefix by their individual lengths to the stream as a single write
+   */
+  writeV(input: Array<Uint8Array | Uint8ArrayList>, options?: AbortOptions): Promise<void>
 
   /**
    * Returns the underlying stream
    */
-  unwrap: () => Stream
+  unwrap(): Stream
 }
 
 export interface LengthPrefixedStreamOpts {
@@ -111,6 +120,14 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
     write: async (data, options?: AbortOptions) => {
       // encode, write
       await bytes.write(lp.encode.single(data, opts), options)
+    },
+    writeV: async (data, options?: AbortOptions) => {
+      const list = new Uint8ArrayList(
+        ...data.map(buf => lp.encode.single(buf, opts))
+      )
+
+      // encode, write
+      await bytes.write(list, options)
     },
     unwrap: () => {
       return bytes.unwrap()

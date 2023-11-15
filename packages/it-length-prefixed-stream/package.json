@@ -1,6 +1,6 @@
 {
   "name": "it-length-prefixed-stream",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Read and write length-prefixed byte arrays over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
@@ -29,6 +29,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },
@@ -138,7 +139,7 @@
     "uint8arraylist": "^2.4.1"
   },
   "devDependencies": {
-    "aegir": "^40.0.11",
+    "aegir": "^41.1.9",
     "it-pair": "^2.0.2",
     "uint8arrays": "^4.0.2"
   }

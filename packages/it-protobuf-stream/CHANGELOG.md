@@ -1,3 +1,10 @@
+## [it-protobuf-stream-v1.1.0](https://github.com/achingbrain/it/compare/it-protobuf-stream-v1.0.2...it-protobuf-stream-v1.1.0) (2023-11-12)
+
+
+### Features
+
+* add `writeV` method to pb and lp streams to batch write ([#101](https://github.com/achingbrain/it/issues/101)) ([4015395](https://github.com/achingbrain/it/commit/40153954baf3816c553ae670935e81b8a0955009))
+
 ## [it-protobuf-stream-v1.0.2](https://github.com/achingbrain/it/compare/it-protobuf-stream-v1.0.1...it-protobuf-stream-v1.0.2) (2023-08-16)
 
 

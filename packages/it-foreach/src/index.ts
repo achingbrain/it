@@ -1,7 +1,52 @@
+/**
+ * @packageDocumentation
+ *
+ * Calls a function for each value in an (async)iterable.
+ *
+ * The function can be sync or async.
+ *
+ * Async functions can be awaited on so may slow down processing of the (async)iterable.
+ *
+ * @example
+ *
+ * ```javascript
+ * import each from 'it-foreach'
+ * import drain from 'it-drain'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * // prints 0, 1, 2, 3, 4
+ * const arr = drain(
+ *   each(values, console.info)
+ * )
+ * ```
+ *
+ * Async sources and callbacks must be awaited:
+ *
+ * ```javascript
+ * import each from 'it-foreach'
+ * import drain from 'it-drain'
+ *
+ * const values = async function * () {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * // prints 0, 1, 2, 3, 4
+ * const arr = await drain(
+ *   each(values(), console.info)
+ * )
+ * ```
+ */
+
 import peek from 'it-peekable'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
+}
+
+function isPromise <T = unknown> (thing: any): thing is Promise<T> {
+  return thing?.then != null
 }
 
 /**
@@ -13,9 +58,14 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
 function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
   if (isAsyncIterable(source)) {
     return (async function * () {
-      for await (const thing of source) {
-        await fn(thing)
-        yield thing
+      for await (const val of source) {
+        const res = fn(val)
+
+        if (isPromise(res)) {
+          await res
+        }
+
+        yield val
       }
     })()
   }
@@ -35,7 +85,12 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
       yield value
 
       for await (const val of peekable) {
-        await fn(val)
+        const res = fn(val)
+
+        if (isPromise(res)) {
+          await res
+        }
+
         yield val
       }
     })()

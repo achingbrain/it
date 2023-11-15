@@ -1,3 +1,38 @@
+/**
+ * @packageDocumentation
+ *
+ * Counts the number of items in an (async)iterable.
+ *
+ * N.b. will consume the iterable
+ *
+ * @example
+ *
+ * ```javascript
+ * import length from 'it-length'
+ *
+ * // This can also be an iterator, generator, etc
+ * const values = [0, 1, 2, 3, 4]
+ *
+ * const res = length(values)
+ *
+ * console.info(res) // 5
+ * ```
+ *
+ * Async sources must be awaited:
+ *
+ * ```javascript
+ * import length from 'it-length'
+ *
+ * const values = async function * () {
+ *   yield * [0, 1, 2, 3, 4]
+ * }
+ *
+ * const res = await length(values())
+ *
+ * console.info(res) // 5
+ * ```
+ */
+
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }
