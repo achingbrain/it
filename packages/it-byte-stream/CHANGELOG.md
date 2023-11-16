@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.3](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.2...it-byte-stream-v1.0.3) (2023-11-16)
+
+
+### Bug Fixes
+
+* use queueless pushable for it-byte-stream outgoing data ([#103](https://github.com/achingbrain/it/issues/103)) ([325b722](https://github.com/achingbrain/it/commit/325b72230ddb3fec9f13e400460731d9ee2d2363))
+
 ## [it-byte-stream-v1.0.2](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.1...it-byte-stream-v1.0.2) (2023-11-15)
 
 
