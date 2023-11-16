@@ -21,8 +21,8 @@
  * ```
  */
 
-import { pushable } from 'it-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { pushable } from './pushable.js'
 import type { Duplex } from 'it-stream-types'
 
 export class CodeError extends Error {
@@ -67,16 +67,16 @@ export interface ByteStream <Stream = unknown> {
 export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream): ByteStream<Stream> {
   const write = pushable()
 
-  duplex.sink(write).catch((err: Error) => {
-    write.end(err)
+  duplex.sink(write).catch(async (err: Error) => {
+    await write.end(err)
   })
 
   duplex.sink = async (source: any) => {
     for await (const buf of source) {
-      write.push(buf)
+      await write.push(buf)
     }
 
-    write.end()
+    await write.end()
   }
 
   let source = duplex.source
@@ -146,12 +146,10 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
 
       // just write
       if (data instanceof Uint8Array) {
-        write.push(data)
+        await write.push(data, options)
       } else {
-        write.push(data.subarray())
+        await write.push(data.subarray(), options)
       }
-
-      await write.onEmpty(options)
     },
     unwrap: () => {
       const originalStream = duplex.source
