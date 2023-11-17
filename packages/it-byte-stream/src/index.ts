@@ -21,6 +21,7 @@
  * ```
  */
 
+import { raceSignal } from 'race-signal'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { pushable } from './pushable.js'
 import type { Duplex } from 'it-stream-types'
@@ -91,55 +92,35 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
 
   const W: ByteStream<Stream> = {
     read: async (bytes?: number, options?: AbortOptions) => {
-      options?.signal?.throwIfAborted()
+      if (bytes == null) {
+        // just read whatever arrives
+        const { done, value } = await raceSignal<{ done?: boolean, value?: any }>(source.next(), options?.signal, {
+          errorMessage: 'Read aborted'
+        })
 
-      let listener: EventListener | undefined
-
-      const abortPromise = new Promise((resolve, reject) => {
-        listener = () => {
-          reject(new AbortError('Read aborted'))
-        }
-
-        options?.signal?.addEventListener('abort', listener)
-      })
-
-      try {
-        if (bytes == null) {
-          // just read whatever arrives
-          const { done, value } = await Promise.race([
-            source.next(),
-            abortPromise
-          ])
-
-          if (done === true) {
-            return new Uint8ArrayList()
-          }
-
+        if (done !== true && value?.byteLength > 0) {
           return value
         }
 
-        while (readBuffer.byteLength < bytes) {
-          const { value, done } = await Promise.race([
-            source.next(),
-            abortPromise
-          ])
-
-          if (done === true) {
-            throw new CodeError('unexpected end of input', 'ERR_UNEXPECTED_EOF')
-          }
-
-          readBuffer.append(value)
-        }
-
-        const buf = readBuffer.sublist(0, bytes)
-        readBuffer.consume(bytes)
-
-        return buf
-      } finally {
-        if (listener != null) {
-          options?.signal?.removeEventListener('abort', listener)
-        }
+        return new Uint8ArrayList()
       }
+
+      while (readBuffer.byteLength < bytes) {
+        const { done, value } = await raceSignal<{ done?: boolean, value?: any }>(source.next(), options?.signal, {
+          errorMessage: 'Read aborted'
+        })
+
+        if (done === true) {
+          throw new CodeError(`unexpected end of input, read ${readBuffer.byteLength} of ${bytes} bytes`, 'ERR_UNEXPECTED_EOF')
+        }
+
+        readBuffer.append(value)
+      }
+
+      const buf = readBuffer.sublist(0, bytes)
+      readBuffer.consume(bytes)
+
+      return buf
     },
     write: async (data, options?: AbortOptions) => {
       options?.signal?.throwIfAborted()
