@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.4](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.3...it-byte-stream-v1.0.4) (2023-11-20)
+
+
+### Bug Fixes
+
+* only overwrite source if readbuffer has bytes ([#105](https://github.com/achingbrain/it/issues/105)) ([bc61c9a](https://github.com/achingbrain/it/commit/bc61c9a2ae69993763c33b0fb5e453e70df45075))
+
 ## [it-byte-stream-v1.0.3](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.2...it-byte-stream-v1.0.3) (2023-11-16)
 
 
