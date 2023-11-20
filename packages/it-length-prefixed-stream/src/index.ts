@@ -23,7 +23,7 @@
  * ])
  * ```
  */
-import { byteStream } from 'it-byte-stream'
+import { byteStream, type ByteStreamOpts } from 'it-byte-stream'
 import * as lp from 'it-length-prefixed'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
@@ -64,7 +64,7 @@ export interface LengthPrefixedStream <Stream = unknown> {
   unwrap(): Stream
 }
 
-export interface LengthPrefixedStreamOpts {
+export interface LengthPrefixedStreamOpts extends ByteStreamOpts {
   // encoding opts
   lengthEncoder: lp.LengthEncoderFunction
 
