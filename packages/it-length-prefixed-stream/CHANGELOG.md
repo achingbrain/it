@@ -1,3 +1,10 @@
+## [it-length-prefixed-stream-v1.1.3](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.2...it-length-prefixed-stream-v1.1.3) (2023-11-20)
+
+
+### Bug Fixes
+
+* add option to yield objects from unwrapped byte stream ([#106](https://github.com/achingbrain/it/issues/106)) ([99e9b82](https://github.com/achingbrain/it/commit/99e9b8242b390703f7c9fa44a7edbb27cee920b8))
+
 ## [it-length-prefixed-stream-v1.1.2](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.1...it-length-prefixed-stream-v1.1.2) (2023-11-20)
 
 
