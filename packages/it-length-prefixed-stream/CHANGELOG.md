@@ -1,3 +1,10 @@
+## [it-length-prefixed-stream-v1.1.2](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.1...it-length-prefixed-stream-v1.1.2) (2023-11-20)
+
+
+### Bug Fixes
+
+* derive max data length length if not passed ([#104](https://github.com/achingbrain/it/issues/104)) ([a4b8561](https://github.com/achingbrain/it/commit/a4b8561b351e377b3b45edce2254956393c1205a))
+
 ## [it-length-prefixed-stream-v1.1.1](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.0...it-length-prefixed-stream-v1.1.1) (2023-11-15)
 
 
