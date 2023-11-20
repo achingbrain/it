@@ -64,7 +64,18 @@ export interface ByteStream <Stream = unknown> {
   unwrap(): Stream
 }
 
-export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream): ByteStream<Stream> {
+export interface ByteStreamOpts {
+  /**
+   * After the stream is unwrapped, any bytes that have been read from the
+   * incoming stream will be yielded in-order as `Uint8Array`(s).
+   *
+   * To yield a single `Uint8ArrayList` with all unread bytes instead, pass
+   * `false` here.
+   */
+  yieldBytes?: boolean
+}
+
+export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts?: ByteStreamOpts): ByteStream<Stream> {
   const write = pushable()
 
   duplex.sink(write).catch(async (err: Error) => {
@@ -155,7 +166,12 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
       if (readBuffer.byteLength > 0) {
         const originalStream = duplex.source
         duplex.source = (async function * () {
-          yield * readBuffer
+          if (opts?.yieldBytes === false) {
+            yield readBuffer
+          } else {
+            yield * readBuffer
+          }
+
           yield * originalStream
         }())
       }
