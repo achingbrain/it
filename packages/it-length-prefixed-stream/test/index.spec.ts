@@ -2,7 +2,9 @@ import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
 import { byteStream } from 'it-byte-stream'
 import { pair } from 'it-pair'
+import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { alloc as uint8Alloc, allocUnsafe as uint8AllocUnsafe } from 'uint8arrays/alloc'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { lpStream } from '../src/index.js'
@@ -31,8 +33,8 @@ const tests: Record<string, Test<any>> = {
   },
   Uint8Array: {
     from: (str: string) => uint8ArrayFromString(str),
-    alloc: (length: number, fill = 0) => new Uint8Array(length).fill(fill),
-    allocUnsafe: (length: number) => new Uint8Array(length),
+    alloc: (length: number, fill = 0) => uint8Alloc(length).fill(fill),
+    allocUnsafe: (length: number) => uint8AllocUnsafe(length),
     concat: (arrs: Buffer[], length?: number) => uint8ArrayConcat(arrs, length),
     writeInt32BE: (buf: Buffer, value: number, offset: number) => {
       new DataView(buf.buffer, buf.byteOffset, buf.byteLength).setInt32(offset, value, false)
@@ -40,8 +42,8 @@ const tests: Record<string, Test<any>> = {
   },
   Uint8ArrayList: {
     from: (str: string) => new Uint8ArrayList(uint8ArrayFromString(str)),
-    alloc: (length: number, fill = 0) => new Uint8ArrayList(new Uint8Array(length).fill(fill)),
-    allocUnsafe: (length: number) => new Uint8ArrayList(new Uint8Array(length)),
+    alloc: (length: number, fill = 0) => new Uint8ArrayList(uint8Alloc(length).fill(fill)),
+    allocUnsafe: (length: number) => new Uint8ArrayList(uint8AllocUnsafe(length)),
     concat: (arrs: Uint8ArrayList[], length?: number) => new Uint8ArrayList(...arrs),
     writeInt32BE: (buf: Uint8ArrayList, value: number, offset: number) => {
       const data = new Uint8Array(4)
@@ -111,7 +113,7 @@ Object.keys(tests).forEach(key => {
       const bytes = byteStream(lp.unwrap())
       const res = await bytes.read()
 
-      const length = test.allocUnsafe(4)
+      const length = test.allocUnsafe(int32BEEncode.bytes)
       test.writeInt32BE(length, data.length, 0)
       const expected = test.concat([length, data])
       expect(res.subarray()).to.equalBytes(expected.subarray())
@@ -123,7 +125,7 @@ Object.keys(tests).forEach(key => {
       // write raw lp-prefixed bytes
       const bytes = byteStream(duplex)
       const data = test.from('hellllllllloooo')
-      const length = test.allocUnsafe(4)
+      const length = test.allocUnsafe(int32BEDecode.bytes)
       test.writeInt32BE(length, data.length, 0)
       const encoded = test.concat([length, data])
       void bytes.write(encoded)
@@ -140,14 +142,38 @@ Object.keys(tests).forEach(key => {
       // write raw lp-prefixed bytes
       const bytes = byteStream(duplex)
       const data = test.alloc(33, 1)
-      const length = test.allocUnsafe(4)
-      test.writeInt32BE(length, data.length, 0)
-      const encoded = test.concat([length, data])
+      const encoded = test.concat([
+        varint.encode(data.length),
+        data
+      ])
       void bytes.write(encoded)
 
-      // read using lp stream and custom decoder with limit
-      const lp = lpStream(bytes.unwrap(), { lengthDecoder: int32BEDecode, maxDataLength: 32 })
-      await expect(lp.read()).to.eventually.be.rejectedWith(/too long/)
+      // read using lp stream with data length limit
+      const lp = lpStream(bytes.unwrap(), { maxDataLength: 32 })
+      await expect(lp.read()).to.eventually.be.rejected
+        .with.property('code', 'ERR_MSG_DATA_TOO_LONG')
+    })
+
+    it('lp exceeds max length length decode', async () => {
+      const duplex = pair<Uint8Array>()
+
+      // write raw lp-prefixed bytes
+      const bytes = byteStream(duplex)
+      const data = test.alloc(32, 1)
+
+      // more than 128 takes 2 bytes to encode
+      const lengthLength = 130
+
+      const encoded = test.concat([
+        varint.encode(lengthLength),
+        data
+      ])
+      void bytes.write(encoded)
+
+      // read using lp stream with data length limit
+      const lp = lpStream(bytes.unwrap(), { maxDataLength: 32 })
+      await expect(lp.read()).to.eventually.be.rejected
+        .with.property('code', 'ERR_MSG_LENGTH_TOO_LONG')
     })
 
     it('lp max length decode', async () => {
@@ -156,13 +182,14 @@ Object.keys(tests).forEach(key => {
       // write raw lp-prefixed bytes
       const bytes = byteStream(duplex)
       const data = test.allocUnsafe(4000)
-      const length = test.allocUnsafe(4)
-      test.writeInt32BE(length, data.length, 0)
-      const encoded = test.concat([length, data])
+      const encoded = test.concat([
+        varint.encode(data.length),
+        data
+      ])
       void bytes.write(encoded)
 
-      // read using lp stream and custom decoder with limit
-      const lp = lpStream(bytes.unwrap(), { lengthDecoder: int32BEDecode, maxDataLength: 5000 })
+      // read using lp stream and length limit
+      const lp = lpStream(bytes.unwrap(), { maxDataLength: 5000 })
       const res = await lp.read()
       expect(res.subarray()).to.equalBytes(data.subarray())
     })

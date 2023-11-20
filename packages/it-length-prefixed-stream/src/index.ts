@@ -79,8 +79,14 @@ const defaultLengthDecoder: lp.LengthDecoderFunction = (buf) => {
 }
 defaultLengthDecoder.bytes = 0
 
-export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts?: Partial<LengthPrefixedStreamOpts>): LengthPrefixedStream<Stream> {
+export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts: Partial<LengthPrefixedStreamOpts> = {}): LengthPrefixedStream<Stream> {
   const bytes = byteStream(duplex)
+
+  if (opts.maxDataLength != null && opts.maxLengthLength == null) {
+    // if max data length is set but max length length is not, calculate the
+    // max length length needed to encode max data length
+    opts.maxLengthLength = varint.encodingLength(opts.maxDataLength)
+  }
 
   const W: LengthPrefixedStream<Stream> = {
     read: async (options?: AbortOptions) => {
@@ -102,12 +108,12 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
           throw err
         }
 
-        if (dataLength > -1) {
-          break
-        }
-
         if (opts?.maxLengthLength != null && lengthBuffer.byteLength > opts.maxLengthLength) {
           throw new CodeError('message length length too long', 'ERR_MSG_LENGTH_TOO_LONG')
+        }
+
+        if (dataLength > -1) {
+          break
         }
       }
 
