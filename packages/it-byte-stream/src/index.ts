@@ -152,11 +152,13 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
       }
     },
     unwrap: () => {
-      const originalStream = duplex.source
-      duplex.source = (async function * () {
-        yield * readBuffer
-        yield * originalStream
-      }())
+      if (readBuffer.byteLength > 0) {
+        const originalStream = duplex.source
+        duplex.source = (async function * () {
+          yield * readBuffer
+          yield * originalStream
+        }())
+      }
 
       return duplex
     }
