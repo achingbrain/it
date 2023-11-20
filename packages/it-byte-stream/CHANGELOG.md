@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.5](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.4...it-byte-stream-v1.0.5) (2023-11-20)
+
+
+### Bug Fixes
+
+* add option to yield objects from unwrapped byte stream ([#106](https://github.com/achingbrain/it/issues/106)) ([99e9b82](https://github.com/achingbrain/it/commit/99e9b8242b390703f7c9fa44a7edbb27cee920b8))
+
 ## [it-byte-stream-v1.0.4](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.3...it-byte-stream-v1.0.4) (2023-11-20)
 
 
