@@ -1,3 +1,10 @@
+## [it-length-prefixed-stream-v1.1.4](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.3...it-length-prefixed-stream-v1.1.4) (2023-11-22)
+
+
+### Bug Fixes
+
+* length-prefixed stream pass opts to byte stream ([#107](https://github.com/achingbrain/it/issues/107)) ([3dfabfa](https://github.com/achingbrain/it/commit/3dfabfa17d89bd6bd18f64642377720159308f0e))
+
 ## [it-length-prefixed-stream-v1.1.3](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.2...it-length-prefixed-stream-v1.1.3) (2023-11-20)
 
 
