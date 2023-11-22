@@ -1,5 +1,5 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
-[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
 > Takes an async iterator and turns it into a browser readable stream
 
@@ -35,6 +35,10 @@ Loading this module through a script tag will make it's exports available as `It
 ```html
 <script src="https://unpkg.com/it-to-browser-readablestream/dist/index.min.js"></script>
 ```
+
+# API Docs
+
+- <https://achingbrain.github.io/it/modules/it_to_browser_readablestream.html>
 
 # License
 

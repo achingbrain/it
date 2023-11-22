@@ -1,5 +1,5 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
-[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
 > Async iterable http multipart message parser
 
@@ -41,6 +41,10 @@ http.createServer(async (req, res) => {
 ```console
 $ npm i it-multipart
 ```
+
+# API Docs
+
+- <https://achingbrain.github.io/it/modules/it_multipart.html>
 
 # License
 
