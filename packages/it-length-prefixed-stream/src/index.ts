@@ -80,7 +80,7 @@ const defaultLengthDecoder: lp.LengthDecoderFunction = (buf) => {
 defaultLengthDecoder.bytes = 0
 
 export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts: Partial<LengthPrefixedStreamOpts> = {}): LengthPrefixedStream<Stream> {
-  const bytes = byteStream(duplex)
+  const bytes = byteStream(duplex, opts)
 
   if (opts.maxDataLength != null && opts.maxLengthLength == null) {
     // if max data length is set but max length length is not, calculate the
