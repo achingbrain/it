@@ -1,7 +1,7 @@
 # it <!-- omit in toc -->
 
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
-[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
 > A collection of utilities for making working with iterables more bearable
 
@@ -38,6 +38,10 @@
 - [`/packages/it-take`](./packages/it-take) Stop iteration after n items have been received
 - [`/packages/it-to-browser-readablestream`](./packages/it-to-browser-readablestream) Takes an async iterator and turns it into a browser readable stream
 - [`/packages/it-to-buffer`](./packages/it-to-buffer) Takes an async iterator that yields buffers and concatenates them all together
+
+# API Docs
+
+- <https://achingbrain.github.io/it>
 
 # License
 

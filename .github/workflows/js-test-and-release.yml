@@ -3,7 +3,7 @@ name: test & maybe release
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
   workflow_dispatch:
 

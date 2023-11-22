@@ -1,5 +1,5 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
-[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
 > Collects all values from an async iterator, sorts them using the passed function and yields them
 
@@ -57,6 +57,10 @@ Loading this module through a script tag will make it's exports available as `It
 ```html
 <script src="https://unpkg.com/it-sort/dist/index.min.js"></script>
 ```
+
+# API Docs
+
+- <https://achingbrain.github.io/it/modules/it_sort.html>
 
 # License
 

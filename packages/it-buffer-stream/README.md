@@ -1,5 +1,5 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
-[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=master\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
 > An async iterator that emits buffers containing bytes up to a certain length
 
@@ -50,6 +50,10 @@ Loading this module through a script tag will make it's exports available as `It
 ```html
 <script src="https://unpkg.com/it-buffer-stream/dist/index.min.js"></script>
 ```
+
+# API Docs
+
+- <https://achingbrain.github.io/it/modules/it_buffer_stream.html>
 
 # License
 
