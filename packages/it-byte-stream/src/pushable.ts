@@ -27,8 +27,6 @@ class QueuelessPushable <T> implements Pushable<T> {
     this.ended = false
 
     this.needNext = deferred()
-    this.needNext.resolve()
-
     this.haveNext = deferred()
   }
 
