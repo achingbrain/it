@@ -1,3 +1,15 @@
+## [it-byte-stream-v1.0.6](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.5...it-byte-stream-v1.0.6) (2023-12-02)
+
+
+### Bug Fixes
+
+* await initial pushable read ([#109](https://github.com/achingbrain/it/issues/109)) ([011fb6b](https://github.com/achingbrain/it/commit/011fb6b6eaf61a39a4ff16fc5392c311cad1aeb1))
+
+
+### Trivial Changes
+
+* rename master to main ([#108](https://github.com/achingbrain/it/issues/108)) ([86d5c1f](https://github.com/achingbrain/it/commit/86d5c1f2082c79a49ef1e75511abfa7e647fd7b9))
+
 ## [it-byte-stream-v1.0.5](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.4...it-byte-stream-v1.0.5) (2023-11-20)
 
 
