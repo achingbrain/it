@@ -24,7 +24,6 @@
  * ```
  */
 import { byteStream, type ByteStreamOpts } from 'it-byte-stream'
-import * as lp from 'it-length-prefixed'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
@@ -66,18 +65,13 @@ export interface LengthPrefixedStream <Stream = unknown> {
 
 export interface LengthPrefixedStreamOpts extends ByteStreamOpts {
   // encoding opts
-  lengthEncoder: lp.LengthEncoderFunction
+  lengthEncoder (value: number): Uint8ArrayList | Uint8Array
 
   // decoding opts
-  lengthDecoder: lp.LengthDecoderFunction
+  lengthDecoder (data: Uint8ArrayList): number
   maxLengthLength: number
   maxDataLength: number
 }
-
-const defaultLengthDecoder: lp.LengthDecoderFunction = (buf) => {
-  return varint.decode(buf)
-}
-defaultLengthDecoder.bytes = 0
 
 export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts: Partial<LengthPrefixedStreamOpts> = {}): LengthPrefixedStream<Stream> {
   const bytes = byteStream(duplex, opts)
@@ -88,11 +82,13 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
     opts.maxLengthLength = varint.encodingLength(opts.maxDataLength)
   }
 
+  const decodeLength = opts?.lengthDecoder ?? varint.decode
+  const encodeLength = opts?.lengthEncoder ?? varint.encode
+
   const W: LengthPrefixedStream<Stream> = {
     read: async (options?: AbortOptions) => {
       let dataLength: number = -1
       const lengthBuffer = new Uint8ArrayList()
-      const decodeLength = opts?.lengthDecoder ?? defaultLengthDecoder
 
       while (true) {
         // read one byte at a time until we can decode a varint
@@ -125,11 +121,11 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
     },
     write: async (data, options?: AbortOptions) => {
       // encode, write
-      await bytes.write(lp.encode.single(data, opts), options)
+      await bytes.write(new Uint8ArrayList(encodeLength(data.byteLength), data), options)
     },
     writeV: async (data, options?: AbortOptions) => {
       const list = new Uint8ArrayList(
-        ...data.map(buf => lp.encode.single(buf, opts))
+        ...data.flatMap(buf => ([encodeLength(buf.byteLength), buf]))
       )
 
       // encode, write
