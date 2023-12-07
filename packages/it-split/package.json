@@ -138,6 +138,6 @@
     "aegir": "^41.1.9",
     "buffer": "^6.0.3",
     "it-all": "^3.0.0",
-    "uint8arrays": "^4.0.2"
+    "uint8arrays": "^5.0.0"
   }
 }

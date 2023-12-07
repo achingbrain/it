@@ -147,6 +147,6 @@
     "it-to-buffer": "^4.0.0",
     "protons": "^7.0.2",
     "uint8-varint": "^2.0.1",
-    "uint8arrays": "^4.0.2"
+    "uint8arrays": "^5.0.0"
   }
 }

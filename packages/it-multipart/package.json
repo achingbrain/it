@@ -137,7 +137,7 @@
     "form-data": "^4.0.0",
     "it-drain": "^3.0.0",
     "node-fetch": "^3.2.10",
-    "uint8arrays": "^4.0.2"
+    "uint8arrays": "^5.0.0"
   },
   "browser": {
     "http": false,
