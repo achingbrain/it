@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.7](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.6...it-byte-stream-v1.0.7) (2023-12-11)
+
+
+### Dependencies
+
+* bump uint8arrays from 4.0.10 to 5.0.0 ([#111](https://github.com/achingbrain/it/issues/111)) ([b0586d0](https://github.com/achingbrain/it/commit/b0586d0d1adf2ecf7a14f53aa8fd8220aaaf78dc))
+
 ## [it-byte-stream-v1.0.6](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.5...it-byte-stream-v1.0.6) (2023-12-02)
 
 
