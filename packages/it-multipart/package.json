@@ -1,6 +1,6 @@
 {
   "name": "it-multipart",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "Async iterable http multipart message parser",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
