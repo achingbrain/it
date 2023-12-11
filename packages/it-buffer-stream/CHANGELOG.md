@@ -1,3 +1,15 @@
+## [it-buffer-stream-v3.0.6](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.5...it-buffer-stream-v3.0.6) (2023-12-11)
+
+
+### Trivial Changes
+
+* rename master to main ([#108](https://github.com/achingbrain/it/issues/108)) ([86d5c1f](https://github.com/achingbrain/it/commit/86d5c1f2082c79a49ef1e75511abfa7e647fd7b9))
+
+
+### Dependencies
+
+* bump uint8arrays from 4.0.10 to 5.0.0 ([#111](https://github.com/achingbrain/it/issues/111)) ([b0586d0](https://github.com/achingbrain/it/commit/b0586d0d1adf2ecf7a14f53aa8fd8220aaaf78dc))
+
 ## [it-buffer-stream-v3.0.5](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.4...it-buffer-stream-v3.0.5) (2023-11-15)
 
 
