@@ -113,7 +113,7 @@ Object.keys(tests).forEach(key => {
       const bytes = byteStream(lp.unwrap())
       const res = await bytes.read()
 
-      const length = test.allocUnsafe(int32BEEncode.bytes)
+      const length = test.allocUnsafe(4)
       test.writeInt32BE(length, data.length, 0)
       const expected = test.concat([length, data])
       expect(res.subarray()).to.equalBytes(expected.subarray())
@@ -125,7 +125,7 @@ Object.keys(tests).forEach(key => {
       // write raw lp-prefixed bytes
       const bytes = byteStream(duplex)
       const data = test.from('hellllllllloooo')
-      const length = test.allocUnsafe(int32BEDecode.bytes)
+      const length = test.allocUnsafe(4)
       test.writeInt32BE(length, data.length, 0)
       const encoded = test.concat([length, data])
       void bytes.write(encoded)
