@@ -33,7 +33,7 @@
     "docs:no-publish": "aegir docs --publish false"
   },
   "devDependencies": {
-    "aegir": "^41.1.9",
+    "aegir": "^42.0.1",
     "npm-run-all": "^4.1.5"
   },
   "workspaces": [
