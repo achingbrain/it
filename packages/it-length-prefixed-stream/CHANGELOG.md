@@ -1,3 +1,10 @@
+## [it-length-prefixed-stream-v1.1.6](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.5...it-length-prefixed-stream-v1.1.6) (2024-01-16)
+
+
+### Bug Fixes
+
+* simplify lp stream read/write ([#110](https://github.com/achingbrain/it/issues/110)) ([d3f6059](https://github.com/achingbrain/it/commit/d3f605942064df51371dc540fe7dfb9ead75f195))
+
 ## [it-length-prefixed-stream-v1.1.5](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.4...it-length-prefixed-stream-v1.1.5) (2023-12-11)
 
 
