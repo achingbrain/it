@@ -18,7 +18,7 @@ export interface Pushable<T> extends AsyncGenerator<T, void, unknown> {
 }
 
 class QueuelessPushable <T> implements Pushable<T> {
-  private needNext: DeferredPromise<void>
+  private readNext: DeferredPromise<void>
   private haveNext: DeferredPromise<void>
   private ended: boolean
   private nextResult: IteratorResult<T> | undefined
@@ -26,7 +26,7 @@ class QueuelessPushable <T> implements Pushable<T> {
   constructor () {
     this.ended = false
 
-    this.needNext = deferred()
+    this.readNext = deferred()
     this.haveNext = deferred()
   }
 
@@ -41,15 +41,15 @@ class QueuelessPushable <T> implements Pushable<T> {
     }
 
     if (this.nextResult == null) {
-      throw new Error('Have next but next was undefined')
+      throw new Error('HaveNext promise resolved but nextResult was undefined')
     }
 
     const nextResult = this.nextResult
     this.nextResult = undefined
 
-    // signal to the supplier that we have read the value
-    this.needNext.resolve()
-    this.needNext = deferred()
+    // signal to the supplier that we read the value
+    this.readNext.resolve()
+    this.readNext = deferred()
 
     return nextResult
   }
@@ -100,7 +100,11 @@ class QueuelessPushable <T> implements Pushable<T> {
 
     // already have a value, wait for it to be read
     if (this.nextResult != null) {
-      await this.needNext.promise
+      await this.readNext.promise
+
+      if (this.nextResult != null) {
+        throw new Error('NeedNext promise resolved but nextResult was not consumed')
+      }
     }
 
     if (value != null) {
@@ -114,10 +118,10 @@ class QueuelessPushable <T> implements Pushable<T> {
     this.haveNext.resolve()
     this.haveNext = deferred()
 
-    // wait for the consumer to read the value or for the passed signal
-    // to abort the waiting
+    // wait for the consumer to have finished processing the value and requested
+    // the next one or for the passed signal to abort the waiting
     await raceSignal(
-      this.needNext.promise,
+      this.readNext.promise,
       options?.signal,
       options
     )

@@ -3,6 +3,7 @@
 
 import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
+import delay from 'delay'
 import { pair } from 'it-pair'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
@@ -85,6 +86,56 @@ Object.keys(tests).forEach(key => {
 
       expect(r.subarray()).to.equalBytes(r1.subarray())
       expect(r.subarray()).to.equalBytes(r2.subarray())
+    })
+
+    it('should not resolve write promise until data is read when writing first', async () => {
+      let firstWritePromiseResolved = false
+      void b.write(test.from('11'))
+        .then(() => {
+          firstWritePromiseResolved = true
+        })
+      await delay(10)
+      expect(firstWritePromiseResolved).to.be.false()
+
+      let secondWritePromiseResolved = false
+      void b.write(test.from('22'))
+        .then(() => {
+          secondWritePromiseResolved = true
+        })
+      await delay(10)
+      expect(secondWritePromiseResolved).to.be.false()
+
+      await expect(b.read()).to.eventually.deep.equal(test.from('11').subarray())
+      await delay(10)
+      expect(firstWritePromiseResolved).to.be.true()
+      expect(secondWritePromiseResolved).to.be.false()
+
+      await expect(b.read()).to.eventually.deep.equal(test.from('22').subarray())
+      await delay(10)
+      expect(secondWritePromiseResolved).to.be.true()
+    })
+
+    it('should not resolve write promise until data is read when reading first', async () => {
+      const firstReadPromise = b.read()
+      let firstWritePromiseResolved = false
+      void b.write(test.from('11'))
+        .then(() => {
+          firstWritePromiseResolved = true
+        })
+      await delay(10)
+      expect(firstWritePromiseResolved).to.be.true()
+
+      const secondReadPromise = b.read()
+      let secondWritePromiseResolved = false
+      void b.write(test.from('22'))
+        .then(() => {
+          secondWritePromiseResolved = true
+        })
+      await delay(10)
+      expect(secondWritePromiseResolved).to.be.true()
+
+      await expect(firstReadPromise).to.eventually.deep.equal(test.from('11').subarray())
+      await expect(secondReadPromise).to.eventually.deep.equal(test.from('22').subarray())
     })
   })
 })
