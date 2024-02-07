@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.8](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.7...it-byte-stream-v1.0.8) (2024-02-07)
+
+
+### Bug Fixes
+
+* add read/write tests for it-byte-stream ([#119](https://github.com/achingbrain/it/issues/119)) ([7dbdd72](https://github.com/achingbrain/it/commit/7dbdd728ec1277acd92e1d381a1bb73797b8670d))
+
 ## [it-byte-stream-v1.0.7](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.6...it-byte-stream-v1.0.7) (2023-12-11)
 
 
