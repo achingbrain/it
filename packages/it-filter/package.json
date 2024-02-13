@@ -20,6 +20,7 @@
     "!dist/test",
     "!**/*.tsbuildinfo"
   ],
+  "react-native": "./dist/src/index.js",
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
