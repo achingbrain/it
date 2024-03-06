@@ -75,13 +75,42 @@ export interface ByteStreamOpts {
   yieldBytes?: boolean
 }
 
+/**
+ * Create a `ByteStream` that is useful for working with streams of bytes.
+ * Streams can consume bytes at a different rate than the source of
+ * bytes is producing them, so the `ByteStream` buffers incoming bytes until
+ * they can be consumed,and buffers outgoing bytes and yields them as
+ * requested in order to create some "temporal slack".
+ *
+ * `byteStream` acheives this by "disassembling" the duplex stream into its
+ * constituent parts and then reassembling them into a `ByteStream`
+ * that provides a simple API for reading and writing bytes, while also
+ * intergrating the buffering logic needed to handle the rate mismatch.
+ *
+ * The buffering to and from the `Duplex` stream is done using a
+ * `Uint8ArrayList` to buffer bytes that are being read, and a `pushable`
+ * to buffer outgoing bytes
+ *
+ * This disassembly and reassembly is "reversible", such that a stream
+ * equivalent to the original duplex stream can be reconstructed using the
+ * `unwrap` method.
+ */
 export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts?: ByteStreamOpts): ByteStream<Stream> {
+  // 1. The duplex may consume bytes at a different rate than the source
+  // of bytes is producing them. To handle this, incoming bytes are
+  // buffered in a pushable and yield them as requested.
+
+  // 1.1. Create a pushable to buffer incoming bytes
   const write = pushable()
 
+  // 1.2. Make the duplex read from the pushable
   duplex.sink(write).catch(async (err: Error) => {
     await write.end(err)
   })
 
+  // 1.3. Intercept any source subsequetly passed to the stream and redirect
+  // its contents to the pushable where the duplex is actually reading
+  // from. This is neccesary if the duplex is unwrapped and; for example.
   duplex.sink = async (source: any) => {
     for await (const buf of source) {
       await write.push(buf)
@@ -90,8 +119,14 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
     await write.end()
   }
 
+  // 2. The source of bytes can be an iterable, an async iterable, an iterator, or a
+  // an async iterator. To handle this, the source is normalized to an async
+  // iterator; even if the underlying source is synchronous.
+
+  // 2.1. Assume the source is an async iterator
   let source = duplex.source
 
+  // 2.2. If the source is an iterable, convert it to an async iterator
   if (duplex.source[Symbol.iterator] != null) {
     source = duplex.source[Symbol.iterator]()
   } else if (duplex.source[Symbol.asyncIterator] != null) {
