@@ -17,49 +17,49 @@
 * **it-peekable:** upgraded to 3.0.4
 * **it-all:** upgraded to 3.0.5
 
-## [it-foreach-v2.0.6](https://github.com/achingbrain/it/compare/it-foreach-v2.0.5...it-foreach-v2.0.6) (2023-11-15)
+## it-foreach [2.0.6](https://github.com/achingbrain/it/compare/it-foreach-v2.0.5...it-foreach-v2.0.6) (2023-11-15)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 40.0.13 to 41.1.9 ([#98](https://github.com/achingbrain/it/issues/98)) ([b5d17af](https://github.com/achingbrain/it/commit/b5d17af750dfa2191423dcf06f37b06e5a866ec8))
 
-## [it-foreach-v2.0.5](https://github.com/achingbrain/it/compare/it-foreach-v2.0.4...it-foreach-v2.0.5) (2023-11-12)
+## it-foreach [2.0.5](https://github.com/achingbrain/it/compare/it-foreach-v2.0.4...it-foreach-v2.0.5) (2023-11-12)
 
 
 ### Bug Fixes
 
 * it-foreach should only await thenables ([#100](https://github.com/achingbrain/it/issues/100)) ([265af59](https://github.com/achingbrain/it/commit/265af59dc1c4e873dfb39c5de2af347efa73c5da))
 
-## [it-foreach-v2.0.4](https://github.com/achingbrain/it/compare/it-foreach-v2.0.3...it-foreach-v2.0.4) (2023-08-16)
+## it-foreach [2.0.4](https://github.com/achingbrain/it/compare/it-foreach-v2.0.3...it-foreach-v2.0.4) (2023-08-16)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 39.0.13 to 40.0.11 ([#80](https://github.com/achingbrain/it/issues/80)) ([98e17ff](https://github.com/achingbrain/it/commit/98e17ff5f108fce177d98a56c201533a415623e4))
 
-## [it-foreach-v2.0.3](https://github.com/achingbrain/it/compare/it-foreach-v2.0.2...it-foreach-v2.0.3) (2023-05-09)
+## it-foreach [2.0.3](https://github.com/achingbrain/it/compare/it-foreach-v2.0.2...it-foreach-v2.0.3) (2023-05-09)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 38.1.8 to 39.0.2 ([#66](https://github.com/achingbrain/it/issues/66)) ([a92bb16](https://github.com/achingbrain/it/commit/a92bb1690e8d584292e37c878d40f437036721a7))
 
-## [it-foreach-v2.0.2](https://github.com/achingbrain/it/compare/it-foreach-v2.0.1...it-foreach-v2.0.2) (2023-03-31)
+## it-foreach [2.0.2](https://github.com/achingbrain/it/compare/it-foreach-v2.0.1...it-foreach-v2.0.2) (2023-03-31)
 
 
 ### Bug Fixes
 
 * yield first mapped/filtered values ([#60](https://github.com/achingbrain/it/issues/60)) ([778a991](https://github.com/achingbrain/it/commit/778a9918b13dd5b8743f34f5cb0a9e256aa2a0b7))
 
-## [it-foreach-v2.0.1](https://github.com/achingbrain/it/compare/it-foreach-v2.0.0...it-foreach-v2.0.1) (2023-03-31)
+## it-foreach [2.0.1](https://github.com/achingbrain/it/compare/it-foreach-v2.0.0...it-foreach-v2.0.1) (2023-03-31)
 
 
 ### Bug Fixes
 
 * allow Iterable | AsyncIterable union input ([#59](https://github.com/achingbrain/it/issues/59)) ([80ec2ac](https://github.com/achingbrain/it/commit/80ec2ace4f64b6291b39cb51bc5ebe2cedba7152))
 
-## [it-foreach-v2.0.0](https://github.com/achingbrain/it/compare/it-foreach-v1.0.1...it-foreach-v2.0.0) (2023-03-30)
+## it-foreach [2.0.0](https://github.com/achingbrain/it/compare/it-foreach-v1.0.1...it-foreach-v2.0.0) (2023-03-30)
 
 
 ### ⚠ BREAKING CHANGES
@@ -81,14 +81,14 @@
 * update sibling dependencies ([5f72696](https://github.com/achingbrain/it/commit/5f726968d434a28df6a4864b0314e8c49cab08dd))
 * update sibling dependencies ([8b60209](https://github.com/achingbrain/it/commit/8b60209d429e282f8d5e5218ee2019ae7153585b))
 
-## [it-foreach-v1.0.1](https://github.com/achingbrain/it/compare/it-foreach-v1.0.0...it-foreach-v1.0.1) (2023-03-02)
+## it-foreach [1.0.1](https://github.com/achingbrain/it/compare/it-foreach-v1.0.0...it-foreach-v1.0.1) (2023-03-02)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 37.12.1 to 38.1.6 ([#45](https://github.com/achingbrain/it/issues/45)) ([2c8139e](https://github.com/achingbrain/it/commit/2c8139ef060efa72c386aa3863e6c575f6f199e5))
 
-## [it-foreach-v1.0.0](https://github.com/achingbrain/it/compare/it-foreach-v0.1.1...it-foreach-v1.0.0) (2022-10-17)
+## it-foreach [1.0.0](https://github.com/achingbrain/it/compare/it-foreach-v0.1.1...it-foreach-v1.0.0) (2022-10-17)
 
 
 ### ⚠ BREAKING CHANGES

@@ -1,39 +1,39 @@
-## it-map [3.0.6](https://github.com/achingbrain/it/compare/it-map-v3.0.5...it-map-3.0.6) (2024-04-24)
+## it-map [.0.6](https://github.com/achingbrain/it/compare/it-map-v3.0.5...it-map-3.0.6) (2024-04-24)
 
 
 ### Trivial Changes
 
 * rename master to main ([#108](https://github.com/achingbrain/it/issues/108)) ([86d5c1f](https://github.com/achingbrain/it/commit/86d5c1f2082c79a49ef1e75511abfa7e647fd7b9))
 
-
+## it-map [
 ### Dependencies
 
 * bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
 
 
 
-### Dependencies
+## it-map [cies
 
 * **it-peekable:** upgraded to 3.0.4
 * **it-all:** upgraded to 3.0.5
 
 ## [it-map-v3.0.5](https://github.com/achingbrain/it/compare/it-map-v3.0.4...it-map-v3.0.5) (2023-11-15)
 
-
+## it-map [
 ### Dependencies
 
 * **dev:** bump aegir from 40.0.13 to 41.1.9 ([#98](https://github.com/achingbrain/it/issues/98)) ([b5d17af](https://github.com/achingbrain/it/commit/b5d17af750dfa2191423dcf06f37b06e5a866ec8))
 
 ## [it-map-v3.0.4](https://github.com/achingbrain/it/compare/it-map-v3.0.3...it-map-v3.0.4) (2023-08-16)
 
-
+## it-map [
 ### Dependencies
 
 * **dev:** bump aegir from 39.0.13 to 40.0.11 ([#80](https://github.com/achingbrain/it/issues/80)) ([98e17ff](https://github.com/achingbrain/it/commit/98e17ff5f108fce177d98a56c201533a415623e4))
 
 ## [it-map-v3.0.3](https://github.com/achingbrain/it/compare/it-map-v3.0.2...it-map-v3.0.3) (2023-05-09)
 
-
+## it-map [
 ### Dependencies
 
 * **dev:** bump aegir from 38.1.8 to 39.0.2 ([#66](https://github.com/achingbrain/it/issues/66)) ([a92bb16](https://github.com/achingbrain/it/commit/a92bb1690e8d584292e37c878d40f437036721a7))
@@ -54,14 +54,14 @@
 
 ## [it-map-v3.0.0](https://github.com/achingbrain/it/compare/it-map-v2.0.1...it-map-v3.0.0) (2023-03-30)
 
-
+## it-map [
 ### ⚠ BREAKING CHANGES
 
 * if you pass a synchronous iterator to a function it will return a synchronous generator in response
 
 ### Bug Fixes
 
-* return iterators from synchronous sources ([#55](https://github.com/achingbrain/it/issues/55)) ([b6d8422](https://github.com/achingbrain/it/commit/b6d84222eb8e6d8c8956810d0e2ec1f065909742))
+## it-map [rators from synchronous sources ([#55](https://github.com/achingbrain/it/issues/55)) ([b6d8422](https://github.com/achingbrain/it/commit/b6d84222eb8e6d8c8956810d0e2ec1f065909742))
 
 
 ### Trivial Changes

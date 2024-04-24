@@ -11,7 +11,7 @@
 
 * **it-drain:** upgraded to 3.0.6
 
-## [it-multipart-v3.0.7](https://github.com/achingbrain/it/compare/it-multipart-v3.0.6...it-multipart-v3.0.7) (2023-12-11)
+## it-multipart [3.0.7](https://github.com/achingbrain/it/compare/it-multipart-v3.0.6...it-multipart-v3.0.7) (2023-12-11)
 
 
 ### Trivial Changes
@@ -23,35 +23,35 @@
 
 * bump uint8arrays from 4.0.10 to 5.0.0 ([#111](https://github.com/achingbrain/it/issues/111)) ([b0586d0](https://github.com/achingbrain/it/commit/b0586d0d1adf2ecf7a14f53aa8fd8220aaaf78dc))
 
-## [it-multipart-v3.0.6](https://github.com/achingbrain/it/compare/it-multipart-v3.0.5...it-multipart-v3.0.6) (2023-11-15)
+## it-multipart [3.0.6](https://github.com/achingbrain/it/compare/it-multipart-v3.0.5...it-multipart-v3.0.6) (2023-11-15)
 
 
 ### Dependencies
 
 * bump formidable from 2.1.2 to 3.5.1 ([#84](https://github.com/achingbrain/it/issues/84)) ([7464c22](https://github.com/achingbrain/it/commit/7464c222ea532db9974a10c10f44b551a2233596))
 
-## [it-multipart-v3.0.5](https://github.com/achingbrain/it/compare/it-multipart-v3.0.4...it-multipart-v3.0.5) (2023-11-15)
+## it-multipart [3.0.5](https://github.com/achingbrain/it/compare/it-multipart-v3.0.4...it-multipart-v3.0.5) (2023-11-15)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 40.0.13 to 41.1.9 ([#98](https://github.com/achingbrain/it/issues/98)) ([b5d17af](https://github.com/achingbrain/it/commit/b5d17af750dfa2191423dcf06f37b06e5a866ec8))
 
-## [it-multipart-v3.0.4](https://github.com/achingbrain/it/compare/it-multipart-v3.0.3...it-multipart-v3.0.4) (2023-08-16)
+## it-multipart [3.0.4](https://github.com/achingbrain/it/compare/it-multipart-v3.0.3...it-multipart-v3.0.4) (2023-08-16)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 39.0.13 to 40.0.11 ([#80](https://github.com/achingbrain/it/issues/80)) ([98e17ff](https://github.com/achingbrain/it/commit/98e17ff5f108fce177d98a56c201533a415623e4))
 
-## [it-multipart-v3.0.3](https://github.com/achingbrain/it/compare/it-multipart-v3.0.2...it-multipart-v3.0.3) (2023-05-09)
+## it-multipart [3.0.3](https://github.com/achingbrain/it/compare/it-multipart-v3.0.2...it-multipart-v3.0.3) (2023-05-09)
 
 
 ### Dependencies
 
 * **dev:** bump aegir from 38.1.8 to 39.0.2 ([#66](https://github.com/achingbrain/it/issues/66)) ([a92bb16](https://github.com/achingbrain/it/commit/a92bb1690e8d584292e37c878d40f437036721a7))
 
-## [it-multipart-v3.0.2](https://github.com/achingbrain/it/compare/it-multipart-v3.0.1...it-multipart-v3.0.2) (2023-03-30)
+## it-multipart [3.0.2](https://github.com/achingbrain/it/compare/it-multipart-v3.0.1...it-multipart-v3.0.2) (2023-03-30)
 
 
 ### Trivial Changes
@@ -63,7 +63,7 @@
 
 * update sibling dependencies ([a76da40](https://github.com/achingbrain/it/commit/a76da40c6a230adeda777760ad4266c68a721a77))
 
-## [it-multipart-v3.0.1](https://github.com/achingbrain/it/compare/it-multipart-v3.0.0...it-multipart-v3.0.1) (2023-03-02)
+## it-multipart [3.0.1](https://github.com/achingbrain/it/compare/it-multipart-v3.0.0...it-multipart-v3.0.1) (2023-03-02)
 
 
 ### Trivial Changes
@@ -75,7 +75,7 @@
 
 * **dev:** bump aegir from 37.12.1 to 38.1.6 ([#45](https://github.com/achingbrain/it/issues/45)) ([2c8139e](https://github.com/achingbrain/it/commit/2c8139ef060efa72c386aa3863e6c575f6f199e5))
 
-## [it-multipart-v3.0.0](https://github.com/achingbrain/it/compare/it-multipart-v2.0.2...it-multipart-v3.0.0) (2022-10-17)
+## it-multipart [3.0.0](https://github.com/achingbrain/it/compare/it-multipart-v2.0.2...it-multipart-v3.0.0) (2022-10-17)
 
 
 ### ⚠ BREAKING CHANGES
