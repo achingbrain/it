@@ -1,3 +1,22 @@
+## it-parallel-batch [3.0.5](https://github.com/achingbrain/it/compare/it-parallel-batch-v3.0.4...it-parallel-batch-3.0.5) (2024-04-24)
+
+
+### Trivial Changes
+
+* rename master to main ([#108](https://github.com/achingbrain/it/issues/108)) ([86d5c1f](https://github.com/achingbrain/it/commit/86d5c1f2082c79a49ef1e75511abfa7e647fd7b9))
+
+
+### Dependencies
+
+* bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
+
+
+
+### Dependencies
+
+* **it-batch:** upgraded to 3.0.5
+* **it-all:** upgraded to 3.0.5
+
 ## [it-parallel-batch-v3.0.4](https://github.com/achingbrain/it/compare/it-parallel-batch-v3.0.3...it-parallel-batch-v3.0.4) (2023-11-15)
 
 
