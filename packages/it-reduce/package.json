@@ -1,6 +1,6 @@
 {
   "name": "it-reduce",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Reduces the values yielded from an async iterator",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
