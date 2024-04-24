@@ -12,7 +12,7 @@
  * // This can also be an iterator, generator, etc
  * const values = [0, 1, 2, 3, 4]
  *
- * const fn = val => val > 2 // Return boolean to keep item
+ * const fn = (val, index) => val > 2 // Return boolean to keep item
  *
  * const arr = all(filter(values, fn))
  *
@@ -29,7 +29,7 @@
  *   yield * [0, 1, 2, 3, 4]
  * }
  *
- * const fn = async val => val > 2 // Return boolean or promise of boolean to keep item
+ * const fn = async val => (val, index) > 2 // Return boolean or promise of boolean to keep item
  *
  * const arr = await all(filter(values, fn))
  *
@@ -46,14 +46,16 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
 /**
  * Filters the passed (async) iterable by using the filter function
  */
-function filter <T> (source: Iterable<T>, fn: (val: T) => Promise<boolean>): AsyncGenerator<T, void, undefined>
-function filter <T> (source: Iterable<T>, fn: (val: T) => boolean): Generator<T, void, undefined>
-function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boolean | Promise<boolean>): AsyncGenerator<T, void, undefined>
-function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boolean | Promise<boolean>): Generator<T, void, undefined> | AsyncGenerator<T, void, undefined> {
+function filter <T> (source: Iterable<T>, fn: (val: T, index: number) => Promise<boolean>): AsyncGenerator<T, void, undefined>
+function filter <T> (source: Iterable<T>, fn: (val: T, index: number) => boolean): Generator<T, void, undefined>
+function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T, index: number) => boolean | Promise<boolean>): AsyncGenerator<T, void, undefined>
+function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T, index: number) => boolean | Promise<boolean>): Generator<T, void, undefined> | AsyncGenerator<T, void, undefined> {
+  let index = 0
+
   if (isAsyncIterable(source)) {
     return (async function * () {
       for await (const entry of source) {
-        if (await fn(entry)) {
+        if (await fn(entry, index++)) {
           yield entry
         }
       }
@@ -68,7 +70,7 @@ function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boo
     return (function * () {}())
   }
 
-  const res = fn(value)
+  const res = fn(value, index++)
 
   // @ts-expect-error .then is not present on O
   if (typeof res.then === 'function') {
@@ -78,14 +80,14 @@ function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boo
       }
 
       for await (const entry of peekable) {
-        if (await fn(entry)) {
+        if (await fn(entry, index++)) {
           yield entry
         }
       }
     })()
   }
 
-  const func = fn as (val: T) => boolean
+  const func = fn as (val: T, index: number) => boolean
 
   return (function * () {
     if (res === true) {
@@ -93,7 +95,7 @@ function filter <T> (source: Iterable<T> | AsyncIterable<T>, fn: (val: T) => boo
     }
 
     for (const entry of peekable) {
-      if (func(entry)) {
+      if (func(entry, index++)) {
         yield entry
       }
     }
