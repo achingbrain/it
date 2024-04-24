@@ -1,3 +1,16 @@
+## it-split [3.0.6](https://github.com/achingbrain/it/compare/it-split-v3.0.5...it-split-3.0.6) (2024-04-24)
+
+
+### Dependencies
+
+* bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
+
+
+
+### Dependencies
+
+* **it-all:** upgraded to 3.0.5
+
 ## [it-split-v3.0.5](https://github.com/achingbrain/it/compare/it-split-v3.0.4...it-split-v3.0.5) (2023-12-11)
 
 
