@@ -1,3 +1,10 @@
+## it-buffer-stream [3.0.7](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.6...it-buffer-stream-3.0.7) (2024-04-24)
+
+
+### Dependencies
+
+* bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
+
 ## [it-buffer-stream-v3.0.6](https://github.com/achingbrain/it/compare/it-buffer-stream-v3.0.5...it-buffer-stream-v3.0.6) (2023-12-11)
 
 
