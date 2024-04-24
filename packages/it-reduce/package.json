@@ -4,13 +4,17 @@
   "description": "Reduces the values yielded from an async iterator",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
-  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-reduce#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-reduce#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/achingbrain/it.git"
   },
   "bugs": {
     "url": "https://github.com/achingbrain/it/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
@@ -32,91 +36,6 @@
       "project": true,
       "sourceType": "module"
     }
-  },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "conventionalcommits",
-          "releaseRules": [
-            {
-              "breaking": true,
-              "release": "major"
-            },
-            {
-              "revert": true,
-              "release": "patch"
-            },
-            {
-              "type": "feat",
-              "release": "minor"
-            },
-            {
-              "type": "fix",
-              "release": "patch"
-            },
-            {
-              "type": "docs",
-              "release": "patch"
-            },
-            {
-              "type": "test",
-              "release": "patch"
-            },
-            {
-              "type": "deps",
-              "release": "patch"
-            },
-            {
-              "scope": "no-release",
-              "release": false
-            }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/release-notes-generator",
-        {
-          "preset": "conventionalcommits",
-          "presetConfig": {
-            "types": [
-              {
-                "type": "feat",
-                "section": "Features"
-              },
-              {
-                "type": "fix",
-                "section": "Bug Fixes"
-              },
-              {
-                "type": "chore",
-                "section": "Trivial Changes"
-              },
-              {
-                "type": "docs",
-                "section": "Documentation"
-              },
-              {
-                "type": "deps",
-                "section": "Dependencies"
-              },
-              {
-                "type": "test",
-                "section": "Tests"
-              }
-            ]
-          }
-        }
-      ],
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ]
   },
   "scripts": {
     "build": "aegir build",

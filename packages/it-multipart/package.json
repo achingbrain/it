@@ -4,13 +4,17 @@
   "description": "Async iterable http multipart message parser",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
-  "homepage": "https://github.com/achingbrain/it/tree/master/packages/it-multipart#readme",
+  "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-multipart#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/achingbrain/it.git"
   },
   "bugs": {
     "url": "https://github.com/achingbrain/it/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
@@ -33,91 +37,6 @@
       "sourceType": "module"
     }
   },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "conventionalcommits",
-          "releaseRules": [
-            {
-              "breaking": true,
-              "release": "major"
-            },
-            {
-              "revert": true,
-              "release": "patch"
-            },
-            {
-              "type": "feat",
-              "release": "minor"
-            },
-            {
-              "type": "fix",
-              "release": "patch"
-            },
-            {
-              "type": "docs",
-              "release": "patch"
-            },
-            {
-              "type": "test",
-              "release": "patch"
-            },
-            {
-              "type": "deps",
-              "release": "patch"
-            },
-            {
-              "scope": "no-release",
-              "release": false
-            }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/release-notes-generator",
-        {
-          "preset": "conventionalcommits",
-          "presetConfig": {
-            "types": [
-              {
-                "type": "feat",
-                "section": "Features"
-              },
-              {
-                "type": "fix",
-                "section": "Bug Fixes"
-              },
-              {
-                "type": "chore",
-                "section": "Trivial Changes"
-              },
-              {
-                "type": "docs",
-                "section": "Documentation"
-              },
-              {
-                "type": "deps",
-                "section": "Dependencies"
-              },
-              {
-                "type": "test",
-                "section": "Tests"
-              }
-            ]
-          }
-        }
-      ],
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      "@semantic-release/git"
-    ]
-  },
   "scripts": {
     "build": "aegir build",
     "lint": "aegir lint",
@@ -129,15 +48,15 @@
   },
   "dependencies": {
     "formidable": "^3.5.1",
-    "it-pushable": "^3.2.0"
+    "it-pushable": "^3.2.3"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
     "aegir": "^42.2.5",
     "form-data": "^4.0.0",
     "it-drain": "^3.0.0",
-    "node-fetch": "^3.2.10",
-    "uint8arrays": "^5.0.0"
+    "node-fetch": "^3.3.2",
+    "uint8arrays": "^5.0.3"
   },
   "browser": {
     "http": false,
