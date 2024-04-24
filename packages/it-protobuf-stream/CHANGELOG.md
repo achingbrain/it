@@ -1,3 +1,18 @@
+## it-protobuf-stream [1.1.3](https://github.com/achingbrain/it/compare/it-protobuf-stream-v1.1.2...it-protobuf-stream-1.1.3) (2024-04-24)
+
+
+### Dependencies
+
+* bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
+
+
+
+### Dependencies
+
+* **it-length-prefixed-stream:** upgraded to 1.1.7
+* **it-map:** upgraded to 3.0.6
+* **it-to-buffer:** upgraded to 4.0.6
+
 ## [it-protobuf-stream-v1.1.2](https://github.com/achingbrain/it/compare/it-protobuf-stream-v1.1.1...it-protobuf-stream-v1.1.2) (2023-12-11)
 
 
