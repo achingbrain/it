@@ -1,3 +1,16 @@
+## it-length-prefixed-stream [1.1.7](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.6...it-length-prefixed-stream-1.1.7) (2024-04-24)
+
+
+### Dependencies
+
+* bump aegir from 41.3.5 to 42.2.5 and update projects ([#121](https://github.com/achingbrain/it/issues/121)) ([cec89b7](https://github.com/achingbrain/it/commit/cec89b7c790bea695b053e3b6b3c255655def1cd))
+
+
+
+### Dependencies
+
+* **it-byte-stream:** upgraded to 1.0.9
+
 ## [it-length-prefixed-stream-v1.1.6](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.5...it-length-prefixed-stream-v1.1.6) (2024-01-16)
 
 
