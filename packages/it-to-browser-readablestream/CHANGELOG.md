@@ -1,3 +1,15 @@
+## it-to-browser-readablestream [2.0.8](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-2.0.7...it-to-browser-readablestream-2.0.8) (2024-04-25)
+
+
+### Bug Fixes
+
+* accept iterable, convert to iterator internally ([#125](https://github.com/achingbrain/it/issues/125)) ([ad52a3d](https://github.com/achingbrain/it/commit/ad52a3d655dac6686f06e5b811caae9e0fab239b)), closes [#123](https://github.com/achingbrain/it/issues/123)
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
 ## it-to-browser-readablestream [2.0.7](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-v2.0.6...it-to-browser-readablestream-2.0.7) (2024-04-24)
 
 
