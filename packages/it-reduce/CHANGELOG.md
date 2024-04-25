@@ -1,3 +1,15 @@
+## it-reduce [3.1.0](https://github.com/achingbrain/it/compare/it-reduce-3.0.5...it-reduce-3.1.0) (2024-04-25)
+
+
+### Features
+
+* pass index to callback functions ([#124](https://github.com/achingbrain/it/issues/124)) ([5021757](https://github.com/achingbrain/it/commit/50217574d713161b8e7a5595bf6908f6869e4a6d))
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
 ## it-reduce [3.0.5](https://github.com/achingbrain/it/compare/it-reduce-v3.0.4...it-reduce-3.0.5) (2024-04-24)
 
 
