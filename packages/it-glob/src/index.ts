@@ -3,6 +3,8 @@
  *
  * Like [`glob`](https://npmjs.com/package/glob) but async iterable.
  *
+ * File separators on Windows will be yielded as `/` and not `\`.
+ *
  * @example
  *
  * ```javascript
