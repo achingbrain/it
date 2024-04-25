@@ -7,27 +7,39 @@
 
 # About
 
+<!--
+
+!IMPORTANT!
+
+Everything in this README between "# About" and "# Install" is automatically
+generated and will be overwritten the next time the doc generator is run.
+
+To make changes to this section, please update the @packageDocumentation section
+of src/index.js or src/index.ts
+
+To experiment with formatting, please run "npm run docs" from the root of this
+repo and examine the changes made.
+
+-->
+
 Like [`glob`](https://npmjs.com/package/glob) but async iterable.
+
+File separators on Windows will be yielded as `/` and not \`\`.
 
 ## Example
 
 ```javascript
 import glob from 'it-glob'
 
-const options = {
-  cwd // defaults to process.cwd
-  absolute // return absolute paths, defaults to false
-  nodir // only yield file paths, skip directories
-
-  // all other options are passed to minimatch
-}
+// All options are passed through to fast-glob
+const options = {}
 
 for await (const path of glob('/path/to/file', '**/*', options)) {
  console.info(path)
 }
 ```
 
-See the [minimatch docs](https://www.npmjs.com/package/minimatch#options) for the full list of options.
+See the [fast-glob docs](https://github.com/mrmlnc/fast-glob#options-3) for the full list of options.
 
 # Install
 

@@ -16,7 +16,7 @@ describe('it-glob', () => {
   it('should match file in subdirectory', async () => {
     const files = await all(glob('.', '**/*'))
 
-    expect(files.includes(path.join('dist', 'src', 'index.d.ts'))).to.be.true()
+    expect(files.includes('dist/src/index.d.ts')).to.be.true()
   })
 
   it('should match one', async () => {
@@ -64,18 +64,20 @@ describe('it-glob', () => {
   })
 
   it('should match directories', async () => {
-    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*'))
+    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*', {
+      onlyFiles: false
+    }))
 
-    expect(files.includes(path.join('dist', 'src'))).to.be.true()
+    expect(files.includes('dist/src')).to.be.true()
   })
 
   it('should skip directories', async () => {
     const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/**/*', {
-      nodir: true,
+      onlyFiles: true,
       dot: true
     }))
 
-    expect(files.includes(path.join('dist', 'src'))).to.be.false()
-    expect(files.includes(path.join('dist', 'src', 'index.js'))).to.be.true()
+    expect(files.includes('dist/src')).to.be.false()
+    expect(files.includes('dist/src/index.js')).to.be.true()
   })
 })

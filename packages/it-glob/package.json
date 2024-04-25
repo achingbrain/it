@@ -38,21 +38,20 @@
     }
   },
   "scripts": {
-    "build": "aegir build",
+    "build": "aegir build --bundle false",
     "lint": "aegir lint",
     "dep-check": "aegir dep-check",
     "test": "aegir test -t node",
     "test:node": "aegir test -t node --cov"
   },
   "dependencies": {
-    "minimatch": "^9.0.4"
+    "fast-glob": "^3.3.2"
   },
   "devDependencies": {
     "aegir": "^42.2.5",
     "it-all": "^3.0.0"
   },
   "browser": {
-    "fs/promises": false,
-    "path": false
+    "./dist/src/index.js": "./dist/src/index.browser.js"
   }
 }
