@@ -1,3 +1,19 @@
+## it-glob [3.0.0](https://github.com/achingbrain/it/compare/it-glob-2.0.7...it-glob-3.0.0) (2024-04-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* The options type used to extend `minimatch`'s options, now it's `fast-glob`'s options - some field names are different. Windows paths will also be yielded with forward slashes and not backslashes.
+
+### Features
+
+* replace minimatch with fast-glob ([#126](https://github.com/achingbrain/it/issues/126)) ([bea32ab](https://github.com/achingbrain/it/commit/bea32ab952a67d3af793fd63e12ef004694f798f))
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
 ## it-glob [2.0.7](https://github.com/achingbrain/it/compare/it-glob-v2.0.6...it-glob-2.0.7) (2024-04-24)
 
 
