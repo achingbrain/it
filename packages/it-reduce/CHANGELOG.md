@@ -1,3 +1,10 @@
+## it-reduce [3.1.1](https://github.com/achingbrain/it/compare/it-reduce-3.1.0...it-reduce-3.1.1) (2024-04-25)
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
 ## it-reduce [3.1.0](https://github.com/achingbrain/it/compare/it-reduce-3.0.5...it-reduce-3.1.0) (2024-04-25)
 
 
