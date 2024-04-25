@@ -26,6 +26,8 @@ import path from 'node:path'
 import fastGlob from 'fast-glob'
 import type { Options } from 'fast-glob'
 
+export type { Options }
+
 /**
  * Async iterable filename pattern matcher
  */
