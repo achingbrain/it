@@ -19,13 +19,13 @@
  * ```
  */
 
+import { getIterator } from 'get-iterator'
+
 interface SourceExt {
   _cancelled: boolean
 }
 
 type Source<T> = SourceExt & UnderlyingSource<T>
-
-import { getIterator } from 'get-iterator'
 
 /**
  * Converts an (async) iterator into a WHATWG ReadableStream

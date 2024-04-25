@@ -10,7 +10,7 @@ async function all <T> (stream: ReadableStream<T>): Promise<T[]> {
     while (true) {
       const { done, value } = await reader.read()
 
-      if (done === true) {
+      if (done) {
         return output
       }
 
@@ -63,6 +63,7 @@ describe('it-to-browser-readable-stream', () => {
       Uint8Array.from([0, 1, 2, 3, 4])
     ]
 
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     const iter = await asyncValues(input)
     const stream = toBrowserReadbleStream(iter)
     const output = await all(stream)
