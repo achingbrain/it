@@ -6,22 +6,7 @@
 <blockquote>
 <p>Read and write arbitrary bytes over a duplex stream</p>
 </blockquote>
-<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><!--
-
-!IMPORTANT!
-
-Everything in this README between "# About" and "# Install" is automatically
-generated and will be overwritten the next time the doc generator is run.
-
-To make changes to this section, please update the  section
-of src/index.js or src/index.ts
-
-To experiment with formatting, please run "npm run docs" from the root of this
-repo and examine the changes made.
-
--->
-
-<p>This module makes it easy to send and receive bytes over streams.</p>
+<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><p>This module makes it easy to send and receive bytes over streams.</p>
 <a id="md:example" class="tsd-anchor"></a><h2><a href="#md:example">Example</a></h2><pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">byteStream</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;it-byte-stream&#39;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">stream</span><span class="hl-1"> = </span><span class="hl-6">byteStream</span><span class="hl-1">(</span><span class="hl-2">duplex</span><span class="hl-1">)</span><br/><br/><span class="hl-8">// read the next chunk</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">bytes</span><span class="hl-1"> = </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">stream</span><span class="hl-1">.</span><span class="hl-6">read</span><span class="hl-1">()</span><br/><br/><span class="hl-8">// read the next five bytes</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">fiveBytes</span><span class="hl-1"> = </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">stream</span><span class="hl-1">.</span><span class="hl-6">read</span><span class="hl-1">(</span><span class="hl-7">5</span><span class="hl-1">)</span><br/><br/><span class="hl-8">// write bytes into the stream</span><br/><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">stream</span><span class="hl-1">.</span><span class="hl-6">write</span><span class="hl-1">(</span><span class="hl-2">Uint8Array</span><span class="hl-1">.</span><span class="hl-6">from</span><span class="hl-1">([</span><span class="hl-7">0</span><span class="hl-1">, </span><span class="hl-7">1</span><span class="hl-1">, </span><span class="hl-7">2</span><span class="hl-1">, </span><span class="hl-7">3</span><span class="hl-1">, </span><span class="hl-7">4</span><span class="hl-1">]))</span>
 </code><button>Copy</button></pre>
 <a id="md:install" class="tsd-anchor"></a><h1><a href="#md:install">Install</a></h1><pre><code class="language-console"><span class="hl-1">$ npm i it-byte-stream</span>

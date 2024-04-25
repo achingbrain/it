@@ -6,22 +6,7 @@
 <blockquote>
 <p>An async iterator that emits buffers containing bytes up to a certain length</p>
 </blockquote>
-<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><!--
-
-!IMPORTANT!
-
-Everything in this README between "# About" and "# Install" is automatically
-generated and will be overwritten the next time the doc generator is run.
-
-To make changes to this section, please update the  section
-of src/index.js or src/index.ts
-
-To experiment with formatting, please run "npm run docs" from the root of this
-repo and examine the changes made.
-
--->
-
-<p>Generate a stream of buffers, useful for testing purposes.</p>
+<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><p>Generate a stream of buffers, useful for testing purposes.</p>
 <a id="md:example" class="tsd-anchor"></a><h2><a href="#md:example">Example</a></h2><pre><code class="language-javascript"><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">bufferStream</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;it-buffer-stream&#39;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">totalLength</span><span class="hl-1"> = </span><span class="hl-8">//... a big number</span><br/><br/><span class="hl-8">// all options are optional, defaults are shown</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">options</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-2">chunkSize:</span><span class="hl-1"> </span><span class="hl-7">4096</span><span class="hl-1">, </span><span class="hl-8">// how many bytes will be in each buffer</span><br/><span class="hl-1">  </span><span class="hl-6">collector</span><span class="hl-2">:</span><span class="hl-1"> (</span><span class="hl-2">buffer</span><span class="hl-1">) </span><span class="hl-4">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-8">// will be called as each buffer is generated. the final buffer</span><br/><span class="hl-1">    </span><span class="hl-8">// may be smaller than `chunkSize`</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">  </span><span class="hl-6">generator</span><span class="hl-2">:</span><span class="hl-1"> </span><span class="hl-4">async</span><span class="hl-1"> (</span><span class="hl-2">size</span><span class="hl-1">) </span><span class="hl-4">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-8">// return a promise that resolves to a buffer of length `size`</span><br/><span class="hl-1">    </span><span class="hl-8">//</span><br/><span class="hl-1">    </span><span class="hl-8">// if omitted, `Promise.resolve(crypto.randomBytes(size))` will be used</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-4">let</span><span class="hl-1"> </span><span class="hl-2">buffers</span><span class="hl-1"> = []</span><br/><br/><span class="hl-0">for</span><span class="hl-1"> </span><span class="hl-0">await</span><span class="hl-1"> (</span><span class="hl-2">buf</span><span class="hl-1"> </span><span class="hl-4">of</span><span class="hl-1"> </span><span class="hl-6">bufferStream</span><span class="hl-1">(</span><span class="hl-2">totalLength</span><span class="hl-1">, </span><span class="hl-2">options</span><span class="hl-1">)) {</span><br/><span class="hl-1">  </span><span class="hl-2">buffers</span><span class="hl-1">.</span><span class="hl-6">push</span><span class="hl-1">(</span><span class="hl-2">buf</span><span class="hl-1">)</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-8">// `buffers` is an array of Buffers the combined length of which === totalLength</span>
 </code><button>Copy</button></pre>
 <a id="md:install" class="tsd-anchor"></a><h1><a href="#md:install">Install</a></h1><pre><code class="language-console"><span class="hl-1">$ npm i it-buffer-stream</span>

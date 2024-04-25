@@ -7,22 +7,7 @@ messages over streams.</p>
 <blockquote>
 <p>Read and write protobuf messages over a duplex stream</p>
 </blockquote>
-<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><!--
-
-!IMPORTANT!
-
-Everything in this README between "# About" and "# Install" is automatically
-generated and will be overwritten the next time the doc generator is run.
-
-To make changes to this section, please update the  section
-of src/index.js or src/index.ts
-
-To experiment with formatting, please run "npm run docs" from the root of this
-repo and examine the changes made.
-
--->
-
-<p>This module makes it easy to send and receive length-prefixed Protobuf encoded
+<a id="md:about" class="tsd-anchor"></a><h1><a href="#md:about">About</a></h1><p>This module makes it easy to send and receive length-prefixed Protobuf encoded
 messages over streams.</p>
 <a id="md:example" class="tsd-anchor"></a><h2><a href="#md:example">Example</a></h2><pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">pbStream</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;it-protobuf-stream&#39;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">MessageType</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;./src/my-message-type.js&#39;</span><br/><br/><span class="hl-8">// RequestType and ResponseType have been generate from `.proto` files and have</span><br/><span class="hl-8">// `.encode` and `.decode` methods for serialization/deserialization</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">stream</span><span class="hl-1"> = </span><span class="hl-6">pbStream</span><span class="hl-1">(</span><span class="hl-2">duplex</span><span class="hl-1">)</span><br/><br/><span class="hl-8">// write a message to the stream</span><br/><span class="hl-2">stream</span><span class="hl-1">.</span><span class="hl-6">write</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-2">foo:</span><span class="hl-1"> </span><span class="hl-3">&#39;bar&#39;</span><br/><span class="hl-1">}, </span><span class="hl-2">MessageType</span><span class="hl-1">)</span><br/><br/><span class="hl-8">// read a message from the stream</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">res</span><span class="hl-1"> = </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">stream</span><span class="hl-1">.</span><span class="hl-6">read</span><span class="hl-1">(</span><span class="hl-2">MessageType</span><span class="hl-1">)</span>
 </code><button>Copy</button></pre>
