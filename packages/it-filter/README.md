@@ -7,6 +7,21 @@
 
 # About
 
+<!--
+
+!IMPORTANT!
+
+Everything in this README between "# About" and "# Install" is automatically
+generated and will be overwritten the next time the doc generator is run.
+
+To make changes to this section, please update the @packageDocumentation section
+of src/index.js or src/index.ts
+
+To experiment with formatting, please run "npm run docs" from the root of this
+repo and examine the changes made.
+
+-->
+
 Filter values out of an (async)iterable
 
 ## Example
@@ -18,7 +33,7 @@ import filter from 'it-filter'
 // This can also be an iterator, generator, etc
 const values = [0, 1, 2, 3, 4]
 
-const fn = val => val > 2 // Return boolean to keep item
+const fn = (val, index) => val > 2 // Return boolean to keep item
 
 const arr = all(filter(values, fn))
 
@@ -35,7 +50,7 @@ const values = async function * () {
   yield * [0, 1, 2, 3, 4]
 }
 
-const fn = async val => val > 2 // Return boolean or promise of boolean to keep item
+const fn = async val => (val, index) > 2 // Return boolean or promise of boolean to keep item
 
 const arr = await all(filter(values, fn))
 
@@ -64,8 +79,8 @@ Loading this module through a script tag will make it's exports available as `It
 
 Licensed under either of
 
-- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+- Apache 2.0, ([LICENSE-APACHE](https://github.com/achingbrain/it/blob/main/packages/it-filter/LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](https://github.com/achingbrain/it/blob/main/packages/it-filter/LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
 # Contribution
 

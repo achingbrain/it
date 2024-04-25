@@ -48,10 +48,10 @@
     "test:firefox": "aegir test -t browser -- --browser firefox",
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox"
   },
-  "devDependencies": {
-    "aegir": "^42.2.5"
-  },
   "dependencies": {
     "get-iterator": "^2.0.1"
+  },
+  "devDependencies": {
+    "aegir": "^42.2.5"
   }
 }

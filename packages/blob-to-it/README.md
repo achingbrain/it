@@ -7,6 +7,21 @@
 
 # About
 
+<!--
+
+!IMPORTANT!
+
+Everything in this README between "# About" and "# Install" is automatically
+generated and will be overwritten the next time the doc generator is run.
+
+To make changes to this section, please update the @packageDocumentation section
+of src/index.js or src/index.ts
+
+To experiment with formatting, please run "npm run docs" from the root of this
+repo and examine the changes made.
+
+-->
+
 Allows reading Blob contents as an async iterator.
 
 ## Example
@@ -44,8 +59,8 @@ Loading this module through a script tag will make it's exports available as `Bl
 
 Licensed under either of
 
-- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+- Apache 2.0, ([LICENSE-APACHE](https://github.com/achingbrain/it/blob/main/packages/blob-to-it/LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](https://github.com/achingbrain/it/blob/main/packages/blob-to-it/LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
 # Contribution
 
