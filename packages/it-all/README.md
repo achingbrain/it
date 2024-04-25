@@ -73,8 +73,8 @@ Loading this module through a script tag will make it's exports available as `It
 
 Licensed under either of
 
-- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+- Apache 2.0, ([LICENSE-APACHE](https://github.com/achingbrain/it/blob/main/packages/it-all/LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](https://github.com/achingbrain/it/blob/main/packages/it-all/LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
 # Contribution
 
