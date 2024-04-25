@@ -1,3 +1,15 @@
+## it-glob [3.0.1](https://github.com/achingbrain/it/compare/it-glob-3.0.0...it-glob-3.0.1) (2024-04-25)
+
+
+### Bug Fixes
+
+* re-export the Options type from fast-glob ([#128](https://github.com/achingbrain/it/issues/128)) ([0dd90a0](https://github.com/achingbrain/it/commit/0dd90a09ab300a569d54a6a67804b580835a19fc))
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
 ## it-glob [3.0.0](https://github.com/achingbrain/it/compare/it-glob-2.0.7...it-glob-3.0.0) (2024-04-25)
 
 
