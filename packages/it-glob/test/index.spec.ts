@@ -64,14 +64,16 @@ describe('it-glob', () => {
   })
 
   it('should match directories', async () => {
-    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*'))
+    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*', {
+      onlyFiles: false
+    }))
 
     expect(files.includes(path.join('dist', 'src'))).to.be.true()
   })
 
   it('should skip directories', async () => {
     const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/**/*', {
-      nodir: true,
+      onlyFiles: true,
       dot: true
     }))
 
