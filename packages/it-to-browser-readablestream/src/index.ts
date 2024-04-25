@@ -19,6 +19,8 @@
  * ```
  */
 
+import { getIterator } from 'get-iterator'
+
 interface SourceExt {
   _cancelled: boolean
 }
@@ -28,7 +30,9 @@ type Source<T> = SourceExt & UnderlyingSource<T>
 /**
  * Converts an (async) iterator into a WHATWG ReadableStream
  */
-export default function itToBrowserReadableStream <T extends ArrayBufferView> (source: AsyncIterator<T> | Iterator<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
+export default function itToBrowserReadableStream <T extends ArrayBufferView> (source: AsyncIterable<T> | Iterable<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
+  const iter = getIterator<T>(source)
+
   const s: Source<ArrayBufferView> = {
     _cancelled: false,
 
@@ -37,7 +41,7 @@ export default function itToBrowserReadableStream <T extends ArrayBufferView> (s
     },
     async pull (controller) {
       try {
-        const { value, done } = await source.next()
+        const { value, done } = await iter.next()
 
         if (this._cancelled) {
           return
