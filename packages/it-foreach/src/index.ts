@@ -16,7 +16,7 @@
  * // This can also be an iterator, generator, etc
  * const values = [0, 1, 2, 3, 4]
  *
- * // prints 0, 1, 2, 3, 4
+ * // prints [0, 0], [1, 1], [2, 2], [3, 3], [4, 4]
  * const arr = drain(
  *   each(values, console.info)
  * )
@@ -32,7 +32,7 @@
  *   yield * [0, 1, 2, 3, 4]
  * }
  *
- * // prints 0, 1, 2, 3, 4
+ * // prints [0, 0], [1, 1], [2, 2], [3, 3], [4, 4]
  * const arr = await drain(
  *   each(values(), console.info)
  * )
@@ -52,14 +52,16 @@ function isPromise <T = unknown> (thing: any): thing is Promise<T> {
 /**
  * Invokes the passed function for each item in an iterable
  */
-function forEach <T> (source: Iterable<T>, fn: (thing: T) => Promise<void>): AsyncGenerator<T, void, undefined>
-function forEach <T> (source: Iterable<T>, fn: (thing: T) => void): Generator<T, void, undefined>
-function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined>
-function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+function forEach <T> (source: Iterable<T>, fn: (thing: T, index: number) => Promise<void>): AsyncGenerator<T, void, undefined>
+function forEach <T> (source: Iterable<T>, fn: (thing: T, index: number) => void): Generator<T, void, undefined>
+function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T, index: number) => void | Promise<void>): AsyncGenerator<T, void, undefined>
+function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T, index: number) => void | Promise<void>): AsyncGenerator<T, void, undefined> | Generator<T, void, undefined> {
+  let index = 0
+
   if (isAsyncIterable(source)) {
     return (async function * () {
       for await (const val of source) {
-        const res = fn(val)
+        const res = fn(val, index++)
 
         if (isPromise(res)) {
           await res
@@ -78,14 +80,14 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
     return (function * () {}())
   }
 
-  const res = fn(value)
+  const res = fn(value, index++)
 
   if (typeof res?.then === 'function') {
     return (async function * () {
       yield value
 
       for await (const val of peekable) {
-        const res = fn(val)
+        const res = fn(val, index++)
 
         if (isPromise(res)) {
           await res
@@ -96,13 +98,13 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T) => 
     })()
   }
 
-  const func = fn as (val: T) => void
+  const func = fn as (val: T, index: number) => void
 
   return (function * () {
     yield value
 
     for (const val of peekable) {
-      func(val)
+      func(val, index++)
       yield val
     }
   })()
