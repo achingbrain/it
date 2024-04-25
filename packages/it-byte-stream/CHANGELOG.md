@@ -1,3 +1,15 @@
+## it-byte-stream [1.0.10](https://github.com/achingbrain/it/compare/it-byte-stream-1.0.9...it-byte-stream-1.0.10) (2024-04-25)
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
 ## it-byte-stream [1.0.9](https://github.com/achingbrain/it/compare/it-byte-stream-v1.0.8...it-byte-stream-1.0.9) (2024-04-24)
 
 
