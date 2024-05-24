@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+enum MessageType {
+  // sent by the client when a method function is invoked
+  invokeMethod = 0;
+
+  // sent by the server when a function has returned
+  methodResolved = 1;
+
+  // sent by the server when a function has thrown
+  methodRejected = 2;
+
+  // sent to invoke a generator method - a special case because the callback
+  // functions on the return value must live beyond the lifetime of the function
+  // that supplied the async generator
+  invokeGeneratorMethod = 3;
+
+  // if the method is passed and `AbortSignal`, the 'abort' event will be fired
+  // on it by the client sending this message
+  abortMethodInvocation = 4;
+
+  // sent by the client when a callback function is invoked
+  invokeCallback = 5;
+
+  // sent by the server when a function has returned
+  callbackResolved = 6;
+
+  // sent by the server when a function has thrown
+  callbackRejected = 7;
+
+  // if the callback is passed and `AbortSignal`, the 'abort' event will be fired
+  // on it by the client sending this message
+  abortCallbackInvocation = 8;
+}
+
+enum ValueType {
+  undefined = 0;
+  null = 1;
+  Boolean = 2;
+  Number = 3;
+  String = 4;
+  Array = 5;
+  Object = 6;
+  Function = 7;
+  NaN = 8;
+  Error = 9;
+  Promise = 10;
+  AsyncGenerator = 11;
+  BigInt = 12;
+  Map = 13;
+  Set = 14;
+  Uint8Array = 15;
+  AbortSignal = 16;
+}
+
+message Value {
+  ValueType type = 1;
+  string value = 2;
+}
+
+message RPCMessage {
+  // the type of the message
+  MessageType type = 1;
+
+  // the message payload
+  bytes message = 2;
+}
+
+message InvokeMethodMessage {
+  string scope = 1;
+  string path = 2;
+  repeated Value args = 3;
+}
+
+message AbortMethodMessage {
+  string scope = 1;
+}
+
+message MethodResolvedMessage {
+  string scope = 1;
+  Value value = 2;
+}
+
+message MethodRejectedMessage {
+  string scope = 1;
+  Value error = 2;
+}
+
+message InvokeCallbackMessage {
+  string scope = 1;
+
+  // a chain of parent invocation scopes used to look up the callback reference
+  repeated string parents = 2;
+
+  // the callback id
+  string callback = 3;
+
+  // args to pass to the callback
+  repeated Value args = 4;
+}
+
+message AbortCallbackMessage {
+  string scope = 1;
+
+  // a chain of parent invocation scopes used to look up the callback reference
+  repeated string parents = 2;
+}
+
+message CallbackResolvedMessage {
+  string scope = 1;
+  repeated string parents = 2;
+  Value value = 3;
+}
+
+message CallbackRejectedMessage {
+  string scope = 1;
+  repeated string parents = 2;
+  Value error = 3;
+}

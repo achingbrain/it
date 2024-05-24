@@ -1,0 +1,72 @@
+{
+  "name": "it-rpc",
+  "version": "0.0.0",
+  "description": "Schema-free RPC over async iterables",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-rpc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "project": true,
+      "sourceType": "module"
+    }
+  },
+  "scripts": {
+    "clean": "aegir clean",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "doc-check": "aegir doc-check",
+    "build": "aegir build",
+    "generate": "protons src/rpc.proto",
+    "test": "aegir test",
+    "test:chrome": "aegir test -t browser",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "test:webkit": "aegir test -t browser -- --browser webkit",
+    "test:node": "aegir test -t node --cov",
+    "test:electron-main": "aegir test -t electron-main"
+  },
+  "dependencies": {
+    "any-signal": "^4.1.1",
+    "it-length-prefixed": "^9.0.4",
+    "it-pushable": "^3.2.3",
+    "it-stream-types": "^2.0.1",
+    "p-defer": "^4.0.1",
+    "protons-runtime": "^5.4.0",
+    "uint8arraylist": "^2.4.8",
+    "uint8arrays": "^5.0.3"
+  },
+  "devDependencies": {
+    "aegir": "^42.2.11",
+    "it-all": "^3.0.0",
+    "protons": "^7.5.0",
+    "sinon-ts": "^2.0.0"
+  },
+  "sideEffects": false
+}
