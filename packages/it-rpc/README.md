@@ -30,8 +30,7 @@ Your RPC objects must follow a few rules:
 2. The values resolved/yielded from an RPC function must be serializable (e.g. contain no functions)
 3. Callback functions (e.g. functions passed as arguments) should return promises or async generators
 4. Callback functions may return `void`, but if so they must not throw
-5. Avoid use of `instanceof` - objects resolved/yielded or passed as arguments will lose their prototype chains during transfer
-6. AsyncGenerators returned from RPC methods must be either read to completion, or their `.return`/`.throw` methods invoked
+5. AsyncGenerators returned from RPC methods must be either read to completion, or their `.return`/`.throw` methods invoked
 
 ## Example - Getting started
 
@@ -145,6 +144,88 @@ for await (const buf of clientTarget.slowStream({ signal })) {
   console.info(buf)
   // explodes after 1s
 }
+```
+
+## Custom types
+
+It is possible to extend `it-rpc` to support serializing/deserializing custom types by passing `ValueCodec`s to the constructor.
+
+Each `ValueCodec` needs a unique `type` field which identifies the value type on the wire.
+
+`it-rpc` uses value types starting at `1024` and has a catch-all `2147483647` type which resolves to plain objects.
+
+You should define your type values higher than the max value `it-rpc` uses (`2048` is a safe value) but lower than the catch-all type value.
+
+Matching codecs are searched for in `type` order so you can override the built-in codecs by specifying a `type` field lower than `1024`.
+
+> \[!IMPORTANT]
+> Both the server and the client must be configured with the same custom `ValueCodec`s otherwise the messages will become un-decodable
+
+## Example - Custom Types
+
+```ts
+import { encode, decode } from 'cborg'
+import { rpc } from 'it-rpc'
+import type { ValueCodec } from 'it-rpc'
+
+// a custom type we want to encode
+class MyClass {
+  field: string
+
+  constructor (val: string) {
+    this.field = val
+  }
+
+  getField () {
+    return this.field
+  }
+}
+
+// our custom codec
+const codec: ValueCodec<MyClass> = {
+  type: 2048,
+  canEncode: (val) => val instanceof MyClass,
+  encode: (val) => encode({ field: val.getField() }),
+  decode: (buf) => {
+    const decoded = decode(buf)
+
+    return new MyClass(decoded.field)
+  }
+}
+
+// configure the server/client with the custom codec
+const server = rpc({
+  valueCodecs: [
+    codec
+  ]
+})
+const client = rpc({
+  valueCodecs: [
+    codec
+  ]
+})
+void server.sink(client.source)
+void client.sink(server.source)
+
+interface Target {
+  getFieldFromArg(arg: MyClass): Promise<string>
+}
+
+const target: Target = {
+  async getFieldFromArg (arg) {
+    return arg.getField()
+  }
+}
+
+const objectName = 'target'
+server.createTarget(objectName, target)
+
+const clientTarget = client.createClient<Target>(objectName)
+
+const val = new MyClass('hello')
+const field = await clientTarget.getFieldFromArg(val)
+
+console.info('field') // 'hello'
 ```
 
 # Install

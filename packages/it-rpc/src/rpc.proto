@@ -33,31 +33,9 @@ enum MessageType {
   abortCallbackInvocation = 8;
 }
 
-enum ValueType {
-  undefined = 0;
-  null = 1;
-  Boolean = 2;
-  Number = 3;
-  String = 4;
-  Array = 5;
-  Object = 6;
-  Function = 7;
-  NaN = 8;
-  Error = 9;
-  Promise = 10;
-  AsyncGenerator = 11;
-  BigInt = 12;
-  Map = 13;
-  Set = 14;
-  Uint8Array = 15;
-  AbortSignal = 16;
-  Date = 17;
-  RegExp = 18;
-}
-
 message Value {
-  ValueType type = 1;
-  string value = 2;
+  uint32 type = 1;
+  optional bytes value = 2;
 }
 
 message RPCMessage {

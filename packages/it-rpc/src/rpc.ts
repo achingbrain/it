@@ -37,58 +37,9 @@ export namespace MessageType {
     return enumeration<MessageType>(__MessageTypeValues)
   }
 }
-export enum ValueType {
-  undefined = 'undefined',
-  null = 'null',
-  Boolean = 'Boolean',
-  Number = 'Number',
-  String = 'String',
-  Array = 'Array',
-  Object = 'Object',
-  Function = 'Function',
-  NaN = 'NaN',
-  Error = 'Error',
-  Promise = 'Promise',
-  AsyncGenerator = 'AsyncGenerator',
-  BigInt = 'BigInt',
-  Map = 'Map',
-  Set = 'Set',
-  Uint8Array = 'Uint8Array',
-  AbortSignal = 'AbortSignal',
-  Date = 'Date',
-  RegExp = 'RegExp'
-}
-
-enum __ValueTypeValues {
-  undefined = 0,
-  null = 1,
-  Boolean = 2,
-  Number = 3,
-  String = 4,
-  Array = 5,
-  Object = 6,
-  Function = 7,
-  NaN = 8,
-  Error = 9,
-  Promise = 10,
-  AsyncGenerator = 11,
-  BigInt = 12,
-  Map = 13,
-  Set = 14,
-  Uint8Array = 15,
-  AbortSignal = 16,
-  Date = 17,
-  RegExp = 18
-}
-
-export namespace ValueType {
-  export const codec = (): Codec<ValueType> => {
-    return enumeration<ValueType>(__ValueTypeValues)
-  }
-}
 export interface Value {
-  type: ValueType
-  value: string
+  type: number
+  value?: Uint8Array
 }
 
 export namespace Value {
@@ -101,14 +52,14 @@ export namespace Value {
           w.fork()
         }
 
-        if (obj.type != null && __ValueTypeValues[obj.type] !== 0) {
+        if ((obj.type != null && obj.type !== 0)) {
           w.uint32(8)
-          ValueType.codec().encode(obj.type, w)
+          w.uint32(obj.type)
         }
 
-        if ((obj.value != null && obj.value !== '')) {
+        if (obj.value != null) {
           w.uint32(18)
-          w.string(obj.value)
+          w.bytes(obj.value)
         }
 
         if (opts.lengthDelimited !== false) {
@@ -116,8 +67,7 @@ export namespace Value {
         }
       }, (reader, length, opts = {}) => {
         const obj: any = {
-          type: ValueType.undefined,
-          value: ''
+          type: 0
         }
 
         const end = length == null ? reader.len : reader.pos + length
@@ -127,11 +77,11 @@ export namespace Value {
 
           switch (tag >>> 3) {
             case 1: {
-              obj.type = ValueType.codec().decode(reader)
+              obj.type = reader.uint32()
               break
             }
             case 2: {
-              obj.value = reader.string()
+              obj.value = reader.bytes()
               break
             }
             default: {
