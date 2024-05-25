@@ -22,15 +22,15 @@ repo and examine the changes made.
 
 -->
 
-Schema-free RPC over async iterables.
-
 Your RPC objects must follow a few rules:
 
 1. All RPC methods must return a promise or an async generator
-2. The values resolved/yielded from an RPC function must be serializable (e.g. contain no functions)
-3. Callback functions (e.g. functions passed as arguments) should return promises or async generators
-4. Callback functions may return `void`, but if so they must not throw
+2. Property access on the RPC object is not supported
+3. RPC Arguments must not be promises (though may be functions that return promises)
+4. The values resolved/yielded from an RPC function must be serializable (e.g. contain no functions) unless custom types are used (see <a href="#custom-types">Custom Types</a> below)
 5. AsyncGenerators returned from RPC methods must be either read to completion, or their `.return`/`.throw` methods invoked
+6. Callback functions (e.g. functions passed as arguments) should return promises or async generators
+7. Callback functions may return `void`, but if so they must not throw
 
 ## Example - Getting started
 
@@ -159,7 +159,7 @@ You should define your type values higher than the max value `it-rpc` uses (`204
 Matching codecs are searched for in `type` order so you can override the built-in codecs by specifying a `type` field lower than `1024`.
 
 > \[!IMPORTANT]
-> Both the server and the client must be configured with the same custom `ValueCodec`s otherwise the messages will become un-decodable
+> Both the server and the client must be configured with the same set of custom `ValueCodec`s
 
 ## Example - Custom Types
 
@@ -223,9 +223,8 @@ server.createTarget(objectName, target)
 const clientTarget = client.createClient<Target>(objectName)
 
 const val = new MyClass('hello')
-const field = await clientTarget.getFieldFromArg(val)
 
-console.info('field') // 'hello'
+await clientTarget.getFieldFromArg(val) // 'hello'
 ```
 
 # Install
