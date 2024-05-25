@@ -5,9 +5,12 @@
  *
  * Your RPC objects must follow a few rules:
  *
- * 1. All invoked methods, or functions passed as arguments (or properties of arguments) must return a promise or an async generator
- * 2. No arguments or properties of arguments can be promises
- * 3. No Functions cannot be returned from RPC methods
+ * 1. All RPC methods must return a promise or an async generator
+ * 2. The values resolved/yielded from an RPC function must be serializable (e.g. contain no functions)
+ * 3. Callback functions (e.g. functions passed as arguments) should return promises or async generators
+ * 4. Callback functions may return `void`, but if so they must not throw
+ * 5. Avoid use of `instanceof` - objects resolved/yielded or passed as arguments will lose their prototype chains during transfer
+ * 6. AsyncGenerators returned from RPC methods must be either read to completion, or their `.return`/`.throw` methods invoked
  *
  * @example Getting started
  *

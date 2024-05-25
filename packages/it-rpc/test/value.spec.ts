@@ -202,4 +202,32 @@ describe('value', () => {
 
     expect(signal).to.have.property('aborted', true)
   })
+
+  it('should round trip Date', () => {
+    const date = new Date()
+    const value = toValue(date)
+    expect(value).to.have.property('type', ValueType.Date)
+
+    const reconstructed = fromValue(value, pushable, invocation)
+    expect(reconstructed.toString()).to.equal(date.toString())
+  })
+
+  it('should round trip RegExp', () => {
+    const regexp = /.*/
+    const value = toValue(regexp)
+    expect(value).to.have.property('type', ValueType.RegExp)
+
+    const reconstructed = fromValue(value, pushable, invocation)
+    expect(reconstructed.toString()).to.equal(regexp.toString())
+  })
+
+  it('should round trip RegExp object', () => {
+    // eslint-disable-next-line prefer-regex-literals
+    const regexp = new RegExp('/.*/', 'g')
+    const value = toValue(regexp)
+    expect(value).to.have.property('type', ValueType.RegExp)
+
+    const reconstructed = fromValue(value, pushable, invocation)
+    expect(reconstructed.toString()).to.equal(regexp.toString())
+  })
 })

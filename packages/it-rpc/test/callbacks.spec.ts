@@ -6,6 +6,12 @@ const target = {
   async callsCallback (arg: () => Promise<any>) {
     return arg()
   },
+  async callsVoidCallback (arg: () => void) {
+    arg()
+  },
+  async callsVoidCallbackWithArg (arg: (a: boolean) => void) {
+    arg(true)
+  },
   async callsCallbackWithHello (arg: (arg: any) => Promise<any>) {
     return arg('hello')
   },
@@ -45,6 +51,26 @@ describe('callbacks', () => {
 
   it('should call a callback argument', async () => {
     await expect(sender.callsCallbackWithHello(async (arg) => arg)).to.eventually.equal('hello')
+  })
+
+  it('should call a void callback argument', async () => {
+    let called = false
+    const cb = (): void => {
+      called = true
+    }
+
+    await sender.callsVoidCallback(cb)
+    expect(called).to.be.true()
+  })
+
+  it('should call a void callback argument with value', async () => {
+    let called
+    const cb = (c: boolean): void => {
+      called = c
+    }
+
+    await sender.callsVoidCallbackWithArg(cb)
+    expect(called).to.be.true()
   })
 
   it('should call a nested callback argument', async () => {

@@ -117,4 +117,22 @@ describe('async generators', () => {
     await expect(gen.throw(new Error('Urk!'))).to.eventually.deep.equal({ done: false, value: 2 })
     await expect(all(gen)).to.eventually.deep.equal([3, 4])
   })
+
+  it('should be able to break out of loops without leaking memory', async () => {
+    const gen = sender.asyncGenerator()
+    const values = []
+
+    for await (const val of gen) {
+      values.push(val)
+      // exit loop before finishing generator
+      if (val === 2) {
+        break
+      }
+    }
+
+    // should have read some values
+    expect(values).to.deep.equal([1, 2])
+
+    // afterEach checks there are no lingering invocations
+  })
 })

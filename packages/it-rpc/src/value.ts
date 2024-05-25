@@ -249,6 +249,22 @@ const valueTransformers: ValueTransformer[] = [{
     return controller.signal
   }
 }, {
+  // 17 - Date
+  type: ValueType.Date,
+  test: (val) => val instanceof Date,
+  toValue: (val) => val.toString(),
+  fromValue: (val) => new Date(val.value)
+}, {
+  // 18 - RegExp
+  type: ValueType.RegExp,
+  test: (val) => val instanceof RegExp,
+  toValue: (val) => JSON.stringify({ source: val.source, flags: val.flags }),
+  fromValue: (val) => {
+    const { source, flags } = JSON.parse(val.value)
+
+    return new RegExp(source, flags)
+  }
+}, {
   // 6 - object - declared last in this list so the simple`typeof` test doesn't
   // catch other supported types
   type: ValueType.Object,

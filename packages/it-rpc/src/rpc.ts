@@ -54,7 +54,9 @@ export enum ValueType {
   Map = 'Map',
   Set = 'Set',
   Uint8Array = 'Uint8Array',
-  AbortSignal = 'AbortSignal'
+  AbortSignal = 'AbortSignal',
+  Date = 'Date',
+  RegExp = 'RegExp'
 }
 
 enum __ValueTypeValues {
@@ -74,7 +76,9 @@ enum __ValueTypeValues {
   Map = 13,
   Set = 14,
   Uint8Array = 15,
-  AbortSignal = 16
+  AbortSignal = 16,
+  Date = 17,
+  RegExp = 18
 }
 
 export namespace ValueType {

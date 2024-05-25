@@ -51,6 +51,8 @@ enum ValueType {
   Set = 14;
   Uint8Array = 15;
   AbortSignal = 16;
+  Date = 17;
+  RegExp = 18;
 }
 
 message Value {
