@@ -211,6 +211,7 @@
 import { anySignal } from 'any-signal'
 import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable, type Pushable } from 'it-pushable'
+import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
 import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, MissingParentScopeError } from './errors.js'
 import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, CallbackResolvedMessage, InvokeCallbackMessage, InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from './rpc.js'
@@ -736,7 +737,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
         function getPromise (): any {
           if (promise == null) {
             promise = new Promise<any>((resolve, reject) => {
-              const scope = crypto.randomUUID()
+              const scope = nanoid()
               const invocation = {
                 scope,
                 result: pDefer(),
@@ -784,7 +785,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
 
         function getAsyncGenerator (): any {
           if (asyncGenerator == null) {
-            const scope = crypto.randomUUID()
+            const scope = nanoid()
             const invocation = {
               scope,
               result: pDefer<AsyncGenerator<any, any, any>>(),

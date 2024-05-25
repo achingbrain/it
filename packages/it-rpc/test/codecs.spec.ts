@@ -1,5 +1,6 @@
 import { expect } from 'aegir/chai'
 import { decode } from 'cborg'
+import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
 import { stubInterface } from 'sinon-ts'
 import undefinedTransformer from '../src/codecs/1024-undefined.js'
@@ -33,7 +34,7 @@ describe('values', () => {
   beforeEach(() => {
     pushable = stubInterface()
     invocation = {
-      scope: crypto.randomUUID(),
+      scope: nanoid(),
       parents: [],
       children: new Map(),
       callbacks: new Map(),

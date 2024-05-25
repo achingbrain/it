@@ -1,5 +1,6 @@
 import { anySignal } from 'any-signal'
 import { decode, encode } from 'cborg'
+import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
 import { AbortCallbackMessage, InvokeCallbackMessage, MessageType, RPCMessage } from '../rpc.js'
 import type { ValueCodec, CallbackFunction, Invocation } from '../index.js'
@@ -9,7 +10,7 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
   canEncode: (val) => typeof val === 'function',
   encode: (val, codec, context, invocation) => {
     // store a reference to the function so it can be invoked later
-    const id = crypto.randomUUID()
+    const id = nanoid()
     invocation?.callbacks.set(id, {
       context,
       fn: val
@@ -21,7 +22,7 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
     return async (...args: any[]): Promise<any> => {
       return new Promise<any>((resolve, reject) => {
         const id = decode(val)
-        const scope = crypto.randomUUID()
+        const scope = nanoid()
 
         const callbackInvocation: Invocation = {
           scope,
