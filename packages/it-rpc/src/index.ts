@@ -127,50 +127,12 @@
 import { anySignal } from 'any-signal'
 import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable, type Pushable } from 'it-pushable'
-import pDefer, { type DeferredPromise } from 'p-defer'
+import pDefer from 'p-defer'
 import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, MissingParentScopeError } from './errors.js'
 import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, CallbackResolvedMessage, InvokeCallbackMessage, InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from './rpc.js'
-import { fromValue, toValue, type CallbackFunction } from './value.js'
+import { fromValue, toValue } from './value.js'
+import type { CallbackFunction, Invocation } from './types.js'
 import type { Duplex, Source } from 'it-stream-types'
-
-export interface Invocation {
-  /**
-   * The scope of this invocation
-   */
-  scope: string
-
-  /**
-   * The result of the execution
-   */
-  result: DeferredPromise<any>
-
-  /**
-   * Holds references to any callback functions passed as arguments
-   */
-  callbacks: Map<string, CallbackFunction>
-
-  /**
-   * Any ongoing invocations of callbacks during the main method execution
-   */
-  children: Map<string, Invocation>
-
-  /**
-   * Scopes of parent invocations
-   */
-  parents: string[]
-
-  /**
-   * Used on the server side to hold abort controllers that will be aborted
-   * if the client sends an abort message
-   */
-  abortControllers: AbortController[]
-
-  /**
-   * Used on the client side to store abort signals that will cause an abort
-   * message to be sent
-   */
-  abortSignals: AbortSignal[]
-}
 
 export interface RPC extends Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   createClient<T extends object> (name: string): T
@@ -401,13 +363,18 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
         return result
       },
       throw: async (err: any) => {
-        const result = await gen.throw(err)
+        try {
+          const result = await gen.throw(err)
 
-        if (result.done === true) {
+          if (result.done === true) {
+            this.invocations.delete(message.scope)
+          }
+
+          return result
+        } catch (err) {
           this.invocations.delete(message.scope)
+          throw err
         }
-
-        return result
       },
       return: async (value: any) => {
         const result = await gen.return(value)
@@ -666,8 +633,14 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
               })
             }))
 
+            let error: Error | undefined
+
             asyncGenerator = {
               async next () {
+                if (error != null) {
+                  throw error
+                }
+
                 const gen = await invocation.result.promise
                 const result = await gen.next()
 
@@ -678,16 +651,30 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 return result
               },
               async throw (err: any) {
-                const gen = await invocation.result.promise
-                const result = await gen.throw(err)
-
-                if (result.done === true) {
-                  self.invocations.delete(scope)
+                if (error != null) {
+                  throw error
                 }
 
-                return result
+                try {
+                  const gen = await invocation.result.promise
+                  const result = await gen.throw(err)
+
+                  if (result.done === true) {
+                    self.invocations.delete(scope)
+                  }
+
+                  return result
+                } catch (e) {
+                  self.invocations.delete(scope)
+                  error = err
+                  throw e
+                }
               },
               async return (value: any) {
+                if (error != null) {
+                  throw error
+                }
+
                 const gen = await invocation.result.promise
                 const result = await gen.return(value)
 

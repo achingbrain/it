@@ -4,14 +4,9 @@ import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
 import { toString as uint8ArrayToString } from 'uint8arrays/to-string'
 import { UnsupportedValueTypeError } from './errors.js'
 import { AbortCallbackMessage, InvokeCallbackMessage, MessageType, RPCMessage, ValueType } from './rpc.js'
-import type { Invocation } from './index.js'
 import type { Value } from './rpc.js'
+import type { CallbackFunction, Invocation } from './types.js'
 import type { Pushable } from 'it-pushable'
-
-export interface CallbackFunction {
-  context: any
-  fn (...args: any[]): any
-}
 
 const IGNORE_OBJECT_PROPS = [
   '__defineGetter__',

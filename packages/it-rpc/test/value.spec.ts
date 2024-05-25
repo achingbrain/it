@@ -3,7 +3,7 @@ import pDefer from 'p-defer'
 import { stubInterface } from 'sinon-ts'
 import { ValueType } from '../src/rpc.js'
 import { toValue, fromValue } from '../src/value.js'
-import type { Invocation } from '../src/index.js'
+import type { Invocation } from '../src/types.js'
 import type { Pushable } from 'it-pushable'
 
 describe('value', () => {
