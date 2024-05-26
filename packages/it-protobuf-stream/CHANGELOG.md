@@ -1,3 +1,22 @@
+## it-protobuf-stream [1.1.4](https://github.com/achingbrain/it/compare/it-protobuf-stream-1.1.3...it-protobuf-stream-1.1.4) (2024-05-26)
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
+
+
+### Dependencies
+
+* **it-length-prefixed-stream:** upgraded to 1.1.8
+* **it-map:** upgraded to 3.1.1
+
 ## it-protobuf-stream [.1.3](https://github.com/achingbrain/it/compare/it-protobuf-stream-v1.1.2...it-protobuf-stream-1.1.3) (2024-04-24)
 
 
