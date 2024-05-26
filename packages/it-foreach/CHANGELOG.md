@@ -1,3 +1,16 @@
+## it-foreach [2.1.1](https://github.com/achingbrain/it/compare/it-foreach-2.1.0...it-foreach-2.1.1) (2024-05-26)
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
+
+
+### Dependencies
+
+* **it-peekable:** upgraded to 3.0.5
+
 ## it-foreach [2.1.0](https://github.com/achingbrain/it/compare/it-foreach-2.0.7...it-foreach-2.1.0) (2024-04-25)
 
 
