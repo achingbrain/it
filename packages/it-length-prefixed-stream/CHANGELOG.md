@@ -1,3 +1,15 @@
+## it-length-prefixed-stream [1.1.8](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-1.1.7...it-length-prefixed-stream-1.1.8) (2024-05-26)
+
+
+### Trivial Changes
+
+* update changelogs to new format ([33e243d](https://github.com/achingbrain/it/commit/33e243d6ce096de7fea1d9caf137175d2043ff31))
+
+
+### Documentation
+
+* update readme files ([#127](https://github.com/achingbrain/it/issues/127)) ([b168296](https://github.com/achingbrain/it/commit/b168296357504d70ec4ec0486d6de166f8ee5446))
+
 ## it-length-prefixed-stream [1.1.7](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-v1.1.6...it-length-prefixed-stream-1.1.7) (2024-04-24)
 
 
