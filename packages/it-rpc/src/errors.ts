@@ -34,9 +34,9 @@ export class DuplicateScopeError extends Error {
 }
 
 export class InvalidReturnTypeError extends Error {
-  constructor (message = 'Invalid response type') {
+  constructor (message = 'Invalid return type') {
     super(message)
-    this.name = 'InvalidResponseTypeError'
+    this.name = 'InvalidReturnTypeError'
   }
 }
 
@@ -51,6 +51,13 @@ export class MissingParentScopeError extends Error {
   constructor (message = 'Parent invocation scope not found') {
     super(message)
     this.name = 'MissingParentScopeError'
+  }
+}
+
+export class MissingInvocationError extends Error {
+  constructor (message = 'Invocation not found') {
+    super(message)
+    this.name = 'MissingInvocationError'
   }
 }
 

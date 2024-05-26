@@ -43,6 +43,13 @@ describe('basics', () => {
     expect(serverRPC).to.have.property('invocations').that.is.empty('server is leaking memory')
   })
 
+  it('should fail to register the same target name', async () => {
+    // invoke methods on target
+    expect(() => {
+      serverRPC.createTarget('target', target)
+    }).to.throw()
+  })
+
   it('should proxy a method invocation', async () => {
     // invoke methods on target
     await expect(sender.inner.world()).to.eventually.be.true()

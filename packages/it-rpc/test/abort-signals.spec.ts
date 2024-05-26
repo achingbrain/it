@@ -13,6 +13,11 @@ const target = {
   },
   async callsCallback (arg: () => Promise<any>) {
     return arg()
+  },
+  async abortsCallback (arg: (arg: any) => Promise<any>) {
+    const signal = AbortSignal.timeout(100)
+
+    await arg({ signal })
   }
 }
 
@@ -37,7 +42,7 @@ describe('abort signals', () => {
     sender = clientRPC.createClient<typeof target>('target')
   })
 
-  afterEach(() => {
+  afterEach(async () => {
     expect(clientRPC).to.have.property('invocations').that.is.empty('client is leaking memory')
     expect(serverRPC).to.have.property('invocations').that.is.empty('server is leaking memory')
   })
@@ -49,12 +54,23 @@ describe('abort signals', () => {
       .with.property('type', 'aborted')
   })
 
-  it('should allow aborting a callback invocation', async () => {
+  it('should allow a callback invocation to abort', async () => {
     const signal = AbortSignal.timeout(100)
 
     await expect(sender.callsCallback(async () => {
       return new Promise((resolve, reject) => {
         signal.addEventListener('abort', () => {
+          reject(new AbortError())
+        })
+      })
+    })).to.eventually.be.rejected
+      .with.property('type', 'aborted')
+  })
+
+  it('should abort a callback invocation', async () => {
+    await expect(sender.abortsCallback(async (args: { signal: AbortSignal }) => {
+      return new Promise((resolve, reject) => {
+        args.signal.addEventListener('abort', () => {
           reject(new AbortError())
         })
       })

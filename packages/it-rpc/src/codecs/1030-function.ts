@@ -23,7 +23,6 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
       return new Promise<any>((resolve, reject) => {
         const id = decode(val)
         const scope = nanoid()
-
         const callbackInvocation: Invocation = {
           scope,
           result: pDefer(),
@@ -33,20 +32,10 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
           abortControllers: [],
           abortSignals: []
         }
-
         invocation.children.set(scope, callbackInvocation)
+        args = args.map(val => codec.toValue(val, null, callbackInvocation))
 
-        pushable.push(RPCMessage.encode({
-          type: MessageType.invokeCallback,
-          message: InvokeCallbackMessage.encode({
-            scope,
-            parents: callbackInvocation.parents,
-            callback: id,
-            args: args.map(val => codec.toValue(val, null, callbackInvocation))
-          })
-        }))
-
-        const signal = anySignal(invocation.abortSignals)
+        const signal = anySignal(callbackInvocation.abortSignals)
         signal.addEventListener('abort', () => {
           pushable.push(RPCMessage.encode({
             type: MessageType.abortCallbackInvocation,
@@ -56,6 +45,16 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
             })
           }))
         })
+
+        pushable.push(RPCMessage.encode({
+          type: MessageType.invokeCallback,
+          message: InvokeCallbackMessage.encode({
+            scope,
+            parents: callbackInvocation.parents,
+            callback: id,
+            args
+          })
+        }))
 
         callbackInvocation.result.promise.then(result => {
           resolve(result)

@@ -87,4 +87,24 @@ describe('custom values', () => {
     expect(encoded).to.have.property('type', customValueCodec.type)
     expect(codecs.fromValue(encoded, pushable, invocation)).to.be.false()
   })
+
+  it('should require unique type values', () => {
+    // override built-in boolean codec to always return false
+    const customValueCodec: ValueCodec = {
+      // this number has to be lower than that of the built-in codec we are
+      // overriding
+      type: 100,
+      canEncode: (val) => val === true || val === false,
+      decode: () => false
+    }
+
+    expect(() => {
+      return new Values({
+        valueCodecs: [
+          customValueCodec,
+          customValueCodec
+        ]
+      })
+    }).to.throw()
+  })
 })

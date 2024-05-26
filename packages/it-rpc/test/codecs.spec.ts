@@ -46,6 +46,26 @@ describe('values', () => {
     codec = new Values()
   })
 
+  it('should throw if toValue is called with an unknown type', () => {
+    // @ts-expect-error private field
+    codec.transformersList = []
+
+    expect(() => {
+      codec.toValue(undefined)
+    }).to.throw()
+      .with.property('name', 'UnsupportedValueTypeError')
+  })
+
+  it('should throw if fromValue is called with an unknown type', () => {
+    expect(() => {
+      codec.fromValue({
+        type: 100,
+        value: new Uint8Array(0)
+      }, pushable, invocation)
+    }).to.throw()
+      .with.property('name', 'UnsupportedValueTypeError')
+  })
+
   it('should round trip undefined', () => {
     const value = codec.toValue(undefined)
 

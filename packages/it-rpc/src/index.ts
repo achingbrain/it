@@ -212,8 +212,9 @@ import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable, type Pushable } from 'it-pushable'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
-import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, MissingParentScopeError } from './errors.js'
+import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError } from './errors.js'
 import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, CallbackResolvedMessage, InvokeCallbackMessage, InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from './rpc.js'
+import { lookUpScope } from './utils.js'
 import { Values } from './values.js'
 import type { Value } from './rpc.js'
 import type { Duplex, Source } from 'it-stream-types'
@@ -309,6 +310,26 @@ export interface RPC extends Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   createTarget (name: string, target: any): void
 }
 
+interface MessageHandler<T> {
+  decoder: { decode(buf: Uint8Array): T }
+  handler(message: T): Promise<void>
+}
+
+interface ScopeMessageHandler<T> {
+  decoder: { decode(buf: Uint8Array): T }
+  handler(message: T, invocation: Invocation): Promise<void>
+  isScope: true
+  isError?: true
+}
+
+function isScopeMessageHandler (handler: any): handler is ScopeMessageHandler<any> {
+  return handler.isScope === true
+}
+
+function isInvocationMessage (subMessage: any): boolean {
+  return subMessage.type === MessageType.invokeMethod || subMessage.type === MessageType.invokeGeneratorMethod || subMessage.type === MessageType.invokeCallback
+}
+
 class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   public source: AsyncGenerator<Uint8Array, void, undefined>
   private readonly output: Pushable<Uint8Array>
@@ -319,7 +340,11 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   // used by both ends to track function input/output during invocations
   private readonly invocations: Map<string, Invocation>
 
+  // used to serialize/deserialize values
   private readonly values: ValueCodecs
+
+  // handers for incoming protocol message
+  private readonly messageHandlers: Record<string, MessageHandler<any> | ScopeMessageHandler<any>>
 
   constructor (init?: RPCIinit) {
     this.output = pushable()
@@ -329,110 +354,122 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     this.values = new Values(init)
 
     this.sink = this.sink.bind(this)
+
+    this.messageHandlers = {
+      [MessageType.invokeMethod]: {
+        decoder: InvokeMethodMessage,
+        handler: this.handleInvokeMethod.bind(this)
+      },
+      [MessageType.invokeGeneratorMethod]: {
+        decoder: InvokeMethodMessage,
+        handler: this.handleInvokeGeneratorMethod.bind(this)
+      },
+      [MessageType.abortMethodInvocation]: {
+        decoder: AbortMethodMessage,
+        handler: this.handleAbortMethod.bind(this),
+        isScope: true
+      },
+      [MessageType.methodResolved]: {
+        decoder: MethodResolvedMessage,
+        handler: this.handleMethodResolved.bind(this),
+        isScope: true
+      },
+      [MessageType.methodRejected]: {
+        decoder: MethodRejectedMessage,
+        handler: this.handleMethodRejected.bind(this),
+        isScope: true,
+        isError: true
+      },
+      [MessageType.invokeCallback]: {
+        decoder: InvokeCallbackMessage,
+        handler: this.handleInvokeCallback.bind(this),
+        isScope: true
+      },
+      [MessageType.abortCallbackInvocation]: {
+        decoder: AbortCallbackMessage,
+        handler: this.handleAbortCallback.bind(this),
+        isScope: true
+      },
+      [MessageType.callbackResolved]: {
+        decoder: CallbackResolvedMessage,
+        handler: this.handleCallbackResolved.bind(this),
+        isScope: true
+      },
+      [MessageType.callbackRejected]: {
+        decoder: CallbackRejectedMessage,
+        handler: this.handleCallbackRejected.bind(this),
+        isScope: true,
+        isError: true
+      }
+    }
   }
 
   async sink (source: Source<Uint8Array>): Promise<void> {
     for await (const buf of lpDecode(source)) {
-      let message: RPCMessage
-
       try {
-        message = RPCMessage.decode(buf)
+        const message = RPCMessage.decode(buf)
+        const messageHandler = this.messageHandlers[message.type]
+
+        if (messageHandler == null) {
+          continue
+        }
+
+        const subMessage = messageHandler.decoder.decode(message.message)
+        let invocation: Invocation | undefined
+
+        if (isScopeMessageHandler(messageHandler)) {
+          try {
+            invocation = lookUpScope(subMessage, this.invocations)
+          } catch (err: any) {
+            // the invocation scope was missing - the only times we look up a
+            // scope is when we're trying to process a method/callback resolved/
+            // rejected method, but there's nothing listening for the outcome so
+            // the only thing we can do is ignore the message
+            continue
+          }
+        }
+
+        // @ts-expect-error invocation may be undefined
+        messageHandler.handler(subMessage, invocation)
+          .catch(err => {
+            // we can only send an error message to throw an error to the caller
+            // if they are awaiting on the result of an invocation, otherwise
+            if (isInvocationMessage(message)) {
+              this.sendError(subMessage, err)
+            }
+
+            this.invocations.delete(subMessage.scope)
+          })
+          .finally(() => {
+            if (message.type === MessageType.invokeMethod) {
+              this.invocations.delete(subMessage.scope)
+            }
+          })
       } catch {
         // ignore invalid message
         continue
       }
+    }
+  }
 
-      if (message.type === MessageType.invokeMethod) {
-        const invokeMethodMessage = InvokeMethodMessage.decode(message.message)
-        this.handleInvokeMethod(invokeMethodMessage)
-          .catch(err => {
-            this.output.push(RPCMessage.encode({
-              type: MessageType.methodRejected,
-              message: MethodRejectedMessage.encode({
-                scope: invokeMethodMessage.scope,
-                error: this.values.toValue(err)
-              })
-            }))
-          })
-          .finally(() => {
-            this.invocations.delete(invokeMethodMessage.scope)
-          })
-      }
-
-      if (message.type === MessageType.abortMethodInvocation) {
-        const abortMethodMessage = AbortMethodMessage.decode(message.message)
-        this.handleAbortMethod(abortMethodMessage)
-      }
-
-      if (message.type === MessageType.methodResolved) {
-        try {
-          const methodResolvedMessage = MethodResolvedMessage.decode(message.message)
-          this.handleMethodResolved(methodResolvedMessage)
-        } catch {
-
-        }
-      }
-
-      if (message.type === MessageType.methodRejected) {
-        try {
-          const methodRejectedMessage = MethodRejectedMessage.decode(message.message)
-          this.handleMethodRejected(methodRejectedMessage)
-        } catch {
-
-        }
-      }
-
-      if (message.type === MessageType.invokeGeneratorMethod) {
-        const invokeMethodMessage = InvokeMethodMessage.decode(message.message)
-        this.handleInvokeGeneratorMethod(invokeMethodMessage)
-          .catch(err => {
-            this.output.push(RPCMessage.encode({
-              type: MessageType.methodRejected,
-              message: MethodRejectedMessage.encode({
-                scope: invokeMethodMessage.scope,
-                error: this.values.toValue(err)
-              })
-            }))
-          })
-      }
-
-      if (message.type === MessageType.invokeCallback) {
-        const invokeCallbackMessage = InvokeCallbackMessage.decode(message.message)
-        this.handleInvokeCallback(invokeCallbackMessage)
-          .catch(err => {
-            this.output.push(RPCMessage.encode({
-              type: MessageType.callbackRejected,
-              message: CallbackRejectedMessage.encode({
-                scope: invokeCallbackMessage.scope,
-                parents: invokeCallbackMessage.parents,
-                error: this.values.toValue(err)
-              })
-            }))
-          })
-      }
-
-      if (message.type === MessageType.abortCallbackInvocation) {
-        const abortMethodMessage = AbortCallbackMessage.decode(message.message)
-        this.handleAbortCallback(abortMethodMessage)
-      }
-
-      if (message.type === MessageType.callbackResolved) {
-        try {
-          const callbackResolvedMessage = CallbackResolvedMessage.decode(message.message)
-          this.handleCallbackResolved(callbackResolvedMessage)
-        } catch {
-
-        }
-      }
-
-      if (message.type === MessageType.callbackRejected) {
-        try {
-          const callbackRejectedMessage = CallbackRejectedMessage.decode(message.message)
-          this.handleCallbackRejected(callbackRejectedMessage)
-        } catch {
-
-        }
-      }
+  private sendError (subMessage: any, err: Error): void {
+    if (subMessage.parents != null) {
+      this.output.push(RPCMessage.encode({
+        type: MessageType.callbackRejected,
+        message: CallbackRejectedMessage.encode({
+          scope: subMessage.scope,
+          parents: subMessage.parents,
+          error: this.values.toValue(err)
+        })
+      }))
+    } else {
+      this.output.push(RPCMessage.encode({
+        type: MessageType.methodRejected,
+        message: MethodRejectedMessage.encode({
+          scope: subMessage.scope,
+          error: this.values.toValue(err)
+        })
+      }))
     }
   }
 
@@ -483,13 +520,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     }))
   }
 
-  private handleAbortMethod (message: AbortMethodMessage): void {
-    const invocation = this.invocations.get(message.scope)
-
-    if (invocation == null) {
-      return
-    }
-
+  private async handleAbortMethod (message: AbortMethodMessage, invocation: Invocation): Promise<void> {
     invocation.abortControllers.forEach(controller => {
       controller.abort()
     })
@@ -599,13 +630,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     return target
   }
 
-  private handleMethodResolved (message: MethodResolvedMessage): void {
-    const invocation = this.invocations.get(message.scope)
-
-    if (invocation == null) {
-      return
-    }
-
+  private async handleMethodResolved (message: MethodResolvedMessage, invocation: Invocation): Promise<void> {
     let value: any
 
     if (message.value != null) {
@@ -615,13 +640,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     invocation.result.resolve(value)
   }
 
-  private handleMethodRejected (message: MethodRejectedMessage): void {
-    const invocation = this.invocations.get(message.scope)
-
-    if (invocation == null) {
-      return
-    }
-
+  private async handleMethodRejected (message: MethodRejectedMessage, invocation: Invocation): Promise<void> {
     let error
 
     if (message.error != null) {
@@ -631,36 +650,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     invocation.result.reject(error)
   }
 
-  private lookUpInvocation (parents: string[]): Invocation {
-    let invocation: Invocation | undefined
-
-    for (const parent of parents) {
-      if (invocation == null) {
-        invocation = this.invocations.get(parent)
-
-        if (invocation == null) {
-          throw new MissingParentScopeError()
-        }
-
-        continue
-      }
-
-      invocation = invocation.children.get(parent)
-
-      if (invocation == null) {
-        throw new MissingParentScopeError()
-      }
-    }
-
-    if (invocation == null) {
-      throw new MissingParentScopeError()
-    }
-
-    return invocation
-  }
-
-  private async handleInvokeCallback (message: InvokeCallbackMessage): Promise<void> {
-    const invocation = this.lookUpInvocation(message.parents)
+  private async handleInvokeCallback (message: InvokeCallbackMessage, invocation: Invocation): Promise<void> {
     const callback = invocation.callbacks.get(message.callback)
 
     if (callback == null) {
@@ -680,21 +670,13 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     }))
   }
 
-  private handleAbortCallback (message: AbortCallbackMessage): void {
-    const invocation = this.lookUpInvocation(message.parents)
-
-    if (invocation == null) {
-      return
-    }
-
+  private async handleAbortCallback (message: AbortCallbackMessage, invocation: Invocation): Promise<void> {
     invocation.abortControllers.forEach(controller => {
       controller.abort()
     })
   }
 
-  private handleCallbackResolved (message: CallbackResolvedMessage): void {
-    const invocation = this.lookUpInvocation(message.parents)
-
+  private async handleCallbackResolved (message: CallbackResolvedMessage, invocation: Invocation): Promise<void> {
     let value
 
     if (message.value != null) {
@@ -705,9 +687,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     invocation.children.delete(message.scope)
   }
 
-  private handleCallbackRejected (message: CallbackRejectedMessage): void {
-    const invocation = this.lookUpInvocation(message.parents)
-
+  private async handleCallbackRejected (message: CallbackRejectedMessage, invocation: Invocation): Promise<void> {
     let error
 
     if (message.error != null) {
