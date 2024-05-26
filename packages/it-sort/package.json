@@ -1,6 +1,6 @@
 {
   "name": "it-sort",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Collects all values from an async iterator, sorts them using the passed function and yields them",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
