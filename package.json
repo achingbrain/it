@@ -39,8 +39,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "overrides": {
-    "semantic-release": "24.0.0-beta.2"
-  }
+  ]
 }
