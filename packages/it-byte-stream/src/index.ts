@@ -21,8 +21,8 @@
  * ```
  */
 
-import { Uint8ArrayList } from 'uint8arraylist'
 import { queuelessPushable } from 'it-queueless-pushable'
+import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
 
 export class CodeError extends Error {
