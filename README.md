@@ -31,6 +31,7 @@
 - [`packages/it-parallel-batch`](https://github.com/achingbrain/it/tree/main/packages/it-parallel-batch) Process (async)iterable values as functions with concurrency control
 - [`packages/it-peekable`](https://github.com/achingbrain/it/tree/main/packages/it-peekable) Allows peeking/pushing an iterable
 - [`packages/it-protobuf-stream`](https://github.com/achingbrain/it/tree/main/packages/it-protobuf-stream) Read and write protobuf messages over a duplex stream
+- [`packages/it-queueless-pushable`](https://github.com/achingbrain/it/tree/main/packages/it-queueless-pushable) A pushable queue that waits until a value is consumed before accepting another
 - [`packages/it-reduce`](https://github.com/achingbrain/it/tree/main/packages/it-reduce) Reduces the values yielded from an async iterator
 - [`packages/it-rpc`](https://github.com/achingbrain/it/tree/main/packages/it-rpc) Schema-free RPC over async iterables
 - [`packages/it-skip`](https://github.com/achingbrain/it/tree/main/packages/it-skip) Skip items from an iterable
