@@ -22,34 +22,30 @@ repo and examine the changes made.
 
 -->
 
-Collects all `Uint8Array` values from an (async)iterable and returns them as a single `Uint8Array`.
+A pushable async generator that waits until the current value is consumed
+before allowing a new value to be pushed.
+
+Useful for when you don't want to keep memory usage under control and/or
+allow a downstream consumer to dictate how fast data flows through a pipe,
+but you want to be able to apply a transform to that data.
 
 ## Example
 
-```javascript
-import toBuffer from 'it-to-buffer'
+```typescript
+import { queuelessPushable } from 'it-queueless-pushable'
 
-// This can also be an iterator, generator, etc
-const values = [Buffer.from([0, 1]), Buffer.from([2, 3])]
+const pushable = queuelessPushable<string>()
 
-const result = toBuffer(values)
+// run asynchronously
+Promise.resolve().then(async () => {
+  // push a value - the returned promise will not resolve until the value is
+  // read from the pushable
+  await pushable.push('hello')
+})
 
-console.info(result) // Buffer[0, 1, 2, 3]
-```
-
-Async sources must be awaited:
-
-```javascript
-import toBuffer from 'it-to-buffer'
-
-const values = async function * () {
-  yield Buffer.from([0, 1])
-  yield Buffer.from([2, 3])
-}
-
-const result = await toBuffer(values())
-
-console.info(result) // Buffer[0, 1, 2, 3]
+// read a value
+const result = await pushable.next()
+console.info(result) // { done: false, value: 'hello' }
 ```
 
 # Install
