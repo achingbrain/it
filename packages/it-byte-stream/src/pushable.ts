@@ -58,6 +58,9 @@ class QueuelessPushable <T> implements Pushable<T> {
     this.ended = true
 
     if (err != null) {
+      // this can cause unhandled promise rejections if nothing is awaiting the
+      // next value so attach a dummy catch listener to the promise
+      this.haveNext.promise.catch(() => {})
       this.haveNext.reject(err)
     }
 
