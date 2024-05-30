@@ -21,8 +21,8 @@
  * ```
  */
 
+import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
-import { pushable } from './pushable.js'
 import type { Duplex } from 'it-stream-types'
 
 export class CodeError extends Error {
@@ -76,7 +76,7 @@ export interface ByteStreamOpts {
 }
 
 export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts?: ByteStreamOpts): ByteStream<Stream> {
-  const write = pushable()
+  const write = queuelessPushable()
 
   duplex.sink(write).catch(async (err: Error) => {
     await write.end(err)
