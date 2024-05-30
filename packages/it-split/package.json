@@ -53,7 +53,7 @@
     "uint8arraylist": "^2.4.8"
   },
   "devDependencies": {
-    "aegir": "^42.2.5",
+    "aegir": "^43.0.0",
     "buffer": "^6.0.3",
     "it-all": "^3.0.0",
     "uint8arrays": "^5.0.3"

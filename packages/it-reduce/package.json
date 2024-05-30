@@ -50,6 +50,6 @@
     "test:firefox-webworker": "aegir test -t webworker -- --browser firefox"
   },
   "devDependencies": {
-    "aegir": "^42.2.5"
+    "aegir": "^43.0.0"
   }
 }
