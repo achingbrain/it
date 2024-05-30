@@ -1,3 +1,15 @@
+## [it-byte-stream-v1.0.11](https://github.com/achingbrain/it/compare/it-byte-stream-1.0.10...it-byte-stream-1.0.11) (2024-05-30)
+
+
+### Bug Fixes
+
+* unhanded promise rejection in it-byte-stream ([#130](https://github.com/achingbrain/it/issues/130)) ([23bc557](https://github.com/achingbrain/it/commit/23bc557e41904d69c6a8e403854e134768d681f9))
+
+
+### Trivial Changes
+
+* update to the latest aegir release ([#131](https://github.com/achingbrain/it/issues/131)) ([a20e5b5](https://github.com/achingbrain/it/commit/a20e5b54142fd5c7db19d360f5456a8c2747cc3e))
+
 ## it-byte-stream [1.0.10](https://github.com/achingbrain/it/compare/it-byte-stream-1.0.9...it-byte-stream-1.0.10) (2024-04-25)
 
 
