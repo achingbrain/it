@@ -1,3 +1,10 @@
+## [it-byte-stream-v1.0.12](https://github.com/achingbrain/it/compare/it-byte-stream-1.0.11...it-byte-stream-1.0.12) (2024-05-30)
+
+
+### Bug Fixes
+
+* reuse it-queueless-pushable ([#134](https://github.com/achingbrain/it/issues/134)) ([dd24081](https://github.com/achingbrain/it/commit/dd240815f0f89e2473658fed76b85a3ce7beb3af))
+
 ## [it-byte-stream-v1.0.11](https://github.com/achingbrain/it/compare/it-byte-stream-1.0.10...it-byte-stream-1.0.11) (2024-05-30)
 
 
