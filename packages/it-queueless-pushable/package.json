@@ -139,6 +139,9 @@
     "race-signal": "^1.0.2"
   },
   "devDependencies": {
-    "aegir": "^43.0.0"
+    "aegir": "^43.0.0",
+    "delay": "^6.0.0",
+    "it-all": "^3.0.6",
+    "it-drain": "^3.0.7"
   }
 }
