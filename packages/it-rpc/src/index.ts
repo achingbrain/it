@@ -509,7 +509,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     const target = this.lookupInvocationTarget(message.path)
 
     // invoke the method
-    const val = await target.apply(context, message.args.map(arg => this.values.fromValue(arg, this.output, invocation)))
+    const val = await target.fn.apply(target.context, message.args.map(arg => this.values.fromValue(arg, this.output, invocation)))
 
     this.output.push(RPCMessage.encode({
       type: MessageType.methodResolved,
@@ -550,7 +550,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     const target = this.lookupInvocationTarget(message.path)
 
     // invoke the method
-    const gen = target.apply(context, message.args.map(arg => this.values.fromValue(arg, this.output, invocation)))
+    const gen = target.fn.apply(target.context, message.args.map(arg => this.values.fromValue(arg, this.output, invocation)))
 
     if (typeof gen.next !== 'function') {
       throw new InvalidReturnTypeError(`${message.path} did not return an async generator`)
@@ -601,7 +601,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     }))
   }
 
-  private lookupInvocationTarget (path: string): (...args: any[]) => any {
+  private lookupInvocationTarget (path: string): { context: any, fn(...args: any[]): any } {
     // look up the requested method on the target
     const pathParts = path.split('.')
     let target = this.targets.get(pathParts[0])
@@ -627,7 +627,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
       throw new InvalidInvocationTypeError('Invocation target was not a function')
     }
 
-    return target
+    return { context, fn: target }
   }
 
   private async handleMethodResolved (message: MethodResolvedMessage, invocation: Invocation): Promise<void> {
