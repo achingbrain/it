@@ -1,4 +1,5 @@
 import { expect } from 'aegir/chai'
+import all from 'it-all'
 import { rpc } from '../src/index.js'
 import type { RPC } from '../src/index.js'
 
@@ -14,6 +15,12 @@ const target = {
   },
   async supportSimpleArguments (...args: any[]): Promise<any[]> {
     return args
+  },
+  async contextAccess (): Promise<boolean> {
+    return this.prop
+  },
+  async * generatorContextAccess (): AsyncGenerator<boolean> {
+    yield this.prop
   }
 }
 
@@ -77,5 +84,13 @@ describe('basics', () => {
     const input = [Uint8Array.from([0, 1, 2, 3, 4]), { hello: 'world' }, new Map([['key', 'value']]), new Set(['value']), new Error('Urk!')]
 
     await expect(sender.supportSimpleArguments(...input)).to.eventually.deep.equal(input)
+  })
+
+  it('should retain object context when invoking a method', async () => {
+    await expect(sender.contextAccess()).to.eventually.be.true()
+  })
+
+  it('should retain object context when invoking a generator', async () => {
+    await expect(all(sender.generatorContextAccess())).to.eventually.deep.equal([true])
   })
 })
