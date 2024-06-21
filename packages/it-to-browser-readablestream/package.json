@@ -138,6 +138,6 @@
     "get-iterator": "^2.0.1"
   },
   "devDependencies": {
-    "aegir": "^43.0.0"
+    "aegir": "^44.0.0"
   }
 }
