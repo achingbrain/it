@@ -134,7 +134,7 @@
     "fast-glob": "^3.3.2"
   },
   "devDependencies": {
-    "aegir": "^43.0.0",
+    "aegir": "^44.1.0",
     "it-all": "^3.0.0"
   },
   "browser": {
