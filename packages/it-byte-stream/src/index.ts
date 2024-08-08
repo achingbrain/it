@@ -23,8 +23,12 @@
 
 import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { UnexpectedEOFError } from './errors.js'
 import type { Duplex } from 'it-stream-types'
 
+/**
+ * @deprecated This will not be exported in a future release
+ */
 export class CodeError extends Error {
   public readonly code: string
 
@@ -34,12 +38,16 @@ export class CodeError extends Error {
   }
 }
 
+/**
+ * @deprecated This will not be exported in a future release
+ */
 export class AbortError extends CodeError {
   public readonly type: string
 
   constructor (message: string) {
     super(message, 'ABORT_ERR')
     this.type = 'aborted'
+    this.name = 'AbortError'
   }
 }
 
@@ -136,7 +144,7 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
           ])
 
           if (done === true) {
-            throw new CodeError('unexpected end of input', 'ERR_UNEXPECTED_EOF')
+            throw new UnexpectedEOFError('unexpected end of input')
           }
 
           readBuffer.append(value)
