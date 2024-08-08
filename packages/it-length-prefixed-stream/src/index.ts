@@ -27,15 +27,7 @@ import { byteStream, type ByteStreamOpts } from 'it-byte-stream'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
-
-class CodeError extends Error {
-  public readonly code: string
-
-  constructor (message: string, code: string) {
-    super(message)
-    this.code = code
-  }
-}
+import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError } from './errors'
 
 export interface AbortOptions {
   signal?: AbortSignal
@@ -104,8 +96,12 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
           throw err
         }
 
+        if (dataLength < 0) {
+          throw new InvalidMessageLengthError('Invalid message length')
+        }
+
         if (opts?.maxLengthLength != null && lengthBuffer.byteLength > opts.maxLengthLength) {
-          throw new CodeError('message length length too long', 'ERR_MSG_LENGTH_TOO_LONG')
+          throw new InvalidDataLengthLengthError('message length length too long')
         }
 
         if (dataLength > -1) {
@@ -114,7 +110,7 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
       }
 
       if (opts?.maxDataLength != null && dataLength > opts.maxDataLength) {
-        throw new CodeError('message length too long', 'ERR_MSG_DATA_TOO_LONG')
+        throw new InvalidDataLengthError('message length too long')
       }
 
       return bytes.read(dataLength, options)

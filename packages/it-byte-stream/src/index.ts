@@ -25,6 +25,9 @@ import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
 
+/**
+ * @deprecated This will not be exported in a future release
+ */
 export class CodeError extends Error {
   public readonly code: string
 
@@ -34,12 +37,16 @@ export class CodeError extends Error {
   }
 }
 
+/**
+ * @deprecated This will not be exported in a future release
+ */
 export class AbortError extends CodeError {
   public readonly type: string
 
   constructor (message: string) {
     super(message, 'ABORT_ERR')
     this.type = 'aborted'
+    this.name = 'AbortError'
   }
 }
 
