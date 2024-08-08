@@ -26,8 +26,8 @@
 import { byteStream, type ByteStreamOpts } from 'it-byte-stream'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError } from './errors.js'
 import type { Duplex } from 'it-stream-types'
-import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError } from './errors'
 
 export interface AbortOptions {
   signal?: AbortSignal

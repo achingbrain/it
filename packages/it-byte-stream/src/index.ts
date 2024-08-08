@@ -23,8 +23,8 @@
 
 import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
+import { UnexpectedEOFError } from './errors.js'
 import type { Duplex } from 'it-stream-types'
-import { UnexpectedEOFError } from './errors'
 
 /**
  * @deprecated This will not be exported in a future release
