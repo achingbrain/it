@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 
-import { type Codec, CodeError, decodeMessage, type DecodeOptions, encodeMessage, enumeration, message } from 'protons-runtime'
+import { type Codec, decodeMessage, type DecodeOptions, encodeMessage, enumeration, MaxLengthError, message } from 'protons-runtime'
 import { alloc as uint8ArrayAlloc } from 'uint8arrays/alloc'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
@@ -237,7 +237,7 @@ export namespace InvokeMethodMessage {
             }
             case 3: {
               if (opts.limits?.args != null && obj.args.length === opts.limits.args) {
-                throw new CodeError('decode error - map field "args" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "args" had too many elements')
               }
 
               obj.args.push(Value.codec().decode(reader, reader.uint32(), {
@@ -536,7 +536,7 @@ export namespace InvokeCallbackMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new CodeError('decode error - map field "parents" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -548,7 +548,7 @@ export namespace InvokeCallbackMessage {
             }
             case 4: {
               if (opts.limits?.args != null && obj.args.length === opts.limits.args) {
-                throw new CodeError('decode error - map field "args" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "args" had too many elements')
               }
 
               obj.args.push(Value.codec().decode(reader, reader.uint32(), {
@@ -627,7 +627,7 @@ export namespace AbortCallbackMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new CodeError('decode error - map field "parents" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -710,7 +710,7 @@ export namespace CallbackResolvedMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new CodeError('decode error - map field "parents" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -799,7 +799,7 @@ export namespace CallbackRejectedMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new CodeError('decode error - map field "parents" had too many elements', 'ERR_MAX_LENGTH')
+                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
