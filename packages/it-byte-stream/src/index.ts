@@ -24,6 +24,7 @@
 import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
 import type { Duplex } from 'it-stream-types'
+import { UnexpectedEOFError } from './errors'
 
 /**
  * @deprecated This will not be exported in a future release
@@ -143,7 +144,7 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
           ])
 
           if (done === true) {
-            throw new CodeError('unexpected end of input', 'ERR_UNEXPECTED_EOF')
+            throw new UnexpectedEOFError('unexpected end of input')
           }
 
           readBuffer.append(value)

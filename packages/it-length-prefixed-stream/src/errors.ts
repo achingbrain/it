@@ -23,11 +23,3 @@ export class InvalidDataLengthLengthError extends Error {
   name = 'InvalidDataLengthLengthError'
   code = 'ERR_MSG_LENGTH_TOO_LONG'
 }
-
-/**
- * The incoming stream ended before the expected number of bytes were read
- */
-export class UnexpectedEOFError extends Error {
-  name = 'UnexpectedEOFError'
-  code = 'ERR_UNEXPECTED_EOF'
-}
