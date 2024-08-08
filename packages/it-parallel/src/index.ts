@@ -101,7 +101,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
     concurrency = Infinity
   }
 
-  const ordered = options.ordered == null ? false : options.ordered
+  const ordered = options.ordered ?? false
   const emitter = new EventTarget()
 
   const ops: Array<Operation<T>> = []

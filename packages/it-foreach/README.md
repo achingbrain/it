@@ -67,7 +67,7 @@ $ npm i it-foreach
 
 ## Browser `<script>` tag
 
-Loading this module through a script tag will make it's exports available as `ItForeach` in the global namespace.
+Loading this module through a script tag will make its exports available as `ItForeach` in the global namespace.
 
 ```html
 <script src="https://unpkg.com/it-foreach/dist/index.min.js"></script>
