@@ -53,7 +53,7 @@ $ npm i it-protobuf-stream
 
 ## Browser `<script>` tag
 
-Loading this module through a script tag will make it's exports available as `ItProtobufStream` in the global namespace.
+Loading this module through a script tag will make its exports available as `ItProtobufStream` in the global namespace.
 
 ```html
 <script src="https://unpkg.com/it-protobuf-stream/dist/index.min.js"></script>

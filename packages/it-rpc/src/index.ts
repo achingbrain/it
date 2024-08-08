@@ -750,7 +750,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
 
               invocation.result.promise.then(result => {
                 resolve(result)
-              }, err => {
+              }, (err: Error) => {
                 reject(err)
               }).finally(() => {
                 self.invocations.delete(scope)

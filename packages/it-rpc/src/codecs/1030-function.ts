@@ -58,7 +58,7 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
 
         callbackInvocation.result.promise.then(result => {
           resolve(result)
-        }, err => {
+        }, (err: Error) => {
           reject(err)
         }).finally(() => {
           invocation.children.delete(scope)

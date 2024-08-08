@@ -45,7 +45,7 @@ $ npm i blob-to-it
 
 ## Browser `<script>` tag
 
-Loading this module through a script tag will make it's exports available as `BlobToIt` in the global namespace.
+Loading this module through a script tag will make its exports available as `BlobToIt` in the global namespace.
 
 ```html
 <script src="https://unpkg.com/blob-to-it/dist/index.min.js"></script>
