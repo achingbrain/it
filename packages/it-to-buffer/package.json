@@ -30,6 +30,7 @@
       "import": "./dist/src/index.js"
     }
   },
+  "react-native": "./dist/src/index.js",
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
