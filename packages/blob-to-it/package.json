@@ -53,7 +53,7 @@
     "browser-readablestream-to-it": "^2.0.0"
   },
   "devDependencies": {
-    "aegir": "^44.1.0",
+    "aegir": "^45.0.1",
     "it-all": "^3.0.0"
   }
 }

@@ -53,6 +53,6 @@
     "get-iterator": "^2.0.1"
   },
   "devDependencies": {
-    "aegir": "^44.1.0"
+    "aegir": "^45.0.1"
   }
 }
