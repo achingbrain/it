@@ -1,6 +1,6 @@
 {
   "name": "it-ndjson-stream",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Read and write ndjson messages over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
@@ -51,7 +51,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-ndjson": "^1.0.7",
+    "it-ndjson": "^1.0.0",
     "it-queueless-pushable": "^1.0.0",
     "it-stream-types": "^2.0.1",
     "race-signal": "^1.1.0"
