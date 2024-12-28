@@ -1,4 +1,13 @@
-export default async function * parse <T> (source: AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>): AsyncGenerator<T, void, undefined> {
+import { InvalidMessageLengthError } from './errors.js'
+
+export interface ParseOptions {
+  /**
+   * Limit the possible size of incoming serialized messages in bytes
+   */
+  maxMessageLength?: number
+}
+
+export default async function * parse <T> (source: AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>, opts: ParseOptions = {}): AsyncGenerator<T, void, undefined> {
   const matcher = /\r?\n/
   const decoder = new TextDecoder('utf8')
   let buffer = ''
@@ -9,6 +18,11 @@ export default async function * parse <T> (source: AsyncIterable<Uint8Array | st
     }
 
     buffer += decoder.decode(chunk, { stream: true })
+
+    if (buffer.length > (opts?.maxMessageLength ?? buffer.length)) {
+      throw new InvalidMessageLengthError('Incoming message too long')
+    }
+
     const parts = buffer.split(matcher)
     buffer = parts.pop() ?? ''
 
