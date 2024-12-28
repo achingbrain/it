@@ -50,7 +50,7 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^44.1.0",
+    "aegir": "^45.0.8",
     "it-all": "^3.0.0"
   }
 }
