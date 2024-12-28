@@ -27,6 +27,7 @@
 - [`packages/it-merge`](https://github.com/achingbrain/it/tree/main/packages/it-merge) Treat one or more iterables as a single iterable
 - [`packages/it-multipart`](https://github.com/achingbrain/it/tree/main/packages/it-multipart) Async iterable http multipart message parser
 - [`packages/it-ndjson`](https://github.com/achingbrain/it/tree/main/packages/it-ndjson) Parse iterators as ndjson and transform iterators to ndjson
+- [`packages/it-ndjson-stream`](https://github.com/achingbrain/it/tree/main/packages/it-ndjson-stream) Read and write ndjson messages over a duplex stream
 - [`packages/it-parallel`](https://github.com/achingbrain/it/tree/main/packages/it-parallel) Process incoming async(iterable) functions in parallel
 - [`packages/it-parallel-batch`](https://github.com/achingbrain/it/tree/main/packages/it-parallel-batch) Process (async)iterable values as functions with concurrency control
 - [`packages/it-peekable`](https://github.com/achingbrain/it/tree/main/packages/it-peekable) Allows peeking/pushing an iterable
