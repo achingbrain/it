@@ -26,6 +26,13 @@ describe('it-ndjson', () => {
     expect(results).to.deep.equal([{ id: 1 }])
   })
 
+  it('should split 1 item from 1 chunk with newline inside', async () => {
+    const source = toAsyncIterator([JSON.stringify({ id: 1, bar: 'baz\n' }) + '\n'])
+    const results = await all(ndjson.parse(source))
+
+    expect(results).to.deep.equal([{ id: 1, bar: 'baz\n' }])
+  })
+
   it('should split 1 item from 2 chunks', async () => {
     const source = toAsyncIterator(['{ "id', '": 1 }\n'])
     const results = await all(ndjson.parse(source))
@@ -81,5 +88,13 @@ describe('it-ndjson', () => {
     const results = await all(ndjson.stringify(source))
 
     expect(results.join('')).to.equal('{"id":1}\n{"id":2}\n{"id":3}\n')
+  })
+
+  it('should limit the incoming message size', async () => {
+    const source = toAsyncIterator(['{ "idddddddddddd": 1 }\n'])
+    await expect(all(ndjson.parse(source, {
+      maxMessageLength: 2
+    }))).to.eventually.be.rejected
+      .with.property('name', 'InvalidMessageLengthError')
   })
 })
