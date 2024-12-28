@@ -1,0 +1,63 @@
+{
+  "name": "it-ndjson-stream",
+  "version": "0.0.0",
+  "description": "Read and write ndjson messages over a duplex stream",
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-ndjson-stream#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "project": true,
+      "sourceType": "module"
+    }
+  },
+  "scripts": {
+    "build": "aegir build",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "clean": "aegir clean",
+    "test": "aegir test",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "release": "aegir release"
+  },
+  "dependencies": {
+    "it-ndjson": "^1.0.7",
+    "it-queueless-pushable": "^1.0.0",
+    "it-stream-types": "^2.0.1",
+    "race-signal": "^1.1.0"
+  },
+  "devDependencies": {
+    "aegir": "^44.1.0",
+    "it-pair": "^2.0.6"
+  }
+}
