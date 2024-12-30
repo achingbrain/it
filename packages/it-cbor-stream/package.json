@@ -1,0 +1,68 @@
+{
+  "name": "it-cbor-stream",
+  "version": "0.0.0",
+  "description": "Read and write CBOR messages over a duplex stream",
+  "author": "Alex Potsides <alex@achingbrain.net>",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-cbor-stream#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achingbrain/it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/achingbrain/it/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "type": "module",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "project": true,
+      "sourceType": "module"
+    }
+  },
+  "scripts": {
+    "clean": "aegir clean",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "build": "aegir build",
+    "test": "aegir test",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "test:node": "aegir test -t node --cov",
+    "test:electron-main": "aegir test -t electron-main",
+    "docs": "aegir docs",
+    "release": "aegir release"
+  },
+  "dependencies": {
+    "cborg": "^4.2.7",
+    "it-length-prefixed-stream": "^1.0.0",
+    "it-stream-types": "^2.0.1"
+  },
+  "devDependencies": {
+    "aegir": "^44.1.0",
+    "it-map": "^3.0.0",
+    "it-pair": "^2.0.6",
+    "it-to-buffer": "^4.0.0",
+    "uint8-varint": "^2.0.4",
+    "uint8arrays": "^5.1.0"
+  }
+}
