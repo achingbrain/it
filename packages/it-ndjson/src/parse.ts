@@ -1,4 +1,6 @@
+import { isUint8ArrayList } from 'uint8arraylist'
 import { InvalidMessageLengthError } from './errors.js'
+import type { Uint8ArrayList } from 'uint8arraylist'
 
 export interface ParseOptions {
   /**
@@ -7,7 +9,7 @@ export interface ParseOptions {
   maxMessageLength?: number
 }
 
-export default async function * parse <T> (source: AsyncIterable<Uint8Array | string> | Iterable<Uint8Array | string>, opts: ParseOptions = {}): AsyncGenerator<T, void, undefined> {
+export default async function * parse <T> (source: AsyncIterable<Uint8Array | Uint8ArrayList | string> | Iterable<Uint8Array | Uint8ArrayList | string>, opts: ParseOptions = {}): AsyncGenerator<T, void, undefined> {
   const matcher = /\r?\n/
   const decoder = new TextDecoder('utf8')
   let buffer = ''
@@ -15,6 +17,10 @@ export default async function * parse <T> (source: AsyncIterable<Uint8Array | st
   for await (let chunk of source) {
     if (typeof chunk === 'string') {
       chunk = new TextEncoder().encode(chunk)
+    }
+
+    if (isUint8ArrayList(chunk)) {
+      chunk = chunk.subarray()
     }
 
     buffer += decoder.decode(chunk, { stream: true })

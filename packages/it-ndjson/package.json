@@ -54,5 +54,8 @@
     "aegir": "^45.0.8",
     "buffer": "^6.0.3",
     "it-all": "^3.0.0"
+  },
+  "dependencies": {
+    "uint8arraylist": "^2.4.8"
   }
 }

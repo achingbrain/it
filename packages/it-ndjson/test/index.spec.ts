@@ -1,6 +1,7 @@
 import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
+import { Uint8ArrayList } from 'uint8arraylist'
 import * as ndjson from '../src/index.js'
 
 async function * toAsyncIterator <T> (array: T[]): AsyncIterable<T> {
@@ -69,6 +70,20 @@ describe('it-ndjson', () => {
 
   it('should split from Uint8Arrays', async () => {
     const source = toAsyncIterator([toUint8Array('{ "id": 1 }\n{ "i'), toUint8Array('d": 2 }'), toUint8Array('\n{"id":3}')])
+    const results = await all(ndjson.parse(source))
+
+    expect(results).to.deep.equal([{ id: 1 }, { id: 2 }, { id: 3 }])
+  })
+
+  it('should split from Uint8ArrayLists', async () => {
+    const source = toAsyncIterator([new Uint8ArrayList(toUint8Array('{ "id": 1 }\n{ "i')), new Uint8ArrayList(toUint8Array('d": 2 }')), new Uint8ArrayList(toUint8Array('\n{"id":3}'))])
+    const results = await all(ndjson.parse(source))
+
+    expect(results).to.deep.equal([{ id: 1 }, { id: 2 }, { id: 3 }])
+  })
+
+  it('should split from Uint8ArrayLists with multiple chunks', async () => {
+    const source = toAsyncIterator([new Uint8ArrayList(toUint8Array('{ "id": 1 }\n{ "i'), toUint8Array('d": 2 }')), new Uint8ArrayList(toUint8Array('\n{"id":3}'))])
     const results = await all(ndjson.parse(source))
 
     expect(results).to.deep.equal([{ id: 1 }, { id: 2 }, { id: 3 }])
