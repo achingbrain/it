@@ -1,6 +1,6 @@
 {
   "name": "it-parallel",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Process incoming async(iterable) functions in parallel",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
