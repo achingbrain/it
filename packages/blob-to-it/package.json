@@ -1,6 +1,6 @@
 {
   "name": "blob-to-it",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Turns a blob into an async iterator",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
