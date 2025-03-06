@@ -1,3 +1,9 @@
+## [it-merge-v3.0.7](https://github.com/achingbrain/it/compare/it-merge-3.0.6...it-merge-3.0.7) (2025-03-06)
+
+### Bug Fixes
+
+* update project config ([7cb826e](https://github.com/achingbrain/it/commit/7cb826ed356e8e43b7ffea51727096c2ce87fe21))
+
 ## it-merge [3.0.5](https://github.com/achingbrain/it/compare/it-merge-3.0.4...it-merge-3.0.5) (2024-04-25)
 
 
