@@ -14,6 +14,7 @@
 - [`packages/it-batched-bytes`](https://github.com/achingbrain/it/tree/main/packages/it-batched-bytes) Takes an async iterator that emits byte arrays and emits them as fixed size batches
 - [`packages/it-buffer-stream`](https://github.com/achingbrain/it/tree/main/packages/it-buffer-stream) An async iterator that emits buffers containing bytes up to a certain length
 - [`packages/it-byte-stream`](https://github.com/achingbrain/it/tree/main/packages/it-byte-stream) Read and write arbitrary bytes over a duplex stream
+- [`packages/it-cbor-stream`](https://github.com/achingbrain/it/tree/main/packages/it-cbor-stream) Read and write CBOR messages over a duplex stream
 - [`packages/it-drain`](https://github.com/achingbrain/it/tree/main/packages/it-drain) Empties an async iterator
 - [`packages/it-filter`](https://github.com/achingbrain/it/tree/main/packages/it-filter) Filters the passed iterable by using the filter function
 - [`packages/it-first`](https://github.com/achingbrain/it/tree/main/packages/it-first) Returns the first result from an async iterator
