@@ -91,6 +91,24 @@ describe('it-queueless-pushable', () => {
     await expect(all(pushable)).to.eventually.be.ok()
   })
 
+  it('should return early', async () => {
+    const pushable = queuelessPushable<string>()
+
+    void pushable.push('hello')
+    void pushable.push('world')
+
+    let output: string | undefined
+
+    for await (const str of pushable) {
+      if (str === 'hello') {
+        output = str
+        break
+      }
+    }
+
+    expect(output).to.equal('hello')
+  })
+
   it('should not be pushable after ending', async () => {
     const pushable = queuelessPushable<string>()
 
