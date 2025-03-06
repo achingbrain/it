@@ -111,7 +111,11 @@ class QueuelessPushable <T> implements Pushable<T> {
       value: undefined
     }
 
-    await this._push(undefined)
+    this.ended = true
+    this.nextResult = result
+
+    // let the consumer know we have a new value
+    this.haveNext.resolve()
 
     return result
   }
