@@ -1,6 +1,6 @@
 {
   "name": "it-byte-stream",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Read and write arbitrary bytes over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
