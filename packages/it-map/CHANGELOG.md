@@ -1,3 +1,18 @@
+## [it-map-v3.1.2](https://github.com/achingbrain/it/compare/it-map-3.1.1...it-map-3.1.2) (2025-03-06)
+
+### Bug Fixes
+
+* update project config ([7cb826e](https://github.com/achingbrain/it/commit/7cb826ed356e8e43b7ffea51727096c2ce87fe21))
+
+### Trivial Changes
+
+* update to the latest aegir release ([#131](https://github.com/achingbrain/it/issues/131)) ([a20e5b5](https://github.com/achingbrain/it/commit/a20e5b54142fd5c7db19d360f5456a8c2747cc3e))
+
+### Dependencies
+
+* **dev:** bump aegir from 43.0.3 to 44.1.0 ([#138](https://github.com/achingbrain/it/issues/138)) ([408f103](https://github.com/achingbrain/it/commit/408f103d17646bc101ad0c4644236bb6b64abf30))
+* **dev:** bump aegir from 44.1.4 to 45.0.8 ([#145](https://github.com/achingbrain/it/issues/145)) ([b01501e](https://github.com/achingbrain/it/commit/b01501e36e5085446f459dac95ea91f0304aca1a))
+
 ## it-map [3.1.1](https://github.com/achingbrain/it/compare/it-map-3.1.0...it-map-3.1.1) (2024-05-26)
 
 
