@@ -41,9 +41,43 @@
  */
 
 import { pushable } from 'it-pushable'
+import type { Pushable } from 'it-pushable'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
+}
+
+async function addAllToPushable <T> (sources: Array<AsyncIterable<T> | Iterable<T>>, output: Pushable<T>): Promise<void> {
+  try {
+    await Promise.all(
+      sources.map(async (source) => {
+        for await (const item of source) {
+          output.push(item)
+        }
+      })
+    )
+
+    output.end()
+  } catch (err: any) {
+    output.end(err)
+  }
+}
+
+async function * mergeSources <T> (sources: Array<AsyncIterable<T> | Iterable<T>>): AsyncGenerator<T, void, undefined> {
+  const output = pushable<T>({
+    objectMode: true
+  })
+
+  addAllToPushable(sources, output)
+    .catch(() => {})
+
+  yield * output
+}
+
+function * mergeSyncSources <T> (syncSources: Array<Iterable<T>>): Generator<T, void, undefined> {
+  for (const source of syncSources) {
+    yield * source
+  }
 }
 
 /**
@@ -65,36 +99,10 @@ function merge <T> (...sources: Array<AsyncIterable<T> | Iterable<T>>): AsyncGen
 
   if (syncSources.length === sources.length) {
     // all sources are synchronous
-    return (function * () {
-      for (const source of syncSources) {
-        yield * source
-      }
-    })()
+    return mergeSyncSources(syncSources)
   }
 
-  return (async function * () {
-    const output = pushable<T>({
-      objectMode: true
-    })
-
-    void Promise.resolve().then(async () => {
-      try {
-        await Promise.all(
-          sources.map(async (source) => {
-            for await (const item of source) {
-              output.push(item)
-            }
-          })
-        )
-
-        output.end()
-      } catch (err: any) {
-        output.end(err)
-      }
-    })
-
-    yield * output
-  })()
+  return mergeSources(sources)
 }
 
 export default merge
