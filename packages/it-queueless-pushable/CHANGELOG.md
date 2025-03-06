@@ -1,3 +1,9 @@
+## [it-queueless-pushable-v1.0.2](https://github.com/achingbrain/it/compare/it-queueless-pushable-1.0.1...it-queueless-pushable-1.0.2) (2025-03-06)
+
+### Bug Fixes
+
+* allow early return ([#153](https://github.com/achingbrain/it/issues/153)) ([66e2278](https://github.com/achingbrain/it/commit/66e22780acb92f4a915d53e3783d00e61c5bec1a))
+
 ## [it-queueless-pushable-v1.0.1](https://github.com/achingbrain/it/compare/it-queueless-pushable-1.0.0...it-queueless-pushable-1.0.1) (2025-03-06)
 
 ### Bug Fixes
