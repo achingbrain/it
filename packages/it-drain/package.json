@@ -1,6 +1,6 @@
 {
   "name": "it-drain",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "Empties an async iterator",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
