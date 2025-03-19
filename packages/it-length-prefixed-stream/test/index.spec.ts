@@ -83,7 +83,7 @@ Object.keys(tests).forEach(key => {
       await expect(lp.read({
         signal: AbortSignal.timeout(10)
       })).to.eventually.be.rejected()
-        .with.property('message', 'Read aborted')
+        .with.property('name', 'AbortError')
     })
 
     it('waits for read when writing', async () => {
@@ -116,7 +116,7 @@ Object.keys(tests).forEach(key => {
       const length = test.allocUnsafe(4)
       test.writeInt32BE(length, data.length, 0)
       const expected = test.concat([length, data])
-      expect(res.subarray()).to.equalBytes(expected.subarray())
+      expect(res?.subarray()).to.equalBytes(expected.subarray())
     })
 
     it('lp fixed decode', async () => {
