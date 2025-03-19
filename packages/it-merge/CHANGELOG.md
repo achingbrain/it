@@ -1,3 +1,9 @@
+## [it-merge-v3.0.9](https://github.com/achingbrain/it/compare/it-merge-3.0.8...it-merge-3.0.9) (2025-03-19)
+
+### Bug Fixes
+
+* update deps ([2ccfa6e](https://github.com/achingbrain/it/commit/2ccfa6e82b9d8ca8f40b0cdbff283414947a3f0e))
+
 ## [it-merge-v3.0.8](https://github.com/achingbrain/it/compare/it-merge-3.0.7...it-merge-3.0.8) (2025-03-19)
 
 ### Bug Fixes
