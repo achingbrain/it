@@ -21,18 +21,30 @@
  * ```
  */
 
-import { AbortError } from 'abort-error'
 import { queuelessPushable } from 'it-queueless-pushable'
+import { raceSignal } from 'race-signal'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { UnexpectedEOFError } from './errors.js'
 import type { AbortOptions } from 'abort-error'
 import type { Duplex } from 'it-stream-types'
 
+export interface ReadOptions extends AbortOptions {
+  bytes: number
+}
+
 export interface ByteStream <Stream = unknown> {
   /**
-   * Read a set number of bytes from the stream
+   * Read bytes from the stream.
+   *
+   * If a required number of bytes is passed as an option, this will wait for
+   * the underlying stream to supply that number of bytes, throwing an
+   * `UnexpectedEOFError` if the stream closes before this happens.
+   *
+   * If no required number of bytes is passed, this will return `null` if the
+   * underlying stream closes before supplying any bytes.
    */
-  read(bytes?: number, options?: AbortOptions): Promise<Uint8ArrayList>
+  read(options: ReadOptions): Promise<Uint8ArrayList>
+  read(options?: AbortOptions): Promise<Uint8ArrayList | null>
 
   /**
    * Write the passed bytes to the stream
@@ -71,7 +83,7 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
     await write.end()
   }
 
-  let source = duplex.source
+  let source: AsyncGenerator<any> = duplex.source
 
   if (duplex.source[Symbol.iterator] != null) {
     source = duplex.source[Symbol.iterator]()
@@ -82,56 +94,34 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
   const readBuffer = new Uint8ArrayList()
 
   const W: ByteStream<Stream> = {
-    read: async (bytes?: number, options?: AbortOptions) => {
+    read: async (options?: ReadOptions) => {
       options?.signal?.throwIfAborted()
 
-      let listener: EventListener | undefined
+      if (options?.bytes == null) {
+        // just read whatever arrives
+        const { done, value } = await raceSignal(source.next(), options?.signal)
 
-      const abortPromise = new Promise((resolve, reject) => {
-        listener = () => {
-          reject(new AbortError('Read aborted'))
+        if (done === true) {
+          return null
         }
 
-        options?.signal?.addEventListener('abort', listener)
-      })
-
-      try {
-        if (bytes == null) {
-          // just read whatever arrives
-          const { done, value } = await Promise.race([
-            source.next(),
-            abortPromise
-          ])
-
-          if (done === true) {
-            return new Uint8ArrayList()
-          }
-
-          return value
-        }
-
-        while (readBuffer.byteLength < bytes) {
-          const { value, done } = await Promise.race([
-            source.next(),
-            abortPromise
-          ])
-
-          if (done === true) {
-            throw new UnexpectedEOFError('unexpected end of input')
-          }
-
-          readBuffer.append(value)
-        }
-
-        const buf = readBuffer.sublist(0, bytes)
-        readBuffer.consume(bytes)
-
-        return buf
-      } finally {
-        if (listener != null) {
-          options?.signal?.removeEventListener('abort', listener)
-        }
+        return value
       }
+
+      while (readBuffer.byteLength < options.bytes) {
+        const { value, done } = await raceSignal(source.next(), options?.signal)
+
+        if (done === true) {
+          throw new UnexpectedEOFError('unexpected end of input')
+        }
+
+        readBuffer.append(value)
+      }
+
+      const buf = readBuffer.sublist(0, options.bytes)
+      readBuffer.consume(options.bytes)
+
+      return buf
     },
     write: async (data, options?: AbortOptions) => {
       options?.signal?.throwIfAborted()

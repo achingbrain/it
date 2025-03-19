@@ -48,6 +48,31 @@ const tests: Record<string, Test<any>> = {
   }
 }
 
+describe('it-byte-stream', () => {
+  it('returns null if underlying stream is empty', async () => {
+    const b = byteStream({
+      source: [],
+      sink: async () => {}
+    })
+
+    const res = await b.read()
+
+    expect(res).to.be.null()
+  })
+
+  it('throws EOF if underlying stream is empty and bytes are specified', async () => {
+    const b = byteStream({
+      source: [],
+      sink: async () => {}
+    })
+
+    await expect(b.read({
+      bytes: 10
+    })).to.eventually.be.rejected
+      .with.property('name', 'UnexpectedEOFError')
+  })
+})
+
 Object.keys(tests).forEach(key => {
   const test = tests[key]
 
@@ -70,7 +95,7 @@ Object.keys(tests).forEach(key => {
       const data = test.from('ww')
 
       void b.write(data)
-      const res = await b.read(2)
+      const res = await b.read({ bytes: 2 })
 
       expect(res.subarray()).to.equalBytes(data.subarray())
     })
@@ -81,8 +106,8 @@ Object.keys(tests).forEach(key => {
       const r = test.from('w')
       void b.write(data)
 
-      const r1 = await b.read(1)
-      const r2 = await b.read(1)
+      const r1 = await b.read({ bytes: 1 })
+      const r2 = await b.read({ bytes: 1 })
 
       expect(r.subarray()).to.equalBytes(r1.subarray())
       expect(r.subarray()).to.equalBytes(r2.subarray())
