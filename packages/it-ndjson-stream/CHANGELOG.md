@@ -1,3 +1,14 @@
+## [it-ndjson-stream-v2.0.0](https://github.com/achingbrain/it/compare/it-ndjson-stream-1.0.1...it-ndjson-stream-2.0.0) (2025-03-19)
+
+### ⚠ BREAKING CHANGES
+
+* the `AbortOptions` interface is no longer exported, use the one from `abort-error` instead
+
+### Bug Fixes
+
+* re-throw error on write ([#157](https://github.com/achingbrain/it/issues/157)) ([be2275e](https://github.com/achingbrain/it/commit/be2275e34e1a446efc2b59a3e2c722efa8f15063))
+* remove AbortOptions exports ([#156](https://github.com/achingbrain/it/issues/156)) ([34b18fb](https://github.com/achingbrain/it/commit/34b18fb28bd60d05c98a7d6d41f4f7986a20c144))
+
 ## [it-ndjson-stream-v1.0.1](https://github.com/achingbrain/it/compare/it-ndjson-stream-1.0.0...it-ndjson-stream-1.0.1) (2025-03-06)
 
 ### Bug Fixes
