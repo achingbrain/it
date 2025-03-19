@@ -1,3 +1,13 @@
+## [it-protobuf-stream-v2.0.0](https://github.com/achingbrain/it/compare/it-protobuf-stream-1.1.6...it-protobuf-stream-2.0.0) (2025-03-19)
+
+### ⚠ BREAKING CHANGES
+
+* the `AbortOptions` interface is no longer exported, use the one from `abort-error` instead
+
+### Bug Fixes
+
+* remove AbortOptions exports ([#156](https://github.com/achingbrain/it/issues/156)) ([34b18fb](https://github.com/achingbrain/it/commit/34b18fb28bd60d05c98a7d6d41f4f7986a20c144))
+
 ## [it-protobuf-stream-v1.1.6](https://github.com/achingbrain/it/compare/it-protobuf-stream-1.1.5...it-protobuf-stream-1.1.6) (2025-03-06)
 
 ### Bug Fixes
