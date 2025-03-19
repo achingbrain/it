@@ -21,39 +21,12 @@
  * ```
  */
 
+import { AbortError } from 'abort-error'
 import { queuelessPushable } from 'it-queueless-pushable'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { UnexpectedEOFError } from './errors.js'
+import type { AbortOptions } from 'abort-error'
 import type { Duplex } from 'it-stream-types'
-
-/**
- * @deprecated This will not be exported in a future release
- */
-export class CodeError extends Error {
-  public readonly code: string
-
-  constructor (message: string, code: string) {
-    super(message)
-    this.code = code
-  }
-}
-
-/**
- * @deprecated This will not be exported in a future release
- */
-export class AbortError extends CodeError {
-  public readonly type: string
-
-  constructor (message: string) {
-    super(message, 'ABORT_ERR')
-    this.type = 'aborted'
-    this.name = 'AbortError'
-  }
-}
-
-export interface AbortOptions {
-  signal?: AbortSignal
-}
 
 export interface ByteStream <Stream = unknown> {
   /**

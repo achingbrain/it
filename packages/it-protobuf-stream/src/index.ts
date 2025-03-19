@@ -26,13 +26,10 @@
  */
 
 import { lpStream } from 'it-length-prefixed-stream'
+import type { AbortOptions } from 'abort-error'
 import type { LengthPrefixedStreamOpts } from 'it-length-prefixed-stream'
 import type { Duplex } from 'it-stream-types'
 import type { Uint8ArrayList } from 'uint8arraylist'
-
-export interface AbortOptions {
-  signal?: AbortSignal
-}
 
 /**
  * A protobuf decoder - takes a byte array and returns an object

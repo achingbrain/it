@@ -24,13 +24,10 @@
 
 import { encode, decode } from 'cborg'
 import { lpStream } from 'it-length-prefixed-stream'
+import type { AbortOptions } from 'abort-error'
 import type { EncodeOptions, DecodeOptions } from 'cborg/interface'
 import type { LengthPrefixedStreamOpts } from 'it-length-prefixed-stream'
 import type { Duplex } from 'it-stream-types'
-
-export interface AbortOptions {
-  signal?: AbortSignal
-}
 
 /**
  * Convenience methods for working with CBOR streams

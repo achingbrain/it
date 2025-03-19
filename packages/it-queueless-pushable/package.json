@@ -136,6 +136,7 @@
     "release": "aegir release"
   },
   "dependencies": {
+    "abort-error": "^1.0.1",
     "p-defer": "^4.0.1",
     "race-signal": "^1.1.3"
   },
