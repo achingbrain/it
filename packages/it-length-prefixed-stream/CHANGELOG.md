@@ -1,3 +1,9 @@
+## [it-length-prefixed-stream-v2.0.1](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-2.0.0...it-length-prefixed-stream-2.0.1) (2025-03-19)
+
+### Bug Fixes
+
+* update it-byte-stream dep ([13329ba](https://github.com/achingbrain/it/commit/13329ba22308c6149d0faf10f28efdf5563ea6e2))
+
 ## [it-length-prefixed-stream-v2.0.0](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-1.2.1...it-length-prefixed-stream-2.0.0) (2025-03-19)
 
 ### ⚠ BREAKING CHANGES
