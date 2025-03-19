@@ -137,7 +137,7 @@
   },
   "dependencies": {
     "abort-error": "^1.0.1",
-    "it-queueless-pushable": "^1.0.0",
+    "it-queueless-pushable": "^2.0.0",
     "it-stream-types": "^2.0.2",
     "race-signal": "^1.1.3",
     "uint8arraylist": "^2.4.8"

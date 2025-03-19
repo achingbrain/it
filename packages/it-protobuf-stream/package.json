@@ -139,7 +139,7 @@
   },
   "dependencies": {
     "abort-error": "^1.0.1",
-    "it-length-prefixed-stream": "^1.0.0",
+    "it-length-prefixed-stream": "^2.0.0",
     "it-stream-types": "^2.0.2",
     "uint8arraylist": "^2.4.8"
   },
