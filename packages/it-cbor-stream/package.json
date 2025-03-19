@@ -1,6 +1,6 @@
 {
   "name": "it-cbor-stream",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Read and write CBOR messages over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
