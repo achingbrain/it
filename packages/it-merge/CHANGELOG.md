@@ -1,3 +1,9 @@
+## [it-merge-v3.0.8](https://github.com/achingbrain/it/compare/it-merge-3.0.7...it-merge-3.0.8) (2025-03-19)
+
+### Bug Fixes
+
+* add backpressure to it-merge ([#155](https://github.com/achingbrain/it/issues/155)) ([eb49a35](https://github.com/achingbrain/it/commit/eb49a353d7bf3487e18ff66e8e6d63ba12e39a94))
+
 ## [it-merge-v3.0.7](https://github.com/achingbrain/it/compare/it-merge-3.0.6...it-merge-3.0.7) (2025-03-06)
 
 ### Bug Fixes
