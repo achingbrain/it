@@ -40,8 +40,8 @@
  * ```
  */
 
-import { pushable } from 'it-pushable'
-import type { Pushable } from 'it-pushable'
+import { queuelessPushable } from 'it-queueless-pushable'
+import type { Pushable } from 'it-queueless-pushable'
 
 function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
@@ -52,21 +52,20 @@ async function addAllToPushable <T> (sources: Array<AsyncIterable<T> | Iterable<
     await Promise.all(
       sources.map(async (source) => {
         for await (const item of source) {
-          output.push(item)
+          await output.push(item)
         }
       })
     )
 
-    output.end()
+    await output.end()
   } catch (err: any) {
-    output.end(err)
+    await output.end(err)
+      .catch(() => {})
   }
 }
 
 async function * mergeSources <T> (sources: Array<AsyncIterable<T> | Iterable<T>>): AsyncGenerator<T, void, undefined> {
-  const output = pushable<T>({
-    objectMode: true
-  })
+  const output = queuelessPushable<T>()
 
   addAllToPushable(sources, output)
     .catch(() => {})

@@ -136,7 +136,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "it-pushable": "^3.2.3"
+    "it-queueless-pushable": "^1.0.0"
   },
   "devDependencies": {
     "aegir": "^45.1.2",
