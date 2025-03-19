@@ -52,6 +52,7 @@ class QueuelessPushable <T> implements Pushable<T> {
   private haveNext: DeferredPromise<void>
   private ended: boolean
   private nextResult: IteratorResult<T> | undefined
+  private error?: Error
 
   constructor () {
     this.ended = false
@@ -86,6 +87,7 @@ class QueuelessPushable <T> implements Pushable<T> {
 
   async throw (err?: Error): Promise<IteratorReturnResult<undefined>> {
     this.ended = true
+    this.error = err
 
     if (err != null) {
       // this can cause unhandled promise rejections if nothing is awaiting the
@@ -132,7 +134,7 @@ class QueuelessPushable <T> implements Pushable<T> {
 
   private async _push (value?: T, options?: AbortOptions & RaceSignalOptions): Promise<void> {
     if (value != null && this.ended) {
-      throw new Error('Cannot push value onto an ended pushable')
+      throw this.error ?? new Error('Cannot push value onto an ended pushable')
     }
 
     // wait for all values to be read

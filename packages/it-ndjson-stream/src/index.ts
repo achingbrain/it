@@ -72,11 +72,7 @@ export function ndjsonStream <T = any, Stream extends Duplex<any, any, any> = Du
     read: async (options?: AbortOptions) => {
       const result = await raceSignal(input.next(), options?.signal)
 
-      if (result.done === true) {
-        throw new UnexpectedEOFError('unexpected end of input')
-      }
-
-      if (result.value == null) {
+      if (result.done === true || result.value == null) {
         throw new UnexpectedEOFError('unexpected end of input')
       }
 

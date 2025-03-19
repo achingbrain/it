@@ -59,4 +59,48 @@ describe('it-ndjson-stream', () => {
     await expect(messages.read()).to.eventually.be.rejected
       .with.property('name', 'InvalidMessageLengthError')
   })
+
+  it('throws EOF on empty stream', async () => {
+    messages = ndjsonStream({
+      source: [],
+      sink: async () => {}
+    })
+
+    // read using stream with message length limit
+    await expect(messages.read()).to.eventually.be.rejected
+      .with.property('name', 'UnexpectedEOFError')
+  })
+
+  it('throws EOF on short read when generator returns', async () => {
+    const source = (async function * () {})()
+    await source.return()
+
+    messages = ndjsonStream({
+      source,
+      sink: async () => {}
+    })
+
+    // read using stream with message length limit
+    await expect(messages.read()).to.eventually.be.rejected
+      .with.property('name', 'UnexpectedEOFError')
+  })
+
+  it('ends output when sink throws', async () => {
+    messages = ndjsonStream({
+      source: [],
+      sink: async () => {
+        throw new Error('Oh noes!')
+      }
+    })
+
+    // wait for stream to end
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, 100)
+    })
+
+    await expect(messages.write(obj)).to.eventually.be.rejected
+      .with.property('message', 'Oh noes!')
+  })
 })
