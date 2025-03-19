@@ -1,3 +1,9 @@
+## [it-byte-stream-v2.0.1](https://github.com/achingbrain/it/compare/it-byte-stream-2.0.0...it-byte-stream-2.0.1) (2025-03-19)
+
+### Bug Fixes
+
+* update deps ([2ccfa6e](https://github.com/achingbrain/it/commit/2ccfa6e82b9d8ca8f40b0cdbff283414947a3f0e))
+
 ## [it-byte-stream-v2.0.0](https://github.com/achingbrain/it/compare/it-byte-stream-1.1.1...it-byte-stream-2.0.0) (2025-03-19)
 
 ### ⚠ BREAKING CHANGES
