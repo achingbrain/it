@@ -1,3 +1,18 @@
+## [it-byte-stream-v2.0.0](https://github.com/achingbrain/it/compare/it-byte-stream-1.1.1...it-byte-stream-2.0.0) (2025-03-19)
+
+### ⚠ BREAKING CHANGES
+
+* if the underlying stream closes without yielding any bytes and we are not waiting for a required number of bytes, `byteStream.read` will now return `null` instead of an empty `Uint8ArrayList`
+* the `AbortOptions` interface is no longer exported, use the one from `abort-error` instead
+
+### Features
+
+* return null from bytestream when stream closes ([#158](https://github.com/achingbrain/it/issues/158)) ([df88a9d](https://github.com/achingbrain/it/commit/df88a9d903226979f79bfdd59f4eae1906720954))
+
+### Bug Fixes
+
+* remove AbortOptions exports ([#156](https://github.com/achingbrain/it/issues/156)) ([34b18fb](https://github.com/achingbrain/it/commit/34b18fb28bd60d05c98a7d6d41f4f7986a20c144))
+
 ## [it-byte-stream-v1.1.1](https://github.com/achingbrain/it/compare/it-byte-stream-1.1.0...it-byte-stream-1.1.1) (2025-03-06)
 
 ### Bug Fixes
