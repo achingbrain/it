@@ -121,6 +121,14 @@ describe('it-queueless-pushable', () => {
     await expect(pushable.push('nope!')).to.eventually.be.rejectedWith('Cannot push value onto an ended pushable')
   })
 
+  it('should re-throw error when attempting to write to errored pushable', async () => {
+    const err = new Error('Urk!')
+    const pushable = queuelessPushable<string>()
+    void pushable.throw(err)
+
+    await expect(pushable.push('derp')).to.eventually.be.rejectedWith(err)
+  })
+
   it('should push in order even it promises are unawaited', async () => {
     const pushable = queuelessPushable<string>()
 
