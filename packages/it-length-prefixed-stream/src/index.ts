@@ -81,7 +81,10 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
 
       while (true) {
         // read one byte at a time until we can decode a varint
-        lengthBuffer.append(await bytes.read(1, options))
+        lengthBuffer.append(await bytes.read({
+          ...options,
+          bytes: 1
+        }))
 
         try {
           dataLength = decodeLength(lengthBuffer)
@@ -110,7 +113,10 @@ export function lpStream <Stream extends Duplex<any, any, any>> (duplex: Stream,
         throw new InvalidDataLengthError('message length too long')
       }
 
-      return bytes.read(dataLength, options)
+      return bytes.read({
+        ...options,
+        bytes: dataLength
+      })
     },
     write: async (data, options?: AbortOptions) => {
       // encode, write
