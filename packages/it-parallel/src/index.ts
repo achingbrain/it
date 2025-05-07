@@ -222,6 +222,14 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
       yield * yieldUnOrderedValues()
     }
 
+    if (sourceErr != null) {
+      // if the source yields an array that is `yield *`, it can throw while the
+      // onward consumer is processing the array contents - make sure we
+      // propagate the error
+      // eslint-disable-next-line @typescript-eslint/no-throw-literal
+      throw sourceErr
+    }
+
     if (sourceFinished && ops.length === 0) {
       // not waiting for any results and no more tasks so we are done
       break
