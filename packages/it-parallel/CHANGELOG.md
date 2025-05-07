@@ -1,3 +1,9 @@
+## [it-parallel-v3.0.10](https://github.com/achingbrain/it/compare/it-parallel-3.0.9...it-parallel-3.0.10) (2025-05-07)
+
+### Bug Fixes
+
+* handle throw during onward yield ([#159](https://github.com/achingbrain/it/issues/159)) ([f38a5e8](https://github.com/achingbrain/it/commit/f38a5e8955c5c9cb9f9c706195d799f5634c397a))
+
 ## [it-parallel-v3.0.9](https://github.com/achingbrain/it/compare/it-parallel-3.0.8...it-parallel-3.0.9) (2025-03-06)
 
 ### Bug Fixes
