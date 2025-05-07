@@ -257,4 +257,41 @@ describe('it-parallel', () => {
 
     expect(res).to.deep.equal([])
   })
+
+  it('should throw when input throws during onward yield', async () => {
+    async function * input (): AsyncGenerator<() => Promise<string[]>, any, any> {
+      await delay(10)
+
+      yield async (): Promise<string[]> => {
+        await delay(10)
+
+        return ['hello', 'world']
+      }
+
+      await delay(10)
+
+      yield async (): Promise<string[]> => {
+        await delay(10)
+
+        return ['hello', 'world']
+      }
+
+      await delay(10)
+
+      throw new Error('input threw')
+    }
+
+    const gen = async function * (): AsyncGenerator<string, any, any> {
+      for await (const res of parallel(input(), {
+        ordered: false,
+        concurrency: 2
+      })) {
+        yield * res
+        await delay(50)
+      }
+    }
+
+    await expect(all(gen())).to.eventually.be.rejected
+      .with.property('message', 'input threw')
+  })
 })
