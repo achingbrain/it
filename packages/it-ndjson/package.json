@@ -139,7 +139,7 @@
     "uint8arraylist": "^2.4.8"
   },
   "devDependencies": {
-    "aegir": "^45.1.2",
+    "aegir": "^46.0.0",
     "buffer": "^6.0.3",
     "it-all": "^3.0.0"
   }

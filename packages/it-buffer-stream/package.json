@@ -139,7 +139,7 @@
     "iso-random-stream": "^2.0.2"
   },
   "devDependencies": {
-    "aegir": "^45.1.2",
+    "aegir": "^46.0.0",
     "uint8arrays": "^5.1.0"
   }
 }
