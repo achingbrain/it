@@ -8,7 +8,8 @@ import { pair } from 'it-pair'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
-import { byteStream, type ByteStream } from '../src/index.js'
+import { byteStream } from '../src/index.js'
+import type { ByteStream } from '../src/index.js'
 
 interface Test<T> {
   from(str: string): T

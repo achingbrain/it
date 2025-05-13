@@ -209,7 +209,7 @@
 
 import { anySignal } from 'any-signal'
 import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
-import { pushable, type Pushable } from 'it-pushable'
+import { pushable } from 'it-pushable'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
 import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError } from './errors.js'
@@ -217,6 +217,7 @@ import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, Call
 import { lookUpScope } from './utils.js'
 import { Values } from './values.js'
 import type { Value } from './rpc.js'
+import type { Pushable } from 'it-pushable'
 import type { Duplex, Source } from 'it-stream-types'
 import type { DeferredPromise } from 'p-defer'
 

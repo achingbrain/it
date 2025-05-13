@@ -23,11 +23,12 @@
  * ])
  * ```
  */
-import { byteStream, type ByteStreamOpts } from 'it-byte-stream'
+import { byteStream } from 'it-byte-stream'
 import * as varint from 'uint8-varint'
 import { Uint8ArrayList } from 'uint8arraylist'
 import { InvalidDataLengthError, InvalidDataLengthLengthError, InvalidMessageLengthError } from './errors.js'
 import type { AbortOptions } from 'abort-error'
+import type { ByteStreamOpts } from 'it-byte-stream'
 import type { Duplex } from 'it-stream-types'
 
 export interface LengthPrefixedStream <Stream = unknown> {

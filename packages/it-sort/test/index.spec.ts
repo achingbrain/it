@@ -1,6 +1,7 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import sort, { type CompareFunction } from '../src/index.js'
+import sort from '../src/index.js'
+import type { CompareFunction } from '../src/index.js'
 
 describe('it-sort', () => {
   it('should sort all entries of an iterator', () => {

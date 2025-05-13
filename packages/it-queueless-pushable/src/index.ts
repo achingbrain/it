@@ -28,9 +28,11 @@
  * ```
  */
 
-import deferred, { type DeferredPromise } from 'p-defer'
-import { raceSignal, type RaceSignalOptions } from 'race-signal'
+import deferred from 'p-defer'
+import { raceSignal } from 'race-signal'
 import type { AbortOptions } from 'abort-error'
+import type { DeferredPromise } from 'p-defer'
+import type { RaceSignalOptions } from 'race-signal'
 
 export interface Pushable<T> extends AsyncGenerator<T, void, unknown> {
   /**

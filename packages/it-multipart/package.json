@@ -119,7 +119,15 @@
       "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/github",
-      "@semantic-release/git"
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json"
+          ]
+        }
+      ]
     ]
   },
   "scripts": {
@@ -132,12 +140,12 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "formidable": "^3.5.2",
+    "formidable": "^3.5.4",
     "it-pushable": "^3.2.3"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
-    "aegir": "^45.1.2",
+    "aegir": "^46.0.1",
     "form-data": "^4.0.2",
     "it-drain": "^3.0.0",
     "node-fetch": "^3.3.2",

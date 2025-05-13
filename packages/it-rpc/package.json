@@ -118,7 +118,15 @@
       "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/github",
-      "@semantic-release/git"
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json"
+          ]
+        }
+      ]
     ]
   },
   "scripts": {
@@ -140,18 +148,18 @@
   },
   "dependencies": {
     "any-signal": "^4.1.1",
-    "cborg": "^4.2.8",
+    "cborg": "^4.2.10",
     "it-length-prefixed": "^10.0.1",
     "it-pushable": "^3.2.3",
     "it-stream-types": "^2.0.2",
-    "nanoid": "^5.1.2",
+    "nanoid": "^5.1.5",
     "p-defer": "^4.0.1",
     "protons-runtime": "^5.5.0",
     "uint8arraylist": "^2.4.8",
     "uint8arrays": "^5.1.0"
   },
   "devDependencies": {
-    "aegir": "^45.1.2",
+    "aegir": "^46.0.1",
     "delay": "^6.0.0",
     "it-all": "^3.0.0",
     "it-drain": "^3.0.0",

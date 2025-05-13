@@ -52,7 +52,7 @@ $ npm i it-ndjson-stream
 
 ## Browser `<script>` tag
 
-Loading this module through a script tag will make its exports available as `ItLengthPrefixedStream` in the global namespace.
+Loading this module through a script tag will make its exports available as `ItNdjsonStream` in the global namespace.
 
 ```html
 <script src="https://unpkg.com/it-ndjson-stream/dist/index.min.js"></script>
