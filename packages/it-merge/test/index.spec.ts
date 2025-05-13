@@ -1,4 +1,5 @@
 import { expect } from 'aegir/chai'
+import delay from 'delay'
 import all from 'it-all'
 import merge from '../src/index.js'
 
@@ -101,5 +102,52 @@ describe('it-merge', () => {
     expect(res4).to.have.property('value', 5)
     expect(values1Yielded).to.equal(2, 'first generator continued yielding without a consumer')
     expect(values2Yielded).to.equal(2, 'second generator continued yielding without a consumer')
+  })
+
+  it('should abort queue push on a short read', async () => {
+    let values1Finally = false
+    let values2Finally = false
+    const yielded: number[] = []
+    const received: number[] = []
+
+    const values1 = async function * (): AsyncGenerator<number, void, undefined> {
+      try {
+        await delay(10)
+        yield 0
+        yielded.push(0)
+        await delay(100)
+        yield 2
+        yielded.push(2)
+      } finally {
+        values1Finally = true
+      }
+    }
+    const values2 = async function * (): AsyncGenerator<number, void, undefined> {
+      try {
+        await delay(10)
+        yield 1
+        yielded.push(1)
+        await delay(100)
+        yield 3
+        yielded.push(3)
+      } finally {
+        values2Finally = true
+      }
+    }
+
+    for await (const val of merge(values1(), values2())) {
+      received.push(val)
+
+      if (val === 1) {
+        break
+      }
+    }
+
+    await delay(1000)
+
+    expect(received).to.deep.equal([0, 1])
+    expect(yielded).to.deep.equal([0])
+    expect(values1Finally).to.be.true()
+    expect(values2Finally).to.be.true()
   })
 })
