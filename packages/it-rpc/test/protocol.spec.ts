@@ -1,12 +1,13 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
 import { encode, decode } from 'it-length-prefixed'
-import { pushable, type Pushable } from 'it-pushable'
+import { pushable } from 'it-pushable'
 import { stubInterface } from 'sinon-ts'
 import { rpc } from '../src/index.js'
 import { InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from '../src/rpc.js'
 import { Values } from '../src/values.js'
 import type { Invocation, RPC, ValueCodecs } from '../src/index.js'
+import type { Pushable } from 'it-pushable'
 
 const target = {
   prop: true,
