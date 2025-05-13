@@ -10,6 +10,9 @@
   "references": [
     {
       "path": "../it-all"
+    },
+    {
+      "path": "../it-queueless-pushable"
     }
   ]
 }
