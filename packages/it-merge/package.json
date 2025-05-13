@@ -148,6 +148,7 @@
   },
   "devDependencies": {
     "aegir": "^46.0.1",
+    "delay": "^6.0.0",
     "it-all": "^3.0.0"
   }
 }

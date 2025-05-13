@@ -47,30 +47,42 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }
 
-async function addAllToPushable <T> (sources: Array<AsyncIterable<T> | Iterable<T>>, output: Pushable<T>): Promise<void> {
+async function addAllToPushable <T> (sources: Array<AsyncIterable<T> | Iterable<T>>, output: Pushable<T>, signal: AbortSignal): Promise<void> {
   try {
     await Promise.all(
       sources.map(async (source) => {
         for await (const item of source) {
-          await output.push(item)
+          await output.push(item, {
+            signal
+          })
+          signal.throwIfAborted()
         }
       })
     )
 
-    await output.end()
+    await output.end(undefined, {
+      signal
+    })
   } catch (err: any) {
-    await output.end(err)
+    await output.end(err, {
+      signal
+    })
       .catch(() => {})
   }
 }
 
 async function * mergeSources <T> (sources: Array<AsyncIterable<T> | Iterable<T>>): AsyncGenerator<T, void, undefined> {
+  const controller = new AbortController()
   const output = queuelessPushable<T>()
 
-  addAllToPushable(sources, output)
+  addAllToPushable(sources, output, controller.signal)
     .catch(() => {})
 
-  yield * output
+  try {
+    yield * output
+  } finally {
+    controller.abort()
+  }
 }
 
 function * mergeSyncSources <T> (syncSources: Array<Iterable<T>>): Generator<T, void, undefined> {
