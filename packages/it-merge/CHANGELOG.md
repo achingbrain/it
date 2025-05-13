@@ -1,3 +1,9 @@
+## [it-merge-v3.0.11](https://github.com/achingbrain/it/compare/it-merge-3.0.10...it-merge-3.0.11) (2025-05-13)
+
+### Bug Fixes
+
+* abort awaiting pushable add when no longer yielding values ([#161](https://github.com/achingbrain/it/issues/161)) ([fd5a361](https://github.com/achingbrain/it/commit/fd5a361b9f7aab5bfa415247992d0cedf23e872f))
+
 ## [it-merge-v3.0.10](https://github.com/achingbrain/it/compare/it-merge-3.0.9...it-merge-3.0.10) (2025-05-13)
 
 ### Dependencies
