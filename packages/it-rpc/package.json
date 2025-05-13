@@ -1,6 +1,6 @@
 {
   "name": "it-rpc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Schema-free RPC over async iterables",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/achingbrain/it/tree/main/packages/it-rpc#readme",
