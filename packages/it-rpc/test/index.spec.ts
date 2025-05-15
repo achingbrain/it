@@ -93,4 +93,40 @@ describe('basics', () => {
   it('should retain object context when invoking a generator', async () => {
     await expect(all(sender.generatorContextAccess())).to.eventually.deep.equal([true])
   })
+
+  it('should require connection to invoke methods', async () => {
+    const clientRPC = rpc()
+    const sender = clientRPC.createClient<typeof target>('target')
+
+    await expect(sender.hello()).to.eventually.be.rejected
+      .with.property('name', 'NotConnectedError')
+  })
+
+  it('should require connection to invoke a generator', async () => {
+    const clientRPC = rpc()
+    const sender = clientRPC.createClient<typeof target>('target')
+
+    await expect(all(sender.generatorContextAccess())).to.eventually.be.rejected
+      .with.property('name', 'NotConnectedError')
+  })
+
+  it('should require connection to throw from a generator', async () => {
+    const clientRPC = rpc()
+    const sender = clientRPC.createClient<typeof target>('target')
+
+    const gen = sender.generatorContextAccess()
+
+    await expect(gen.throw(new Error('wat'))).to.eventually.be.rejected
+      .with.property('name', 'NotConnectedError')
+  })
+
+  it('should require connection to return from a generator', async () => {
+    const clientRPC = rpc()
+    const sender = clientRPC.createClient<typeof target>('target')
+
+    const gen = sender.generatorContextAccess()
+
+    await expect(gen.return(true)).to.eventually.be.rejected
+      .with.property('name', 'NotConnectedError')
+  })
 })

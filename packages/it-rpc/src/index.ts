@@ -212,7 +212,7 @@ import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable } from 'it-pushable'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
-import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError } from './errors.js'
+import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, NotConnectedError } from './errors.js'
 import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, CallbackResolvedMessage, InvokeCallbackMessage, InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from './rpc.js'
 import { lookUpScope } from './utils.js'
 import { Values } from './values.js'
@@ -347,9 +347,20 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   // handers for incoming protocol message
   private readonly messageHandlers: Record<string, MessageHandler<any> | ScopeMessageHandler<any>>
 
+  // record if we have an onward stream to send messages to
+  private connected: boolean
+
   constructor (init?: RPCIinit) {
     this.output = pushable()
     this.source = lpEncode(this.output)
+
+    this.connected = false
+    const next = this.source.next
+    this.source.next = async (...args: any) => {
+      this.connected = true
+      return next.apply(this.source, args)
+    }
+
     this.targets = new Map()
     this.invocations = new Map()
     this.values = new Values(init)
@@ -757,6 +768,10 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 self.invocations.delete(scope)
                 signal.clear()
               })
+
+              if (!self.connected) {
+                invocation.result.reject(new NotConnectedError())
+              }
             })
           }
 
@@ -839,6 +854,10 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 return result
               },
               [Symbol.asyncIterator]: () => asyncGenerator
+            }
+
+            if (!self.connected) {
+              invocation.result.reject(new NotConnectedError())
             }
           }
 

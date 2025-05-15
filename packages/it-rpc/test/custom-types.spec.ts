@@ -32,7 +32,7 @@ const codec: ValueCodec<MyClass> = {
   }
 }
 
-describe('basics', () => {
+describe('custom types', () => {
   let serverRPC: RPC
   let clientRPC: RPC
   let sender: typeof target

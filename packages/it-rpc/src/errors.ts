@@ -67,3 +67,10 @@ export class MissingCallbackError extends Error {
     this.name = 'MissingCallbackError'
   }
 }
+
+export class NotConnectedError extends Error {
+  constructor (message = 'Not connected') {
+    super(message)
+    this.name = 'NotConnectedError'
+  }
+}
