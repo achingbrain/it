@@ -1,6 +1,6 @@
 {
   "name": "it-limit-bytes",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Limit the number of bytes that are yielded from an (async) iterable",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
