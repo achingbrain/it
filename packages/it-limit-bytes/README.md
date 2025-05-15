@@ -3,7 +3,7 @@
 [![codecov](https://img.shields.io/codecov/c/github/achingbrain/it.svg?style=flat-square)](https://codecov.io/gh/achingbrain/it)
 [![CI](https://img.shields.io/github/actions/workflow/status/achingbrain/it/js-test-and-release.yml?branch=main\&style=flat-square)](https://github.com/achingbrain/it/actions/workflows/js-test-and-release.yml?query=branch%3Amain)
 
-> Limit the number of bytes that are yielded
+> Limit the number of bytes that are yielded from an (async) iterable
 
 # About
 
