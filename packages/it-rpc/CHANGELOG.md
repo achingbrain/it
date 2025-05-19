@@ -1,3 +1,9 @@
+## [it-rpc-v1.1.0](https://github.com/achingbrain/it/compare/it-rpc-1.0.5...it-rpc-1.1.0) (2025-05-19)
+
+### Features
+
+* add timeout for function returns ([#164](https://github.com/achingbrain/it/issues/164)) ([13bebbe](https://github.com/achingbrain/it/commit/13bebbe4b10c7d98148ea5b63f462aa5bb1f3a2b))
+
 ## [it-rpc-v1.0.5](https://github.com/achingbrain/it/compare/it-rpc-1.0.4...it-rpc-1.0.5) (2025-05-19)
 
 ### Bug Fixes
