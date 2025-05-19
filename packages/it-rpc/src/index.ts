@@ -207,12 +207,14 @@
  * ```
  */
 
+import { AbortError } from 'abort-error'
 import { anySignal } from 'any-signal'
 import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable } from 'it-pushable'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
-import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, NotConnectedError } from './errors.js'
+import { raceSignal } from 'race-signal'
+import { DuplicateScopeError, DuplicateTargetNameError, InvalidInvocationTypeError, InvalidMethodError, InvalidReturnTypeError, MethodNotFoundError, MissingCallbackError, NotConnectedError, TimeoutError } from './errors.js'
 import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, CallbackResolvedMessage, InvokeCallbackMessage, InvokeMethodMessage, MessageType, MethodRejectedMessage, MethodResolvedMessage, RPCMessage } from './rpc.js'
 import { lookUpScope } from './utils.js'
 import { Values } from './values.js'
@@ -302,12 +304,20 @@ export interface ValueCodec<T = any> {
   decode(buf: Uint8Array, codec: ValueCodecs, pushable: Pushable<Uint8Array>, invocation: Invocation): T
 }
 
-export interface RPCIinit {
+export interface ClientOptions {
+  /**
+   * If a remote method invocation is not resolved within this many ms, throw an
+   * AbortError
+   */
+  timeout?: number
+}
+
+export interface RPCInit {
   valueCodecs?: ValueCodec[]
 }
 
 export interface RPC extends Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
-  createClient<T extends object> (name: string): T
+  createClient<T extends object> (name: string, options?: ClientOptions): T
   createTarget (name: string, target: any): void
 }
 
@@ -350,7 +360,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   // record if we have an onward stream to send messages to
   private connected: boolean
 
-  constructor (init?: RPCIinit) {
+  constructor (init?: RPCInit) {
     this.output = pushable()
     this.source = lpEncode(this.output)
 
@@ -485,8 +495,8 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     }
   }
 
-  createClient<T extends object> (name: string): T {
-    return this.proxy(name)
+  createClient<T extends object> (name: string, options?: ClientOptions): T {
+    return this.proxy(name, options)
   }
 
   createTarget (name: string, target: any): void {
@@ -710,7 +720,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
     invocation.children.delete(message.scope)
   }
 
-  private proxy (path: string): any {
+  private proxy (path: string, options?: ClientOptions): any {
     // proxy a function object because it can be either invoked or it's
     // properties can be accessed.
     const f = (): void => {}
@@ -718,7 +728,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
 
     return new Proxy(f as any, {
       get (target, prop, receiver) {
-        return self.proxy(`${path == null ? '' : `${path}.`}${prop.toString()}`)
+        return self.proxy(`${path == null ? '' : `${path}.`}${prop.toString()}`, options)
       },
 
       apply (target, thisArg, argumentsList) {
@@ -729,7 +739,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
           if (promise == null) {
             promise = new Promise<any>((resolve, reject) => {
               const scope = nanoid()
-              const invocation = {
+              const invocation: Invocation = {
                 scope,
                 result: pDefer(),
                 callbacks: new Map<string, CallbackFunction>(),
@@ -737,6 +747,13 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 parents: [],
                 abortControllers: [],
                 abortSignals: []
+              }
+
+              let timeout: AbortSignal | undefined
+
+              if (options?.timeout != null) {
+                timeout = AbortSignal.timeout(options.timeout)
+                invocation.abortSignals.push(timeout)
               }
 
               self.invocations.set(scope, invocation)
@@ -758,6 +775,12 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                     scope
                   })
                 }))
+
+                if (timeout?.aborted === true) {
+                  invocation.result.reject(new TimeoutError())
+                } else {
+                  invocation.result.reject(new AbortError())
+                }
               })
 
               invocation.result.promise.then(result => {
@@ -781,7 +804,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
         function getAsyncGenerator (): any {
           if (asyncGenerator == null) {
             const scope = nanoid()
-            const invocation = {
+            const invocation: Invocation = {
               scope,
               result: pDefer<AsyncGenerator<any, any, any>>(),
               callbacks: new Map<string, CallbackFunction>(),
@@ -810,33 +833,73 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   throw error
                 }
 
-                const gen = await invocation.result.promise
-                const result = await gen.next()
+                const signals = [...invocation.abortSignals]
+                let timeout: AbortSignal | undefined
 
-                if (result.done === true) {
-                  self.invocations.delete(scope)
+                if (options?.timeout != null) {
+                  timeout = AbortSignal.timeout(options.timeout)
+                  signals.push(timeout)
                 }
 
-                return result
-              },
-              async throw (err: any) {
-                if (error != null) {
-                  throw error
-                }
+                const signal = anySignal(signals)
 
                 try {
-                  const gen = await invocation.result.promise
-                  const result = await gen.throw(err)
+                  const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
+                  const result = await raceSignal(gen.next(), signal)
 
                   if (result.done === true) {
                     self.invocations.delete(scope)
                   }
 
                   return result
-                } catch (e) {
+                } catch (err: any) {
+                  self.invocations.delete(scope)
+
+                  if (timeout?.aborted === true) {
+                    throw new TimeoutError()
+                  }
+
+                  throw err
+                } finally {
+                  signal.clear()
+                }
+              },
+              async throw (err: any) {
+                if (error != null) {
+                  throw error
+                }
+
+                const signals = [...invocation.abortSignals]
+                let timeout: AbortSignal | undefined
+
+                if (options?.timeout != null) {
+                  timeout = AbortSignal.timeout(options.timeout)
+                  signals.push(timeout)
+                }
+
+                const signal = anySignal(signals)
+
+                try {
+                  const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
+                  const result = await raceSignal(gen.throw(err), signal)
+
+                  if (result.done === true) {
+                    self.invocations.delete(scope)
+                  }
+
+                  return result
+                } catch (e: any) {
                   self.invocations.delete(scope)
                   error = err
+
+                  if (timeout?.aborted === true) {
+                    error = new TimeoutError()
+                    throw error
+                  }
+
                   throw e
+                } finally {
+                  signal.clear()
                 }
               },
               async return (value: any) {
@@ -844,14 +907,36 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   throw error
                 }
 
-                const gen = await invocation.result.promise
-                const result = await gen.return(value)
+                const signals = [...invocation.abortSignals]
+                let timeout: AbortSignal | undefined
 
-                if (result.done === true) {
-                  self.invocations.delete(scope)
+                if (options?.timeout != null) {
+                  timeout = AbortSignal.timeout(options.timeout)
+                  signals.push(timeout)
                 }
 
-                return result
+                const signal = anySignal(signals)
+
+                try {
+                  const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
+                  const result = await raceSignal(gen.return(value), signal)
+
+                  if (result.done === true) {
+                    self.invocations.delete(scope)
+                  }
+
+                  return result
+                } catch (err: any) {
+                  self.invocations.delete(scope)
+
+                  if (timeout?.aborted === true) {
+                    throw new TimeoutError()
+                  }
+
+                  throw err
+                } finally {
+                  signal.clear()
+                }
               },
               [Symbol.asyncIterator]: () => asyncGenerator
             }
@@ -915,6 +1000,6 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   }
 }
 
-export function rpc (init?: RPCIinit): RPC {
+export function rpc (init?: RPCInit): RPC {
   return new DuplexRPC(init)
 }

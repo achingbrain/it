@@ -74,3 +74,10 @@ export class NotConnectedError extends Error {
     this.name = 'NotConnectedError'
   }
 }
+
+export class TimeoutError extends Error {
+  constructor (message = 'Timeout') {
+    super(message)
+    this.name = 'TimeoutError'
+  }
+}
