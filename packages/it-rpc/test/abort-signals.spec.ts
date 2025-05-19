@@ -1,5 +1,5 @@
+import { AbortError } from 'abort-error'
 import { expect } from 'aegir/chai'
-import { AbortError } from 'it-pushable'
 import { rpc } from '../src/index.js'
 import type { RPC } from '../src/index.js'
 
@@ -51,7 +51,7 @@ describe('abort signals', () => {
     const signal = AbortSignal.timeout(100)
 
     await expect(sender.throwsOnAbort({ signal })).to.eventually.be.rejected
-      .with.property('type', 'aborted')
+      .with.property('name', 'AbortError')
   })
 
   it('should allow a callback invocation to abort', async () => {
@@ -64,7 +64,7 @@ describe('abort signals', () => {
         })
       })
     })).to.eventually.be.rejected
-      .with.property('type', 'aborted')
+      .with.property('name', 'AbortError')
   })
 
   it('should abort a callback invocation', async () => {
@@ -75,6 +75,6 @@ describe('abort signals', () => {
         })
       })
     })).to.eventually.be.rejected
-      .with.property('type', 'aborted')
+      .with.property('name', 'AbortError')
   })
 })
