@@ -1,3 +1,9 @@
+## [it-rpc-v1.0.5](https://github.com/achingbrain/it/compare/it-rpc-1.0.4...it-rpc-1.0.5) (2025-05-19)
+
+### Bug Fixes
+
+* require connection to invoke remote methods ([#163](https://github.com/achingbrain/it/issues/163)) ([ea0e374](https://github.com/achingbrain/it/commit/ea0e374c49979fb4a4428a5dea21f7bde6f3a12f))
+
 ## [it-rpc-v1.0.4](https://github.com/achingbrain/it/compare/it-rpc-1.0.3...it-rpc-1.0.4) (2025-05-13)
 
 ### Dependencies
