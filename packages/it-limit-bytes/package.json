@@ -144,7 +144,7 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.10",
     "it-drain": "^3.0.0"
   }
 }

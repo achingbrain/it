@@ -147,7 +147,7 @@
     "p-defer": "^4.0.1"
   },
   "devDependencies": {
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.10",
     "delay": "^6.0.0",
     "it-all": "^3.0.0"
   }
