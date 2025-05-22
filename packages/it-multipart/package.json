@@ -145,7 +145,7 @@
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.12",
     "form-data": "^4.0.2",
     "it-drain": "^3.0.0",
     "node-fetch": "^3.3.2",
