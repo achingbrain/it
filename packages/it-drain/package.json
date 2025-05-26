@@ -144,7 +144,7 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.16",
     "delay": "^6.0.0"
   }
 }
