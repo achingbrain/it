@@ -1,6 +1,6 @@
 {
   "name": "it-ndjson-stream",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Read and write ndjson messages over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
