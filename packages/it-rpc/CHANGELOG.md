@@ -1,3 +1,9 @@
+## [it-rpc-v1.1.1](https://github.com/achingbrain/it/compare/it-rpc-1.1.0...it-rpc-1.1.1) (2025-06-01)
+
+### Dependencies
+
+* **dev:** bump aegir from 46.0.5 to 47.0.16 ([#168](https://github.com/achingbrain/it/issues/168)) ([ac09a34](https://github.com/achingbrain/it/commit/ac09a34bbf8117d90d307638943c5f34724697bb))
+
 ## [it-rpc-v1.1.0](https://github.com/achingbrain/it/compare/it-rpc-1.0.5...it-rpc-1.1.0) (2025-05-19)
 
 ### Features
