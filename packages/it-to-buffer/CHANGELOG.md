@@ -1,3 +1,9 @@
+## [it-to-buffer-v4.0.10](https://github.com/achingbrain/it/compare/it-to-buffer-4.0.9...it-to-buffer-4.0.10) (2025-06-01)
+
+### Dependencies
+
+* **dev:** bump aegir from 46.0.5 to 47.0.16 ([#168](https://github.com/achingbrain/it/issues/168)) ([ac09a34](https://github.com/achingbrain/it/commit/ac09a34bbf8117d90d307638943c5f34724697bb))
+
 ## [it-to-buffer-v4.0.9](https://github.com/achingbrain/it/compare/it-to-buffer-4.0.8...it-to-buffer-4.0.9) (2025-05-13)
 
 ### Dependencies
