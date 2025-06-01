@@ -1,3 +1,9 @@
+## [it-foreach-v2.1.4](https://github.com/achingbrain/it/compare/it-foreach-2.1.3...it-foreach-2.1.4) (2025-06-01)
+
+### Dependencies
+
+* **dev:** bump aegir from 46.0.5 to 47.0.16 ([#168](https://github.com/achingbrain/it/issues/168)) ([ac09a34](https://github.com/achingbrain/it/commit/ac09a34bbf8117d90d307638943c5f34724697bb))
+
 ## [it-foreach-v2.1.3](https://github.com/achingbrain/it/compare/it-foreach-2.1.2...it-foreach-2.1.3) (2025-05-13)
 
 ### Dependencies
