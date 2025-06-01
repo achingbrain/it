@@ -1,3 +1,9 @@
+## [it-filter-v3.1.4](https://github.com/achingbrain/it/compare/it-filter-3.1.3...it-filter-3.1.4) (2025-06-01)
+
+### Dependencies
+
+* **dev:** bump aegir from 46.0.5 to 47.0.16 ([#168](https://github.com/achingbrain/it/issues/168)) ([ac09a34](https://github.com/achingbrain/it/commit/ac09a34bbf8117d90d307638943c5f34724697bb))
+
 ## [it-filter-v3.1.3](https://github.com/achingbrain/it/compare/it-filter-3.1.2...it-filter-3.1.3) (2025-05-13)
 
 ### Dependencies
