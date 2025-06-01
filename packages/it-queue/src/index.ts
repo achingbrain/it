@@ -71,6 +71,13 @@ export interface QueueInit<JobReturnType, JobOptions extends AbortOptions = Abor
    * An optional function that will sort the queue after a job has been added
    */
   sort?: Comparator<Job<JobOptions, JobReturnType>>
+
+  /**
+   * If false, `.start` will need to be called to start processing jobs
+   *
+   * @default true
+   */
+  autoStart?: boolean
 }
 
 export type JobStatus = 'queued' | 'running' | 'errored' | 'complete'
@@ -145,6 +152,7 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
   public queue: Array<Job<JobOptions, JobReturnType>>
   private pending: number
   private readonly sort?: Comparator<Job<JobOptions, JobReturnType>>
+  private readonly autoStart: boolean
 
   constructor (init: QueueInit<JobReturnType, JobOptions> = {}) {
     super()
@@ -152,6 +160,7 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
     this.concurrency = init.concurrency ?? Number.POSITIVE_INFINITY
     this.maxSize = init.maxSize ?? Number.POSITIVE_INFINITY
     this.pending = 0
+    this.autoStart = init.autoStart ?? true
 
     this.sort = init.sort
     this.queue = []
@@ -239,6 +248,18 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
   }
 
   /**
+   * Start the queue. If the `autoStart` parameter passed to the constructor was
+   * not `false` this is a no-op
+   */
+  start () {
+    if (this.autoStart !== false) {
+      return
+    }
+
+    this.tryToStartAnother()
+  }
+
+  /**
    * Adds a sync or async task to the queue. Always returns a promise.
    */
   async add (fn: RunFunction<JobOptions, JobReturnType>, options?: JobOptions): Promise<JobReturnType> {
@@ -251,7 +272,10 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
     const job = new Job<JobOptions, JobReturnType>(fn, options)
     this.enqueue(job)
     this.safeDispatchEvent('add')
-    this.tryToStartAnother()
+
+    if (this.autoStart) {
+      this.tryToStartAnother()
+    }
 
     return job.join(options)
       .then(result => {

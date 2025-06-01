@@ -878,4 +878,27 @@ describe('queue', () => {
     expect(error).to.have.property('name', 'AbortError')
     expect(removeEventListenerSpy).to.have.property('callCount', addEventListenerSpy.callCount, 'did not remove all added listeners')
   })
+
+  it('should not start jobs when `autoStart` is false', async () => {
+    const queue = new Queue<string>({
+      concurrency: 1,
+      autoStart: false
+    })
+
+    let started = false
+
+    void queue.add(async () => {
+      started = true
+      await delay(100)
+      return 'hello'
+    })
+
+    await delay(500)
+
+    expect(started).to.be.false()
+
+    queue.start()
+
+    expect(started).to.be.true()
+  })
 })
