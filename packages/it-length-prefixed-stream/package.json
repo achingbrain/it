@@ -30,13 +30,6 @@
       "import": "./dist/src/index.js"
     }
   },
-  "eslintConfig": {
-    "extends": "ipfs",
-    "parserOptions": {
-      "project": true,
-      "sourceType": "module"
-    }
-  },
   "release": {
     "branches": [
       "main"
@@ -151,7 +144,7 @@
     "uint8arraylist": "^2.4.8"
   },
   "devDependencies": {
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.16",
     "it-pair": "^2.0.6",
     "uint8arrays": "^5.1.0"
   }

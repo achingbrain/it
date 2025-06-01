@@ -226,7 +226,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
       // if the source yields an array that is `yield *`, it can throw while the
       // onward consumer is processing the array contents - make sure we
       // propagate the error
-      // eslint-disable-next-line @typescript-eslint/no-throw-literal
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw sourceErr
     }
 

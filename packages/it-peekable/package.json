@@ -30,13 +30,6 @@
       "import": "./dist/src/index.js"
     }
   },
-  "eslintConfig": {
-    "extends": "ipfs",
-    "parserOptions": {
-      "project": true,
-      "sourceType": "module"
-    }
-  },
   "release": {
     "branches": [
       "main"
@@ -144,7 +137,7 @@
     "release": "aegir release"
   },
   "devDependencies": {
-    "aegir": "^46.0.1",
+    "aegir": "^47.0.16",
     "it-all": "^3.0.0"
   }
 }

@@ -31,7 +31,6 @@
 import deferred from 'p-defer'
 import { raceSignal } from 'race-signal'
 import type { AbortOptions } from 'abort-error'
-import type { DeferredPromise } from 'p-defer'
 import type { RaceSignalOptions } from 'race-signal'
 
 export interface Pushable<T> extends AsyncGenerator<T, void, unknown> {
@@ -50,8 +49,8 @@ export interface Pushable<T> extends AsyncGenerator<T, void, unknown> {
 }
 
 class QueuelessPushable <T> implements Pushable<T> {
-  private readNext: DeferredPromise<void>
-  private haveNext: DeferredPromise<void>
+  private readNext: PromiseWithResolvers<void>
+  private haveNext: PromiseWithResolvers<void>
   private ended: boolean
   private nextResult: IteratorResult<T> | undefined
   private error?: Error

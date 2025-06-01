@@ -222,8 +222,9 @@ import type { Value } from './rpc.js'
 import type { DecoderOptions, EncoderOptions } from 'it-length-prefixed'
 import type { Pushable } from 'it-pushable'
 import type { Duplex, Source } from 'it-stream-types'
-import type { DeferredPromise } from 'p-defer'
 import type { EncodeOptions, DecodeOptions } from 'protons-runtime'
+
+export type { Value }
 
 export interface Invocation {
   /**
@@ -234,7 +235,7 @@ export interface Invocation {
   /**
    * The result of the execution
    */
-  result: DeferredPromise<any>
+  result: PromiseWithResolvers<any>
 
   /**
    * Holds references to any callback functions passed as arguments

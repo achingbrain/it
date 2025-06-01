@@ -1,5 +1,4 @@
 /* eslint-env mocha */
-/* eslint-disable max-nested-callbacks */
 
 import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
