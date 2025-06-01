@@ -222,7 +222,6 @@ import type { Value } from './rpc.js'
 import type { DecoderOptions, EncoderOptions } from 'it-length-prefixed'
 import type { Pushable } from 'it-pushable'
 import type { Duplex, Source } from 'it-stream-types'
-import type { EncodeOptions, DecodeOptions } from 'protons-runtime'
 
 export type { Value }
 
