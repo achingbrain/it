@@ -152,7 +152,7 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
   public queue: Array<Job<JobOptions, JobReturnType>>
   private pending: number
   private readonly sort?: Comparator<Job<JobOptions, JobReturnType>>
-  private readonly autoStart: boolean
+  private autoStart: boolean
 
   constructor (init: QueueInit<JobReturnType, JobOptions> = {}) {
     super()
@@ -229,8 +229,10 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
           }
 
           this.pending--
-          this.tryToStartAnother()
           this.safeDispatchEvent('next')
+          if (this.autoStart) {
+            this.tryToStartAnother()
+          }
         })
 
       return true
@@ -251,12 +253,20 @@ export class Queue<JobReturnType = unknown, JobOptions extends AbortOptions = Ab
    * Start the queue. If the `autoStart` parameter passed to the constructor was
    * not `false` this is a no-op
    */
-  start () {
+  start (): void {
     if (this.autoStart !== false) {
       return
     }
 
+    this.autoStart = true
     this.tryToStartAnother()
+  }
+
+  /**
+   * Prevent further jobs from running - call `.start` to start the queue again
+   */
+  pause (): void {
+    this.autoStart = false
   }
 
   /**
