@@ -219,9 +219,11 @@ import { AbortCallbackMessage, AbortMethodMessage, CallbackRejectedMessage, Call
 import { lookUpScope } from './utils.js'
 import { Values } from './values.js'
 import type { Value } from './rpc.js'
+import type { DecoderOptions, EncoderOptions } from 'it-length-prefixed'
 import type { Pushable } from 'it-pushable'
 import type { Duplex, Source } from 'it-stream-types'
 import type { DeferredPromise } from 'p-defer'
+import type { EncodeOptions, DecodeOptions } from 'protons-runtime'
 
 export interface Invocation {
   /**
@@ -313,7 +315,24 @@ export interface ClientOptions {
 }
 
 export interface RPCInit {
+  /**
+   * Out of the box serializing/deserializing common JavaScript types is
+   * supported - if your application uses custom data types you can add support
+   * for them by specifying value codecs.
+   */
   valueCodecs?: ValueCodec[]
+
+  /**
+   * Options passed to the length-prefixed encoder, allows limiting max message
+   * size, etc.
+   */
+  lpEncoder?: EncoderOptions
+
+  /**
+   * Options passed to the length-prefixed decoder, allows limiting max message
+   * size, etc.
+   */
+  lpDecoder?: DecoderOptions
 }
 
 export interface RPC extends Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
@@ -360,9 +379,13 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   // record if we have an onward stream to send messages to
   private connected: boolean
 
+  // options to pass to the decoder
+  private readonly lpDecoderOptions?: DecoderOptions
+
   constructor (init?: RPCInit) {
     this.output = pushable()
-    this.source = lpEncode(this.output)
+    this.source = lpEncode(this.output, init?.lpEncoder)
+    this.lpDecoderOptions = init?.lpDecoder
 
     this.connected = false
     const next = this.source.next
@@ -427,7 +450,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   }
 
   async sink (source: Source<Uint8Array>): Promise<void> {
-    for await (const buf of lpDecode(source)) {
+    for await (const buf of lpDecode(source, this.lpDecoderOptions)) {
       try {
         const message = RPCMessage.decode(buf)
         const messageHandler = this.messageHandlers[message.type]
