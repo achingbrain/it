@@ -1,3 +1,9 @@
+## [it-rpc-v1.2.0](https://github.com/achingbrain/it/compare/it-rpc-1.1.1...it-rpc-1.2.0) (2025-06-01)
+
+### Features
+
+* expose lp decoder/encoder options ([#169](https://github.com/achingbrain/it/issues/169)) ([e66faae](https://github.com/achingbrain/it/commit/e66faae85c80e4037766d1091ecf22f8ed5edc84))
+
 ## [it-rpc-v1.1.1](https://github.com/achingbrain/it/compare/it-rpc-1.1.0...it-rpc-1.1.1) (2025-06-01)
 
 ### Dependencies
