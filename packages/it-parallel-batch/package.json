@@ -1,6 +1,6 @@
 {
   "name": "it-parallel-batch",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Process (async)iterable values as functions with concurrency control",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
