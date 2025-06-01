@@ -30,13 +30,6 @@
       "import": "./dist/src/index.js"
     }
   },
-  "eslintConfig": {
-    "extends": "ipfs",
-    "parserOptions": {
-      "project": true,
-      "sourceType": "module"
-    }
-  },
   "release": {
     "branches": [
       "main"

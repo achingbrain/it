@@ -70,7 +70,7 @@ function map <I, O> (source: AsyncIterable<I> | Iterable<I>, func: (val: I, inde
     return (async function * () {
       yield await res
 
-      for await (const val of peekable) {
+      for (const val of peekable) {
         yield func(val, index++)
       }
     })()

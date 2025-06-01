@@ -47,7 +47,8 @@ function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Pr
 function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array> | Uint8Array {
   if (isAsyncIterable(source)) {
     return (async () => {
-      let buffer = new Uint8Array(0)
+      // https://github.com/microsoft/TypeScript/issues/61793
+      let buffer: Uint8Array = new Uint8Array(0)
 
       for await (const buf of source) {
         buffer = uint8ArrayConcat([buffer, buf], buffer.length + buf.length)

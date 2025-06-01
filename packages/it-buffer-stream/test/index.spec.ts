@@ -36,7 +36,8 @@ describe('it-buffer-stream', () => {
 
   it('should allow collection of buffers', async () => {
     const expected = 100
-    let emitted = new Uint8Array(0)
+    // https://github.com/microsoft/TypeScript/issues/61793
+    let emitted: Uint8Array = new Uint8Array(0)
     const buffers = []
 
     for await (const buf of bufferStream(expected, {
@@ -52,7 +53,8 @@ describe('it-buffer-stream', () => {
 
   it('should allow generation of buffers', async () => {
     const expected = 100
-    let emitted = new Uint8Array(0)
+    // https://github.com/microsoft/TypeScript/issues/61793
+    let emitted: Uint8Array = new Uint8Array(0)
     const buffers = []
 
     for await (const buf of bufferStream(expected, {
@@ -73,11 +75,11 @@ describe('it-buffer-stream', () => {
     const generationError = new Error('Urk!')
 
     try {
-      for await (const _ of bufferStream(5, { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
+      for await (const _ of bufferStream(5, { // eslint-disable-line @typescript-eslint/no-unused-vars
         generator: async () => {
           throw generationError
         }
-      })) { // eslint-disable-line no-empty
+      })) {
 
       }
 

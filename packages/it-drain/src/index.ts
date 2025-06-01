@@ -40,10 +40,10 @@ function drain (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<voi
 function drain (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<void> | void {
   if (isAsyncIterable(source)) {
     return (async () => {
-      for await (const _ of source) { } // eslint-disable-line no-unused-vars,no-empty,@typescript-eslint/no-unused-vars
+      for await (const _ of source) { } // eslint-disable-line no-empty,@typescript-eslint/no-unused-vars
     })()
   } else {
-    for (const _ of source) { } // eslint-disable-line no-unused-vars,no-empty,@typescript-eslint/no-unused-vars
+    for (const _ of source) { } // eslint-disable-line no-empty,@typescript-eslint/no-unused-vars
   }
 }
 

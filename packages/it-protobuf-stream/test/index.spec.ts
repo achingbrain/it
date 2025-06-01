@@ -9,7 +9,6 @@ import { TestMessage } from './fixtures/test-message.js'
 import type { ProtobufStream } from '../src/index.js'
 
 /* eslint-env mocha */
-/* eslint-disable max-nested-callbacks */
 
 describe('it-protobuf-stream', () => {
   let w: ProtobufStream<any>
