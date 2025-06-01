@@ -878,4 +878,77 @@ describe('queue', () => {
     expect(error).to.have.property('name', 'AbortError')
     expect(removeEventListenerSpy).to.have.property('callCount', addEventListenerSpy.callCount, 'did not remove all added listeners')
   })
+
+  it('should not start jobs when `autoStart` is false', async () => {
+    const queue = new Queue<string>({
+      concurrency: 1,
+      autoStart: false
+    })
+
+    let started = false
+
+    void queue.add(async () => {
+      started = true
+      await delay(100)
+      return 'hello'
+    })
+
+    await delay(500)
+
+    expect(started).to.be.false()
+
+    queue.start()
+
+    expect(started).to.be.true()
+
+    await expect(queue.add(async () => {
+      await delay(100)
+      return 'world'
+    })).to.eventually.equal('world', 'did not start subsequent job')
+  })
+
+  it('should pause the queue', async () => {
+    const queue = new Queue<string>({
+      concurrency: 1
+    })
+
+    let startedFirst = false
+    let startedSecond = false
+
+    void queue.add(async () => {
+      startedFirst = true
+      await delay(500)
+      return 'hello'
+    })
+    void queue.add(async () => {
+      startedSecond = true
+      await delay(100)
+      return 'hello'
+    })
+
+    // not long enough to finish the first job
+    await delay(50)
+
+    expect(startedFirst).to.be.true()
+
+    // do not start the second job
+    queue.pause()
+
+    // long enough to finish the first job
+    await delay(1_000)
+
+    // should not have started the second job
+    expect(startedSecond).to.be.false()
+
+    queue.start()
+
+    // should have started the second job
+    expect(startedSecond).to.be.true()
+
+    // should start any subsequent jobs
+    await expect(queue.add(async () => {
+      await delay(100)
+      return 'again'
+    })).to.eventually.equal('again', 'did not start subsequent job')
+  })
 })
