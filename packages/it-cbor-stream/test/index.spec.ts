@@ -9,7 +9,6 @@ import { cborStream } from '../src/index.js'
 import type { CBORStream } from '../src/index.js'
 
 /* eslint-env mocha */
-/* eslint-disable max-nested-callbacks */
 
 describe('it-cbor-stream', () => {
   let w: CBORStream<any>

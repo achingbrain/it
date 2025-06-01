@@ -9,10 +9,7 @@
   ],
   "references": [
     {
-      "path": "../it-all"
-    },
-    {
-      "path": "../it-peekable"
+      "path": "../it-drain"
     }
   ]
 }

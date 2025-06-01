@@ -221,7 +221,8 @@ import { Values } from './values.js'
 import type { Value } from './rpc.js'
 import type { Pushable } from 'it-pushable'
 import type { Duplex, Source } from 'it-stream-types'
-import type { DeferredPromise } from 'p-defer'
+
+export type { Value }
 
 export interface Invocation {
   /**
@@ -232,7 +233,7 @@ export interface Invocation {
   /**
    * The result of the execution
    */
-  result: DeferredPromise<any>
+  result: PromiseWithResolvers<any>
 
   /**
    * Holds references to any callback functions passed as arguments

@@ -13,7 +13,6 @@ import { int32BEEncode } from './fixtures/int32BE-encode.js'
 import type { LengthPrefixedStream } from '../src/index.js'
 
 /* eslint-env mocha */
-/* eslint-disable max-nested-callbacks */
 
 interface Test<T> {
   from(str: string): T

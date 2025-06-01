@@ -86,7 +86,7 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T, ind
     return (async function * () {
       yield value
 
-      for await (const val of peekable) {
+      for (const val of peekable) {
         const res = fn(val, index++)
 
         if (isPromise(res)) {

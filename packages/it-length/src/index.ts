@@ -47,7 +47,7 @@ function length (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<nu
     return (async () => {
       let count = 0
 
-      for await (const _ of source) { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
+      for await (const _ of source) { // eslint-disable-line @typescript-eslint/no-unused-vars
         count++
       }
 
@@ -56,7 +56,7 @@ function length (source: Iterable<unknown> | AsyncIterable<unknown>): Promise<nu
   } else {
     let count = 0
 
-    for (const _ of source) { // eslint-disable-line no-unused-vars,@typescript-eslint/no-unused-vars
+    for (const _ of source) { // eslint-disable-line @typescript-eslint/no-unused-vars
       count++
     }
 

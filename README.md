@@ -24,6 +24,7 @@
 - [`packages/it-last`](https://github.com/achingbrain/it/tree/main/packages/it-last) Returns the last result from an async iterator
 - [`packages/it-length`](https://github.com/achingbrain/it/tree/main/packages/it-length) Counts the number of items in an async iterable
 - [`packages/it-length-prefixed-stream`](https://github.com/achingbrain/it/tree/main/packages/it-length-prefixed-stream) Read and write length-prefixed byte arrays over a duplex stream
+- [`packages/it-limit-bytes`](https://github.com/achingbrain/it/tree/main/packages/it-limit-bytes) Limit the number of bytes that are yielded from an (async) iterable
 - [`packages/it-map`](https://github.com/achingbrain/it/tree/main/packages/it-map) Maps the values yielded by an async iterator
 - [`packages/it-merge`](https://github.com/achingbrain/it/tree/main/packages/it-merge) Treat one or more iterables as a single iterable
 - [`packages/it-multipart`](https://github.com/achingbrain/it/tree/main/packages/it-multipart) Async iterable http multipart message parser
