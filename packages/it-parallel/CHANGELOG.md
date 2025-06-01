@@ -1,3 +1,9 @@
+## [it-parallel-v3.0.13](https://github.com/achingbrain/it/compare/it-parallel-3.0.12...it-parallel-3.0.13) (2025-06-01)
+
+### Bug Fixes
+
+* remove eslint config ([#171](https://github.com/achingbrain/it/issues/171)) ([4826456](https://github.com/achingbrain/it/commit/4826456cfc3d063153139dad33f7d96c63b3debe))
+
 ## [it-parallel-v3.0.12](https://github.com/achingbrain/it/compare/it-parallel-3.0.11...it-parallel-3.0.12) (2025-06-01)
 
 ### Dependencies
