@@ -1,6 +1,6 @@
 {
   "name": "it-skip",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Skip items from an iterable",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
