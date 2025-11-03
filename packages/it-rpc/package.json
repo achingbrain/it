@@ -155,7 +155,7 @@
   },
   "devDependencies": {
     "aegir": "^47.0.16",
-    "delay": "^6.0.0",
+    "delay": "^7.0.0",
     "it-all": "^3.0.0",
     "it-drain": "^3.0.0",
     "protons": "^7.6.1",

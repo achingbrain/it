@@ -147,7 +147,7 @@
   "devDependencies": {
     "@types/sinon": "^17.0.4",
     "aegir": "^47.0.16",
-    "delay": "^6.0.0",
+    "delay": "^7.0.0",
     "it-all": "^3.0.0",
     "sinon": "^20.0.0"
   }
