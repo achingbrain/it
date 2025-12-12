@@ -84,6 +84,7 @@ function forEach <T> (source: Iterable<T> | AsyncIterable<T>, fn: (thing: T, ind
 
   if (typeof res?.then === 'function') {
     return (async function * () {
+      await res
       yield value
 
       for (const val of peekable) {

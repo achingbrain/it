@@ -148,4 +148,16 @@ describe('it-for-each', () => {
       expect(callbackArgs).to.have.nested.property(`[${index}][1]`, index)
     })
   })
+
+  it('should throw when first fn rejects', async () => {
+    const err = new Error('Urk!')
+    const vals = [4, 3, 2, 1, 0]
+
+    await expect(all(forEach(vals, async (val, index) => {
+      if (index === 0) {
+        return Promise.reject(err)
+      }
+    }))).to.eventually.be.rejected
+      .with.property('message', err.message)
+  })
 })
