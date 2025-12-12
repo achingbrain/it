@@ -75,14 +75,14 @@ Object.keys(tests).forEach(key => {
       await expect(lp.write(data, {
         signal: AbortSignal.timeout(10)
       })).to.eventually.be.rejected()
-        .with.property('code', 'ABORT_ERR')
+        .with.property('name', 'TimeoutError')
     })
 
     it('times out when reading', async () => {
       await expect(lp.read({
         signal: AbortSignal.timeout(10)
       })).to.eventually.be.rejected()
-        .with.property('name', 'AbortError')
+        .with.property('name', 'TimeoutError')
     })
 
     it('waits for read when writing', async () => {
