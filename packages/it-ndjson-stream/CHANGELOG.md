@@ -1,3 +1,9 @@
+## [it-ndjson-stream-v2.0.4](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.3...it-ndjson-stream-2.0.4) (2025-12-12)
+
+### Dependencies
+
+* bump race-signal from 1.1.3 to 2.0.0 ([#179](https://github.com/achingbrain/it/issues/179)) ([88c0a95](https://github.com/achingbrain/it/commit/88c0a95fbb8531bffb401bececa1ab6b29985442))
+
 ## [it-ndjson-stream-v2.0.3](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.2...it-ndjson-stream-2.0.3) (2025-06-01)
 
 ### Dependencies
