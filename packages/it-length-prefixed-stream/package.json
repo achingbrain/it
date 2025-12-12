@@ -1,6 +1,6 @@
 {
   "name": "it-length-prefixed-stream",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Read and write length-prefixed byte arrays over a duplex stream",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
