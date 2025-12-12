@@ -1,3 +1,15 @@
+## [it-queue-v1.1.1](https://github.com/achingbrain/it/compare/it-queue-1.1.0...it-queue-1.1.1) (2025-12-12)
+
+### Trivial Changes
+
+* bump @types/sinon from 17.0.4 to 21.0.0 ([#186](https://github.com/achingbrain/it/issues/186)) ([609f9b9](https://github.com/achingbrain/it/commit/609f9b9c6600080c7b7ca3c0a91a400fce66d55d))
+* bump delay from 6.0.0 to 7.0.0 ([#184](https://github.com/achingbrain/it/issues/184)) ([c2f64db](https://github.com/achingbrain/it/commit/c2f64db5a200524c26b0c0ef36acf5c5f2b735cf))
+* bump sinon from 20.0.0 to 21.0.0 ([#173](https://github.com/achingbrain/it/issues/173)) ([713b935](https://github.com/achingbrain/it/commit/713b935b245bdd24eaa3c6ed8f6d303ae3a550fd))
+
+### Dependencies
+
+* bump race-signal from 1.1.3 to 2.0.0 ([#179](https://github.com/achingbrain/it/issues/179)) ([88c0a95](https://github.com/achingbrain/it/commit/88c0a95fbb8531bffb401bececa1ab6b29985442))
+
 ## [it-queue-v1.1.0](https://github.com/achingbrain/it/compare/it-queue-1.0.0...it-queue-1.1.0) (2025-06-01)
 
 ### Features

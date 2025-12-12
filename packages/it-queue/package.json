@@ -1,6 +1,6 @@
 {
   "name": "it-queue",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A queue implementation that can be iterated over",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
