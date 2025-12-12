@@ -1,3 +1,13 @@
+## [it-rpc-v1.2.1](https://github.com/achingbrain/it/compare/it-rpc-1.2.0...it-rpc-1.2.1) (2025-12-12)
+
+### Trivial Changes
+
+* bump delay from 6.0.0 to 7.0.0 ([#184](https://github.com/achingbrain/it/issues/184)) ([c2f64db](https://github.com/achingbrain/it/commit/c2f64db5a200524c26b0c0ef36acf5c5f2b735cf))
+
+### Dependencies
+
+* bump race-signal from 1.1.3 to 2.0.0 ([#179](https://github.com/achingbrain/it/issues/179)) ([88c0a95](https://github.com/achingbrain/it/commit/88c0a95fbb8531bffb401bececa1ab6b29985442))
+
 ## [it-rpc-v1.2.0](https://github.com/achingbrain/it/compare/it-rpc-1.1.1...it-rpc-1.2.0) (2025-06-01)
 
 ### Features
