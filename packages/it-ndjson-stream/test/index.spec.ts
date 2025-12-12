@@ -23,14 +23,14 @@ describe('it-ndjson-stream', () => {
     await expect(messages.write(obj, {
       signal: AbortSignal.timeout(10)
     })).to.eventually.be.rejected()
-      .with.property('name', 'AbortError')
+      .with.property('name', 'TimeoutError')
   })
 
   it('times out when reading', async () => {
     await expect(messages.read({
       signal: AbortSignal.timeout(10)
     })).to.eventually.be.rejected()
-      .with.property('name', 'AbortError')
+      .with.property('name', 'TimeoutError')
   })
 
   it('waits for read when writing', async () => {
