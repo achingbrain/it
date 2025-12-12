@@ -1,3 +1,9 @@
+## [it-foreach-v2.1.5](https://github.com/achingbrain/it/compare/it-foreach-2.1.4...it-foreach-2.1.5) (2025-12-12)
+
+### Bug Fixes
+
+* ensure first function invocation can reject ([#188](https://github.com/achingbrain/it/issues/188)) ([3e9b9af](https://github.com/achingbrain/it/commit/3e9b9afe93deaa46c11b5c6bc3be49d06d30c435))
+
 ## [it-foreach-v2.1.4](https://github.com/achingbrain/it/compare/it-foreach-2.1.3...it-foreach-2.1.4) (2025-06-01)
 
 ### Dependencies
