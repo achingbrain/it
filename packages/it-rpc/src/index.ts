@@ -208,7 +208,6 @@
  */
 
 import { AbortError } from 'abort-error'
-import { anySignal } from 'any-signal'
 import { decode as lpDecode, encode as lpEncode } from 'it-length-prefixed'
 import { pushable } from 'it-pushable'
 import { nanoid } from 'nanoid'
@@ -790,7 +789,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 })
               }))
 
-              const signal = anySignal(invocation.abortSignals)
+              const signal = AbortSignal.any(invocation.abortSignals)
               signal.addEventListener('abort', () => {
                 self.output.push(RPCMessage.encode({
                   type: MessageType.abortMethodInvocation,
@@ -812,7 +811,6 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                 reject(err)
               }).finally(() => {
                 self.invocations.delete(scope)
-                signal.clear()
               })
 
               if (!self.connected) {
@@ -864,7 +862,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   signals.push(timeout)
                 }
 
-                const signal = anySignal(signals)
+                const signal = AbortSignal.any(signals)
 
                 try {
                   const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
@@ -883,8 +881,6 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   }
 
                   throw err
-                } finally {
-                  signal.clear()
                 }
               },
               async throw (err: any) {
@@ -900,7 +896,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   signals.push(timeout)
                 }
 
-                const signal = anySignal(signals)
+                const signal = AbortSignal.any(signals)
 
                 try {
                   const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
@@ -921,8 +917,6 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   }
 
                   throw e
-                } finally {
-                  signal.clear()
                 }
               },
               async return (value: any) {
@@ -938,7 +932,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   signals.push(timeout)
                 }
 
-                const signal = anySignal(signals)
+                const signal = AbortSignal.any(signals)
 
                 try {
                   const gen = await raceSignal<AsyncGenerator<any>>(invocation.result.promise, signal)
@@ -957,8 +951,6 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
                   }
 
                   throw err
-                } finally {
-                  signal.clear()
                 }
               },
               [Symbol.asyncIterator]: () => asyncGenerator

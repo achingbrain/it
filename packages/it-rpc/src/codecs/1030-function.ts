@@ -1,4 +1,3 @@
-import { anySignal } from 'any-signal'
 import { decode, encode } from 'cborg'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
@@ -35,7 +34,7 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
         invocation.children.set(scope, callbackInvocation)
         args = args.map(val => codec.toValue(val, null, callbackInvocation))
 
-        const signal = anySignal(callbackInvocation.abortSignals)
+        const signal = AbortSignal.any(callbackInvocation.abortSignals)
         signal.addEventListener('abort', () => {
           pushable.push(RPCMessage.encode({
             type: MessageType.abortCallbackInvocation,
@@ -62,7 +61,6 @@ const transformer: ValueCodec<(...args: any[]) => any> = {
           reject(err)
         }).finally(() => {
           invocation.children.delete(scope)
-          signal.clear()
         })
       })
     }
