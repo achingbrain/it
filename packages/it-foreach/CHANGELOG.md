@@ -1,3 +1,9 @@
+## [it-foreach-v2.1.6](https://github.com/achingbrain/it/compare/it-foreach-2.1.5...it-foreach-2.1.6) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-foreach-v2.1.5](https://github.com/achingbrain/it/compare/it-foreach-2.1.4...it-foreach-2.1.5) (2025-12-12)
 
 ### Bug Fixes
