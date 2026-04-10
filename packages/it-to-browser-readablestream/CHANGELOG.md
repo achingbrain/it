@@ -1,3 +1,9 @@
+## [it-to-browser-readablestream-v2.0.13](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-2.0.12...it-to-browser-readablestream-2.0.13) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-to-browser-readablestream-v2.0.12](https://github.com/achingbrain/it/compare/it-to-browser-readablestream-2.0.11...it-to-browser-readablestream-2.0.12) (2025-06-01)
 
 ### Dependencies
