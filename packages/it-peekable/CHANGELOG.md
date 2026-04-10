@@ -1,3 +1,9 @@
+## [it-peekable-v3.0.9](https://github.com/achingbrain/it/compare/it-peekable-3.0.8...it-peekable-3.0.9) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-peekable-v3.0.8](https://github.com/achingbrain/it/compare/it-peekable-3.0.7...it-peekable-3.0.8) (2025-06-01)
 
 ### Dependencies
