@@ -38,12 +38,12 @@ import { AbortError } from 'abort-error'
 import { pushable } from 'it-pushable'
 import { TypedEventEmitter } from 'main-event'
 import { raceEvent } from 'race-event'
-import { QueueFullError } from './errors.js'
-import { Job } from './job.js'
-import { debounce } from './utils.js'
+import { QueueFullError } from './errors.ts'
+import { Job } from './job.ts'
+import { debounce } from './utils.ts'
 import type { AbortOptions } from 'abort-error'
-export type { Job, JobTimeline } from './job.js'
-export type { JobRecipient } from './recipient.js'
+export type { Job, JobTimeline } from './job.ts'
+export type { JobRecipient } from './recipient.ts'
 
 export interface Comparator<T> {
   (a: T, b: T): -1 | 0 | 1

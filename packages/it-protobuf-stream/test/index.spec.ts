@@ -5,7 +5,7 @@ import toBuffer from 'it-to-buffer'
 import * as varint from 'uint8-varint'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { pbStream } from '../src/index.js'
-import { TestMessage } from './fixtures/test-message.js'
+import { TestMessage } from './fixtures/test-message.ts'
 import type { ProtobufStream } from '../src/index.js'
 
 /* eslint-env mocha */

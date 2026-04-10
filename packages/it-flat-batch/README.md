@@ -71,7 +71,7 @@ Loading this module through a script tag will make its exports available as `ItF
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_flat_batch.html>
+- <https://achingbrain.github.io/it/modules/it-flat-batch.html>
 
 # License
 

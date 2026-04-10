@@ -29,7 +29,7 @@ messages over streams.
 
 ```typescript
 import { pbStream } from 'it-protobuf-stream'
-import { MessageType } from './src/my-message-type.js'
+import { MessageType } from './src/my-message-type.ts'
 
 // RequestType and ResponseType have been generate from `.proto` files and have
 // `.encode` and `.decode` methods for serialization/deserialization
@@ -61,7 +61,7 @@ Loading this module through a script tag will make its exports available as `ItP
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_protobuf_stream.html>
+- <https://achingbrain.github.io/it/modules/it-protobuf-stream.html>
 
 # License
 

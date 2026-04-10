@@ -81,7 +81,7 @@ Loading this module through a script tag will make its exports available as `ItP
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_peekable.html>
+- <https://achingbrain.github.io/it/modules/it-peekable.html>
 
 # License
 

@@ -67,7 +67,7 @@ Loading this module through a script tag will make its exports available as `ItA
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_all.html>
+- <https://achingbrain.github.io/it/modules/it-all.html>
 
 # License
 

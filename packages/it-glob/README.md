@@ -49,7 +49,7 @@ $ npm i it-glob
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_glob.html>
+- <https://achingbrain.github.io/it/modules/it-glob.html>
 
 # License
 

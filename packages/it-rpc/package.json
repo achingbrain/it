@@ -26,7 +26,8 @@
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
-      "import": "./dist/src/index.js"
+      "import": "./dist/src/index.js",
+      "module-sync": "./src/index.js"
     }
   },
   "release": {
@@ -140,25 +141,25 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "abort-error": "^1.0.1",
-    "any-signal": "^4.1.1",
-    "cborg": "^4.2.11",
+    "abort-error": "^1.0.2",
+    "any-signal": "^4.2.0",
+    "cborg": "^4.5.8",
     "it-length-prefixed": "^10.0.1",
     "it-pushable": "^3.2.3",
     "it-stream-types": "^2.0.2",
-    "nanoid": "^5.1.5",
+    "nanoid": "^5.1.7",
     "p-defer": "^4.0.1",
-    "protons-runtime": "^5.5.0",
+    "protons-runtime": "^5.6.0",
     "race-signal": "^2.0.0",
     "uint8arraylist": "^2.4.8",
     "uint8arrays": "^5.1.0"
   },
   "devDependencies": {
-    "aegir": "^47.0.16",
+    "aegir": "^47.1.1",
     "delay": "^7.0.0",
     "it-all": "^3.0.0",
     "it-drain": "^3.0.0",
-    "protons": "^7.6.1",
+    "protons": "^7.7.0",
     "sinon-ts": "^2.0.0"
   },
   "sideEffects": false

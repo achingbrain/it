@@ -27,7 +27,8 @@
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "import": "./dist/src/index.js"
+      "import": "./dist/src/index.js",
+      "module-sync": "./src/index.js"
     }
   },
   "release": {
@@ -138,13 +139,13 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "abort-error": "^1.0.1",
-    "cborg": "^4.2.11",
+    "abort-error": "^1.0.2",
+    "cborg": "^4.5.8",
     "it-length-prefixed-stream": "^2.0.0",
     "it-stream-types": "^2.0.2"
   },
   "devDependencies": {
-    "aegir": "^47.0.16",
+    "aegir": "^47.1.1",
     "it-map": "^3.0.0",
     "it-pair": "^2.0.6",
     "it-to-buffer": "^4.0.0",

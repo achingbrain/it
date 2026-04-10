@@ -29,7 +29,7 @@ messages over streams.
 
 ```typescript
 import { cborStream } from 'it-cbor-stream'
-import { MessageType } from './src/my-message-type.js'
+import { MessageType } from './src/my-message-type.ts'
 
 const stream = cborStream(duplex)
 
@@ -58,7 +58,7 @@ Loading this module through a script tag will make its exports available as `ItC
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_cbor_stream.html>
+- <https://achingbrain.github.io/it/modules/it-cbor-stream.html>
 
 # License
 

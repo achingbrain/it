@@ -243,7 +243,7 @@ Loading this module through a script tag will make its exports available as `ItR
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_rpc.html>
+- <https://achingbrain.github.io/it/modules/it-rpc.html>
 
 # License
 

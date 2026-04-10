@@ -68,7 +68,7 @@ Loading this module through a script tag will make its exports available as `ItT
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_to_buffer.html>
+- <https://achingbrain.github.io/it/modules/it-to-buffer.html>
 
 # License
 

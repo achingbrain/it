@@ -67,7 +67,7 @@ Loading this module through a script tag will make its exports available as `ItF
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_first.html>
+- <https://achingbrain.github.io/it/modules/it-first.html>
 
 # License
 

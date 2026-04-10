@@ -26,7 +26,7 @@
 import { parse } from 'it-ndjson'
 import { queuelessPushable } from 'it-queueless-pushable'
 import { raceSignal } from 'race-signal'
-import { UnexpectedEOFError } from './errors.js'
+import { UnexpectedEOFError } from './errors.ts'
 import type { AbortOptions } from 'abort-error'
 import type { ParseOptions } from 'it-ndjson'
 import type { Duplex } from 'it-stream-types'

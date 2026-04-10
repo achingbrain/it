@@ -136,7 +136,7 @@ describe('timeouts', () => {
     await expect(all(sender.generatorContextAccess({
       signal: AbortSignal.timeout(10)
     }))).to.eventually.be.rejected
-      .with.property('name', 'AbortError')
+      .with.property('name', 'TimeoutError')
   })
 
   it('should time out generator throw when server is slow', async () => {
@@ -153,7 +153,7 @@ describe('timeouts', () => {
 
     // invoke methods on target
     await expect(gen.throw(new Error('Urk!'))).to.eventually.be.rejected
-      .with.property('name', 'AbortError')
+      .with.property('name', 'TimeoutError')
   })
 
   it('should time out generator return when server is slow', async () => {
@@ -170,6 +170,6 @@ describe('timeouts', () => {
 
     // invoke methods on target
     await expect(gen.return(true)).to.eventually.be.rejected
-      .with.property('name', 'AbortError')
+      .with.property('name', 'TimeoutError')
   })
 })

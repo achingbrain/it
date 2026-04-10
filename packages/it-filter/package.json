@@ -27,7 +27,8 @@
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "import": "./dist/src/index.js"
+      "import": "./dist/src/index.js",
+      "module-sync": "./src/index.js"
     }
   },
   "release": {
@@ -140,7 +141,7 @@
     "it-peekable": "^3.0.0"
   },
   "devDependencies": {
-    "aegir": "^47.0.16",
+    "aegir": "^47.1.1",
     "it-all": "^3.0.0"
   }
 }
