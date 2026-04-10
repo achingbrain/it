@@ -3,7 +3,7 @@ import delay from 'delay'
 import all from 'it-all'
 import Sinon from 'sinon'
 import { Queue } from '../src/index.js'
-import { TestSignal } from './fixtures/test-signal.js'
+import { TestSignal } from './fixtures/test-signal.ts'
 import type { AbortOptions } from 'abort-error'
 
 const fixture = Symbol('fixture')

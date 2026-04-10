@@ -29,7 +29,7 @@ messages over streams.
 
 ```typescript
 import { pbStream } from 'it-protobuf-stream'
-import { MessageType } from './src/my-message-type.js'
+import { MessageType } from './src/my-message-type.ts'
 
 // RequestType and ResponseType have been generate from `.proto` files and have
 // `.encode` and `.decode` methods for serialization/deserialization

@@ -1,7 +1,7 @@
-import { defaultTransformers } from './codecs/index.js'
-import { UnsupportedValueTypeError } from './errors.js'
-import type { ValueCodec, Invocation } from './index.js'
-import type { Value } from './rpc.js'
+import { defaultTransformers } from './codecs/index.ts'
+import { UnsupportedValueTypeError } from './errors.ts'
+import type { ValueCodec, Invocation } from './index.ts'
+import type { Value } from './rpc.ts'
 import type { Pushable } from 'it-pushable'
 
 export interface ValuesInit {

@@ -22,7 +22,7 @@
  * ```
  */
 
-export { default as parse } from './parse.js'
-export { default as stringify } from './stringify.js'
+export { default as parse } from './parse.ts'
+export { default as stringify } from './stringify.ts'
 
-export type { ParseOptions } from './parse.js'
+export type { ParseOptions } from './parse.ts'

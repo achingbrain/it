@@ -29,7 +29,7 @@ messages over streams.
 
 ```typescript
 import { cborStream } from 'it-cbor-stream'
-import { MessageType } from './src/my-message-type.js'
+import { MessageType } from './src/my-message-type.ts'
 
 const stream = cborStream(duplex)
 

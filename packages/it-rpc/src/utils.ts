@@ -1,5 +1,5 @@
-import { MissingInvocationError, MissingParentScopeError } from './errors.js'
-import type { Invocation } from './index.js'
+import { MissingInvocationError, MissingParentScopeError } from './errors.ts'
+import type { Invocation } from './index.ts'
 
 interface MethodMessage {
   scope: string

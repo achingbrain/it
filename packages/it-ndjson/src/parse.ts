@@ -1,5 +1,5 @@
 import { isUint8ArrayList } from 'uint8arraylist'
-import { InvalidMessageLengthError } from './errors.js'
+import { InvalidMessageLengthError } from './errors.ts'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
 export interface ParseOptions {
