@@ -1,3 +1,9 @@
+## [it-buffer-stream-v3.0.13](https://github.com/achingbrain/it/compare/it-buffer-stream-3.0.12...it-buffer-stream-3.0.13) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
 ## [it-buffer-stream-v3.0.12](https://github.com/achingbrain/it/compare/it-buffer-stream-3.0.11...it-buffer-stream-3.0.12) (2026-04-10)
 
 ### Bug Fixes
