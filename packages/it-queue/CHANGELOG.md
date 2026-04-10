@@ -1,3 +1,9 @@
+## [it-queue-v1.1.2](https://github.com/achingbrain/it/compare/it-queue-1.1.1...it-queue-1.1.2) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-queue-v1.1.1](https://github.com/achingbrain/it/compare/it-queue-1.1.0...it-queue-1.1.1) (2025-12-12)
 
 ### Trivial Changes
