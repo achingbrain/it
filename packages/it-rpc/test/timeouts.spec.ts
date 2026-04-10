@@ -26,7 +26,6 @@ const target = {
       [Symbol.asyncIterator]: () => {
         return generator
       },
-      async [Symbol.asyncDispose] (): Promise<void> {},
       async next () {
         await delay(1_000)
         return {

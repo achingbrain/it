@@ -634,8 +634,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
 
         return result
       },
-      [Symbol.asyncIterator]: () => asyncGenerator,
-      async [Symbol.asyncDispose] (): Promise<void> {}
+      [Symbol.asyncIterator]: () => asyncGenerator
     }
 
     this.output.push(RPCMessage.encode({
