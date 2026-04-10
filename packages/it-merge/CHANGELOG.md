@@ -1,3 +1,13 @@
+## [it-merge-v3.0.13](https://github.com/achingbrain/it/compare/it-merge-3.0.12...it-merge-3.0.13) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
+### Trivial Changes
+
+* bump delay from 6.0.0 to 7.0.0 ([#184](https://github.com/achingbrain/it/issues/184)) ([c2f64db](https://github.com/achingbrain/it/commit/c2f64db5a200524c26b0c0ef36acf5c5f2b735cf))
+
 ## [it-merge-v3.0.12](https://github.com/achingbrain/it/compare/it-merge-3.0.11...it-merge-3.0.12) (2025-06-01)
 
 ### Dependencies
