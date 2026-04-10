@@ -1,3 +1,9 @@
+## [it-length-prefixed-stream-v2.0.6](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-2.0.5...it-length-prefixed-stream-2.0.6) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
 ## [it-length-prefixed-stream-v2.0.5](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-2.0.4...it-length-prefixed-stream-2.0.5) (2026-04-10)
 
 ### Bug Fixes
