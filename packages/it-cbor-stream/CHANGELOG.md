@@ -1,3 +1,9 @@
+## [it-cbor-stream-v2.0.4](https://github.com/achingbrain/it/compare/it-cbor-stream-2.0.3...it-cbor-stream-2.0.4) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-cbor-stream-v2.0.3](https://github.com/achingbrain/it/compare/it-cbor-stream-2.0.2...it-cbor-stream-2.0.3) (2025-06-01)
 
 ### Dependencies
