@@ -1,3 +1,9 @@
+## [it-peekable-v3.0.10](https://github.com/achingbrain/it/compare/it-peekable-3.0.9...it-peekable-3.0.10) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
 ## [it-peekable-v3.0.9](https://github.com/achingbrain/it/compare/it-peekable-3.0.8...it-peekable-3.0.9) (2026-04-10)
 
 ### Bug Fixes
