@@ -70,7 +70,7 @@ Loading this module through a script tag will make its exports available as `ItQ
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_queue.html>
+- <https://achingbrain.github.io/it/modules/it-queue.html>
 
 # License
 

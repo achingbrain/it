@@ -76,7 +76,7 @@ Loading this module through a script tag will make its exports available as `Bro
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/browser_readablestream_to_it.html>
+- <https://achingbrain.github.io/it/modules/browser-readablestream-to-it.html>
 
 # License
 

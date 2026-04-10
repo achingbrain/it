@@ -77,7 +77,7 @@ Loading this module through a script tag will make its exports available as `ItS
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_sort.html>
+- <https://achingbrain.github.io/it/modules/it-sort.html>
 
 # License
 

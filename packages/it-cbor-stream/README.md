@@ -58,7 +58,7 @@ Loading this module through a script tag will make its exports available as `ItC
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_cbor_stream.html>
+- <https://achingbrain.github.io/it/modules/it-cbor-stream.html>
 
 # License
 

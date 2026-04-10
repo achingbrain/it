@@ -67,7 +67,7 @@ Loading this module through a script tag will make its exports available as `ItM
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_map.html>
+- <https://achingbrain.github.io/it/modules/it-map.html>
 
 # License
 

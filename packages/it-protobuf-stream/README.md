@@ -61,7 +61,7 @@ Loading this module through a script tag will make its exports available as `ItP
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_protobuf_stream.html>
+- <https://achingbrain.github.io/it/modules/it-protobuf-stream.html>
 
 # License
 

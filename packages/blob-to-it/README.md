@@ -53,7 +53,7 @@ Loading this module through a script tag will make its exports available as `Blo
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/blob_to_it.html>
+- <https://achingbrain.github.io/it/modules/blob-to-it.html>
 
 # License
 

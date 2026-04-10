@@ -64,7 +64,7 @@ Loading this module through a script tag will make its exports available as `ItQ
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_queueless_pushable.html>
+- <https://achingbrain.github.io/it/modules/it-queueless-pushable.html>
 
 # License
 

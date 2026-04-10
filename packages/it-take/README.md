@@ -69,7 +69,7 @@ Loading this module through a script tag will make its exports available as `ItT
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_take.html>
+- <https://achingbrain.github.io/it/modules/it-take.html>
 
 # License
 

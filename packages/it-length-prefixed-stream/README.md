@@ -60,7 +60,7 @@ Loading this module through a script tag will make its exports available as `ItL
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_length_prefixed_stream.html>
+- <https://achingbrain.github.io/it/modules/it-length-prefixed-stream.html>
 
 # License
 

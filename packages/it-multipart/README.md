@@ -61,7 +61,7 @@ $ npm i it-multipart
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_multipart.html>
+- <https://achingbrain.github.io/it/modules/it-multipart.html>
 
 # License
 

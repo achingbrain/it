@@ -71,7 +71,7 @@ Loading this module through a script tag will make its exports available as `ItB
 
 # API Docs
 
-- <https://achingbrain.github.io/it/modules/it_batch.html>
+- <https://achingbrain.github.io/it/modules/it-batch.html>
 
 # License
 
