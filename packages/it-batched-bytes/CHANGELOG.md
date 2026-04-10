@@ -1,3 +1,9 @@
+## [it-batched-bytes-v2.0.12](https://github.com/achingbrain/it/compare/it-batched-bytes-2.0.11...it-batched-bytes-2.0.12) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
 ## [it-batched-bytes-v2.0.11](https://github.com/achingbrain/it/compare/it-batched-bytes-2.0.10...it-batched-bytes-2.0.11) (2026-04-10)
 
 ### Bug Fixes
