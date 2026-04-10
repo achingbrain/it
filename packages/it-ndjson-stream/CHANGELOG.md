@@ -1,3 +1,9 @@
+## [it-ndjson-stream-v2.0.5](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.4...it-ndjson-stream-2.0.5) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-ndjson-stream-v2.0.4](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.3...it-ndjson-stream-2.0.4) (2025-12-12)
 
 ### Dependencies
