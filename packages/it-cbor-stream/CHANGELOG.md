@@ -1,3 +1,9 @@
+## [it-cbor-stream-v2.0.6](https://github.com/achingbrain/it/compare/it-cbor-stream-2.0.5...it-cbor-stream-2.0.6) (2026-04-15)
+
+### Dependencies
+
+* bump cborg from 4.5.8 to 5.1.0 ([#197](https://github.com/achingbrain/it/issues/197)) ([4f70dda](https://github.com/achingbrain/it/commit/4f70dda78a99a7533a515e7247eb58e56b53ddbd))
+
 ## [it-cbor-stream-v2.0.5](https://github.com/achingbrain/it/compare/it-cbor-stream-2.0.4...it-cbor-stream-2.0.5) (2026-04-10)
 
 ### Bug Fixes
