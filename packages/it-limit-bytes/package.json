@@ -1,6 +1,6 @@
 {
   "name": "it-limit-bytes",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Limit the number of bytes that are yielded from an (async) iterable",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
@@ -28,7 +28,7 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js",
-      "module-sync": "./src/index.js"
+      "module-sync": "./dist/src/index.js"
     }
   },
   "release": {

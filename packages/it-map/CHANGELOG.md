@@ -1,3 +1,15 @@
+## [it-map-v3.1.6](https://github.com/achingbrain/it/compare/it-map-3.1.5...it-map-3.1.6) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
+## [it-map-v3.1.5](https://github.com/achingbrain/it/compare/it-map-3.1.4...it-map-3.1.5) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-map-v3.1.4](https://github.com/achingbrain/it/compare/it-map-3.1.3...it-map-3.1.4) (2025-06-01)
 
 ### Dependencies

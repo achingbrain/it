@@ -1,6 +1,6 @@
 {
   "name": "it-queueless-pushable",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "A pushable queue that waits until a value is consumed before accepting another",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
@@ -28,7 +28,7 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js",
-      "module-sync": "./src/index.js"
+      "module-sync": "./dist/src/index.js"
     }
   },
   "release": {

@@ -1,3 +1,19 @@
+## [it-parallel-batch-v3.0.11](https://github.com/achingbrain/it/compare/it-parallel-batch-3.0.10...it-parallel-batch-3.0.11) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
+## [it-parallel-batch-v3.0.10](https://github.com/achingbrain/it/compare/it-parallel-batch-3.0.9...it-parallel-batch-3.0.10) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
+### Trivial Changes
+
+* bump delay from 6.0.0 to 7.0.0 ([#184](https://github.com/achingbrain/it/issues/184)) ([c2f64db](https://github.com/achingbrain/it/commit/c2f64db5a200524c26b0c0ef36acf5c5f2b735cf))
+
 ## [it-parallel-batch-v3.0.9](https://github.com/achingbrain/it/compare/it-parallel-batch-3.0.8...it-parallel-batch-3.0.9) (2025-06-01)
 
 ### Dependencies

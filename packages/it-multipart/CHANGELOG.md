@@ -1,3 +1,15 @@
+## [it-multipart-v3.0.14](https://github.com/achingbrain/it/compare/it-multipart-3.0.13...it-multipart-3.0.14) (2026-04-10)
+
+### Bug Fixes
+
+* update module-sync path ([#199](https://github.com/achingbrain/it/issues/199)) ([1fa1946](https://github.com/achingbrain/it/commit/1fa1946acdda2de0add17f00ea390bcf820f24b4))
+
+## [it-multipart-v3.0.13](https://github.com/achingbrain/it/compare/it-multipart-3.0.12...it-multipart-3.0.13) (2026-04-10)
+
+### Bug Fixes
+
+* allow importing via require ([#198](https://github.com/achingbrain/it/issues/198)) ([c9cb42e](https://github.com/achingbrain/it/commit/c9cb42e88db35093463bde9fa9c898a01ba7c98f))
+
 ## [it-multipart-v3.0.12](https://github.com/achingbrain/it/compare/it-multipart-3.0.11...it-multipart-3.0.12) (2025-06-01)
 
 ### Dependencies

@@ -1,6 +1,6 @@
 {
   "name": "it-split",
-  "version": "3.0.10",
+  "version": "3.0.12",
   "description": "Splits Uint8Arrays emitted by an (async) iterable by a delimiter",
   "author": "Alex Potsides <alex@achingbrain.net>",
   "license": "Apache-2.0 OR MIT",
@@ -28,7 +28,7 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js",
-      "module-sync": "./src/index.js"
+      "module-sync": "./dist/src/index.js"
     }
   },
   "release": {
