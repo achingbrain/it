@@ -1,3 +1,9 @@
+## [it-rpc-v1.2.4](https://github.com/achingbrain/it/compare/it-rpc-1.2.3...it-rpc-1.2.4) (2026-04-15)
+
+### Dependencies
+
+* bump cborg from 4.5.8 to 5.1.0 ([#197](https://github.com/achingbrain/it/issues/197)) ([4f70dda](https://github.com/achingbrain/it/commit/4f70dda78a99a7533a515e7247eb58e56b53ddbd))
+
 ## [it-rpc-v1.2.3](https://github.com/achingbrain/it/compare/it-rpc-1.2.2...it-rpc-1.2.3) (2026-04-10)
 
 ### Bug Fixes
