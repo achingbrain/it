@@ -1,4 +1,4 @@
-import { decodeMessage, encodeMessage, message } from 'protons-runtime'
+import { decodeMessage, encodeMessage, message, streamMessage } from 'protons-runtime'
 import type { Codec, DecodeOptions } from 'protons-runtime'
 import type { Uint8ArrayList } from 'uint8arraylist'
 
@@ -47,17 +47,46 @@ export namespace TestMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.foo`,
+                value: reader.string()
+              }
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<TestMessage>): Uint8Array => {
+  export interface TestMessageFooFieldEvent {
+    field: '$.foo'
+    value: string
+  }
+
+  export function encode (obj: Partial<TestMessage>): Uint8Array {
     return encodeMessage(obj, TestMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<TestMessage>): TestMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<TestMessage>): TestMessage {
     return decodeMessage(buf, TestMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<TestMessage>): Generator<TestMessageFooFieldEvent> {
+    return streamMessage(buf, TestMessage.codec(), opts)
   }
 }
