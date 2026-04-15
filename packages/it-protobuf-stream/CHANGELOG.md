@@ -1,3 +1,9 @@
+## [it-protobuf-stream-v2.0.6](https://github.com/achingbrain/it/compare/it-protobuf-stream-2.0.5...it-protobuf-stream-2.0.6) (2026-04-15)
+
+### Dependencies
+
+* bump protons from 7.7.0 to 8.1.1 ([#194](https://github.com/achingbrain/it/issues/194)) ([f7d60bd](https://github.com/achingbrain/it/commit/f7d60bd8b8cc93b4641ad59dd55edb9d1bc087c5))
+
 ## [it-protobuf-stream-v2.0.5](https://github.com/achingbrain/it/compare/it-protobuf-stream-2.0.4...it-protobuf-stream-2.0.5) (2026-04-10)
 
 ### Bug Fixes
