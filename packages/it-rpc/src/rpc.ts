@@ -1,4 +1,4 @@
-import { decodeMessage, encodeMessage, enumeration, MaxLengthError, message } from 'protons-runtime'
+import { decodeMessage, encodeMessage, enumeration, MaxLengthError, message, streamMessage } from 'protons-runtime'
 import { alloc as uint8ArrayAlloc } from 'uint8arrays/alloc'
 import type { Codec, DecodeOptions } from 'protons-runtime'
 import type { Uint8ArrayList } from 'uint8arraylist'
@@ -32,6 +32,7 @@ export namespace MessageType {
     return enumeration<MessageType>(__MessageTypeValues)
   }
 }
+
 export interface Value {
   type: number
   value?: Uint8Array
@@ -87,18 +88,59 @@ export namespace Value {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.type`,
+                value: reader.uint32()
+              }
+              break
+            }
+            case 2: {
+              yield {
+                field: `${prefix}.value`,
+                value: reader.bytes()
+              }
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<Value>): Uint8Array => {
+  export interface ValueTypeFieldEvent {
+    field: '$.type'
+    value: number
+  }
+
+  export interface ValueValueFieldEvent {
+    field: '$.value'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<Value>): Uint8Array {
     return encodeMessage(obj, Value.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<Value>): Value => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<Value>): Value {
     return decodeMessage(buf, Value.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<Value>): Generator<ValueTypeFieldEvent | ValueValueFieldEvent> {
+    return streamMessage(buf, Value.codec(), opts)
   }
 }
 
@@ -158,18 +200,59 @@ export namespace RPCMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.type`,
+                value: MessageType.codec().decode(reader)
+              }
+              break
+            }
+            case 2: {
+              yield {
+                field: `${prefix}.message`,
+                value: reader.bytes()
+              }
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<RPCMessage>): Uint8Array => {
+  export interface RPCMessageTypeFieldEvent {
+    field: '$.type'
+    value: MessageType
+  }
+
+  export interface RPCMessageMessageFieldEvent {
+    field: '$.message'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<RPCMessage>): Uint8Array {
     return encodeMessage(obj, RPCMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<RPCMessage>): RPCMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<RPCMessage>): RPCMessage {
     return decodeMessage(buf, RPCMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<RPCMessage>): Generator<RPCMessageTypeFieldEvent | RPCMessageMessageFieldEvent> {
+    return streamMessage(buf, RPCMessage.codec(), opts)
   }
 }
 
@@ -199,7 +282,7 @@ export namespace InvokeMethodMessage {
           w.string(obj.path)
         }
 
-        if (obj.args != null) {
+        if (obj.args != null && obj.args.length > 0) {
           for (const value of obj.args) {
             w.uint32(26)
             Value.codec().encode(value, w)
@@ -232,7 +315,7 @@ export namespace InvokeMethodMessage {
             }
             case 3: {
               if (opts.limits?.args != null && obj.args.length === opts.limits.args) {
-                throw new MaxLengthError('Decode error - map field "args" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "args" had too many elements')
               }
 
               obj.args.push(Value.codec().decode(reader, reader.uint32(), {
@@ -248,18 +331,93 @@ export namespace InvokeMethodMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const obj = {
+          args: 0
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              yield {
+                field: `${prefix}.path`,
+                value: reader.string()
+              }
+              break
+            }
+            case 3: {
+              if (opts.limits?.args != null && obj.args === opts.limits.args) {
+                throw new MaxLengthError('Streaming decode error - repeated field "args" had too many elements')
+              }
+
+              for (const evt of Value.codec().stream(reader, reader.uint32(), `${prefix}.args[]`, {
+                limits: opts.limits?.args$
+              })) {
+                yield {
+                  ...evt,
+                  index: obj.args
+                }
+              }
+
+              obj.args++
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<InvokeMethodMessage>): Uint8Array => {
+  export interface InvokeMethodMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface InvokeMethodMessagePathFieldEvent {
+    field: '$.path'
+    value: string
+  }
+
+  export interface InvokeMethodMessageArgsTypeFieldEvent {
+    field: '$.args[].type'
+    value: number
+    index: number
+  }
+
+  export interface InvokeMethodMessageArgsValueFieldEvent {
+    field: '$.args[].value'
+    value: Uint8Array
+    index: number
+  }
+
+  export function encode (obj: Partial<InvokeMethodMessage>): Uint8Array {
     return encodeMessage(obj, InvokeMethodMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeMethodMessage>): InvokeMethodMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeMethodMessage>): InvokeMethodMessage {
     return decodeMessage(buf, InvokeMethodMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeMethodMessage>): Generator<InvokeMethodMessageScopeFieldEvent | InvokeMethodMessagePathFieldEvent | InvokeMethodMessageArgsTypeFieldEvent | InvokeMethodMessageArgsValueFieldEvent> {
+    return streamMessage(buf, InvokeMethodMessage.codec(), opts)
   }
 }
 
@@ -308,18 +466,47 @@ export namespace AbortMethodMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<AbortMethodMessage>): Uint8Array => {
+  export interface AbortMethodMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export function encode (obj: Partial<AbortMethodMessage>): Uint8Array {
     return encodeMessage(obj, AbortMethodMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortMethodMessage>): AbortMethodMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortMethodMessage>): AbortMethodMessage {
     return decodeMessage(buf, AbortMethodMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortMethodMessage>): Generator<AbortMethodMessageScopeFieldEvent> {
+    return streamMessage(buf, AbortMethodMessage.codec(), opts)
   }
 }
 
@@ -380,18 +567,64 @@ export namespace MethodResolvedMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              yield * Value.codec().stream(reader, reader.uint32(), `${prefix}.value`, {
+                limits: opts.limits?.value
+              })
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<MethodResolvedMessage>): Uint8Array => {
+  export interface MethodResolvedMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface MethodResolvedMessageValueTypeFieldEvent {
+    field: '$.value.type'
+    value: number
+  }
+
+  export interface MethodResolvedMessageValueValueFieldEvent {
+    field: '$.value.value'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<MethodResolvedMessage>): Uint8Array {
     return encodeMessage(obj, MethodResolvedMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodResolvedMessage>): MethodResolvedMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodResolvedMessage>): MethodResolvedMessage {
     return decodeMessage(buf, MethodResolvedMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodResolvedMessage>): Generator<MethodResolvedMessageScopeFieldEvent | MethodResolvedMessageValueTypeFieldEvent | MethodResolvedMessageValueValueFieldEvent> {
+    return streamMessage(buf, MethodResolvedMessage.codec(), opts)
   }
 }
 
@@ -452,18 +685,64 @@ export namespace MethodRejectedMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              yield * Value.codec().stream(reader, reader.uint32(), `${prefix}.error`, {
+                limits: opts.limits?.error
+              })
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<MethodRejectedMessage>): Uint8Array => {
+  export interface MethodRejectedMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface MethodRejectedMessageErrorTypeFieldEvent {
+    field: '$.error.type'
+    value: number
+  }
+
+  export interface MethodRejectedMessageErrorValueFieldEvent {
+    field: '$.error.value'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<MethodRejectedMessage>): Uint8Array {
     return encodeMessage(obj, MethodRejectedMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodRejectedMessage>): MethodRejectedMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodRejectedMessage>): MethodRejectedMessage {
     return decodeMessage(buf, MethodRejectedMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<MethodRejectedMessage>): Generator<MethodRejectedMessageScopeFieldEvent | MethodRejectedMessageErrorTypeFieldEvent | MethodRejectedMessageErrorValueFieldEvent> {
+    return streamMessage(buf, MethodRejectedMessage.codec(), opts)
   }
 }
 
@@ -489,7 +768,7 @@ export namespace InvokeCallbackMessage {
           w.string(obj.scope)
         }
 
-        if (obj.parents != null) {
+        if (obj.parents != null && obj.parents.length > 0) {
           for (const value of obj.parents) {
             w.uint32(18)
             w.string(value)
@@ -501,7 +780,7 @@ export namespace InvokeCallbackMessage {
           w.string(obj.callback)
         }
 
-        if (obj.args != null) {
+        if (obj.args != null && obj.args.length > 0) {
           for (const value of obj.args) {
             w.uint32(34)
             Value.codec().encode(value, w)
@@ -531,7 +810,7 @@ export namespace InvokeCallbackMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -543,7 +822,7 @@ export namespace InvokeCallbackMessage {
             }
             case 4: {
               if (opts.limits?.args != null && obj.args.length === opts.limits.args) {
-                throw new MaxLengthError('Decode error - map field "args" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "args" had too many elements')
               }
 
               obj.args.push(Value.codec().decode(reader, reader.uint32(), {
@@ -559,18 +838,115 @@ export namespace InvokeCallbackMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const obj = {
+          parents: 0,
+          args: 0
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              if (opts.limits?.parents != null && obj.parents === opts.limits.parents) {
+                throw new MaxLengthError('Streaming decode error - repeated field "parents" had too many elements')
+              }
+
+              yield {
+                field: `${prefix}.parents[]`,
+                index: obj.parents,
+                value: reader.string()
+              }
+
+              obj.parents++
+
+              break
+            }
+            case 3: {
+              yield {
+                field: `${prefix}.callback`,
+                value: reader.string()
+              }
+              break
+            }
+            case 4: {
+              if (opts.limits?.args != null && obj.args === opts.limits.args) {
+                throw new MaxLengthError('Streaming decode error - repeated field "args" had too many elements')
+              }
+
+              for (const evt of Value.codec().stream(reader, reader.uint32(), `${prefix}.args[]`, {
+                limits: opts.limits?.args$
+              })) {
+                yield {
+                  ...evt,
+                  index: obj.args
+                }
+              }
+
+              obj.args++
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<InvokeCallbackMessage>): Uint8Array => {
+  export interface InvokeCallbackMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface InvokeCallbackMessageParentsFieldEvent {
+    field: '$.parents[]'
+    index: number
+    value: string
+  }
+
+  export interface InvokeCallbackMessageCallbackFieldEvent {
+    field: '$.callback'
+    value: string
+  }
+
+  export interface InvokeCallbackMessageArgsTypeFieldEvent {
+    field: '$.args[].type'
+    value: number
+    index: number
+  }
+
+  export interface InvokeCallbackMessageArgsValueFieldEvent {
+    field: '$.args[].value'
+    value: Uint8Array
+    index: number
+  }
+
+  export function encode (obj: Partial<InvokeCallbackMessage>): Uint8Array {
     return encodeMessage(obj, InvokeCallbackMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeCallbackMessage>): InvokeCallbackMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeCallbackMessage>): InvokeCallbackMessage {
     return decodeMessage(buf, InvokeCallbackMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<InvokeCallbackMessage>): Generator<InvokeCallbackMessageScopeFieldEvent | InvokeCallbackMessageParentsFieldEvent | InvokeCallbackMessageCallbackFieldEvent | InvokeCallbackMessageArgsTypeFieldEvent | InvokeCallbackMessageArgsValueFieldEvent> {
+    return streamMessage(buf, InvokeCallbackMessage.codec(), opts)
   }
 }
 
@@ -594,7 +970,7 @@ export namespace AbortCallbackMessage {
           w.string(obj.scope)
         }
 
-        if (obj.parents != null) {
+        if (obj.parents != null && obj.parents.length > 0) {
           for (const value of obj.parents) {
             w.uint32(18)
             w.string(value)
@@ -622,7 +998,7 @@ export namespace AbortCallbackMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -636,18 +1012,72 @@ export namespace AbortCallbackMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const obj = {
+          parents: 0
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              if (opts.limits?.parents != null && obj.parents === opts.limits.parents) {
+                throw new MaxLengthError('Streaming decode error - repeated field "parents" had too many elements')
+              }
+
+              yield {
+                field: `${prefix}.parents[]`,
+                index: obj.parents,
+                value: reader.string()
+              }
+
+              obj.parents++
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<AbortCallbackMessage>): Uint8Array => {
+  export interface AbortCallbackMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface AbortCallbackMessageParentsFieldEvent {
+    field: '$.parents[]'
+    index: number
+    value: string
+  }
+
+  export function encode (obj: Partial<AbortCallbackMessage>): Uint8Array {
     return encodeMessage(obj, AbortCallbackMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortCallbackMessage>): AbortCallbackMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortCallbackMessage>): AbortCallbackMessage {
     return decodeMessage(buf, AbortCallbackMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<AbortCallbackMessage>): Generator<AbortCallbackMessageScopeFieldEvent | AbortCallbackMessageParentsFieldEvent> {
+    return streamMessage(buf, AbortCallbackMessage.codec(), opts)
   }
 }
 
@@ -672,7 +1102,7 @@ export namespace CallbackResolvedMessage {
           w.string(obj.scope)
         }
 
-        if (obj.parents != null) {
+        if (obj.parents != null && obj.parents.length > 0) {
           for (const value of obj.parents) {
             w.uint32(18)
             w.string(value)
@@ -705,7 +1135,7 @@ export namespace CallbackResolvedMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -725,18 +1155,89 @@ export namespace CallbackResolvedMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const obj = {
+          parents: 0
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              if (opts.limits?.parents != null && obj.parents === opts.limits.parents) {
+                throw new MaxLengthError('Streaming decode error - repeated field "parents" had too many elements')
+              }
+
+              yield {
+                field: `${prefix}.parents[]`,
+                index: obj.parents,
+                value: reader.string()
+              }
+
+              obj.parents++
+
+              break
+            }
+            case 3: {
+              yield * Value.codec().stream(reader, reader.uint32(), `${prefix}.value`, {
+                limits: opts.limits?.value
+              })
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<CallbackResolvedMessage>): Uint8Array => {
+  export interface CallbackResolvedMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface CallbackResolvedMessageParentsFieldEvent {
+    field: '$.parents[]'
+    index: number
+    value: string
+  }
+
+  export interface CallbackResolvedMessageValueTypeFieldEvent {
+    field: '$.value.type'
+    value: number
+  }
+
+  export interface CallbackResolvedMessageValueValueFieldEvent {
+    field: '$.value.value'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<CallbackResolvedMessage>): Uint8Array {
     return encodeMessage(obj, CallbackResolvedMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackResolvedMessage>): CallbackResolvedMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackResolvedMessage>): CallbackResolvedMessage {
     return decodeMessage(buf, CallbackResolvedMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackResolvedMessage>): Generator<CallbackResolvedMessageScopeFieldEvent | CallbackResolvedMessageParentsFieldEvent | CallbackResolvedMessageValueTypeFieldEvent | CallbackResolvedMessageValueValueFieldEvent> {
+    return streamMessage(buf, CallbackResolvedMessage.codec(), opts)
   }
 }
 
@@ -761,7 +1262,7 @@ export namespace CallbackRejectedMessage {
           w.string(obj.scope)
         }
 
-        if (obj.parents != null) {
+        if (obj.parents != null && obj.parents.length > 0) {
           for (const value of obj.parents) {
             w.uint32(18)
             w.string(value)
@@ -794,7 +1295,7 @@ export namespace CallbackRejectedMessage {
             }
             case 2: {
               if (opts.limits?.parents != null && obj.parents.length === opts.limits.parents) {
-                throw new MaxLengthError('Decode error - map field "parents" had too many elements')
+                throw new MaxLengthError('Decode error - repeated field "parents" had too many elements')
               }
 
               obj.parents.push(reader.string())
@@ -814,17 +1315,88 @@ export namespace CallbackRejectedMessage {
         }
 
         return obj
+      }, function * (reader, length, prefix, opts = {}) {
+        const obj = {
+          parents: 0
+        }
+
+        const end = length == null ? reader.len : reader.pos + length
+
+        while (reader.pos < end) {
+          const tag = reader.uint32()
+
+          switch (tag >>> 3) {
+            case 1: {
+              yield {
+                field: `${prefix}.scope`,
+                value: reader.string()
+              }
+              break
+            }
+            case 2: {
+              if (opts.limits?.parents != null && obj.parents === opts.limits.parents) {
+                throw new MaxLengthError('Streaming decode error - repeated field "parents" had too many elements')
+              }
+
+              yield {
+                field: `${prefix}.parents[]`,
+                index: obj.parents,
+                value: reader.string()
+              }
+
+              obj.parents++
+
+              break
+            }
+            case 3: {
+              yield * Value.codec().stream(reader, reader.uint32(), `${prefix}.error`, {
+                limits: opts.limits?.error
+              })
+
+              break
+            }
+            default: {
+              reader.skipType(tag & 7)
+              break
+            }
+          }
+        }
       })
     }
 
     return _codec
   }
 
-  export const encode = (obj: Partial<CallbackRejectedMessage>): Uint8Array => {
+  export interface CallbackRejectedMessageScopeFieldEvent {
+    field: '$.scope'
+    value: string
+  }
+
+  export interface CallbackRejectedMessageParentsFieldEvent {
+    field: '$.parents[]'
+    index: number
+    value: string
+  }
+
+  export interface CallbackRejectedMessageErrorTypeFieldEvent {
+    field: '$.error.type'
+    value: number
+  }
+
+  export interface CallbackRejectedMessageErrorValueFieldEvent {
+    field: '$.error.value'
+    value: Uint8Array
+  }
+
+  export function encode (obj: Partial<CallbackRejectedMessage>): Uint8Array {
     return encodeMessage(obj, CallbackRejectedMessage.codec())
   }
 
-  export const decode = (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackRejectedMessage>): CallbackRejectedMessage => {
+  export function decode (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackRejectedMessage>): CallbackRejectedMessage {
     return decodeMessage(buf, CallbackRejectedMessage.codec(), opts)
+  }
+
+  export function stream (buf: Uint8Array | Uint8ArrayList, opts?: DecodeOptions<CallbackRejectedMessage>): Generator<CallbackRejectedMessageScopeFieldEvent | CallbackRejectedMessageParentsFieldEvent | CallbackRejectedMessageErrorTypeFieldEvent | CallbackRejectedMessageErrorValueFieldEvent> {
+    return streamMessage(buf, CallbackRejectedMessage.codec(), opts)
   }
 }
