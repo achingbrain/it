@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import drain from 'it-drain'
-import limitBytes from '../src/index.js'
+import limitBytes from '../src/index.ts'
 
 function values (): Uint8Array[] {
   return [

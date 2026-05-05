@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import map from '../src/index.js'
+import map from '../src/index.ts'
 
 async function * asyncGenerator (vals: number[] = [1]): AsyncGenerator<number, void, undefined> {
   yield * vals

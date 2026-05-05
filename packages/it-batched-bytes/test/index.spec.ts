@@ -2,7 +2,7 @@
 
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import batch from '../src/index.js'
+import batch from '../src/index.ts'
 
 describe('it-batched-bytes', () => {
   it('should batch up entries', () => {

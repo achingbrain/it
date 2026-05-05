@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import peekableIt from '../src/index.js'
+import peekableIt from '../src/index.ts'
 
 describe('it-peekable', () => {
   it('should peek at an iterable', async () => {

@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import take from '../src/index.js'
+import take from '../src/index.ts'
 
 describe('it-take', () => {
   it('should limit the number of values returned from an iterable', () => {

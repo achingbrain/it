@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
-import { rpc } from '../src/index.js'
-import type { RPC } from '../src/index.js'
+import { rpc } from '../src/index.ts'
+import type { RPC } from '../src/index.ts'
 
 const target = {
   async callsCallback (arg: () => Promise<any>) {

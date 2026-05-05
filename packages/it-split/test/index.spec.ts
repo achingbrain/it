@@ -2,7 +2,7 @@ import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
 import { toString } from 'uint8arrays/to-string'
-import split from '../src/index.js'
+import split from '../src/index.ts'
 
 describe('it-split', () => {
   it('should split Uint8Arrays by newlines', () => {

@@ -1,7 +1,7 @@
 import { expect } from 'aegir/chai'
 import { encode, decode } from 'cborg'
-import { rpc } from '../src/index.js'
-import type { RPC, ValueCodec } from '../src/index.js'
+import { rpc } from '../src/index.ts'
+import type { RPC, ValueCodec } from '../src/index.ts'
 
 class MyClass {
   field: string

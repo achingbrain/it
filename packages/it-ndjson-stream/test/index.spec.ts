@@ -1,7 +1,7 @@
 import { expect } from 'aegir/chai'
 import { pair } from 'it-pair'
-import { ndjsonStream } from '../src/index.js'
-import type { NDJSONStream } from '../src/index.js'
+import { ndjsonStream } from '../src/index.ts'
+import type { NDJSONStream } from '../src/index.ts'
 
 const obj = { foo: 'bar' }
 

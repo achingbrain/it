@@ -2,7 +2,7 @@ import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
 import { Uint8ArrayList } from 'uint8arraylist'
-import * as ndjson from '../src/index.js'
+import * as ndjson from '../src/index.ts'
 
 async function * toAsyncIterator <T> (array: T[]): AsyncIterable<T> {
   for (let i = 0; i < array.length; i++) {

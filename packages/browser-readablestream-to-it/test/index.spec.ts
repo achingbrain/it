@@ -2,7 +2,7 @@
 
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import toIt from '../src/index.js'
+import toIt from '../src/index.ts'
 
 describe('browser-readablestream-to-it', () => {
   it('should convert a readablestream to an async iterator', async () => {

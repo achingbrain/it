@@ -2,7 +2,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import glob from '../src/index.js'
+import glob from '../src/index.ts'
 
 const dir = dirname(fileURLToPath(import.meta.url))
 

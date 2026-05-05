@@ -1,4 +1,4 @@
-import type { ValueCodec } from '../index.js'
+import type { ValueCodec } from '../index.ts'
 
 const transformer: ValueCodec<null> = {
   type: 1025,

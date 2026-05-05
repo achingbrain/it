@@ -1,7 +1,7 @@
 /**
  * @packageDocumentation
  *
- * Turns an (async)iterable into a W3C ReadbleStream.
+ * Turns an (async)iterable into a W3C ReadableStream.
  *
  * @example
  *
@@ -30,10 +30,10 @@ type Source<T> = SourceExt & UnderlyingSource<T>
 /**
  * Converts an (async) iterator into a WHATWG ReadableStream
  */
-export default function itToBrowserReadableStream <T extends ArrayBufferView> (source: AsyncIterable<T> | Iterable<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
+export default function itToBrowserReadableStream <T extends ArrayBufferView<ArrayBuffer>> (source: AsyncIterable<T> | Iterable<T>, queuingStrategy: QueuingStrategy<T> = {}): ReadableStream<T> {
   const iter = getIterator<T>(source)
 
-  const s: Source<ArrayBufferView> = {
+  const s: Source<ArrayBufferView<ArrayBuffer>> = {
     _cancelled: false,
 
     async start () {

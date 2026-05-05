@@ -2,7 +2,7 @@
 
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import toIt from '../src/index.js'
+import toIt from '../src/index.ts'
 
 describe('blob-to-it', () => {
   it('should convert a blob to an async iterator', async () => {

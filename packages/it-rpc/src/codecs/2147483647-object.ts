@@ -1,5 +1,5 @@
 import { decode, encode } from 'cborg'
-import type { ValueCodec } from '../index.js'
+import type { ValueCodec } from '../index.ts'
 
 const IGNORE_OBJECT_PROPS = [
   '__defineGetter__',

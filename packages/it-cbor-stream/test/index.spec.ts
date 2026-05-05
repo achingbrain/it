@@ -5,8 +5,8 @@ import { pair } from 'it-pair'
 import toBuffer from 'it-to-buffer'
 import * as varint from 'uint8-varint'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
-import { cborStream } from '../src/index.js'
-import type { CBORStream } from '../src/index.js'
+import { cborStream } from '../src/index.ts'
+import type { CBORStream } from '../src/index.ts'
 
 /* eslint-env mocha */
 

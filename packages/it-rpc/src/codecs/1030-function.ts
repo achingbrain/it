@@ -2,8 +2,8 @@ import { anySignal } from 'any-signal'
 import { decode, encode } from 'cborg'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
-import { AbortCallbackMessage, InvokeCallbackMessage, MessageType, RPCMessage } from '../rpc.js'
-import type { ValueCodec, CallbackFunction, Invocation } from '../index.js'
+import { AbortCallbackMessage, InvokeCallbackMessage, MessageType, RPCMessage } from '../rpc.ts'
+import type { ValueCodec, CallbackFunction, Invocation } from '../index.ts'
 
 const transformer: ValueCodec<(...args: any[]) => any> = {
   type: 1030,

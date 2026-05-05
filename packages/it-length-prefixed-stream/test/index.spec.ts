@@ -7,10 +7,10 @@ import { Uint8ArrayList } from 'uint8arraylist'
 import { alloc as uint8Alloc, allocUnsafe as uint8AllocUnsafe } from 'uint8arrays/alloc'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { fromString as uint8ArrayFromString } from 'uint8arrays/from-string'
-import { lpStream } from '../src/index.js'
+import { lpStream } from '../src/index.ts'
 import { int32BEDecode } from './fixtures/int32BE-decode.ts'
 import { int32BEEncode } from './fixtures/int32BE-encode.ts'
-import type { LengthPrefixedStream } from '../src/index.js'
+import type { LengthPrefixedStream } from '../src/index.ts'
 
 /* eslint-env mocha */
 

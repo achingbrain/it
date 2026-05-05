@@ -3,8 +3,8 @@ import { encode, decode } from 'cborg'
 import { nanoid } from 'nanoid'
 import pDefer from 'p-defer'
 import { stubInterface } from 'sinon-ts'
-import { Values } from '../src/values.js'
-import type { Invocation, ValueCodec } from '../src/index.js'
+import { Values } from '../src/values.ts'
+import type { Invocation, ValueCodec } from '../src/index.ts'
 import type { Pushable } from 'it-pushable'
 
 describe('custom values', () => {

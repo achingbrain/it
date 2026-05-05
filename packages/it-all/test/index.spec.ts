@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'aegir/chai'
-import all from '../src/index.js'
+import all from '../src/index.ts'
 
 describe('it-all', () => {
   it('should collect all entries of an iterator as an array', () => {

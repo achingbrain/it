@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import forEach from '../src/index.js'
+import forEach from '../src/index.ts'
 
 function * values (vals: number[] = [0, 1, 2, 3, 4]): Generator<number, void, undefined> {
   yield * vals
