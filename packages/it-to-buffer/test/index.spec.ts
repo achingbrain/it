@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import toBuffer from '../src/index.js'
+import toBuffer from '../src/index.ts'
 
 describe('it-to-buffer', () => {
   it('should turn a generator that yields buffers into a buffer', () => {

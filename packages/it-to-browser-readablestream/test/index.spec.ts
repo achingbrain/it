@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import toBrowserReadbleStream from '../src/index.js'
+import toBrowserReadbleStream from '../src/index.ts'
 
 async function all <T> (stream: ReadableStream<T>): Promise<T[]> {
   const output: T[] = []

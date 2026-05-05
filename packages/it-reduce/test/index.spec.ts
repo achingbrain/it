@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import reduce from '../src/index.js'
+import reduce from '../src/index.ts'
 
 function * values (vals: number[] = [0, 1, 2, 3, 4]): Generator<number, void, undefined> {
   yield * vals

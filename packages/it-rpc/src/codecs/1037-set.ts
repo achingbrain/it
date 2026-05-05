@@ -1,5 +1,5 @@
 import { decode, encode } from 'cborg'
-import type { ValueCodec } from '../index.js'
+import type { ValueCodec } from '../index.ts'
 
 const transformer: ValueCodec<Set<any>> = {
   type: 1037,

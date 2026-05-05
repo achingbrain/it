@@ -2,7 +2,7 @@ import { expect } from 'aegir/chai'
 import delay from 'delay'
 import all from 'it-all'
 import drain from 'it-drain'
-import { queuelessPushable } from '../src/index.js'
+import { queuelessPushable } from '../src/index.ts'
 
 describe('it-queueless-pushable', () => {
   it('should return a value', async () => {

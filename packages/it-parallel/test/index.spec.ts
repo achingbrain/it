@@ -1,7 +1,7 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
 import all from 'it-all'
-import parallel from '../src/index.js'
+import parallel from '../src/index.ts'
 
 const createFn = (ms: number, result: number) => {
   return async () => {

@@ -1,5 +1,5 @@
 import objectTransformer from './2147483647-object.ts'
-import type { ValueCodec } from '../index.js'
+import type { ValueCodec } from '../index.ts'
 
 const transformer: ValueCodec<AsyncGenerator<any>> = {
   type: 1034,

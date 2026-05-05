@@ -1,8 +1,8 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
 import all from 'it-all'
-import { rpc } from '../src/index.js'
-import type { RPC } from '../src/index.js'
+import { rpc } from '../src/index.ts'
+import type { RPC } from '../src/index.ts'
 import type { AbortOptions } from 'it-pushable'
 
 const target = {
@@ -22,10 +22,7 @@ const target = {
     return args
   },
   generatorContextAccess (options?: AbortOptions): AsyncGenerator<boolean> {
-    const generator: AsyncGenerator<boolean> = {
-      [Symbol.asyncIterator]: () => {
-        return generator
-      },
+    const asyncGenerator: AsyncGenerator<boolean> = {
       async next () {
         await delay(1_000)
         return {
@@ -45,10 +42,12 @@ const target = {
           done: true,
           value: undefined
         }
-      }
+      },
+      [Symbol.asyncIterator]: () => asyncGenerator,
+      [Symbol.asyncDispose]: async () => {}
     }
 
-    return generator
+    return asyncGenerator
   }
 }
 

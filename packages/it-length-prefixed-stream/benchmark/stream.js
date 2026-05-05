@@ -1,5 +1,5 @@
 import { duplexPair } from 'it-pair/duplex'
-import { lpStream } from '../dist/src/index.js'
+import { lpStream } from '../dist/src/index.ts'
 
 const DATA_LENGTH = 1024 * 1024 * 1024
 const CHUNK_SIZE = 256 * 1024

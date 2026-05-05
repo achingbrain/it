@@ -145,7 +145,7 @@
     "it-stream-types": "^2.0.2"
   },
   "devDependencies": {
-    "aegir": "^47.1.1",
+    "aegir": "^48.0.1",
     "it-map": "^3.0.0",
     "it-pair": "^2.0.6",
     "it-to-buffer": "^4.0.0",

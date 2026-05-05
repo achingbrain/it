@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
-import bufferStream from '../src/index.js'
+import bufferStream from '../src/index.ts'
 
 describe('it-buffer-stream', () => {
   it('should emit bytes', async () => {

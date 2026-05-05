@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import last from '../src/index.js'
+import last from '../src/index.ts'
 
 describe('it-last', () => {
   it('should return only the last result from an iterator', async () => {

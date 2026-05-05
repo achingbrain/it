@@ -1,7 +1,7 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
 import all from 'it-all'
-import parallelBatch from '../src/index.js'
+import parallelBatch from '../src/index.ts'
 
 describe('it-parallel-batch', () => {
   it('should batch up emitted arrays', async () => {

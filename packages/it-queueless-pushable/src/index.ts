@@ -66,6 +66,10 @@ class QueuelessPushable <T> implements Pushable<T> {
     return this
   }
 
+  async [Symbol.asyncDispose] (): Promise<void> {
+
+  }
+
   async next (): Promise<IteratorResult<T, void>> {
     if (this.nextResult == null) {
       // wait for the supplier to push a value

@@ -1,7 +1,7 @@
 import { AbortError } from 'abort-error'
 import { expect } from 'aegir/chai'
-import { rpc } from '../src/index.js'
-import type { RPC } from '../src/index.js'
+import { rpc } from '../src/index.ts'
+import type { RPC } from '../src/index.ts'
 
 const target = {
   async throwsOnAbort (args: { signal: AbortSignal }) {

@@ -1,7 +1,7 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
 import all from 'it-all'
-import merge from '../src/index.js'
+import merge from '../src/index.ts'
 
 describe('it-merge', () => {
   it('should merge multiple arrays', async () => {

@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import first from '../src/index.js'
+import first from '../src/index.ts'
 
 describe('it-first', () => {
   it('should return only the first result from an iterator', () => {

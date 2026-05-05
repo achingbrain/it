@@ -17,7 +17,7 @@ import abortSignalTransformer from './1039-abort-signal.ts'
 import dateTransformer from './1040-date.ts'
 import regExpTransformer from './1041-regexp.ts'
 import objectTransformer from './2147483647-object.ts'
-import type { ValueCodec } from '../index.js'
+import type { ValueCodec } from '../index.ts'
 
 export const defaultTransformers: ValueCodec[] = [
   undefinedTransformer,

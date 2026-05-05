@@ -4,7 +4,7 @@ import FormData from 'form-data'
 import drain from 'it-drain'
 import fetch from 'node-fetch'
 import { toString as uint8ArrayToString } from 'uint8arrays/to-string'
-import handler from '../src/index.js'
+import handler from '../src/index.ts'
 import type { Server, IncomingMessage } from 'http'
 
 describe('it-multipart', () => {

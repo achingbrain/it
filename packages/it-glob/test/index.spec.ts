@@ -2,7 +2,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import glob from '../src/index.js'
+import glob from '../src/index.ts'
 
 const dir = dirname(fileURLToPath(import.meta.url))
 
@@ -64,20 +64,20 @@ describe('it-glob', () => {
   })
 
   it('should match directories', async () => {
-    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/*', {
+    const files = await all(glob(path.resolve(dir, '..'), '*/**', {
       onlyFiles: false
     }))
 
-    expect(files.includes('dist/src')).to.be.true()
+    expect(files.includes('src')).to.be.true()
   })
 
   it('should skip directories', async () => {
-    const files = await all(glob(path.resolve(dir, '..', '..'), 'dist/**/*', {
+    const files = await all(glob(path.resolve(dir, '..'), '*/**', {
       onlyFiles: true,
       dot: true
     }))
 
-    expect(files.includes('dist/src')).to.be.false()
-    expect(files.includes('dist/src/index.js')).to.be.true()
+    expect(files.includes('src')).to.be.false()
+    expect(files.includes('src/index.ts')).to.be.true()
   })
 })

@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import delay from 'delay'
-import drain from '../src/index.js'
+import drain from '../src/index.ts'
 
 describe('it-drain', () => {
   it('should empty an async iterator', async () => {

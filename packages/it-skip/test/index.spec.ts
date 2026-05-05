@@ -1,6 +1,6 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
-import skip from '../src/index.js'
+import skip from '../src/index.ts'
 
 describe('it-skip', () => {
   it('should skip values from an iterable', async () => {

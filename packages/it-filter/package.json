@@ -141,7 +141,7 @@
     "it-peekable": "^3.0.0"
   },
   "devDependencies": {
-    "aegir": "^47.1.1",
+    "aegir": "^48.0.1",
     "it-all": "^3.0.0"
   }
 }

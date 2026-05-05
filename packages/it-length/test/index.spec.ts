@@ -1,5 +1,5 @@
 import { expect } from 'aegir/chai'
-import length from '../src/index.js'
+import length from '../src/index.ts'
 
 describe('it-length', () => {
   it('should count the items in an iterator', () => {

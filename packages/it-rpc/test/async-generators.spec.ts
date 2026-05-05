@@ -1,8 +1,8 @@
 import { expect } from 'aegir/chai'
 import all from 'it-all'
 import drain from 'it-drain'
-import { rpc } from '../src/index.js'
-import type { RPC } from '../src/index.js'
+import { rpc } from '../src/index.ts'
+import type { RPC } from '../src/index.ts'
 
 const target = {
   async * asyncGenerator () {
