@@ -1,5 +1,3 @@
-/* eslint-env mocha, browser */
-
 import { expect } from 'aegir/chai'
 import all from 'it-all'
 import toIt from '../src/index.ts'

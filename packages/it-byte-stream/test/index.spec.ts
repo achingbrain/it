@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 import { Buffer } from 'buffer'
 import { expect } from 'aegir/chai'
 import delay from 'delay'

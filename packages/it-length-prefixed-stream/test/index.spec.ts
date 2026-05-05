@@ -12,8 +12,6 @@ import { int32BEDecode } from './fixtures/int32BE-decode.ts'
 import { int32BEEncode } from './fixtures/int32BE-encode.ts'
 import type { LengthPrefixedStream } from '../src/index.ts'
 
-/* eslint-env mocha */
-
 interface Test<T> {
   from(str: string): T
   alloc(length: number, fill?: number): T

@@ -8,8 +8,6 @@ import { concat as uint8ArrayConcat } from 'uint8arrays/concat'
 import { cborStream } from '../src/index.ts'
 import type { CBORStream } from '../src/index.ts'
 
-/* eslint-env mocha */
-
 describe('it-cbor-stream', () => {
   let w: CBORStream<any>
 

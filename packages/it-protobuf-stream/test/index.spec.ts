@@ -8,8 +8,6 @@ import { pbStream } from '../src/index.ts'
 import { TestMessage } from './fixtures/test-message.ts'
 import type { ProtobufStream } from '../src/index.ts'
 
-/* eslint-env mocha */
-
 describe('it-protobuf-stream', () => {
   let w: ProtobufStream<any>
 
