@@ -22,7 +22,7 @@ repo and examine the changes made.
 
 -->
 
-Turns an (async)iterable into a W3C ReadbleStream.
+Turns an (async)iterable into a W3C ReadableStream.
 
 ## Example
 
