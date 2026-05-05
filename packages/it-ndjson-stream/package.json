@@ -145,7 +145,7 @@
     "race-signal": "^2.0.0"
   },
   "devDependencies": {
-    "aegir": "^47.1.1",
+    "aegir": "^48.0.1",
     "it-pair": "^2.0.6"
   }
 }
