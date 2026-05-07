@@ -143,7 +143,7 @@
     "abort-error": "^1.0.2",
     "it-length-prefixed-stream": "^2.0.0",
     "it-stream-types": "^2.0.2",
-    "uint8arraylist": "^2.4.8"
+    "uint8arraylist": "^3.0.0"
   },
   "devDependencies": {
     "aegir": "^48.0.1",
