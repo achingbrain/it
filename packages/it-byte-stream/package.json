@@ -148,6 +148,6 @@
     "aegir": "^48.0.1",
     "delay": "^7.0.0",
     "it-pair": "^2.0.6",
-    "uint8arrays": "^5.1.0"
+    "uint8arrays": "^6.0.0"
   }
 }
