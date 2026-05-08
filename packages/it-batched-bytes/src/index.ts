@@ -70,15 +70,15 @@ export interface AsyncBatchedBytesOptions extends BatchedBytesOptions {
   yieldAfter?: number
 }
 
-export interface BatchedObjectsOptions<T> extends BatchedBytesOptions {
+export interface BatchedObjectsOptions<O, T extends ArrayBufferLike = ArrayBufferLike> extends BatchedBytesOptions {
   /**
    * This function should serialize the object and append the
    * result to the passed list
    */
-  serialize(object: T, list: Uint8ArrayList): void
+  serialize(object: O, list: Uint8ArrayList<T>): void
 }
 
-export interface AsyncBatchedObjectsOptions<T> extends AsyncBatchedBytesOptions, BatchedObjectsOptions<T> {
+export interface AsyncBatchedObjectsOptions<O, T extends ArrayBufferLike = ArrayBufferLike> extends AsyncBatchedBytesOptions, BatchedObjectsOptions<O, T> {
 
 }
 
@@ -87,14 +87,14 @@ export interface AsyncBatchedObjectsOptions<T> extends AsyncBatchedBytesOptions,
  * an internal buffer. Either once the buffer reaches the requested size
  * or the next event loop tick occurs, yield any bytes from the buffer.
  */
-function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList>, options?: BatchedBytesOptions): Iterable<Uint8Array>
-function batchedBytes (source: Iterable<Uint8Array | Uint8ArrayList> | AsyncIterable<Uint8Array | Uint8ArrayList>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array>
-function batchedBytes <T> (source: Iterable<T>, options?: BatchedObjectsOptions<T>): Iterable<Uint8Array>
-function batchedBytes <T> (source: Iterable<T> | AsyncIterable<T>, options?: AsyncBatchedObjectsOptions<T>): AsyncIterable<Uint8Array>
-function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | AsyncIterable<T>, options?: Partial<AsyncBatchedObjectsOptions<T>>): AsyncIterable<Uint8Array> | Iterable<Uint8Array> {
+function batchedBytes <T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<Uint8Array<T> | Uint8ArrayList<T>>, options?: BatchedBytesOptions): Iterable<Uint8Array<T>>
+function batchedBytes <T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<Uint8Array<T> | Uint8ArrayList<T>> | AsyncIterable<Uint8Array<T> | Uint8ArrayList<T>>, options?: AsyncBatchedBytesOptions): AsyncIterable<Uint8Array<T>>
+function batchedBytes <O, T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<O>, options?: BatchedObjectsOptions<O, T>): Iterable<Uint8Array<T>>
+function batchedBytes <O, T extends ArrayBufferLike = ArrayBufferLike> (source: Iterable<O> | AsyncIterable<O>, options?: AsyncBatchedObjectsOptions<O, T>): AsyncIterable<Uint8Array<T>>
+function batchedBytes <T extends ArrayBufferLike = ArrayBufferLike, O = Uint8Array<T> | Uint8ArrayList<T>> (source: Iterable<O> | AsyncIterable<O>, options?: Partial<AsyncBatchedObjectsOptions<O, T>>): AsyncIterable<Uint8Array<T | ArrayBuffer>> | Iterable<Uint8Array<T | ArrayBuffer>> {
   if (isAsyncIterable(source)) {
     return (async function * () {
-      let buffer = new Uint8ArrayList()
+      let buffer = new Uint8ArrayList<T>()
       let ended = false
       let deferred = defer()
 
@@ -144,7 +144,7 @@ function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | A
         deferred = defer()
         if (buffer.byteLength > 0) {
           const b = buffer
-          buffer = new Uint8ArrayList()
+          buffer = new Uint8ArrayList<T>()
           yield b.subarray()
         }
       }
@@ -152,7 +152,7 @@ function batchedBytes <T = Uint8Array | Uint8ArrayList> (source: Iterable<T> | A
   }
 
   return (function * () {
-    const buffer = new Uint8ArrayList()
+    const buffer = new Uint8ArrayList<T>()
     let size = Number(options?.size ?? DEFAULT_BATCH_SIZE)
 
     if (isNaN(size) || size === 0 || size < 0) {

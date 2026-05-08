@@ -36,13 +36,13 @@
 
 import randomBytes from 'iso-random-stream/src/random.js'
 
-export interface BufferStreamOptions {
+export interface BufferStreamOptions<T extends ArrayBufferLike = ArrayBufferLike> {
   chunkSize?: number
-  collector?(arr: Uint8Array): void
-  generator?(length: number): Uint8Array | Promise<Uint8Array>
+  collector?(arr: Uint8Array<T>): void
+  generator?(length: number): Uint8Array<T> | Promise<Uint8Array<T>>
 }
 
-const defaultOptions: Required<BufferStreamOptions> = {
+const defaultOptions: Required<BufferStreamOptions<ArrayBufferLike>> = {
   chunkSize: 4096,
   collector: () => {},
   generator: async (size) => Promise.resolve(randomBytes(size))
@@ -51,7 +51,10 @@ const defaultOptions: Required<BufferStreamOptions> = {
 /**
  * An async iterable that emits buffers containing bytes up to a certain length
  */
-export default async function * bufferStream (limit: number, options: BufferStreamOptions = {}): AsyncGenerator<Uint8Array, void, unknown> {
+export default function bufferStream (limit: number): AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown>
+export default function bufferStream (limit: number, options: Omit<BufferStreamOptions, 'generator'>): AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown>
+export default function bufferStream <T extends ArrayBufferLike = ArrayBufferLike> (limit: number, options?: BufferStreamOptions<T>): AsyncGenerator<Uint8Array<T>, void, unknown>
+export default async function * bufferStream <T extends ArrayBufferLike = ArrayBufferLike> (limit: number, options: BufferStreamOptions<T> = {}): AsyncGenerator<Uint8Array<T | SharedArrayBuffer | ArrayBuffer>, void, unknown> {
   const opts: Required<BufferStreamOptions> = Object.assign({}, defaultOptions, options)
   let emitted = 0
 
@@ -68,7 +71,7 @@ export default async function * bufferStream (limit: number, options: BufferStre
     }
 
     let bytes = await opts.generator(nextChunkSize)
-    bytes = bytes.slice(0, nextChunkSize)
+    bytes = bytes.subarray(0, nextChunkSize)
 
     opts.collector(bytes)
     emitted += nextChunkSize
