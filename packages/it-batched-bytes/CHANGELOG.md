@@ -1,3 +1,17 @@
+## [it-batched-bytes-v3.0.0](https://github.com/achingbrain/it/compare/it-batched-bytes-2.0.12...it-batched-bytes-3.0.0) (2026-05-08)
+
+### ⚠ BREAKING CHANGES
+
+* returned `Uint8Array`s and `Uint8ArrayList`s now have a generic type that reflects the internal buffer type
+
+### Bug Fixes
+
+* Uint8Arrays are generic ([#207](https://github.com/achingbrain/it/issues/207)) ([3e463cd](https://github.com/achingbrain/it/commit/3e463cdcf19b37414a7e8752150ad688cd11ef88)), closes [microsoft/TypeScript#59417](https://github.com/microsoft/TypeScript/issues/59417)
+
+### Trivial Changes
+
+* bump aegir from 47.2.0 to 48.0.1 ([#202](https://github.com/achingbrain/it/issues/202)) ([856b57f](https://github.com/achingbrain/it/commit/856b57f1891fb9037ddc3858232a4f9888b31f7f))
+
 ## [it-batched-bytes-v2.0.12](https://github.com/achingbrain/it/compare/it-batched-bytes-2.0.11...it-batched-bytes-2.0.12) (2026-04-10)
 
 ### Bug Fixes
