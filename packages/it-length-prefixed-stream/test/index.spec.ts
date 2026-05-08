@@ -32,8 +32,8 @@ const tests: Record<string, Test<any>> = {
     from: (str: string) => uint8ArrayFromString(str),
     alloc: (length: number, fill = 0) => uint8Alloc(length).fill(fill),
     allocUnsafe: (length: number) => uint8AllocUnsafe(length),
-    concat: (arrs: Buffer[], length?: number) => uint8ArrayConcat(arrs, length),
-    writeInt32BE: (buf: Buffer, value: number, offset: number) => {
+    concat: (arrs: Uint8Array[], length?: number) => uint8ArrayConcat(arrs, length),
+    writeInt32BE: (buf: Uint8Array, value: number, offset: number) => {
       new DataView(buf.buffer, buf.byteOffset, buf.byteLength).setInt32(offset, value, false)
     }
   },
@@ -46,6 +46,26 @@ const tests: Record<string, Test<any>> = {
       const data = new Uint8Array(4)
       new DataView(data.buffer, data.byteOffset, data.byteLength).setInt32(offset, value, false)
       buf.write(data, offset)
+    }
+  }
+}
+
+if (globalThis.SharedArrayBuffer != null) {
+  function toSharedArrayBuffer (arr: Uint8Array): Uint8Array {
+    const buf = new SharedArrayBuffer(arr.byteLength)
+    const out = new Uint8Array(buf)
+    out.set(arr, 0)
+
+    return out
+  }
+
+  tests['SharedArrayBuffer'] = {
+    from: (str: string) => toSharedArrayBuffer(uint8ArrayFromString(str)),
+    alloc: (length: number, fill = 0) => toSharedArrayBuffer(uint8Alloc(length).fill(fill)),
+    allocUnsafe: (length: number) => toSharedArrayBuffer(uint8AllocUnsafe(length)),
+    concat: (arrs: Uint8Array<SharedArrayBuffer>[], length?: number) => toSharedArrayBuffer(uint8ArrayConcat(arrs, length)),
+    writeInt32BE: (buf: Uint8Array<SharedArrayBuffer>, value: number, offset: number) => {
+      new DataView(buf.buffer, buf.byteOffset, buf.byteLength).setInt32(offset, value, false)
     }
   }
 }

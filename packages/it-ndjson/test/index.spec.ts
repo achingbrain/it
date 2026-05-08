@@ -11,7 +11,7 @@ async function * toAsyncIterator <T> (array: T[]): AsyncIterable<T> {
   }
 }
 
-function toUint8Array (str: string): Uint8Array {
+function toUint8Array (str: string): Uint8Array<ArrayBuffer> {
   const arr = new Uint8Array(str.length)
   for (let i = 0; i < str.length; i++) {
     arr[i] = str.charCodeAt(i)

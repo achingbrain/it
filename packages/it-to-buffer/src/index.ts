@@ -42,13 +42,12 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
  * Takes an (async) iterable that yields buffer-like-objects and concats them
  * into one buffer
  */
-function toBuffer (source: Iterable<Uint8Array>): Uint8Array
-function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array>
-function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array> | Uint8Array {
+function toBuffer (source: Iterable<Uint8Array>): Uint8Array<ArrayBuffer>
+function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array<ArrayBuffer>>
+function toBuffer (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>): Promise<Uint8Array<ArrayBuffer>> | Uint8Array<ArrayBuffer> {
   if (isAsyncIterable(source)) {
     return (async () => {
-      // https://github.com/microsoft/TypeScript/issues/61793
-      let buffer: Uint8Array = new Uint8Array(0)
+      let buffer = new Uint8Array(0)
 
       for await (const buf of source) {
         buffer = uint8ArrayConcat([buffer, buf], buffer.length + buf.length)

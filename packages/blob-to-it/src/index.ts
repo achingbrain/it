@@ -19,7 +19,7 @@
 
 import browserReadableStreamToIt from 'browser-readablestream-to-it'
 
-export default function blobToIt (blob: Blob): AsyncIterable<Uint8Array> {
+export default function blobToIt (blob: Blob): AsyncGenerator<Uint8Array<ArrayBuffer>> {
   if (typeof blob.stream === 'function') {
     return browserReadableStreamToIt(blob.stream())
   }

@@ -78,7 +78,7 @@ export namespace TestMessage {
     value: string
   }
 
-  export function encode (obj: Partial<TestMessage>): Uint8Array {
+  export function encode (obj: Partial<TestMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, TestMessage.codec())
   }
 

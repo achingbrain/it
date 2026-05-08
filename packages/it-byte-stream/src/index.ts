@@ -32,7 +32,7 @@ export interface ReadOptions extends AbortOptions {
   bytes: number
 }
 
-export interface ByteStream <Stream = unknown> {
+export interface ByteStream <Stream = unknown, T extends ArrayBufferLike = ArrayBufferLike> {
   /**
    * Read bytes from the stream.
    *
@@ -43,13 +43,13 @@ export interface ByteStream <Stream = unknown> {
    * If no required number of bytes is passed, this will return `null` if the
    * underlying stream closes before supplying any bytes.
    */
-  read(options: ReadOptions): Promise<Uint8ArrayList>
-  read(options?: AbortOptions): Promise<Uint8ArrayList | null>
+  read(options: ReadOptions): Promise<Uint8ArrayList<T>>
+  read(options?: AbortOptions): Promise<Uint8ArrayList<T> | null>
 
   /**
    * Write the passed bytes to the stream
    */
-  write(input: Uint8Array | Uint8ArrayList, options?: AbortOptions): Promise<void>
+  write(input: Uint8Array<T> | Uint8ArrayList<T>, options?: AbortOptions): Promise<void>
 
   /**
    * Returns the underlying stream
@@ -68,7 +68,7 @@ export interface ByteStreamOpts {
   yieldBytes?: boolean
 }
 
-export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Stream, opts?: ByteStreamOpts): ByteStream<Stream> {
+export function byteStream <Stream extends Duplex<any, any, any>, T extends ArrayBufferLike = ArrayBufferLike> (duplex: Stream, opts?: ByteStreamOpts): ByteStream<Stream, T> {
   const write = queuelessPushable()
 
   duplex.sink(write).catch(async (err: Error) => {
@@ -91,9 +91,9 @@ export function byteStream <Stream extends Duplex<any, any, any>> (duplex: Strea
     source = duplex.source[Symbol.asyncIterator]()
   }
 
-  const readBuffer = new Uint8ArrayList()
+  const readBuffer = new Uint8ArrayList<T>()
 
-  const W: ByteStream<Stream> = {
+  const W: ByteStream<Stream, T> = {
     read: async (options?: ReadOptions) => {
       options?.signal?.throwIfAborted()
 

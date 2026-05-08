@@ -39,7 +39,7 @@ import type { IncomingMessage, IncomingHttpHeaders } from 'http'
 
 export interface Part {
   headers: IncomingHttpHeaders
-  body: AsyncIterable<Uint8Array>
+  body: AsyncIterable<Uint8Array<ArrayBuffer>>
 }
 
 /**
@@ -65,7 +65,7 @@ export default async function * multipart (request: IncomingMessage): AsyncGener
   })
 
   form.onPart = (part) => {
-    const body = pushable()
+    const body = pushable<Uint8Array<ArrayBuffer>>()
 
     part.on('data', buf => {
       body.push(buf)

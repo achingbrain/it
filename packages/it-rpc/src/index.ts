@@ -335,7 +335,7 @@ export interface RPCInit {
   lpDecoder?: DecoderOptions
 }
 
-export interface RPC extends Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
+export interface RPC extends Duplex<AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown>, AsyncGenerator<Uint8Array, void, unknown>> {
   createClient<T extends object> (name: string, options?: ClientOptions): T
   createTarget (name: string, target: any): void
 }
@@ -360,9 +360,9 @@ function isInvocationMessage (subMessage: any): boolean {
   return subMessage.type === MessageType.invokeMethod || subMessage.type === MessageType.invokeGeneratorMethod || subMessage.type === MessageType.invokeCallback
 }
 
-class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
-  public source: AsyncGenerator<Uint8Array, void, undefined>
-  private readonly output: Pushable<Uint8Array>
+class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown>, AsyncGenerator<Uint8Array, void, unknown>> {
+  public source: AsyncGenerator<Uint8Array<ArrayBuffer>, void, undefined>
+  private readonly output: Pushable<Uint8Array<ArrayBuffer>>
 
   // used by the server end to track RPC invocation destinations
   private readonly targets: Map<string, any>
@@ -383,7 +383,7 @@ class DuplexRPC implements Duplex<AsyncGenerator<Uint8Array, void, unknown>> {
   private readonly lpDecoderOptions?: DecoderOptions
 
   constructor (init?: RPCInit) {
-    this.output = pushable()
+    this.output = pushable<Uint8Array<ArrayBuffer>>()
     this.source = lpEncode(this.output, init?.lpEncoder)
     this.lpDecoderOptions = init?.lpDecoder
 

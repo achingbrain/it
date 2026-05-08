@@ -31,11 +31,11 @@ import type { AbortOptions } from 'abort-error'
 import type { ByteStreamOpts } from 'it-byte-stream'
 import type { Duplex } from 'it-stream-types'
 
-export interface LengthPrefixedStream <Stream = unknown> {
+export interface LengthPrefixedStream <Stream = unknown, T extends ArrayBufferLike = ArrayBufferLike> {
   /**
    * Read the next length-prefixed number of bytes from the stream
    */
-  read(options?: AbortOptions): Promise<Uint8ArrayList>
+  read(options?: AbortOptions): Promise<Uint8ArrayList<T>>
 
   /**
    * Write the passed bytes to the stream prefixed by their length

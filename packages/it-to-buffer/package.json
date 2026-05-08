@@ -138,7 +138,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "uint8arrays": "^5.1.0"
+    "uint8arrays": "^6.1.0"
   },
   "devDependencies": {
     "aegir": "^48.0.1"

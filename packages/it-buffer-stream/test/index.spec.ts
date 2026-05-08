@@ -36,8 +36,7 @@ describe('it-buffer-stream', () => {
 
   it('should allow collection of buffers', async () => {
     const expected = 100
-    // https://github.com/microsoft/TypeScript/issues/61793
-    let emitted: Uint8Array = new Uint8Array(0)
+    let emitted = new Uint8Array(0)
     const buffers = []
 
     for await (const buf of bufferStream(expected, {
@@ -53,13 +52,35 @@ describe('it-buffer-stream', () => {
 
   it('should allow generation of buffers', async () => {
     const expected = 100
-    // https://github.com/microsoft/TypeScript/issues/61793
-    let emitted: Uint8Array = new Uint8Array(0)
+    let emitted = new Uint8Array(0)
     const buffers = []
 
     for await (const buf of bufferStream(expected, {
       generator: (size) => {
         const output = new Uint8Array(size)
+        emitted = uint8ArrayConcat([emitted, output])
+
+        return output
+      }
+    })) {
+      buffers.push(buf)
+    }
+
+    expect(emitted).to.equalBytes(buffers[0])
+  })
+
+  it('should allow generation of buffers with non-default backing buffer', async function () {
+    if (globalThis.SharedArrayBuffer == null) {
+      this.skip()
+    }
+
+    const expected = 100
+    let emitted = new Uint8Array(0)
+    const buffers = []
+
+    for await (const buf of bufferStream(expected, {
+      generator: (size) => {
+        const output = new Uint8Array(new SharedArrayBuffer(size))
         emitted = uint8ArrayConcat([emitted, output])
 
         return output

@@ -42,7 +42,7 @@ export interface Decoder<T> {
  * A protobuf encoder - takes an object and returns a byte array
  */
 export interface Encoder<T> {
-  (data: T): Uint8Array
+  (data: T): Uint8Array<ArrayBuffer>
 }
 
 /**

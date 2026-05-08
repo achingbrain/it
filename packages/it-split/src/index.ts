@@ -71,9 +71,9 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
 /**
  * Splits Uint8Arrays emitted by an (async) iterable by a delimiter
  */
-function split (source: Iterable<Uint8Array>, options?: SplitOptions): Generator<Uint8Array, void, undefined>
-function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options?: SplitOptions): AsyncGenerator<Uint8Array, void, undefined>
-function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array, void, undefined> | Generator<Uint8Array, void, undefined> {
+function split (source: Iterable<Uint8Array>, options?: SplitOptions): Generator<Uint8Array<ArrayBuffer>, void, undefined>
+function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options?: SplitOptions): AsyncGenerator<Uint8Array<ArrayBuffer>, void, undefined>
+function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, options: SplitOptions = {}): AsyncGenerator<Uint8Array<ArrayBuffer>, void, undefined> | Generator<Uint8Array<ArrayBuffer>, void, undefined> {
   const bl = new Uint8ArrayList()
   const delimiter = options.delimiter ?? new TextEncoder().encode('\n')
 
@@ -108,7 +108,7 @@ function split (source: Iterable<Uint8Array> | AsyncIterable<Uint8Array>, option
   })()
 }
 
-function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): Generator<Uint8Array, void, undefined> {
+function * yieldUntilEnd (bl: Uint8ArrayList, delimiter: Uint8Array): Generator<Uint8Array<ArrayBuffer>, void, undefined> {
   let index = bl.indexOf(delimiter)
 
   while (index !== -1) {

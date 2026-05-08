@@ -131,7 +131,7 @@ export namespace Value {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<Value>): Uint8Array {
+  export function encode (obj: Partial<Value>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, Value.codec())
   }
 
@@ -243,7 +243,7 @@ export namespace RPCMessage {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<RPCMessage>): Uint8Array {
+  export function encode (obj: Partial<RPCMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, RPCMessage.codec())
   }
 
@@ -408,7 +408,7 @@ export namespace InvokeMethodMessage {
     index: number
   }
 
-  export function encode (obj: Partial<InvokeMethodMessage>): Uint8Array {
+  export function encode (obj: Partial<InvokeMethodMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, InvokeMethodMessage.codec())
   }
 
@@ -497,7 +497,7 @@ export namespace AbortMethodMessage {
     value: string
   }
 
-  export function encode (obj: Partial<AbortMethodMessage>): Uint8Array {
+  export function encode (obj: Partial<AbortMethodMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, AbortMethodMessage.codec())
   }
 
@@ -615,7 +615,7 @@ export namespace MethodResolvedMessage {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<MethodResolvedMessage>): Uint8Array {
+  export function encode (obj: Partial<MethodResolvedMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, MethodResolvedMessage.codec())
   }
 
@@ -733,7 +733,7 @@ export namespace MethodRejectedMessage {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<MethodRejectedMessage>): Uint8Array {
+  export function encode (obj: Partial<MethodRejectedMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, MethodRejectedMessage.codec())
   }
 
@@ -937,7 +937,7 @@ export namespace InvokeCallbackMessage {
     index: number
   }
 
-  export function encode (obj: Partial<InvokeCallbackMessage>): Uint8Array {
+  export function encode (obj: Partial<InvokeCallbackMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, InvokeCallbackMessage.codec())
   }
 
@@ -1068,7 +1068,7 @@ export namespace AbortCallbackMessage {
     value: string
   }
 
-  export function encode (obj: Partial<AbortCallbackMessage>): Uint8Array {
+  export function encode (obj: Partial<AbortCallbackMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, AbortCallbackMessage.codec())
   }
 
@@ -1228,7 +1228,7 @@ export namespace CallbackResolvedMessage {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<CallbackResolvedMessage>): Uint8Array {
+  export function encode (obj: Partial<CallbackResolvedMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, CallbackResolvedMessage.codec())
   }
 
@@ -1388,7 +1388,7 @@ export namespace CallbackRejectedMessage {
     value: Uint8Array
   }
 
-  export function encode (obj: Partial<CallbackRejectedMessage>): Uint8Array {
+  export function encode (obj: Partial<CallbackRejectedMessage>): Uint8Array<ArrayBuffer> {
     return encodeMessage(obj, CallbackRejectedMessage.codec())
   }
 
