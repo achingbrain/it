@@ -110,6 +110,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
   let sourceFinished = false
   let sourceErr: Error | undefined
   let opErred = false
+  let returned = false
 
   emitter.addEventListener('task-complete', () => {
     resultAvailable.resolve()
@@ -123,7 +124,7 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
           await slotAvailable.promise
         }
 
-        if (opErred) {
+        if (opErred || returned) {
           break
         }
 
@@ -205,34 +206,42 @@ export default async function * parallel <T> (source: Iterable<() => Promise<T>>
     }
   }
 
-  while (true) {
-    if (!valuesAvailable()) {
-      resultAvailable = defer()
-      await resultAvailable.promise
-    }
+  try {
+    while (true) {
+      if (!valuesAvailable()) {
+        resultAvailable = defer()
+        await resultAvailable.promise
+      }
 
-    if (sourceErr != null) {
-      // the source threw an error, propagate it
-      throw sourceErr
-    }
+      if (sourceErr != null) {
+        // the source threw an error, propagate it
+        throw sourceErr
+      }
 
-    if (ordered) {
-      yield * yieldOrderedValues()
-    } else {
-      yield * yieldUnOrderedValues()
-    }
+      if (ordered) {
+        yield * yieldOrderedValues()
+      } else {
+        yield * yieldUnOrderedValues()
+      }
 
-    if (sourceErr != null) {
-      // if the source yields an array that is `yield *`, it can throw while the
-      // onward consumer is processing the array contents - make sure we
-      // propagate the error
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
-      throw sourceErr
-    }
+      if (sourceErr != null) {
+        // if the source yields an array that is `yield *`, it can throw while the
+        // onward consumer is processing the array contents - make sure we
+        // propagate the error
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
+        throw sourceErr
+      }
 
-    if (sourceFinished && ops.length === 0) {
-      // not waiting for any results and no more tasks so we are done
-      break
+      if (sourceFinished && ops.length === 0) {
+        // not waiting for any results and no more tasks so we are done
+        break
+      }
     }
+  } finally {
+    // the consumer has stopped iterating before the source was exhausted -
+    // let the source reader exit so the source iterator is returned and any
+    // resources it holds are freed
+    returned = true
+    slotAvailable.resolve()
   }
 }
