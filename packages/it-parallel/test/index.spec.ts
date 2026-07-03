@@ -322,6 +322,6 @@ describe('it-parallel', () => {
     await delay(500)
 
     expect(received).to.have.lengthOf(2)
-    expect(sourceReturned).to.be.true()
+    expect(sourceReturned).to.be.true('source did not return')
   })
 })
