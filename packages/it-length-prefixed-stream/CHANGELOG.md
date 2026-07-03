@@ -1,3 +1,9 @@
+## [it-length-prefixed-stream-v3.0.1](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-3.0.0...it-length-prefixed-stream-3.0.1) (2026-07-03)
+
+### Bug Fixes
+
+* update sibling deps ([#211](https://github.com/achingbrain/it/issues/211)) ([50aed6c](https://github.com/achingbrain/it/commit/50aed6cb084c4f71d758e3ae77069942ff4b91dc))
+
 ## [it-length-prefixed-stream-v3.0.0](https://github.com/achingbrain/it/compare/it-length-prefixed-stream-2.0.6...it-length-prefixed-stream-3.0.0) (2026-05-08)
 
 ### ⚠ BREAKING CHANGES
