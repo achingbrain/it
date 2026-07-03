@@ -1,3 +1,13 @@
+## [it-ndjson-stream-v2.0.7](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.6...it-ndjson-stream-2.0.7) (2026-07-03)
+
+### Bug Fixes
+
+* update sibling deps ([#211](https://github.com/achingbrain/it/issues/211)) ([50aed6c](https://github.com/achingbrain/it/commit/50aed6cb084c4f71d758e3ae77069942ff4b91dc))
+
+### Trivial Changes
+
+* bump aegir from 47.2.0 to 48.0.1 ([#202](https://github.com/achingbrain/it/issues/202)) ([856b57f](https://github.com/achingbrain/it/commit/856b57f1891fb9037ddc3858232a4f9888b31f7f))
+
 ## [it-ndjson-stream-v2.0.6](https://github.com/achingbrain/it/compare/it-ndjson-stream-2.0.5...it-ndjson-stream-2.0.6) (2026-04-10)
 
 ### Bug Fixes
