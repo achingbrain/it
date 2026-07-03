@@ -1,3 +1,13 @@
+## [it-parallel-v3.0.16](https://github.com/achingbrain/it/compare/it-parallel-3.0.15...it-parallel-3.0.16) (2026-07-03)
+
+### Bug Fixes
+
+* clean up source on a short read in it-parallel ([#209](https://github.com/achingbrain/it/issues/209)) ([5dc93e4](https://github.com/achingbrain/it/commit/5dc93e40db77aa0d7d509043b7fa3bd19db9c412)), closes [#161](https://github.com/achingbrain/it/issues/161)
+
+### Trivial Changes
+
+* bump aegir from 47.2.0 to 48.0.1 ([#202](https://github.com/achingbrain/it/issues/202)) ([856b57f](https://github.com/achingbrain/it/commit/856b57f1891fb9037ddc3858232a4f9888b31f7f))
+
 ## [it-parallel-v3.0.15](https://github.com/achingbrain/it/compare/it-parallel-3.0.14...it-parallel-3.0.15) (2026-04-10)
 
 ### Bug Fixes
