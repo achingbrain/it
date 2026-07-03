@@ -294,4 +294,34 @@ describe('it-parallel', () => {
     await expect(all(gen())).to.eventually.be.rejected
       .with.property('message', 'input threw')
   })
+
+  it('should stop reading the source on a short read', async () => {
+    let sourceReturned = false
+    const received: number[] = []
+
+    const source = async function * (): AsyncGenerator<() => Promise<number>, void, undefined> {
+      try {
+        for (let i = 0; i < 100; i++) {
+          const value = i
+          yield async () => value
+          await delay(10)
+        }
+      } finally {
+        sourceReturned = true
+      }
+    }
+
+    for await (const value of parallel(source(), { concurrency: 2 })) {
+      received.push(value)
+
+      if (received.length === 2) {
+        break
+      }
+    }
+
+    await delay(500)
+
+    expect(received).to.have.lengthOf(2)
+    expect(sourceReturned).to.be.true('source did not return')
+  })
 })
