@@ -1,3 +1,14 @@
+## [it-queue-v1.1.4](https://github.com/achingbrain/it/compare/it-queue-1.1.3...it-queue-1.1.4) (2026-07-03)
+
+### Bug Fixes
+
+* update sibling deps ([#211](https://github.com/achingbrain/it/issues/211)) ([50aed6c](https://github.com/achingbrain/it/commit/50aed6cb084c4f71d758e3ae77069942ff4b91dc))
+
+### Trivial Changes
+
+* bump aegir from 47.2.0 to 48.0.1 ([#202](https://github.com/achingbrain/it/issues/202)) ([856b57f](https://github.com/achingbrain/it/commit/856b57f1891fb9037ddc3858232a4f9888b31f7f))
+* bump sinon from 21.1.2 to 22.0.0 ([#204](https://github.com/achingbrain/it/issues/204)) ([ac30d9f](https://github.com/achingbrain/it/commit/ac30d9f219d8c5a5dd7e1a12a39ecb19ec633ebb))
+
 ## [it-queue-v1.1.3](https://github.com/achingbrain/it/compare/it-queue-1.1.2...it-queue-1.1.3) (2026-04-10)
 
 ### Bug Fixes
