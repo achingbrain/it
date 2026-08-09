@@ -47,12 +47,18 @@ function isAsyncIterable <T> (thing: any): thing is AsyncIterable<T> {
   return thing[Symbol.asyncIterator] != null
 }
 
-async function addAllToPushable <T> (sources: Array<AsyncIterable<T> | Iterable<T>>, output: Pushable<T>, signal: AbortSignal): Promise<void> {
+async function addAllToPushable <T> (iterators: Array<AsyncIterator<T> | Iterator<T>>, output: Pushable<T>, signal: AbortSignal): Promise<void> {
   try {
     await Promise.all(
-      sources.map(async (source) => {
-        for await (const item of source) {
-          await output.push(item, {
+      iterators.map(async (iterator) => {
+        while (true) {
+          const { value, done } = await iterator.next()
+
+          if (done === true) {
+            break
+          }
+
+          await output.push(value, {
             signal
           })
           signal.throwIfAborted()
@@ -75,13 +81,31 @@ async function * mergeSources <T> (sources: Array<AsyncIterable<T> | Iterable<T>
   const controller = new AbortController()
   const output = queuelessPushable<T>()
 
-  addAllToPushable(sources, output, controller.signal)
+  const iterators = sources.map(source => isAsyncIterable<T>(source)
+    ? source[Symbol.asyncIterator]()
+    : source[Symbol.iterator]())
+
+  addAllToPushable(iterators, output, controller.signal)
     .catch(() => {})
 
   try {
     yield * output
   } finally {
     controller.abort()
+
+    // Aborting only unblocks sources that are waiting to push. A source suspended at a yield
+    // is never signalled by it, so it would be left un-unwound forever along with everything
+    // its scope captured - return each iterator explicitly instead.
+    //
+    // Deliberately not awaited: a source parked mid-await leaves return() pending
+    // indefinitely, and awaiting it here would hang the consumer's `break`.
+    for (const iterator of iterators) {
+      try {
+        Promise.resolve(iterator.return?.()).catch(() => {})
+      } catch {
+        // an iterator that throws on return() has nothing further we can do for it
+      }
+    }
   }
 }
 
