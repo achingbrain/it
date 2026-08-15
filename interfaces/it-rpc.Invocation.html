@@ -13,7 +13,7 @@
 <h1>Interface Invocation</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">Invocation</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#abortcontrollers">abortControllers</a><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/API/AbortController" class="tsd-signature-type external" target="_blank">AbortController</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#abortsignals">abortSignals</a><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/API/AbortSignal" class="tsd-signature-type external" target="_blank">AbortSignal</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#callbacks">callbacks</a><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map" class="tsd-signature-type external" target="_blank">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="it-rpc.CallbackFunction.html" class="tsd-signature-type tsd-kind-interface">CallbackFunction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#children">children</a><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map" class="tsd-signature-type external" target="_blank">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="" class="tsd-signature-type tsd-kind-interface">Invocation</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#parents">parents</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#result">result</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PromiseWithResolvers</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#scope">scope</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L228">packages/it-rpc/src/index.ts:228</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L228">packages/it-rpc/src/index.ts:228</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -39,7 +39,7 @@
 if the client sends an abort message</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L258">packages/it-rpc/src/index.ts:258</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L258">packages/it-rpc/src/index.ts:258</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="abortsignals"><span>abort<wbr/>Signals</span><a href="#abortsignals" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">abortSignals</span><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/API/AbortSignal" class="tsd-signature-type external" target="_blank">AbortSignal</a><span class="tsd-signature-symbol">[]</span></div>
@@ -47,42 +47,42 @@ if the client sends an abort message</p>
 message to be sent</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L264">packages/it-rpc/src/index.ts:264</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L264">packages/it-rpc/src/index.ts:264</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="callbacks"><span>callbacks</span><a href="#callbacks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">callbacks</span><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map" class="tsd-signature-type external" target="_blank">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="it-rpc.CallbackFunction.html" class="tsd-signature-type tsd-kind-interface">CallbackFunction</a><span class="tsd-signature-symbol">&gt;</span></div>
 <div class="tsd-comment tsd-typography"><p>Holds references to any callback functions passed as arguments</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L242">packages/it-rpc/src/index.ts:242</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L242">packages/it-rpc/src/index.ts:242</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="children"><span>children</span><a href="#children" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">children</span><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map" class="tsd-signature-type external" target="_blank">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="" class="tsd-signature-type tsd-kind-interface">Invocation</a><span class="tsd-signature-symbol">&gt;</span></div>
 <div class="tsd-comment tsd-typography"><p>Any ongoing invocations of callbacks during the main method execution</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L247">packages/it-rpc/src/index.ts:247</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L247">packages/it-rpc/src/index.ts:247</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="parents"><span>parents</span><a href="#parents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">parents</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 <div class="tsd-comment tsd-typography"><p>Scopes of parent invocations</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L252">packages/it-rpc/src/index.ts:252</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L252">packages/it-rpc/src/index.ts:252</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="result"><span>result</span><a href="#result" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">result</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PromiseWithResolvers</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 <div class="tsd-comment tsd-typography"><p>The result of the execution</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L237">packages/it-rpc/src/index.ts:237</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L237">packages/it-rpc/src/index.ts:237</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="scope"><span>scope</span><a href="#scope" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">scope</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The scope of this invocation</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/achingbrain/it/blob/b3deb1266511fb55893d5ce201915de4b43ca9d4/packages/it-rpc/src/index.ts#L232">packages/it-rpc/src/index.ts:232</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/achingbrain/it/blob/5dc2642937c440d52748cfd046e5316fe23c1846/packages/it-rpc/src/index.ts#L232">packages/it-rpc/src/index.ts:232</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
