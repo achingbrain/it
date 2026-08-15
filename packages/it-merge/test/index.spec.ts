@@ -150,4 +150,63 @@ describe('it-merge', () => {
     expect(values1Finally).to.be.true()
     expect(values2Finally).to.be.true()
   })
+
+  it('should clean up every source when the consumer breaks early', async () => {
+    // With more sources than the consumer reads, some are left suspended at a `yield` when the
+    // consumer breaks. Aborting the internal controller only unblocks sources that are waiting
+    // to push, so those suspended sources were never unwound and their `finally` never ran -
+    // leaking whatever their scope captured. Six sources makes the case reproducible; with two
+    // the timing happens to work out.
+    const cleanedUp = new Set<string>()
+
+    const source = (name: string): AsyncGenerator<string, void, undefined> => {
+      return (async function * () {
+        try {
+          for (let i = 0; i < 1000; i++) {
+            yield `${name}:${i}`
+          }
+        } finally {
+          cleanedUp.add(name)
+        }
+      })()
+    }
+
+    const names = ['a', 'b', 'c', 'd', 'e', 'f']
+    const sources = names.map(source)
+
+    let received = 0
+
+    for await (const value of merge(...sources)) {
+      received++
+
+      if (received === 3) {
+        expect(value).to.be.a('string')
+        break
+      }
+    }
+
+    await delay(100)
+
+    expect([...cleanedUp].sort()).to.deep.equal(names)
+  })
+
+  it('should not block the consumer on a source that cannot be unwound', async () => {
+    // A source parked mid-await cannot be unwound by `.return()` - the return request queues
+    // behind the pending await. Cleaning up must therefore not await the returns, or breaking
+    // out of the loop would hang forever.
+    const stuck = (async function * (): AsyncGenerator<number, void, undefined> {
+      yield 1
+      await new Promise(() => {})
+    })()
+
+    const start = Date.now()
+
+    for await (const value of merge(stuck)) {
+      if (value === 1) {
+        break
+      }
+    }
+
+    expect(Date.now() - start).to.be.lessThan(1000)
+  })
 })
