@@ -1,3 +1,10 @@
+## [it-rpc-v2.0.1](https://github.com/achingbrain/it/compare/it-rpc-2.0.0...it-rpc-2.0.1) (2026-08-15)
+
+### Dependencies
+
+* bump cborg from 5.1.11 to 6.1.1 ([#214](https://github.com/achingbrain/it/issues/214)) ([5dc2642](https://github.com/achingbrain/it/commit/5dc2642937c440d52748cfd046e5316fe23c1846))
+* bump nanoid from 5.1.16 to 6.0.1 ([#215](https://github.com/achingbrain/it/issues/215)) ([74319cc](https://github.com/achingbrain/it/commit/74319ccc7dc9389c5314c6b5867d4e75ba329394))
+
 ## [it-rpc-v2.0.0](https://github.com/achingbrain/it/compare/it-rpc-1.2.5...it-rpc-2.0.0) (2026-05-08)
 
 ### ⚠ BREAKING CHANGES
