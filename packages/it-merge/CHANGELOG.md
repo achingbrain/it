@@ -1,3 +1,13 @@
+## [it-merge-v3.0.15](https://github.com/achingbrain/it/compare/it-merge-3.0.14...it-merge-3.0.15) (2026-08-15)
+
+### Bug Fixes
+
+* **it-merge:** return the source iterators when the consumer exits early ([#216](https://github.com/achingbrain/it/issues/216)) ([b3deb12](https://github.com/achingbrain/it/commit/b3deb1266511fb55893d5ce201915de4b43ca9d4))
+
+### Trivial Changes
+
+* bump aegir from 47.2.0 to 48.0.1 ([#202](https://github.com/achingbrain/it/issues/202)) ([856b57f](https://github.com/achingbrain/it/commit/856b57f1891fb9037ddc3858232a4f9888b31f7f))
+
 ## [it-merge-v3.0.14](https://github.com/achingbrain/it/compare/it-merge-3.0.13...it-merge-3.0.14) (2026-04-10)
 
 ### Bug Fixes
