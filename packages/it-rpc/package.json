@@ -159,7 +159,7 @@
     "delay": "^7.0.0",
     "it-all": "^3.0.0",
     "it-drain": "^3.0.0",
-    "protons": "^9.0.0",
+    "protons": "^10.0.4",
     "sinon-ts": "^2.0.0"
   },
   "sideEffects": false
