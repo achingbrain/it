@@ -151,7 +151,7 @@
     "it-pair": "^2.0.6",
     "it-to-buffer": "^5.0.0",
     "protons": "^9.0.0",
-    "protons-runtime": "^7.0.0",
+    "protons-runtime": "^8.0.2",
     "uint8-varint": "^3.0.0",
     "uint8arrays": "^6.1.0"
   }
